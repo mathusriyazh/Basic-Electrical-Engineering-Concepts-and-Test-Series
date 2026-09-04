@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Electrical Engineering - Test 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #1e3a8a;
+            text-align: center;
+        }
+        .section-header {
+            border-bottom: 2px solid #1e3a8a;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            color: #1e3a8a;
+        }
+        .question-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+            margin-top: 8px;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+            font-weight: bold;
+        }
+        .correct {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        .incorrect {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        .svg-container {
+            text-align: center;
+            margin: 15px 0;
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+        }
+        .submit-all-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #059669;
+            font-size: 18px;
+            margin-top: 30px;
+        }
+        .submit-all-btn:hover {
+            background-color: #047857;
+        }
+        #finalScore {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Electrical Circuit Analysis - Test 2</h1>
+    <p style="text-align: center;"><strong>Total Marks: 50 | Time: 90 Minutes</strong></p>
+
+    <!-- PART A -->
+    <h2 class="section-header">Part A: Short Answer Questions (10 x 2 = 20 Marks)</h2>
+
+    <!-- Q1 -->
+    <div class="question-card" id="card-q1">
+        <div class="question-title">Q1. State Kirchhoff's Voltage Law (KVL) and Kirchhoff's Current Law (KCL). (2 Marks)</div>
+        <textarea id="ans-q1" placeholder="Write your text answer here..."></textarea>
+        <button onclick="evaluateText('q1', ['sum', 'zero'], 'KVL states that the algebraic sum of voltages in a closed loop is zero. KCL states that total current entering a node equals total current leaving.')">Submit Answer</button>
+        <div class="result" id="res-q1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-card" id="card-q2">
+        <div class="question-title">Q2. The element of a 500 W electric iron is designed for 200 V. What value of resistance must be connected in series so that it can operate on a 240 V supply? (2 Marks)</div>
+        <input type="text" id="ans-q2" placeholder="Enter calculated resistance in Ohms">
+        <button onclick="evaluateNumeric('q2', 16, 'Iron Resistance R_iron = V^2/P = 200^2 / 500 = 80 Ω. Current I = 200V / 80Ω = 2.5 A. Total required R = 240V / 2.5A = 96 Ω. Series Resistance R = 96 - 80 = 16 Ω.')">Submit Answer</button>
+        <div class="result" id="res-q2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-card" id="card-q3">
+        <div class="question-title">Q3. A 100 V, 60 W bulb is connected in series with a 100 V, 100 W bulb across a 200 V mains. Calculate the resistance that should be connected across the first bulb so each bulb gets its proper current. (2 Marks)</div>
+        <input type="text" id="ans-q3" placeholder="Enter resistance value in Ohms">
+        <button onclick="evaluateNumeric('q3', 250, 'Current of 100W bulb = 100/100 = 1A. Current of 60W bulb = 60/100 = 0.6A. Extra current required across 1st bulb = 1 - 0.6 = 0.4A. Voltage across 1st bulb = 100V. Parallel Resistance R = 100 / 0.4 = 250 Ω.')">Submit Answer</button>
+        <div class="result" id="res-q3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-card" id="card-q4">
+        <div class="question-title">Q4. Four resistors connected in parallel have an equivalent resistance of 30 Ω. The currents flowing through them are 0.5 A, 0.4 A, 0.6 A, and 0.1 A. Find the values of R1, R2, R3, and R4. (2 Marks)</div>
+        <input type="text" id="ans-q4" placeholder="Enter R1, R2, R3, R4 in Ohms separated by commas">
+        <button onclick="evaluateArray('q4', [96, 120, 80, 480], 'Total Current I = 0.5+0.4+0.6+0.1 = 1.6 A. Total Voltage V = I * R_eq = 1.6 * 30 = 48 V. R1=48/0.5=96Ω, R2=48/0.4=120Ω, R3=48/0.6=80Ω, R4=48/0.1=480Ω.')">Submit Answer</button>
+        <div class="result" id="res-q4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-card" id="card-q5">
+        <div class="question-title">Q5. Differentiate between an Ideal Voltage Source and a Practical Voltage Source. (2 Marks)</div>
+        <textarea id="ans-q5" placeholder="Write your explanation here..."></textarea>
+        <button onclick="evaluateText('q5', ['internal resistance', 'zero'], 'An ideal voltage source has zero internal resistance and maintains constant terminal voltage regardless of load current. A practical source has a small internal resistance in series.')">Submit Answer</button>
+        <div class="result" id="res-q5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-card" id="card-q6">
+        <div class="question-title">Q6. State Ohm's law and list two of its primary limitations. (2 Marks)</div>
+        <textarea id="ans-q6" placeholder="Write your explanation here..."></textarea>
+        <button onclick="evaluateText('q6', ['proportional', 'temperature'], 'Ohm’s law states V=IR at constant temperature. Limitations: It does not apply to non-linear devices (diodes/transistors) or varying temperature conditions.')">Submit Answer</button>
+        <div class="result" id="res-q6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-card" id="card-q7">
+        <div class="question-title">Q7. Convert a 10 V voltage source in series with a 5 Ω resistor into an equivalent current source. (2 Marks)</div>
+        <input type="text" id="ans-q7" placeholder="Enter current value in Amperes">
+        <button onclick="evaluateNumeric('q7', 2, 'Equivalent Current Source I = V / R = 10 / 5 = 2 A in parallel with a 5 Ω resistor.')">Submit Answer</button>
+        <div class="result" id="res-q7"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-card" id="card-q8">
+        <div class="question-title">Q8. Define power and energy in electrical circuits along with their SI units. (2 Marks)</div>
+        <textarea id="ans-q8" placeholder="Write your answer here..."></textarea>
+        <button onclick="evaluateText('q8', ['watt', 'joule'], 'Power is the rate of electrical energy consumption (Unit: Watt). Energy is the total power consumed over time (Unit: Joule or kWh).')">Submit Answer</button>
+        <div class="result" id="res-q8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-card" id="card-q9">
+        <div class="question-title">Q9. What is the difference between Mesh Analysis and Nodal Analysis? (2 Marks)</div>
+        <textarea id="ans-q9" placeholder="Write your answer here..."></textarea>
+        <button onclick="evaluateText('q9', ['kvl', 'kcl'], 'Mesh analysis uses KVL to solve for loop currents, whereas Nodal analysis uses KCL to solve for node voltages.')">Submit Answer</button>
+        <div class="result" id="res-q9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-card" id="card-q10">
+        <div class="question-title">Q10. Two resistors of 6 Ω and 12 Ω are connected in parallel. If total current is 6 A, find current in the 6 Ω resistor. (2 Marks)</div>
+        <input type="text" id="ans-q10" placeholder="Enter current in Amperes">
+        <button onclick="evaluateNumeric('q10', 4, 'Using current divider rule: I_6 = Total_I * (12 / (6 + 12)) = 6 * (12 / 18) = 4 A.')">Submit Answer</button>
+        <div class="result" id="res-q10"></div>
+    </div>
+
+
+    <!-- PART B -->
+    <h2 class="section-header">Part B: Long Answer & Numerical Questions (3 x 10 = 30 Marks)</h2>
+
+    <!-- Q11 -->
+    <div class="question-card" id="card-q11">
+        <div class="question-title">Q11. (a) For the circuit shown below, apply KVL to find the voltage across the 3 Ω resistor and current through the 4 Ω resistor. (10 Marks)</div>
+        
+        <div class="svg-container">
+            <svg width="450" height="220" viewBox="0 0 450 220">
+                <!-- Outer Loop -->
+                <rect x="50" y="30" width="350" height="150" fill="none" stroke="#000" stroke-width="2"/>
+                <!-- Middle Branch -->
+                <line x1="225" y1="30" x2="225" y2="180" stroke="#000" stroke-width="2"/>
+                <!-- Resistor 2 Ohm -->
+                <rect x="110" y="23" width="40" height="14" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="120" y="18" font-size="12">2 Ω</text>
+                <!-- Resistor 4 Ohm -->
+                <rect x="280" y="23" width="40" height="14" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="290" y="18" font-size="12">4 Ω</text>
+                <!-- Resistor 3 Ohm -->
+                <rect x="218" y="85" width="14" height="40" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="190" y="110" font-size="12">3 Ω</text>
+                <!-- Source 100V -->
+                <line x1="50" y1="95" x2="50" y2="115" stroke="#000" stroke-width="3"/>
+                <line x1="40" y1="105" x2="60" y2="105" stroke="#000" stroke-width="1"/>
+                <text x="10" y="110" font-size="12">100V</text>
+                <!-- Source 50V -->
+                <line x1="400" y1="95" x2="400" y2="115" stroke="#000" stroke-width="3"/>
+                <line x1="390" y1="105" x2="410" y2="105" stroke="#000" stroke-width="1"/>
+                <text x="415" y="110" font-size="12">50V</text>
+                <!-- Nodes -->
+                <text x="45" y="25" font-size="12" font-weight="bold">A</text>
+                <text x="220" y="25" font-size="12" font-weight="bold">B</text>
+                <text x="400" y="25" font-size="12" font-weight="bold">C</text>
+                <text x="400" y="195" font-size="12" font-weight="bold">D</text>
+                <text x="220" y="195" font-size="12" font-weight="bold">E</text>
+                <text x="45" y="195" font-size="12" font-weight="bold">F</text>
+            </svg>
+        </div>
+
+        <p><strong>Enter Voltage across 3 Ω resistor (V):</strong></p>
+        <input type="text" id="ans-q11a" placeholder="Enter voltage in Volts">
+        <p><strong>Enter Current through 4 Ω resistor (A):</strong></p>
+        <input type="text" id="ans-q11b" placeholder="Enter current in Amperes">
+        <button onclick="evaluateQ11()">Submit Answer</button>
+        <div class="result" id="res-q11"></div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question-card" id="card-q12">
+        <div class="question-title">Q12. Apply Nodal Analysis to determine node voltages VA and VB in the given network. (10 Marks)</div>
+        
+        <div class="svg-container">
+            <svg width="400" height="180" viewBox="0 0 400 180">
+                <rect x="50" y="30" width="300" height="120" fill="none" stroke="#000" stroke-width="2"/>
+                <line x1="150" y1="30" x2="150" y2="150" stroke="#000" stroke-width="2"/>
+                <line x1="250" y1="30" x2="250" y2="150" stroke="#000" stroke-width="2"/>
+                
+                <!-- Resistor 4 Ohm -->
+                <rect x="180" y="23" width="40" height="14" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="195" y="18" font-size="12">4 Ω</text>
+                <!-- Resistor 3 Ohm -->
+                <rect x="143" y="70" width="14" height="40" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="120" y="95" font-size="12">3 Ω</text>
+                <!-- Resistor 5 Ohm -->
+                <rect x="243" y="70" width="14" height="40" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="265" y="95" font-size="12">5 Ω</text>
+
+                <!-- Current Source 2A -->
+                <circle cx="50" cy="90" r="15" fill="#fff" stroke="#000" stroke-width="2"/>
+                <line x1="50" y1="98" x2="50" y2="82" stroke="#000" stroke-width="2"/>
+                <text x="15" y="95" font-size="12">2 A</text>
+
+                <!-- Current Source 3A -->
+                <circle cx="350" cy="90" r="15" fill="#fff" stroke="#000" stroke-width="2"/>
+                <line x1="350" y1="98" x2="350" y2="82" stroke="#000" stroke-width="2"/>
+                <text x="370" y="95" font-size="12">3 A</text>
+
+                <text x="145" y="20" font-size="12" font-weight="bold">VA</text>
+                <text x="245" y="20" font-size="12" font-weight="bold">VB</text>
+            </svg>
+        </div>
+
+        <p><strong>Enter Node Voltage VA (V):</strong></p>
+        <input type="text" id="ans-q12a" placeholder="Enter VA in Volts">
+        <p><strong>Enter Node Voltage VB (V):</strong></p>
+        <input type="text" id="ans-q12b" placeholder="Enter VB in Volts">
+        <button onclick="evaluateQ12()">Submit Answer</button>
+        <div class="result" id="res-q12"></div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="question-card" id="card-q13">
+        <div class="question-title">Q13. Find the current flowing in the 4 kΩ resistor shown in the active network below. (10 Marks)</div>
+        
+        <div class="svg-container">
+            <svg width="450" height="220" viewBox="0 0 450 220">
+                <rect x="50" y="80" width="350" height="100" fill="none" stroke="#000" stroke-width="2"/>
+                <line x1="170" y1="80" x2="170" y2="180" stroke="#000" stroke-width="2"/>
+                <line x1="280" y1="80" x2="280" y2="180" stroke="#000" stroke-width="2"/>
+                
+                <!-- Top Current Source 30 mA -->
+                <line x1="170" y1="30" x2="280" y2="30" stroke="#000" stroke-width="2"/>
+                <line x1="170" y1="30" x2="170" y2="80" stroke="#000" stroke-width="2"/>
+                <line x1="280" y1="30" x2="280" y2="80" stroke="#000" stroke-width="2"/>
+                <circle cx="225" cy="30" r="12" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="210" y="15" font-size="12">30 mA (&larr;)</text>
+
+                <!-- Resistors -->
+                <rect x="200" y="73" width="50" height="14" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="205" y="68" font-size="11">R1=1 kΩ</text>
+
+                <rect x="163" y="115" width="14" height="35" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="110" y="135" font-size="11">R2=2 kΩ</text>
+
+                <rect x="273" y="115" width="14" height="35" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="220" y="135" font-size="11">R3=2 kΩ</text>
+
+                <rect x="393" y="115" width="14" height="35" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="340" y="135" font-size="11">R4=4 kΩ</text>
+
+                <!-- 50 mA Source -->
+                <circle cx="50" cy="130" r="15" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="0" y="135" font-size="11">50 mA (&uarr;)</text>
+            </svg>
+        </div>
+
+        <p><strong>Enter Current in 4 kΩ Resistor (mA):</strong></p>
+        <input type="text" id="ans-q13" placeholder="Enter current in mA">
+        <button onclick="evaluateNumeric('q13', 5, 'Applying Nodal Analysis at top nodes V1 and V2: Solving node equations yields V2 = 20 V. Current in 4 kΩ resistor I = V2 / R4 = 20 V / 4 kΩ = 5 mA.')">Submit Answer</button>
+        <div class="result" id="res-q13"></div>
+    </div>
+
+    <button class="submit-all-btn" onclick="evaluateAll()">Evaluate Complete Test</button>
+    <div id="finalScore"></div>
+
+</div>
+
+<script>
+    let scores = {};
+
+    function evaluateText(id, keywords, solution) {
+        let val = document.getElementById('ans-' + id).value.toLowerCase();
+        let res = document.getElementById('res-' + id);
+        let passed = keywords.some(kw => val.includes(kw));
+
+        res.style.display = "block";
+        if (passed && val.length > 5) {
+            res.className = "result correct";
+            res.innerHTML = "<strong>Correct! (2/2 Marks)</strong><br>Solution: " + solution;
+            scores[id] = 2;
+        } else {
+            res.className = "result incorrect";
+            res.innerHTML = "<strong>Incorrect / Incomplete (0/2 Marks)</strong><br>Solution: " + solution;
+            scores[id] = 0;
+        }
+    }
+
+    function evaluateNumeric(id, correctVal, solution) {
+        let val = parseFloat(document.getElementById('ans-' + id).value);
+        let res = document.getElementById('res-' + id);
+        res.style.display = "block";
+
+        if (!isNaN(val) && Math.abs(val - correctVal) <= 0.1) {
+            let pts = id.startsWith('q11') || id.startsWith('q12') || id.startsWith('q13') ? 10 : 2;
+            res.className = "result correct";
+            res.innerHTML = `<strong>Correct! (${pts}/${pts} Marks)</strong><br>Solution: ` + solution;
+            scores[id] = pts;
+        } else {
+            let pts = id.startsWith('q11') || id.startsWith('q12') || id.startsWith('q13') ? 10 : 2;
+            res.className = "result incorrect";
+            res.innerHTML = `<strong>Incorrect (${0}/${pts} Marks)</strong><br>Solution: ` + solution;
+            scores[id] = 0;
+        }
+    }
+
+    function evaluateArray(id, correctArr, solution) {
+        let raw = document.getElementById('ans-' + id).value;
+        let arr = raw.split(',').map(n => parseFloat(n.trim()));
+        let res = document.getElementById('res-' + id);
+        res.style.display = "block";
+
+        let isCorrect = arr.length === correctArr.length && arr.every((v, i) => Math.abs(v - correctArr[i]) <= 0.5);
+
+        if (isCorrect) {
+            res.className = "result correct";
+            res.innerHTML = "<strong>Correct! (2/2 Marks)</strong><br>Solution: " + solution;
+            scores[id] = 2;
+        } else {
+            res.className = "result incorrect";
+            res.innerHTML = "<strong>Incorrect (0/2 Marks)</strong><br>Solution: " + solution;
+            scores[id] = 0;
+        }
+    }
+
+    function evaluateQ11() {
+        let va = parseFloat(document.getElementById('ans-q11a').value);
+        let ib = parseFloat(document.getElementById('ans-q11b').value);
+        let res = document.getElementById('res-q11');
+        res.style.display = "block";
+
+        // Correct calculated values: V_3ohm = 60 V, I_4ohm = 2.5 A
+        let correctVa = Math.abs(va - 60) <= 0.5;
+        let correctIb = Math.abs(ib - 2.5) <= 0.1;
+
+        if (correctVa && correctIb) {
+            res.className = "result correct";
+            res.innerHTML = "<strong>Correct! (10/10 Marks)</strong><br>Solution: KVL Loop 1: 100 - 2I1 - 3(I1-I2) = 0 => 5I1 - 3I2 = 100. Loop 2: 3(I2-I1) + 4I2 + 50 = 0 => -3I1 + 7I2 = -50. Solving gives I1 = 20A, I2 = 2.5A. Voltage across 3Ω = 3*(20-2.5) = 60V, Current in 4Ω = 2.5A.";
+            scores['q11'] = 10;
+        } else {
+            res.className = "result incorrect";
+            res.innerHTML = "<strong>Incorrect (0/10 Marks)</strong><br>Solution: Correct values are Voltage across 3Ω = 60 V and Current in 4Ω = 2.5 A.";
+            scores['q11'] = 0;
+        }
+    }
+
+    function evaluateQ12() {
+        let va = parseFloat(document.getElementById('ans-q12a').value);
+        let vb = parseFloat(document.getElementById('ans-q12b').value);
+        let res = document.getElementById('res-q12');
+        res.style.display = "block";
+
+        // Correct values: VA = 14.73 V, VB = 16.36 V
+        let correctVA = Math.abs(va - 14.73) <= 0.5;
+        let correctVB = Math.abs(vb - 16.36) <= 0.5;
+
+        if (correctVA && correctVB) {
+            res.className = "result correct";
+            res.innerHTML = "<strong>Correct! (10/10 Marks)</strong><br>Solution: KCL at VA: (VA/3) + (VA-VB)/4 = 2. KCL at VB: (VB-VA)/4 + (VB/5) = 3. Solving simultaneously yields VA = 14.73 V and VB = 16.36 V.";
+            scores['q12'] = 10;
+        } else {
+            res.className = "result incorrect";
+            res.innerHTML = "<strong>Incorrect (0/10 Marks)</strong><br>Solution: Correct Node Voltages are VA = 14.73 V and VB = 16.36 V.";
+            scores['q12'] = 0;
+        }
+    }
+
+    function evaluateAll() {
+        let total = 0;
+        for (let key in scores) {
+            total += scores[key];
+        }
+        document.getElementById('finalScore').innerHTML = `Your Final Score: ${total} / 50`;
+    }
+</script>
+
+</body>
+</html>
