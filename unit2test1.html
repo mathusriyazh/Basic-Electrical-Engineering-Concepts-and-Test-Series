@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC Quantities & Waveforms - Test Series</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #1e3a8a;
+            text-align: center;
+        }
+        .section-header {
+            border-bottom: 2px solid #1e3a8a;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            color: #1e3a8a;
+        }
+        .question-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+            margin-top: 8px;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+            font-weight: bold;
+        }
+        .correct {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        .incorrect {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        .submit-all-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #059669;
+            font-size: 18px;
+            margin-top: 30px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .submit-all-btn:hover {
+            background-color: #047857;
+        }
+        #finalScore {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #1e3a8a;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .footer-logo {
+            max-width: 350px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 12px;
+        }
+        footer p {
+            color: #64748b;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+            <img src="sas40TPJ.jpg" alt="SASTRA University Logo" class="footer-logo">
+    <h1>Electrical Circuit Analysis - AC Quantities</h1>
+    <p style="text-align: center;"><strong>Form Factor & Peak Factor Analysis | Total Marks: 50 | Time: 90 Minutes</strong></p>
+
+    <!-- PART A -->
+    <h2 class="section-header">Part A: Short Answer Questions (10 x 2 = 20 Marks)</h2>
+
+    <!-- Q1 -->
+    <div class="question-card" id="card-q1">
+        <div class="question-title">Q1. Define Form Factor and give its basic ratio formula. (2 Marks)</div>
+        <textarea id="ans-q1" placeholder="Write definition and formula..."></textarea>
+        <button onclick="evaluateText('q1', ['rms', 'average'], 'Form Factor is defined as the ratio of RMS value to the Average value of an AC quantity. Form Factor = RMS Value / Average Value.')">Submit Answer</button>
+        <div class="result" id="res-q1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-card" id="card-q2">
+        <div class="question-title">Q2. Define Peak Factor (Crest Factor) and state its formula. (2 Marks)</div>
+        <textarea id="ans-q2" placeholder="Write definition and formula..."></textarea>
+        <button onclick="evaluateText('q2', ['peak', 'maximum', 'rms'], 'Peak Factor is the ratio of Peak (Maximum) value to the RMS value of an AC quantity. Peak Factor = Peak Value / RMS Value.')">Submit Answer</button>
+        <div class="result" id="res-q2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-card" id="card-q3">
+        <div class="question-title">Q3. What is the Form Factor of a pure sinusoidal AC waveform? (2 Marks)</div>
+        <input type="text" id="ans-q3" placeholder="Enter numerical value">
+        <button onclick="evaluateNumeric('q3', 1.11, 'Form Factor = RMS / Average = (Vm / √2) / (2Vm / π) = π / (2√2) ≈ 1.11')">Submit Answer</button>
+        <div class="result" id="res-q3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-card" id="card-q4">
+        <div class="question-title">Q4. What is the Peak Factor of a standard sinusoidal AC wave? (2 Marks)</div>
+        <input type="text" id="ans-q4" placeholder="Enter numerical value">
+        <button onclick="evaluateNumeric('q4', 1.414, 'Peak Factor = Peak Value / RMS Value = Vm / (Vm / √2) = √2 ≈ 1.414')">Submit Answer</button>
+        <div class="result" id="res-q4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-card" id="card-q5">
+        <div class="question-title">Q5. State the Form Factor of a full-wave rectified sinusoidal waveform. (2 Marks)</div>
+        <input type="text" id="ans-q5" placeholder="Enter numerical value">
+        <button onclick="evaluateNumeric('q5', 1.11, 'Full-wave rectified wave has the same RMS (Vm/√2) and Average (2Vm/π) as a full sine wave, so Form Factor = 1.11')">Submit Answer</button>
+        <div class="result" id="res-q5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-card" id="card-q6">
+        <div class="question-title">Q6. What is the Form Factor of a half-wave rectified sinusoidal waveform? (2 Marks)</div>
+        <input type="text" id="ans-q6" placeholder="Enter numerical value">
+        <button onclick="evaluateNumeric('q6', 1.57, 'For Half-wave Rectified Wave: RMS = Vm / 2, Avg = Vm / π. Form Factor = (Vm / 2) / (Vm / π) = π / 2 ≈ 1.57')">Submit Answer</button>
+        <div class="result" id="res-q6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-card" id="card-q7">
+        <div class="question-title">Q7. What is the Peak Factor of a half-wave rectified sinusoidal wave? (2 Marks)</div>
+        <input type="text" id="ans-q7" placeholder="Enter numerical value">
+        <button onclick="evaluateNumeric('q7', 2.0, 'For Half-wave Rectified Wave: RMS = Vm / 2. Peak Factor = Vm / (Vm / 2) = 2.0')">Submit Answer</button>
+        <div class="result" id="res-q7"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-card" id="card-q8">
+        <div class="question-title">Q8. What are the RMS and Average values of a half-wave rectified wave with peak voltage Vm? (2 Marks)</div>
+        <textarea id="ans-q8" placeholder="Enter expressions for RMS and Average values..."></textarea>
+        <button onclick="evaluateText('q8', ['vm/2', 'vm/pi', '2'], 'RMS Value = Vm / 2, Average Value = Vm / π.')">Submit Answer</button>
+        <div class="result" id="res-q8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-card" id="card-q9">
+        <div class="question-title">Q9. Why is the Form Factor of a square wave equal to 1.0? (2 Marks)</div>
+        <textarea id="ans-q9" placeholder="Explain in brief..."></textarea>
+        <button onclick="evaluateText('q9', ['equal', 'same', 'rms'], 'For a square wave, the RMS value is equal to the Average value (both equal to Vm). Thus, Form Factor = Vm / Vm = 1.0.')">Submit Answer</button>
+        <div class="result" id="res-q9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-card" id="card-q10">
+        <div class="question-title">Q10. An AC voltage is given by v(t) = 311 sin(wt). Calculate its RMS voltage. (2 Marks)</div>
+        <input type="text" id="ans-q10" placeholder="Enter voltage in Volts">
+        <button onclick="evaluateNumeric('q10', 220, 'V_rms = Vm / √2 = 311 / 1.414 = 220 V.')">Submit Answer</button>
+        <div class="result" id="res-q10"></div>
+    </div>
+
+    <!-- PART B -->
+    <h2 class="section-header">Part B: Long Answer & Numerical Questions (3 x 10 = 30 Marks)</h2>
+
+    <!-- Q11 -->
+    <div class="question-card" id="card-q11">
+        <div class="question-title">Q11. Derive the RMS value, Average value, Form Factor, and Peak Factor for a standard full sinusoidal waveform v(t) = Vm sin(wt). (10 Marks)</div>
+        <textarea id="ans-q11" placeholder="Write step-by-step derivation..."></textarea>
+        <button onclick="evaluateText('q11', ['vm', 'sqrt', 'pi', '1.11'], '1. Average Value = (2/π)Vm ≈ 0.637 Vm. 2. RMS Value = Vm / √2 ≈ 0.707 Vm. 3. Form Factor = RMS / Avg = (Vm / √2) / (2Vm / π) = 1.11. 4. Peak Factor = Peak / RMS = Vm / (Vm / √2) = 1.414.')">Submit Answer</button>
+        <div class="result" id="res-q11"></div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question-card" id="card-q12">
+        <div class="question-title">Q12. Derive the expressions for RMS value and Average value of a Half-Wave Rectified sine wave, and calculate its Form Factor and Peak Factor. (10 Marks)</div>
+        <p><strong>Enter calculated Form Factor:</strong></p>
+        <input type="text" id="ans-q12a" placeholder="Enter Form Factor">
+        <p><strong>Enter calculated Peak Factor:</strong></p>
+        <input type="text" id="ans-q12b" placeholder="Enter Peak Factor">
+        <button onclick="evaluateQ12()">Submit Answer</button>
+        <div class="result" id="res-q12"></div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="question-card" id="card-q13">
+        <div class="question-title">Q13. A full-wave rectified sinusoidal current has a peak value of 20 A. Calculate: (i) Average Current, (ii) RMS Current, (iii) Form Factor, and (iv) Peak Factor. (10 Marks)</div>
+        <p><strong>Enter Average Current (A):</strong></p>
+        <input type="text" id="ans-q13a" placeholder="Enter Average Current in Amperes">
+        <p><strong>Enter RMS Current (A):</strong></p>
+        <input type="text" id="ans-q13b" placeholder="Enter RMS Current in Amperes">
+        <button onclick="evaluateQ13()">Submit Answer</button>
+        <div class="result" id="res-q13"></div>
+    </div>
+
+    <button class="submit-all-btn" onclick="evaluateAll()">Evaluate Complete Test</button>
+    <div id="finalScore"></div>
+
+    <!-- Footer -->
+    <footer>
+        
+        <p>Dr. R. Sriranjani, Senior Assistant Professor, SEEE, SASTRA Deemed University</p>
+    </footer>
+
+</div>
+
+<script>
+    let scores = {};
+
+    function evaluateText(id, keywords, solution) {
+        let val = document.getElementById('ans-' + id).value.toLowerCase();
+        let res = document.getElementById('res-' + id);
+        let passed = keywords.some(kw => val.includes(kw));
+        let pts = id === 'q11' ? 10 : 2;
+
+        res.style.display = "block";
+        if (passed && val.length > 5) {
+            res.className = "result correct";
+            res.innerHTML = `<strong>Correct! (${pts}/${pts} Marks)</strong><br>Solution: ` + solution;
+            scores[id] = pts;
+        } else {
+            res.className = "result incorrect";
+            res.innerHTML = `<strong>Incorrect / Incomplete (0/${pts} Marks)</strong><br>Solution: ` + solution;
+            scores[id] = 0;
+        }
+    }
+
+    function evaluateNumeric(id, correctVal, solution) {
+        let val = parseFloat(document.getElementById('ans-' + id).value);
+        let res = document.getElementById('res-' + id);
+        res.style.display = "block";
+
+        if (!isNaN(val) && Math.abs(val - correctVal) <= 0.05) {
+            res.className = "result correct";
+            res.innerHTML = "<strong>Correct! (2/2 Marks)</strong><br>Solution: " + solution;
+            scores[id] = 2;
+        } else {
+            res.className = "result incorrect";
+            res.innerHTML = "<strong>Incorrect (0/2 Marks)</strong><br>Solution: " + solution;
+            scores[id] = 0;
+        }
+    }
+
+    function evaluateQ12() {
+        let ff = parseFloat(document.getElementById('ans-q12a').value);
+        let pf = parseFloat(document.getElementById('ans-q12b').value);
+        let res = document.getElementById('res-q12');
+        res.style.display = "block";
+
+        let correctFF = Math.abs(ff - 1.57) <= 0.05;
+        let correctPF = Math.abs(pf - 2.0) <= 0.05;
+
+        if (correctFF && correctPF) {
+            res.className = "result correct";
+            res.innerHTML = "<strong>Correct! (10/10 Marks)</strong><br>Solution: Average = Vm/π, RMS = Vm/2. Form Factor = (Vm/2)/(Vm/π) = π/2 ≈ 1.57. Peak Factor = Vm/(Vm/2) = 2.0.";
+            scores['q12'] = 10;
+        } else {
+            res.className = "result incorrect";
+            res.innerHTML = "<strong>Incorrect (0/10 Marks)</strong><br>Solution: Correct values are Form Factor = 1.57 and Peak Factor = 2.0.";
+            scores['q12'] = 0;
+        }
+    }
+
+    function evaluateQ13() {
+        let avg = parseFloat(document.getElementById('ans-q13a').value);
+        let rms = parseFloat(document.getElementById('ans-q13b').value);
+        let res = document.getElementById('res-q13');
+        res.style.display = "block";
+
+        // Im = 20A -> I_avg = 2 * 20 / pi ≈ 12.73 A, I_rms = 20 / sqrt(2) ≈ 14.14 A
+        let correctAvg = Math.abs(avg - 12.73) <= 0.2;
+        let correctRMS = Math.abs(rms - 14.14) <= 0.2;
+
+        if (correctAvg && correctRMS) {
+            res.className = "result correct";
+            res.innerHTML = "<strong>Correct! (10/10 Marks)</strong><br>Solution: (i) I_avg = 2 * Im / π = 2 * 20 / 3.1416 = 12.73 A. (ii) I_rms = Im / √2 = 20 / 1.414 = 14.14 A. (iii) Form Factor = 14.14 / 12.73 = 1.11. (iv) Peak Factor = 20 / 14.14 = 1.414.";
+            scores['q13'] = 10;
+        } else {
+            res.className = "result incorrect";
+            res.innerHTML = "<strong>Incorrect (0/10 Marks)</strong><br>Solution: Correct values are Average Current = 12.73 A and RMS Current = 14.14 A.";
+            scores['q13'] = 0;
+        }
+    }
+
+    function evaluateAll() {
+        let total = 0;
+        for (let key in scores) {
+            total += scores[key];
+        }
+        document.getElementById('finalScore').innerHTML = `Your Final Score: ${total} / 50`;
+    }
+</script>
+
+</body>
+</html>
