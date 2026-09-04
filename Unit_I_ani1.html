@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DC Circuits Interactive Virtual Lab</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f3f6fb;color:#172033}
+header{background:linear-gradient(135deg,#12355b,#087e8b);color:white;padding:22px;text-align:center}
+header h1{margin:0 0 7px;font-size:28px} header p{margin:0;opacity:.9}
+nav{display:flex;flex-wrap:wrap;gap:7px;background:#10243e;padding:9px;position:sticky;top:0;z-index:10}
+nav button{border:0;background:#294866;color:white;padding:11px 14px;border-radius:7px;cursor:pointer;font-weight:600}
+nav button.active,nav button:hover{background:#10a6a6}
+main{max-width:1250px;margin:auto;padding:18px}.tab{display:none}.tab.active{display:block}
+.card{background:white;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 3px 14px #00000012}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+h2{color:#12355b;margin-top:0} h3{color:#087e8b}
+.badge{display:inline-block;padding:5px 9px;border-radius:15px;background:#e5f7f6;color:#087e8b;font-size:12px;font-weight:bold}
+.formula{background:#eef5ff;border-left:5px solid #087e8b;padding:12px;font-size:18px;font-weight:bold}
+.canvas-wrapper{width:100%;max-width:620px;background:#0f172a;border-radius:9px;padding:10px;box-shadow:inset 0 0 10px rgba(0,0,0,0.5)}
+canvas{width:100%;height:300px;display:block;}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0}
+input,textarea,select{padding:10px;border:1px solid #cbd5e1;border-radius:7px;font:inherit}
+textarea{width:100%;min-height:110px;resize:vertical}
+button.primary{background:#087e8b;color:#fff;border:0;border-radius:7px;padding:10px 15px;cursor:pointer;font-weight:bold}
+button.secondary{background:#e8eef5;border:0;border-radius:7px;padding:10px 15px;cursor:pointer}
+.result{padding:10px;border-radius:7px;background:#f1f8f8;margin-top:9px;min-height:40px}
+.correct{background:#dff6e7!important;color:#126b39}.wrong{background:#fff0f0!important;color:#a52828}
+.small{font-size:13px;color:#5d6b7a}.topic-title{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.question{border:1px solid #dce5ef;border-radius:9px;padding:14px;margin:12px 0}
+.mark{float:right;background:#fff2cc;padding:4px 8px;border-radius:10px;font-size:12px}
+.chat{height:310px;overflow:auto;background:#f7f9fc;border:1px solid #dbe4ee;padding:12px;border-radius:8px}
+.msg{padding:9px 12px;margin:7px 0;border-radius:12px;max-width:85%}.bot{background:#e6f4f4}.user{background:#dceaff;margin-left:auto}
+.flex{display:flex;gap:8px}.flex input{flex:1}
+table{width:100%;border-collapse:collapse}th,td{border:1px solid #d9e2ec;padding:9px;text-align:left}th{background:#eef4f8}
+.progress{height:12px;background:#e4e9ef;border-radius:8px;overflow:hidden}.progress div{height:100%;background:#087e8b;width:0}
+footer{text-align:center;color:#64748b;padding:20px}
+</style>
+</head>
+<body>
+<header>
+<h1>⚡ Direct Current (DC) Circuits — Interactive Virtual Lab</h1>
+<p>Concept • Circuit Diagram • Animation • Numerical Problems • AI-style Tutor • Question Bank • Self Assessment</p>
+</header>
+
+<nav id="nav">
+<button class="active" onclick="showTab('home',this)">Home</button>
+<button onclick="showTab('ohm',this)">Ohm's Law</button>
+<button onclick="showTab('kcl',this)">Kirchhoff's Laws</button>
+<button onclick="showTab('series',this)">Series & Parallel</button>
+<button onclick="showTab('sources',this)">Ideal/Practical Sources</button>
+<button onclick="showTab('mesh',this)">Mesh & Nodal</button>
+<button onclick="showTab('transform',this)">Source Transformation</button>
+<button onclick="showTab('bank',this)">Question Bank</button>
+<button onclick="showTab('chat',this)">Ask Tutor</button>
+</nav>
+
+<main>
+<section id="home" class="tab active">
+<div class="card">
+<h2>DC Circuits Learning Module</h2>
+<p>This virtual laboratory is designed for classroom teaching and student self-learning. Select a topic to study its concept, observe an animated circuit, solve a numerical problem, and submit the answer.</p>
+<div class="grid">
+<div><h3>Learning Cycle</h3><ol><li>Study the concept</li><li>Observe the circuit</li><li>Run the animation</li><li>Work out the numerical</li><li>Enter your answer</li><li>Check/evaluate</li></ol></div>
+<div><h3>Syllabus Covered</h3><ul><li>Ohm's law</li><li>Kirchhoff's laws</li><li>Series and parallel circuits</li><li>Ideal and practical voltage/current sources</li><li>Mesh and nodal analysis</li><li>Source transformation</li></ul></div>
+</div>
+</div>
+<div class="card">
+<h2>Learning Progress</h2>
+<div class="progress"><div id="progressBar"></div></div>
+<p id="progressText">0 activities evaluated.</p>
+</div>
+</section>
+
+<section id="ohm" class="tab">
+<div class="card">
+<div class="topic-title"><h2>1. Ohm's Law</h2><span class="badge">V = IR</span></div>
+<p>For a resistive element under constant physical conditions, current is directly proportional to voltage. The fundamental relationship is <b>V = IR</b>.</p>
+<div class="formula">V = I R &nbsp;&nbsp; | &nbsp;&nbsp; I = V/R &nbsp;&nbsp; | &nbsp;&nbsp; R = V/I</div>
+<p><b>Unit:</b> V in volts, I in amperes and R in ohms (Ω).</p>
+<div class="canvas-wrapper"><canvas id="ohmCanvas" width="620" height="300"></canvas></div>
+<div class="controls"><label>Voltage <input id="ohmV" type="number" value="12" min="0" step="0.1"> V</label><label>Resistance <input id="ohmR" type="number" value="6" min="0.1" step="0.1"> Ω</label><button class="primary" onclick="ohmCalc()">Run Animation</button></div>
+<div id="ohmResult" class="result"></div>
+<h3>Numerical Problem</h3>
+<p>A 24 V DC supply is connected to a 8 Ω resistor. Find the current through the resistor and power absorbed.</p>
+<input id="ohmAns" placeholder="Enter I and P, e.g. I=3 A, P=72 W">
+<button class="primary" onclick="checkOhm()">Evaluate Answer</button><div id="ohmCheck" class="result"></div>
+</div>
+</section>
+
+<section id="kcl" class="tab">
+<div class="card">
+<div class="topic-title"><h2>2. Kirchhoff's Laws</h2><span class="badge">KCL + KVL</span></div>
+<h3>Kirchhoff's Current Law (KCL)</h3><p>At any node, the algebraic sum of currents is zero. Total current entering a node equals total current leaving it.</p>
+<div class="formula">ΣI<sub>in</sub> = ΣI<sub>out</sub></div>
+<h3>Kirchhoff's Voltage Law (KVL)</h3><p>Around any closed loop, the algebraic sum of voltage rises and drops is zero.</p>
+<div class="formula">ΣV = 0</div>
+<div class="canvas-wrapper"><canvas id="kclCanvas" width="620" height="300"></canvas></div>
+<div class="controls"><label>I1 <input id="i1" type="number" value="5" step=".1"> A</label><label>I2 <input id="i2" type="number" value="2" step=".1"> A</label><button class="primary" onclick="kclAnim()">Animate KCL</button></div>
+<div id="kclResult" class="result"></div>
+<h3>Numerical Problem</h3><p>At a node, 8 A and 3 A enter the node. If 5 A leaves through one branch, find the current leaving through the remaining branch.</p>
+<input id="kclAns" placeholder="Enter current in A">
+<button class="primary" onclick="checkKcl()">Evaluate Answer</button><div id="kclCheck" class="result"></div>
+</div>
+</section>
+
+<section id="series" class="tab">
+<div class="card">
+<h2>3. Series and Parallel Circuits</h2>
+<h3>Series Circuit</h3><p>In series, the same current flows through every resistor.</p>
+<div class="formula">R<sub>eq</sub> = R1 + R2 + ... + Rn</div>
+<h3>Parallel Circuit</h3><p>In parallel, the voltage across each branch is the same.</p>
+<div class="formula">1/R<sub>eq</sub> = 1/R1 + 1/R2 + ... + 1/Rn</div>
+<div class="canvas-wrapper"><canvas id="seriesCanvas" width="620" height="300"></canvas></div>
+<div class="controls"><select id="spMode"><option value="series">Series</option><option value="parallel">Parallel</option></select><label>R1 <input id="rA" type="number" value="4" min=".1" step=".1"> Ω</label><label>R2 <input id="rB" type="number" value="6" min=".1" step=".1"> Ω</label><button class="primary" onclick="spAnim()">Animate Circuit</button></div>
+<div id="spResult" class="result"></div>
+<h3>Numerical Problem</h3><p>Two resistors of 10 Ω and 15 Ω are connected in parallel across a 30 V source. Find equivalent resistance and total current.</p>
+<input id="spAns" placeholder="Enter Req and I">
+<button class="primary" onclick="checkSP()">Evaluate Answer</button><div id="spCheck" class="result"></div>
+</div>
+</section>
+
+<section id="sources" class="tab">
+<div class="card">
+<h2>4. Ideal and Practical Voltage and Current Sources</h2>
+<div class="grid">
+<div><h3>Ideal Voltage Source</h3><p>Maintains constant terminal voltage independent of load current. Internal resistance is zero.</p></div>
+<div><h3>Practical Voltage Source</h3><p>Modelled as an ideal voltage source in series with internal resistance.</p></div>
+<div><h3>Ideal Current Source</h3><p>Maintains constant current independent of terminal voltage. Internal resistance is infinite.</p></div>
+<div><h3>Practical Current Source</h3><p>Modelled as an ideal current source in parallel with a large internal resistance.</p></div>
+</div>
+<div class="canvas-wrapper"><canvas id="sourceCanvas" width="620" height="300"></canvas></div>
+<div class="controls"><select id="sourceType"><option>Ideal Voltage Source</option><option>Practical Voltage Source</option><option>Ideal Current Source</option><option>Practical Current Source</option></select><button class="primary" onclick="sourceAnim()">Show Animation</button></div>
+<div id="sourceResult" class="result"></div>
+<h3>Numerical Problem</h3><p>A 12 V practical voltage source has an internal resistance of 1 Ω and supplies a 5 Ω load. Find load current and terminal voltage.</p>
+<input id="sourceAns" placeholder="Enter current and terminal voltage">
+<button class="primary" onclick="checkSource()">Evaluate Answer</button><div id="sourceCheck" class="result"></div>
+</div>
+</section>
+
+<section id="mesh" class="tab">
+<div class="card">
+<h2>5. Mesh and Nodal Analysis</h2>
+<h3>Mesh Analysis</h3><p>Mesh analysis applies KVL to independent loops. Assign mesh currents and solve simultaneous equations.</p>
+<h3>Nodal Analysis</h3><p>Nodal analysis applies KCL at essential nodes. Select a reference node and determine node voltages.</p>
+<div class="canvas-wrapper"><canvas id="meshCanvas" width="620" height="300"></canvas></div>
+<div class="controls"><select id="analysisType"><option>Mesh Analysis</option><option>Nodal Analysis</option></select><button class="primary" onclick="analysisAnim()">Animate Analysis</button></div>
+<div id="meshResult" class="result"></div>
+<h3>Numerical Problem — Nodal Analysis</h3><p>A node V is connected to a 10 V source through 2 Ω and to ground through 3 Ω. Find V.</p>
+<input id="meshAns" placeholder="Enter node voltage in V">
+<button class="primary" onclick="checkMesh()">Evaluate Answer</button><div id="meshCheck" class="result"></div>
+</div>
+</section>
+
+<section id="transform" class="tab">
+<div class="card">
+<h2>6. Source Transformation</h2>
+<p>A voltage source V in series with R can be transformed into an equivalent current source I in parallel with the same R.</p>
+<div class="formula">I = V/R &nbsp;&nbsp;&nbsp; R remains unchanged</div>
+<div class="canvas-wrapper"><canvas id="transformCanvas" width="620" height="300"></canvas></div>
+<div class="controls"><label>Voltage V <input id="trV" type="number" value="12" step=".1"></label><label>R <input id="trR" type="number" value="4" min=".1" step=".1"></label><button class="primary" onclick="transformAnim()">Transform</button></div>
+<div id="trResult" class="result"></div>
+<h3>Numerical Problem</h3><p>Transform a 20 V source in series with 5 Ω into an equivalent current source. Find source current and parallel resistance.</p>
+<input id="trAns" placeholder="Enter I and R">
+<button class="primary" onclick="checkTransform()">Evaluate Answer</button><div id="trCheck" class="result"></div>
+</div>
+</section>
+
+<section id="bank" class="tab">
+<div class="card">
+<h2>Question Bank & Self Assessment</h2>
+<p>Attempt all questions. Type your answer after working it out. The evaluator checks numerical answers and provides a score for the conceptual questions.</p>
+<div id="bankQuestions"></div>
+<button class="primary" onclick="evaluateBank()">Evaluate Question Bank</button>
+<div id="bankScore" class="result"></div>
+</div>
+</section>
+
+<section id="chat" class="tab">
+<div class="card">
+<h2>💬 DC Circuits Tutor</h2>
+<p>Ask questions related to the syllabus. This is a built-in rule-based tutor and works without an internet connection.</p>
+<div id="chatBox" class="chat"><div class="msg bot">Hello! Ask me about Ohm's law, KCL, KVL, series/parallel circuits, sources, mesh analysis, nodal analysis, or source transformation.</div></div>
+<div class="flex" style="margin-top:10px"><input id="chatInput" placeholder="Ask: What is KCL?"><button class="primary" onclick="askTutor()">Ask</button></div>
+</div>
+</section>
+</main>
+<footer>DC Circuits Interactive Virtual Lab • Designed for teaching, practice and self-assessment</footer>
+
+<script>
+let activities=0;
+let animFrameId = null;
+
+function showTab(id,btn){
+    if(animFrameId) cancelAnimationFrame(animFrameId);
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+    btn.classList.add('active');
+    drawAll();
+}
+
+function success(id,msg){const e=document.getElementById(id);e.className='result correct';e.innerHTML=msg;activities++;updateProgress()}
+function fail(id,msg){const e=document.getElementById(id);e.className='result wrong';e.innerHTML=msg}
+function updateProgress(){document.getElementById('progressText').textContent=activities+' activities evaluated.';document.getElementById('progressBar').style.width=Math.min(100,activities*7)+'%'}
+
+// High DPI Canvas Setup Engine
+function setupCanvas(id){
+    const c=document.getElementById(id);
+    const ctx=c.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    c.width = 620 * dpr;
+    c.height = 300 * dpr;
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0,0,620,300);
+    ctx.font='14px Segoe UI, Arial, sans-serif';
+    return [c,ctx];
+}
+
+// Advanced High-Definition Schematics Drawing Toolkit
+const Schematics = {
+    wire: function(ctx, x1, y1, x2, y2, color="#38bdf8", width=2.5) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+        ctx.restore();
+    },
+    resistor: function(ctx, x1, y1, x2, y2, label="", val="", vert=false) {
+        ctx.save();
+        ctx.strokeStyle = "#fbbf24";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        if(!vert) {
+            let len = x2 - x1;
+            let mid = (x1 + x2) / 2;
+            let rw = 50;
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(mid - rw/2, y1);
+            let startX = mid - rw/2;
+            let step = rw / 6;
+            ctx.lineTo(startX + step*0.5, y1 - 12);
+            for(let i=1; i<6; i++) {
+                ctx.lineTo(startX + step*(i + 0.5), y1 + (i%2 === 0 ? -12 : 12));
+            }
+            ctx.lineTo(mid + rw/2, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+            this.terminal(ctx, x1, y1);
+            this.terminal(ctx, x2, y2);
+            ctx.fillStyle = "#f8fafc";
+            ctx.font = "bold 13px Arial";
+            ctx.textAlign = "center";
+            if(label) ctx.fillText(label, mid, y1 - 20);
+            if(val) ctx.fillText(val, mid, y1 + 25);
+        } else {
+            let mid = (y1 + y2) / 2;
+            let rh = 50;
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x1, mid - rh/2);
+            let startY = mid - rh/2;
+            let step = rh / 6;
+            ctx.lineTo(x1 - 12, startY + step*0.5);
+            for(let i=1; i<6; i++) {
+                ctx.lineTo(x1 + (i%2 === 0 ? -12 : 12), startY + step*(i + 0.5));
+            }
+            ctx.lineTo(x1, mid + rh/2);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+            this.terminal(ctx, x1, y1);
+            this.terminal(ctx, x2, y2);
+            ctx.fillStyle = "#f8fafc";
+            ctx.font = "bold 13px Arial";
+            if(label) ctx.fillText(label, x1 + 20, mid - 5);
+            if(val) ctx.fillText(val, x1 + 20, mid + 15);
+        }
+        ctx.restore();
+    },
+    battery: function(ctx, x, y, label="V", val="", vert=true) {
+        ctx.save();
+        ctx.strokeStyle = "#ef4444";
+        ctx.lineWidth = 3;
+        if(vert) {
+            ctx.beginPath();
+            ctx.moveTo(x - 20, y - 10); ctx.lineTo(x + 20, y - 10); // Long positive plate
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.strokeStyle = "#94a3b8";
+            ctx.lineWidth = 4;
+            ctx.moveTo(x - 10, y + 10); ctx.lineTo(x + 10, y + 10); // Short negative plate
+            ctx.stroke();
+            ctx.fillStyle = "#ef4444"; ctx.font = "bold 16px Arial"; ctx.fillText("+", x - 32, y - 8);
+            ctx.fillStyle = "#94a3b8"; ctx.font = "bold 18px Arial"; ctx.fillText("−", x - 32, y + 16);
+            ctx.fillStyle = "#f8fafc"; ctx.font = "bold 13px Arial"; ctx.fillText(label, x + 28, y - 2);
+            if(val) ctx.fillText(val, x + 28, y + 15);
+        } else {
+            ctx.beginPath();
+            ctx.moveTo(x - 10, y - 20); ctx.lineTo(x - 10, y + 20);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.strokeStyle = "#94a3b8";
+            ctx.lineWidth = 4;
+            ctx.moveTo(x + 10, y - 10); ctx.lineTo(x + 10, y + 10);
+            ctx.stroke();
+            ctx.fillStyle = "#ef4444"; ctx.font = "bold 16px Arial"; ctx.fillText("+", x - 12, y - 26);
+            ctx.fillStyle = "#94a3b8"; ctx.font = "bold 18px Arial"; ctx.fillText("−", x + 8, y - 26);
+            ctx.fillStyle = "#f8fafc"; ctx.font = "bold 13px Arial"; ctx.fillText(label, x - 10, y + 36);
+            if(val) ctx.fillText(val, x - 10, y + 52);
+        }
+        ctx.restore();
+    },
+    currentSource: function(ctx, x, y, label="I", val="") {
+        ctx.save();
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.arc(x, y, 22, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.fillStyle = "#0f172a"; ctx.fill();
+        // Arrow pointing up
+        ctx.fillStyle = "#38bdf8";
+        ctx.beginPath();
+        ctx.moveTo(x, y + 12); ctx.lineTo(x, y - 12);
+        ctx.lineTo(x - 5, y - 5); ctx.moveTo(x, y - 12); ctx.lineTo(x + 5, y - 5);
+        ctx.stroke();
+        ctx.fillStyle = "#f8fafc"; ctx.font = "bold 13px Arial";
+        ctx.fillText(label, x - 40, y - 2);
+        if(val) ctx.fillText(val, x - 40, y + 15);
+        ctx.restore();
+    },
+    ground: function(ctx, x, y) {
+        ctx.save();
+        ctx.strokeStyle = "#94a3b8";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(x, y); ctx.lineTo(x, y + 15);
+        ctx.moveTo(x - 18, y + 15); ctx.lineTo(x + 18, y + 15);
+        ctx.moveTo(x - 11, y + 21); ctx.lineTo(x + 11, y + 21);
+        ctx.moveTo(x - 4, y + 27); ctx.lineTo(x + 4, y + 27);
+        ctx.stroke();
+        ctx.restore();
+    },
+    terminal: function(ctx, x, y) {
+        ctx.save();
+        ctx.fillStyle = "#38bdf8";
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+    },
+    node: function(ctx, x, y, label="") {
+        ctx.save();
+        ctx.fillStyle = "#f59e0b";
+        ctx.beginPath();
+        ctx.arc(x, y, 6, 0, Math.PI*2);
+        ctx.fill();
+        if(label) {
+            ctx.fillStyle = "#f8fafc";
+            ctx.font = "bold 14px Arial";
+            ctx.fillText(label, x - 10, y - 12);
+        }
+        ctx.restore();
+    },
+    currentArrow: function(ctx, x, y, dir="right", label="") {
+        ctx.save();
+        ctx.strokeStyle = "#4ade80";
+        ctx.fillStyle = "#4ade80";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        if(dir === "right") {
+            ctx.moveTo(x, y); ctx.lineTo(x + 30, y); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x + 30, y); ctx.lineTo(x + 22, y - 5); ctx.lineTo(x + 22, y + 5); ctx.closePath(); ctx.fill();
+            if(label) ctx.fillText(label, x + 5, y - 8);
+        } else if(dir === "down") {
+            ctx.moveTo(x, y); ctx.lineTo(x, y + 30); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x, y + 30); ctx.lineTo(x - 5, y + 22); ctx.lineTo(x + 5, y + 22); ctx.closePath(); ctx.fill();
+            if(label) ctx.fillText(label, x + 8, y + 18);
+        } else if(dir === "left") {
+            ctx.moveTo(x, y); ctx.lineTo(x - 30, y); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x - 30, y); ctx.lineTo(x - 22, y - 5); ctx.lineTo(x - 22, y + 5); ctx.closePath(); ctx.fill();
+            if(label) ctx.fillText(label, x - 25, y - 8);
+        }
+        ctx.restore();
+    }
+};
+
+// 1. Ohm's Law Schematic & Animation
+function drawOhmStatic(vVal, rVal) {
+    let [c, ctx] = setupCanvas('ohmCanvas');
+    Schematics.wire(ctx, 100, 60, 520, 60);
+    Schematics.wire(ctx, 520, 60, 520, 240);
+    Schematics.wire(ctx, 520, 240, 100, 240);
+    Schematics.wire(ctx, 100, 240, 100, 60);
+    
+    Schematics.battery(ctx, 100, 150, "DC Source", `${vVal} V`, true);
+    Schematics.resistor(ctx, 230, 60, 390, 60, "Resistor (R)", `${rVal} Ω`, false);
+    
+    let current = (vVal / rVal).toFixed(2);
+    Schematics.currentArrow(ctx, 280, 110, "right", `I = ${current} A`);
+}
+
+function ohmCalc() {
+    let v = +ohmV.value, r = +ohmR.value;
+    if(r <= 0) return;
+    let i = v / r, p = v * i;
+    
+    if(animFrameId) cancelAnimationFrame(animFrameId);
+    let offset = 0;
+    function animate() {
+        drawOhmStatic(v, r);
+        let [c, ctx] = setupCanvas('ohmCanvas');
+        drawOhmStatic(v, r);
+        
+        // Render charge particle flow
+        ctx.fillStyle = "#38bdf8";
+        let speed = Math.max(0.5, Math.min(i * 1.5, 8));
+        offset = (offset + speed) % 40;
+        
+        const path = [
+            {x1:100, y1:150, x2:100, y2:60},
+            {x1:100, y1:60, x2:520, y2:60},
+            {x1:520, y1:60, x2:520, y2:240},
+            {x1:520, y1:240, x2:100, y2:240},
+            {x1:100, y1:240, x2:100, y2:150}
+        ];
+        
+        for(let pSeg of path) {
+            let len = Math.hypot(pSeg.x2 - pSeg.x1, pSeg.y2 - pSeg.y1);
+            let steps = Math.floor(len / 35);
+            for(let s=0; s<steps; s++) {
+                let d = (s * 35 + offset) % len;
+                let px = pSeg.x1 + (pSeg.x2 - pSeg.x1) * (d / len);
+                let py = pSeg.y1 + (pSeg.y2 - pSeg.y1) * (d / len);
+                ctx.beginPath();
+                ctx.arc(px, py, 4, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        animFrameId = requestAnimationFrame(animate);
+    }
+    animate();
+    document.getElementById('ohmResult').innerHTML = `<b>Current (I): ${i.toFixed(3)} A</b> &nbsp; | &nbsp; <b>Power (P): ${p.toFixed(3)} W</b>`;
+}
+
+function checkOhm() {
+    let s = ohmAns.value.toLowerCase();
+    if(s.includes('3') && s.includes('72')) success('ohmCheck','✓ Correct. I = 24/8 = 3 A and P = VI = 72 W.');
+    else fail('ohmCheck','Try again. Use I=V/R and P=VI. Expected: 3 A and 72 W.');
+}
+
+// 2. KCL & KVL Schematics
+function drawKcl() {
+    let [c, ctx] = setupCanvas('kclCanvas');
+    let v1 = +i1.value || 5, v2 = +i2.value || 2;
+    let sum = v1 + v2;
+    
+    // KCL Node Junction Graphic
+    Schematics.wire(ctx, 80, 150, 260, 150);
+    Schematics.wire(ctx, 160, 50, 260, 150);
+    Schematics.wire(ctx, 260, 150, 480, 150);
+    
+    Schematics.node(ctx, 260, 150, "Node A");
+    
+    Schematics.currentArrow(ctx, 130, 150, "right", `I1 = ${v1} A`);
+    Schematics.currentArrow(ctx, 180, 80, "right", `I2 = ${v2} A`);
+    Schematics.currentArrow(ctx, 330, 150, "right", `I3 = ${sum} A`);
+    
+    ctx.fillStyle = "#f8fafc";
+    ctx.font = "bold 15px Arial";
+    ctx.fillText("KCL Junction Principle: Σ I_in = Σ I_out", 160, 240);
+}
+
+function kclAnim() {
+    drawKcl();
+    let a = +i1.value, b = +i2.value;
+    document.getElementById('kclResult').innerHTML = `Total current entering Node A = <b>${(a+b).toFixed(1)} A</b>. Total current leaving = <b>${(a+b).toFixed(1)} A</b>.`;
+}
+
+function checkKcl() {
+    let v = parseFloat(kclAns.value);
+    if(Math.abs(v-6) < .01) success('kclCheck','✓ Correct. 8 + 3 = 5 + I, hence I = 6 A.');
+    else fail('kclCheck','Expected 6 A. Apply KCL: 8 + 3 = 5 + I.');
+}
+
+// 3. Series & Parallel Schematics
+function drawSeriesParallel() {
+    let [c, ctx] = setupCanvas('seriesCanvas');
+    let mode = spMode.value, r1 = +rA.value, r2 = +rB.value;
+    let eq = mode==='series' ? r1+r2 : (r1*r2/(r1+r2));
+
+    if(mode === 'series') {
+        Schematics.wire(ctx, 80, 70, 540, 70);
+        Schematics.wire(ctx, 540, 70, 540, 230);
+        Schematics.wire(ctx, 540, 230, 80, 230);
+        Schematics.wire(ctx, 80, 230, 80, 70);
+        
+        Schematics.battery(ctx, 80, 150, "V_in", "", true);
+        Schematics.resistor(ctx, 160, 70, 310, 70, "R1", `${r1} Ω`, false);
+        Schematics.resistor(ctx, 350, 70, 500, 70, "R2", `${r2} Ω`, false);
+        Schematics.currentArrow(ctx, 300, 120, "right", "Same Current (I)");
+    } else {
+        Schematics.wire(ctx, 80, 70, 500, 70);
+        Schematics.wire(ctx, 80, 230, 500, 230);
+        Schematics.wire(ctx, 80, 70, 80, 230);
+        
+        Schematics.wire(ctx, 280, 70, 280, 230);
+        Schematics.wire(ctx, 480, 70, 480, 230);
+        
+        Schematics.battery(ctx, 80, 150, "V_in", "", true);
+        Schematics.resistor(ctx, 280, 70, 280, 230, "R1", `${r1} Ω`, true);
+        Schematics.resistor(ctx, 480, 70, 480, 230, "R2", `${r2} Ω`, true);
+        
+        Schematics.node(ctx, 280, 70, "A");
+        Schematics.node(ctx, 280, 230, "B");
+    }
+    document.getElementById('spResult').innerHTML = `Equivalent Resistance (Req) = <b>${eq.toFixed(3)} Ω</b>.`;
+}
+
+function spAnim() { drawSeriesParallel(); }
+
+function checkSP() {
+    let s = spAns.value.toLowerCase();
+    if(s.includes('6') && s.includes('5')) success('spCheck','✓ Correct. Req = (10×15)/(10+15) = 6 Ω; total current = 30/6 = 5 A.');
+    else fail('spCheck','Expected Req = 6 Ω and total current = 5 A.');
+}
+
+// 4. Source Schematics
+function sourceAnim() {
+    let type = sourceType.value;
+    let [c, ctx] = setupCanvas('sourceCanvas');
+    
+    if(type === 'Ideal Voltage Source') {
+        Schematics.wire(ctx, 150, 80, 450, 80);
+        Schematics.wire(ctx, 150, 220, 450, 220);
+        Schematics.wire(ctx, 150, 80, 150, 220);
+        Schematics.battery(ctx, 150, 150, "Vs", "Ideal", true);
+        Schematics.terminal(ctx, 450, 80); Schematics.terminal(ctx, 450, 220);
+    } else if(type === 'Practical Voltage Source') {
+        Schematics.wire(ctx, 100, 150, 180, 150);
+        Schematics.resistor(ctx, 180, 150, 360, 150, "Internal R_s", "Series", false);
+        Schematics.wire(ctx, 360, 150, 480, 150);
+        Schematics.wire(ctx, 100, 230, 480, 230);
+        Schematics.wire(ctx, 100, 150, 100, 230);
+        Schematics.battery(ctx, 100, 190, "Vs", "", true);
+        Schematics.terminal(ctx, 480, 150); Schematics.terminal(ctx, 480, 230);
+    } else if(type === 'Ideal Current Source') {
+        Schematics.wire(ctx, 200, 80, 420, 80);
+        Schematics.wire(ctx, 200, 220, 420, 220);
+        Schematics.wire(ctx, 200, 80, 200, 220);
+        Schematics.currentSource(ctx, 200, 150, "Is", "Ideal");
+        Schematics.terminal(ctx, 420, 80); Schematics.terminal(ctx, 420, 220);
+    } else {
+        // Practical Current Source
+        Schematics.wire(ctx, 150, 80, 450, 80);
+        Schematics.wire(ctx, 150, 220, 450, 220);
+        Schematics.wire(ctx, 150, 80, 150, 220);
+        Schematics.wire(ctx, 320, 80, 320, 220);
+        Schematics.currentSource(ctx, 150, 150, "Is", "");
+        Schematics.resistor(ctx, 320, 80, 320, 220, "Parallel R_s", "", true);
+        Schematics.terminal(ctx, 450, 80); Schematics.terminal(ctx, 450, 220);
+    }
+    document.getElementById('sourceResult').innerHTML = `<b>${type}</b>: Ideal sources assume no losses. Practical sources account for internal resistance (R_s).`;
+}
+
+function checkSource() {
+    let s = sourceAns.value.toLowerCase();
+    if(s.includes('2') && s.includes('10')) success('sourceCheck','✓ Correct. I = 12/(1+5) = 2 A; terminal voltage = I×5 = 10 V.');
+    else fail('sourceCheck','Expected I = 2 A and terminal voltage = 10 V.');
+}
+
+// 5. Mesh & Nodal Schematics
+function analysisAnim() {
+    let type = analysisType.value;
+    let [c, ctx] = setupCanvas('meshCanvas');
+    
+    if(type === 'Mesh Analysis') {
+        // Dual Loop Mesh Network
+        Schematics.wire(ctx, 80, 60, 520, 60);
+        Schematics.wire(ctx, 80, 220, 520, 220);
+        Schematics.wire(ctx, 80, 60, 80, 220);
+        Schematics.wire(ctx, 300, 60, 300, 220);
+        Schematics.wire(ctx, 520, 60, 520, 220);
+        
+        Schematics.battery(ctx, 80, 140, "V1", "", true);
+        Schematics.resistor(ctx, 140, 60, 240, 60, "R1", "", false);
+        Schematics.resistor(ctx, 300, 60, 300, 220, "R3", "", true);
+        Schematics.resistor(ctx, 360, 60, 460, 60, "R2", "", false);
+        
+        // Loop indicators
+        ctx.strokeStyle = "#4ade80"; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(190, 140, 30, 0, Math.PI*1.5); ctx.stroke();
+        ctx.beginPath(); ctx.arc(410, 140, 30, 0, Math.PI*1.5); ctx.stroke();
+        ctx.fillStyle = "#4ade80"; ctx.font = "bold 13px Arial";
+        ctx.fillText("Loop I1 ↻", 160, 145); ctx.fillText("Loop I2 ↻", 380, 145);
+    } else {
+        // Nodal Analysis System
+        Schematics.wire(ctx, 80, 80, 520, 80);
+        Schematics.wire(ctx, 80, 220, 520, 220);
+        Schematics.wire(ctx, 80, 80, 80, 220);
+        Schematics.wire(ctx, 300, 80, 300, 220);
+        
+        Schematics.battery(ctx, 80, 150, "V_src", "", true);
+        Schematics.resistor(ctx, 140, 80, 240, 80, "R1", "", false);
+        Schematics.resistor(ctx, 300, 80, 300, 220, "R2", "", true);
+        
+        Schematics.node(ctx, 300, 80, "Node V1");
+        Schematics.ground(ctx, 300, 220);
+        ctx.fillStyle = "#94a3b8"; ctx.fillText("Reference (0V)", 330, 245);
+    }
+    document.getElementById('meshResult').innerHTML = type==='Mesh Analysis'?'<b>Mesh Analysis</b>: Apply KVL around closed paths to find mesh currents.':'<b>Nodal Analysis</b>: Apply KCL at essential nodes to find node voltages relative to Ground.';
+}
+
+function checkMesh() {
+    let v = parseFloat(meshAns.value);
+    if(Math.abs(v-6) < .01) success('meshCheck','✓ Correct. KCL: (V−10)/2 + V/3 = 0 → V = 6 V.');
+    else fail('meshCheck','Expected 6 V. Solve (V−10)/2 + V/3 = 0.');
+}
+
+// 6. Source Transformation Schematics
+function transformAnim() {
+    let v = +trV.value, r = +trR.value, i = v / r;
+    let [c, ctx] = setupCanvas('transformCanvas');
+    
+    // Voltage Source Diagram
+    Schematics.wire(ctx, 40, 150, 80, 150);
+    Schematics.resistor(ctx, 80, 150, 200, 150, "Rs", `${r} Ω`, false);
+    Schematics.wire(ctx, 200, 150, 240, 150);
+    Schematics.wire(ctx, 40, 230, 240, 230);
+    Schematics.wire(ctx, 40, 150, 40, 230);
+    Schematics.battery(ctx, 40, 190, "Vs", `${v}V`, true);
+    Schematics.terminal(ctx, 240, 150); Schematics.terminal(ctx, 240, 230);
+    
+    // Transformation Arrow
+    ctx.fillStyle = "#f59e0b"; ctx.font = "bold 22px Arial";
+    ctx.fillText("⇄", 270, 185);
+    
+    // Current Source Diagram
+    Schematics.wire(ctx, 340, 100, 560, 100);
+    Schematics.wire(ctx, 340, 230, 560, 230);
+    Schematics.wire(ctx, 340, 100, 340, 230);
+    Schematics.wire(ctx, 480, 100, 480, 230);
+    Schematics.currentSource(ctx, 340, 165, "Is", `${i.toFixed(2)}A`);
+    Schematics.resistor(ctx, 480, 100, 480, 230, "Rs", `${r} Ω`, true);
+    Schematics.terminal(ctx, 560, 100); Schematics.terminal(ctx, 560, 230);
+    
+    document.getElementById('trResult').innerHTML = `Transformed Current Source = <b>${i.toFixed(3)} A</b> in parallel with <b>${r} Ω</b>.`;
+}
+
+function checkTransform() {
+    let s = trAns.value.toLowerCase();
+    if(s.includes('4') && s.includes('5')) success('trCheck','✓ Correct. I = 20/5 = 4 A and R remains 5 Ω.');
+    else fail('trCheck','Expected current source = 4 A and parallel resistance = 5 Ω.');
+}
+
+// Question Bank Module Setup
+const bank=[
+['2 Marks','State Ohm’s law.','V = IR','ohm'],
+['2 Marks','What is KCL?','sum of currents entering equals sum leaving','kcl'],
+['2 Marks','What is KVL?','algebraic sum of voltages in a closed loop is zero','kvl'],
+['2 Marks','Give equivalent resistance of two series resistors.','R1 + R2','series'],
+['2 Marks','Give equivalent resistance of two parallel resistors.','R1R2/(R1+R2)','parallel'],
+['2 Marks','What is an ideal voltage source internal resistance?','zero','source'],
+['2 Marks','What is an ideal current source internal resistance?','infinite','source'],
+['2 Marks','State source transformation equation.','I = V/R','transform'],
+['2 Marks','What is a reference node?','ground or zero-voltage reference node','nodal'],
+['2 Marks','What does mesh analysis apply?','KVL','mesh'],
+['10 Marks','A 24 V source supplies a 6 Ω and 3 Ω series combination. Find total current and voltage across each resistor.','I=8/3 A; V6=16 V; V3=8 V','numerical'],
+['10 Marks','A 12 V source is connected to 4 Ω and 12 Ω in parallel. Find equivalent resistance, total current and branch currents.','Req=3 Ω; It=4 A; I4=3 A; I12=1 A','numerical'],
+['10 Marks','Use nodal analysis for a node connected to 20 V through 5 Ω and to ground through 10 Ω. Find node voltage and current through 10 Ω.','V=13.333 V; I=1.333 A','numerical']
+];
+
+function renderBank(){
+    let d=document.getElementById('bankQuestions');
+    d.innerHTML=bank.map((q,i)=>`<div class="question"><span class="mark">${q[0]}</span><b>Q${i+1}. ${q[1]}</b><textarea id="qb${i}" placeholder="Write your worked answer here..."></textarea><div class="small">Hint: ${i<10?'Explain the principle and equation.':'Show equations, substitution and final numerical answer.'}</div></div>`).join('')
+}
+
+function evaluateBank(){
+    let score=0;
+    for(let i=0;i<bank.length;i++){
+        let a=document.getElementById('qb'+i).value.toLowerCase();
+        let key=bank[i][2].toLowerCase().split(/[^a-z0-9.]+/).filter(x=>x.length>1);
+        let hits=key.filter(k=>a.includes(k.replace('.',''))).length;
+        if(hits>=Math.max(1,Math.ceil(key.length*.35))) score += bank[i][0]==='2 Marks'?2:10;
+    }
+    document.getElementById('bankScore').innerHTML=`Self-assessment score: <b>${score} / 50</b><br><span class="small">The evaluator is a classroom aid using keyword/numerical matching. For descriptive answers, teacher review is recommended.</span>`
+}
+
+// AI Rule-based Offline Chatbot
+const tutor={
+'ohm':`Ohm's law is V = IR. If voltage and resistance are known, current is I = V/R.`,
+'kcl':`KCL states that the algebraic sum of currents at a node is zero. Current entering = current leaving.`,
+'kvl':`KVL states that the algebraic sum of all voltage rises and drops around a closed loop is zero.`,
+'series':`For series resistors, the same current flows through all elements and Req = R1 + R2 + ...`,
+'parallel':`For parallel resistors, the same voltage appears across each branch and 1/Req = Σ(1/R).`,
+'source':`An ideal voltage source has zero internal resistance. An ideal current source has infinite internal resistance.`,
+'mesh':`Mesh analysis assigns mesh currents and applies KVL to each independent mesh.`,
+'nodal':`Nodal analysis selects a reference node, assigns node voltages, and applies KCL.`,
+'transform':`Source transformation converts V in series with R to I=V/R in parallel with the same R, and vice versa.`
+};
+
+function askTutor(){
+    let q=chatInput.value.trim();if(!q)return;
+    chatBox.innerHTML+=`<div class="msg user">${q}</div>`;
+    let l=q.toLowerCase(),ans='Please ask about Ohm’s law, KCL, KVL, series/parallel, sources, mesh, nodal analysis or source transformation.';
+    for(const k in tutor)if(l.includes(k)){ans=tutor[k];break}
+    if(l.includes('calculate')||l.includes('example'))ans+=' Try the numerical problem in the corresponding topic tab.';
+    chatBox.innerHTML+=`<div class="msg bot">${ans}</div>`;
+    chatBox.scrollTop=chatBox.scrollHeight;
+    chatInput.value=''
+}
+
+chatInput.addEventListener('keydown',e=>{if(e.key==='Enter')askTutor()});
+
+function drawAll(){
+    drawOhmStatic(12, 6);
+    drawKcl();
+    drawSeriesParallel();
+    sourceAnim();
+    analysisAnim();
+    transformAnim();
+}
+
+renderBank();
+window.onload = drawAll;
+</script>
+</body>
+</html>

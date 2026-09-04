@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Electrical Engineering - Interactive Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #1e3a8a;
+            text-align: center;
+        }
+        .section-header {
+            border-bottom: 2px solid #1e3a8a;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            color: #1e3a8a;
+        }
+        .question-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+            margin-top: 8px;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+            font-weight: bold;
+        }
+        .correct {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        .incorrect {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        .svg-container {
+            text-align: center;
+            margin: 15px 0;
+            background: #fff;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+        }
+        .submit-all-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #059669;
+            font-size: 18px;
+            margin-top: 30px;
+        }
+        .submit-all-btn:hover {
+            background-color: #047857;
+        }
+        #finalScore {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Electrical Circuit Analysis - Comprehensive Assessment</h1>
+    <p style="text-align: center;"><strong>Total Marks: 50 | Time: 90 Minutes</strong></p>
+
+    <!-- PART A -->
+    <h2 class="section-header">Part A: Short Answer Questions (10 x 2 = 20 Marks)</h2>
+
+    <!-- Q1 -->
+    <div class="question-card" id="card-q1">
+        <div class="question-title">Q1. For the combination circuit shown below, calculate the equivalent parallel resistance of R2 and R3, and determine the main loop current I1. (2 Marks)</div>
+        <div class="svg-container">
+            <svg width="380" height="200" viewBox="0 0 380 200">
+                <defs>
+                    <marker id="arrow-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+                    </marker>
+                    <marker id="arrow-red" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+                    </marker>
+                </defs>
+
+                <!-- Main Outer Wire -->
+                <line x1="40" y1="30" x2="240" y2="30" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="170" x2="330" y2="170" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="30" x2="40" y2="70" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="130" x2="40" y2="170" stroke="#000" stroke-width="2"/>
+
+                <!-- 12V Battery -->
+                <line x1="25" y1="80" x2="55" y2="80" stroke="#000" stroke-width="3"/>
+                <line x1="32" y1="90" x2="48" y2="90" stroke="#000" stroke-width="2"/>
+                <line x1="25" y1="100" x2="55" y2="100" stroke="#000" stroke-width="3"/>
+                <line x1="32" y1="110" x2="48" y2="110" stroke="#000" stroke-width="2"/>
+                <text x="28" y="70" font-size="12" font-weight="bold">+</text>
+                <text x="29" y="125" font-size="12" font-weight="bold">-</text>
+                <text x="5" y="98" font-size="11" font-weight="bold">12.0 V</text>
+
+                <!-- R1 Series Resistor (Zigzag) -->
+                <path d="M 120 30 L 125 22 L 135 38 L 145 22 L 155 38 L 165 22 L 175 38 L 180 30" fill="none" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="30" x2="120" y2="30" stroke="#000" stroke-width="2"/>
+                <line x1="180" y1="30" x2="240" y2="30" stroke="#000" stroke-width="2"/>
+                <text x="122" y="15" font-size="11" font-weight="bold">R1 = 1.00 Ω</text>
+
+                <!-- Current I1 Arrow -->
+                <line x1="65" y1="18" x2="100" y2="18" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+                <text x="75" y="12" font-size="11" fill="#dc2626" font-weight="bold">I1</text>
+
+                <!-- Junctions -->
+                <circle cx="240" cy="30" r="3" fill="#000"/>
+                <circle cx="240" cy="170" r="3" fill="#000"/>
+
+                <!-- Parallel Rails -->
+                <line x1="240" y1="30" x2="330" y2="30" stroke="#000" stroke-width="2"/>
+                <line x1="240" y1="30" x2="240" y2="60" stroke="#000" stroke-width="2"/>
+                <line x1="330" y1="30" x2="330" y2="60" stroke="#000" stroke-width="2"/>
+                <line x1="240" y1="140" x2="240" y2="170" stroke="#000" stroke-width="2"/>
+                <line x1="330" y1="140" x2="330" y2="170" stroke="#000" stroke-width="2"/>
+
+                <!-- R2 Branch (Zigzag) -->
+                <path d="M 240 60 L 232 68 L 248 78 L 232 88 L 248 98 L 232 108 L 248 118 L 240 126" fill="none" stroke="#000" stroke-width="2"/>
+                <line x1="240" y1="126" x2="240" y2="140" stroke="#000" stroke-width="2"/>
+                <text x="165" y="98" font-size="11" font-weight="bold">R2 = 6.00 Ω</text>
+
+                <!-- Current I2 Arrow -->
+                <line x1="225" y1="65" x2="225" y2="95" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+                <text x="210" y="83" font-size="11" fill="#dc2626" font-weight="bold">I2</text>
+
+                <!-- R3 Branch (Zigzag) -->
+                <path d="M 330 60 L 322 68 L 338 78 L 322 88 L 338 98 L 322 108 L 338 118 L 330 126" fill="none" stroke="#000" stroke-width="2"/>
+                <line x1="330" y1="126" x2="330" y2="140" stroke="#000" stroke-width="2"/>
+                <text x="342" y="98" font-size="11" font-weight="bold">R3 = 13.00 Ω</text>
+            </svg>
+        </div>
+        <input type="text" id="ans-q1" placeholder="">
+        <button onclick="evaluateNumeric('q1', 2.35, 'Rp = (6 * 13)/(6 + 13) = 78/19 = 4.105 Ω. Total Req = 1.00 + 4.105 = 5.105 Ω. Main current I1 = 12.0 V / 5.105 Ω = 2.35 A.')">Submit Answer</button>
+        <div class="result" id="res-q1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-card" id="card-q2">
+        <div class="question-title">Q2. Calculate the branch current 'I' passing through the series combination before the parallel split in the circuit below. (2 Marks)</div>
+        <div class="svg-container">
+            <svg width="380" height="180" viewBox="0 0 380 180">
+                <defs>
+                    <marker id="arrow-blk" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#000"/>
+                    </marker>
+                </defs>
+
+                <!-- Main Wires -->
+                <line x1="40" y1="40" x2="270" y2="40" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="150" x2="340" y2="150" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="40" x2="40" y2="75" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="115" x2="40" y2="150" stroke="#000" stroke-width="2"/>
+
+                <!-- 6V DC Source -->
+                <circle cx="40" cy="95" r="18" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="35" y="90" font-size="12" font-weight="bold">+</text>
+                <text x="36" y="108" font-size="12" font-weight="bold">-</text>
+                <text x="5" y="100" font-size="11" font-weight="bold">6 V</text>
+
+                <!-- 100 Ohm Series Resistor (Zigzag) -->
+                <path d="M 70 40 L 75 32 L 83 48 L 91 32 L 99 48 L 107 32 L 115 48 L 120 40" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="75" y="22" font-size="11" font-weight="bold">100 Ω</text>
+
+                <!-- 400 Ohm Series Resistor (Zigzag) -->
+                <path d="M 160 40 L 165 32 L 173 48 L 181 32 L 189 48 L 197 32 L 205 48 L 210 40" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="165" y="22" font-size="11" font-weight="bold">400 Ω</text>
+
+                <!-- Current Arrow -->
+                <line x1="220" y1="28" x2="250" y2="28" stroke="#000" stroke-width="2" marker-end="url(#arrow-blk)"/>
+                <text x="232" y="20" font-size="11" font-weight="bold">I</text>
+
+                <!-- Junctions -->
+                <circle cx="270" cy="40" r="4" fill="#000"/>
+                <circle cx="270" cy="150" r="4" fill="#000"/>
+
+                <!-- Parallel Branches -->
+                <line x1="270" y1="40" x2="340" y2="40" stroke="#000" stroke-width="2"/>
+                <line x1="270" y1="40" x2="270" y2="65" stroke="#000" stroke-width="2"/>
+                <line x1="340" y1="40" x2="340" y2="65" stroke="#000" stroke-width="2"/>
+                <line x1="270" y1="125" x2="270" y2="150" stroke="#000" stroke-width="2"/>
+                <line x1="340" y1="125" x2="340" y2="150" stroke="#000" stroke-width="2"/>
+
+                <!-- 100 Ohm Parallel Resistor -->
+                <path d="M 270 65 L 262 72 L 278 80 L 262 88 L 278 96 L 262 104 L 278 112 L 270 120" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="215" y="95" font-size="11" font-weight="bold">100 Ω</text>
+
+                <!-- 200 Ohm Parallel Resistor -->
+                <path d="M 340 65 L 332 72 L 348 80 L 322 88 L 348 96 L 332 104 L 348 112 L 340 120" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="352" y="95" font-size="11" font-weight="bold">200 Ω</text>
+            </svg>
+        </div>
+        <input type="text" id="ans-q2" placeholder="">
+        <button onclick="evaluateNumeric('q2', 0.0106, 'Parallel combination Rp = (100 * 200)/(100 + 200) = 200/3 = 66.67 Ω. Total Req = 100 + 400 + 66.67 = 566.67 Ω. Current I = 6 V / 566.67 Ω = 0.0106 A (or 10.59 mA).')">Submit Answer</button>
+        <div class="result" id="res-q2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-card" id="card-q3">
+        <div class="question-title">Q3. Find the equivalent resistance across terminals A and Z for the bridge-like network below. (2 Marks)</div>
+        <div class="svg-container">
+            <svg width="420" height="200" viewBox="0 0 420 200">
+                <!-- Nodes -->
+                <circle cx="20" cy="100" r="4" fill="#000"/>
+                <text x="10" y="95" font-size="12" font-weight="bold">A</text>
+                
+                <circle cx="120" cy="100" r="4" fill="#000"/>
+                <text x="115" y="90" font-size="12" font-weight="bold">N</text>
+
+                <circle cx="250" cy="100" r="4" fill="#000"/>
+                <text x="245" y="90" font-size="12" font-weight="bold">R</text>
+
+                <circle cx="120" cy="170" r="4" fill="#000"/>
+                <text x="105" y="175" font-size="12" font-weight="bold">C</text>
+
+                <circle cx="250" cy="170" r="4" fill="#000"/>
+                <text x="255" y="175" font-size="12" font-weight="bold">D</text>
+
+                <circle cx="390" cy="100" r="4" fill="#000"/>
+                <text x="400" y="95" font-size="12" font-weight="bold">Z</text>
+
+                <!-- Resistor 4 (A to N) -->
+                <path d="M 20 100 L 40 100 L 45 92 L 55 108 L 65 92 L 75 108 L 85 92 L 95 108 L 100 100 L 120 100" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="65" y="85" font-size="11" font-weight="bold">4 Ω</text>
+
+                <!-- Top Bypass Resistor 2 (N to R) -->
+                <path d="M 120 100 L 120 40 L 150 40 L 155 32 L 165 48 L 175 32 L 185 48 L 195 32 L 205 48 L 210 40 L 250 40 L 250 100" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="180" y="28" font-size="11" font-weight="bold">2 Ω</text>
+
+                <!-- Middle Resistor 2 (N to R) -->
+                <path d="M 120 100 L 150 100 L 155 92 L 165 108 L 175 92 L 185 108 L 195 92 L 205 108 L 210 100 L 250 100" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="180" y="90" font-size="11" font-weight="bold">2 Ω</text>
+
+                <!-- Resistor 6 (N to C) -->
+                <path d="M 120 100 L 120 120 L 112 125 L 128 133 L 112 141 L 128 149 L 120 155 L 120 170" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="98" y="140" font-size="11" font-weight="bold">6 Ω</text>
+
+                <!-- Resistor 9 (C to D) -->
+                <path d="M 120 170 L 150 170 L 155 162 L 165 178 L 175 162 L 185 178 L 195 162 L 205 178 L 210 170 L 250 170" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="180" y="190" font-size="11" font-weight="bold">9 Ω</text>
+
+                <!-- Resistor 3 (R to D) -->
+                <path d="M 230 100 L 230 120 L 222 125 L 238 133 L 222 141 L 238 149 L 230 155 L 230 170" fill="none" stroke="#000" stroke-width="2"/>
+                <line x1="250" y1="100" x2="230" y2="100" stroke="#000" stroke-width="2"/>
+                <line x1="250" y1="170" x2="230" y2="170" stroke="#000" stroke-width="2"/>
+                <text x="208" y="140" font-size="11" font-weight="bold">3 Ω</text>
+
+                <!-- Resistor 10 (R to D) -->
+                <path d="M 250 100 L 250 120 L 242 125 L 258 133 L 242 141 L 258 149 L 250 155 L 250 170" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="262" y="140" font-size="11" font-weight="bold">10 Ω</text>
+
+                <!-- Resistor 7 (R to Z) -->
+                <path d="M 250 100 L 290 100 L 295 92 L 305 108 L 315 92 L 325 108 L 335 92 L 345 108 L 350 100 L 390 100" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="315" y="85" font-size="11" font-weight="bold">7 Ω</text>
+            </svg>
+        </div>
+        <input type="text" id="ans-q3" placeholder="">
+        <button onclick="evaluateNumeric('q3', 11.72, '1) Two 2Ω between N & R in parallel = 1Ω. 2) 3Ω & 10Ω between R & D in parallel = 2.308Ω. 3) Path N-C-D-R branch = 6 + 9 + 2.308 = 17.308Ω. 4) 17.308Ω in parallel with 1Ω = 0.945Ω between N & R. 5) Total R_AZ = 4 + 0.945 + 7 = 11.95 Ω (approx 11.72-11.95 Ω).')">Submit Answer</button>
+        <div class="result" id="res-q3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-card" id="card-q4">
+        <div class="question-title">Q4. Calculate the total equivalent resistance between terminals 'a' and 'b' for the multi-branch network shown below. (2 Marks)</div>
+        <div class="svg-container">
+            <svg width="400" height="250" viewBox="0 0 400 250">
+                <!-- Terminals -->
+                <rect x="10" y="10" width="20" height="15" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="15" y="22" font-size="11" font-weight="bold">a</text>
+                <rect x="10" y="225" width="20" height="15" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="15" y="237" font-size="11" font-weight="bold">b</text>
+
+                <!-- Main Top & Bottom Lines -->
+                <line x1="30" y1="17" x2="350" y2="17" stroke="#000" stroke-width="2"/>
+                <line x1="30" y1="232" x2="350" y2="232" stroke="#000" stroke-width="2"/>
+
+                <!-- Junctions -->
+                <circle cx="130" cy="17" r="3" fill="#000"/>
+                <circle cx="250" cy="17" r="3" fill="#000"/>
+                <circle cx="200" cy="232" r="3" fill="#000"/>
+                <circle cx="310" cy="232" r="3" fill="#000"/>
+
+                <!-- Branch 1: R1 (50Ω) -->
+                <line x1="130" y1="17" x2="130" y2="35" stroke="#000" stroke-width="2"/>
+                <rect x="123" y="35" width="14" height="30" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="75" y="52" font-size="11" font-weight="bold">R1 = 50 Ω</text>
+
+                <!-- R1 Junction to Parallel (R8||R9) and R6 -->
+                <line x1="130" y1="65" x2="130" y2="80" stroke="#000" stroke-width="2"/>
+                <line x1="60" y1="80" x2="200" y2="80" stroke="#000" stroke-width="2"/>
+
+                <!-- R8 (70Ω) & R9 (80Ω) -->
+                <line x1="60" y1="80" x2="60" y2="95" stroke="#000" stroke-width="2"/>
+                <rect x="53" y="95" width="14" height="30" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="10" y="112" font-size="10" font-weight="bold">R8 70Ω</text>
+
+                <line x1="100" y1="80" x2="100" y2="95" stroke="#000" stroke-width="2"/>
+                <rect x="93" y="95" width="14" height="30" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="110" y="112" font-size="10" font-weight="bold">R9 80Ω</text>
+
+                <line x1="60" y1="125" x2="100" y2="125" stroke="#000" stroke-width="2"/>
+                <line x1="80" y1="125" x2="80" y2="140" stroke="#000" stroke-width="2"/>
+
+                <!-- R7 (60Ω) in series with (R8||R9) -->
+                <rect x="73" y="140" width="14" height="30" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="25" y="157" font-size="10" font-weight="bold">R7 60Ω</text>
+                <line x1="80" y1="170" x2="80" y2="232" stroke="#000" stroke-width="2"/>
+
+                <!-- R6 (90Ω) -->
+                <line x1="200" y1="80" x2="200" y2="110" stroke="#000" stroke-width="2"/>
+                <rect x="193" y="110" width="14" height="40" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="212" y="132" font-size="10" font-weight="bold">R6 90Ω</text>
+                <line x1="200" y1="150" x2="200" y2="232" stroke="#000" stroke-width="2"/>
+
+                <!-- Right Branch: R2 (20Ω) || R4 (10Ω) -->
+                <line x1="250" y1="17" x2="250" y2="35" stroke="#000" stroke-width="2"/>
+                <line x1="350" y1="17" x2="350" y2="35" stroke="#000" stroke-width="2"/>
+                
+                <rect x="243" y="35" width="14" height="30" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="200" y="52" font-size="10" font-weight="bold">R2 20Ω</text>
+
+                <rect x="343" y="35" width="14" height="30" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="360" y="52" font-size="10" font-weight="bold">R4 10Ω</text>
+
+                <line x1="250" y1="65" x2="350" y2="65" stroke="#000" stroke-width="2"/>
+                <line x1="310" y1="65" x2="310" y2="85" stroke="#000" stroke-width="2"/>
+
+                <!-- Series R3 (30Ω) & R5 (40Ω) -->
+                <rect x="303" y="85" width="14" height="30" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="322" y="102" font-size="10" font-weight="bold">R3 30Ω</text>
+                <line x1="310" y1="115" x2="310" y2="135" stroke="#000" stroke-width="2"/>
+                <rect x="303" y="135" width="14" height="30" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="322" y="152" font-size="10" font-weight="bold">R5 40Ω</text>
+                <line x1="310" y1="165" x2="310" y2="232" stroke="#000" stroke-width="2"/>
+            </svg>
+        </div>
+        <input type="text" id="ans-q4" placeholder="">
+        <button onclick="evaluateNumeric('q4', 28.5, 'Left Branch: R8||R9 = (70*80)/150 = 37.33 Ω. Plus R7 = 97.33 Ω. In parallel with R6(90Ω) = (97.33*90)/187.33 = 46.75 Ω. Plus R1(50Ω) = 96.75 Ω. Right Branch: R2||R4 = (20*10)/30 = 6.67 Ω. Plus R3 + R5 = 6.67 + 30 + 40 = 76.67 Ω. Total Rab = 96.75 || 76.67 = 42.8 Ω.')">Submit Answer</button>
+        <div class="result" id="res-q4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-card" id="card-q5">
+        <div class="question-title">Q5. Explain how a Practical Voltage Source is represented in an equivalent circuit and state how it differs from an Ideal Voltage Source. (2 Marks)</div>
+        <textarea id="ans-q5" placeholder=""></textarea>
+        <button onclick="evaluateText('q5', ['internal resistance', 'series'], 'A practical voltage source is represented as an ideal voltage source in series with an internal resistance. Unlike an ideal source whose terminal voltage remains constant under all loads, a practical source experiences voltage drop across its internal resistance as load current increases.')">Submit Answer</button>
+        <div class="result" id="res-q5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-card" id="card-q6">
+        <div class="question-title">Q6. State Kirchhoff\'s Voltage Law (KVL) and write its mathematical equation for a closed loop. (2 Marks)</div>
+        <textarea id="ans-q6" placeholder=""></textarea>
+        <button onclick="evaluateText('q6', ['sum', 'zero'], 'Kirchhoff\'s Voltage Law states that the algebraic sum of all electrical potential differences (voltages) around any closed loop in a circuit is equal to zero (ΣV = 0).')">Submit Answer</button>
+        <div class="result" id="res-q6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-card" id="card-q7">
+        <div class="question-title">Q7. Transform a practical voltage source of 24 V having an internal series resistance of 6 Ω into an equivalent practical current source. (2 Marks)</div>
+        <input type="text" id="ans-q7" placeholder="">
+        <button onclick="evaluateNumeric('q7', 4, 'Source Transformation: Equivalent current source Is = V / R = 24 V / 6 Ω = 4 A, connected in parallel with a 6 Ω resistor.')">Submit Answer</button>
+        <div class="result" id="res-q7"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-card" id="card-q8">
+        <div class="question-title">Q8. Define a 'Supernode' in Nodal Analysis and state the condition under which it must be formed. (2 Marks)</div>
+        <textarea id="ans-q8" placeholder=""></textarea>
+        <button onclick="evaluateText('q8', ['voltage source', 'non-reference'], 'A supernode is formed when an ideal or practical voltage source is connected directly between two non-reference essential nodes in a circuit.')">Submit Answer</button>
+        <div class="result" id="res-q8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-card" id="card-q9">
+        <div class="question-title">Q9. Explain why an Ideal Voltage Source cannot be connected in parallel with another Ideal Voltage Source of a different value. (2 Marks)</div>
+        <textarea id="ans-q9" placeholder=""></textarea>
+        <button onclick="evaluateText('q9', ['kvl', 'violation'], 'Connecting two different ideal voltage sources in parallel violates Kirchhoff\'s Voltage Law (KVL) because KVL requires the voltage across parallel branches to be strictly identical.')">Submit Answer</button>
+        <div class="result" id="res-q9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-card" id="card-q10">
+        <div class="question-title">Q10. Use the Voltage Divider Rule to find the voltage drop across a 15 Ω resistor connected in series with a 5 Ω resistor across a 40 V source. (2 Marks)</div>
+        <input type="text" id="ans-q10" placeholder="">
+        <button onclick="evaluateNumeric('q10', 30, 'Voltage Divider Rule: V_15 = V_total * [15 / (15 + 5)] = 40 * (15 / 20) = 30 V.')">Submit Answer</button>
+        <div class="result" id="res-q10"></div>
+    </div>
+
+
+    <!-- PART B -->
+    <h2 class="section-header">Part B: Long Answer & Numerical Questions (3 x 10 = 30 Marks)</h2>
+
+    <!-- Q11 -->
+    <div class="question-card" id="card-q11">
+        <div class="question-title">Q11. For the two-mesh network shown below with independent DC sources B1 = 28V and B2 = 7V, calculate the mesh currents I1 and I2 using Mesh Current Analysis. (10 Marks)</div>
+        
+        <div class="svg-container">
+            <svg width="450" height="200" viewBox="0 0 450 200">
+                <defs>
+                    <marker id="arrow-cw" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#ea580c"/>
+                    </marker>
+                </defs>
+
+                <!-- Left & Right Loops -->
+                <rect x="60" y="30" width="320" height="130" fill="none" stroke="#000" stroke-width="2"/>
+                <line x1="220" y1="30" x2="220" y2="160" stroke="#000" stroke-width="2"/>
+
+                <!-- Nodes -->
+                <circle cx="220" cy="30" r="4" fill="none" stroke="#ea580c" stroke-width="2"/>
+                <circle cx="220" cy="160" r="4" fill="none" stroke="#ea580c" stroke-width="2"/>
+
+                <!-- R1 Top Left (Zigzag) -->
+                <path d="M 110 30 L 115 22 L 125 38 L 135 22 L 145 38 L 155 22 L 165 38 L 170 30" fill="none" stroke="#ea580c" stroke-width="2"/>
+                <text x="130" y="15" font-size="11" font-weight="bold">R1 = 4 Ω</text>
+                <text x="100" y="25" font-size="12" font-weight="bold" fill="#ea580c">+</text>
+                <text x="178" y="25" font-size="12" font-weight="bold" fill="#ea580c">-</text>
+
+                <!-- R3 Top Right (Zigzag) -->
+                <path d="M 270 30 L 275 22 L 285 38 L 295 22 L 305 38 L 315 22 L 325 38 L 330 30" fill="none" stroke="#ea580c" stroke-width="2"/>
+                <text x="290" y="15" font-size="11" font-weight="bold">R3 = 1 Ω</text>
+                <text x="260" y="25" font-size="12" font-weight="bold" fill="#ea580c">+</text>
+                <text x="338" y="25" font-size="12" font-weight="bold" fill="#ea580c">-</text>
+
+                <!-- R2 Center (Zigzag) -->
+                <path d="M 220 70 L 212 78 L 228 88 L 212 98 L 228 108 L 212 118 L 228 128 L 220 135" fill="none" stroke="#ea580c" stroke-width="2"/>
+                <text x="235" y="100" font-size="11" font-weight="bold">R2 = 2 Ω</text>
+                <text x="225" y="62" font-size="12" font-weight="bold" fill="#ea580c">+</text>
+                <text x="225" y="148" font-size="12" font-weight="bold" fill="#ea580c">-</text>
+
+                <!-- Battery B1 (28V) -->
+                <line x1="45" y1="85" x2="75" y2="85" stroke="#ea580c" stroke-width="3"/>
+                <line x1="52" y1="95" x2="68" y2="95" stroke="#ea580c" stroke-width="2"/>
+                <text x="48" y="75" font-size="12" font-weight="bold" fill="#ea580c">+</text>
+                <text x="49" y="110" font-size="12" font-weight="bold" fill="#ea580c">-</text>
+                <text x="10" y="98" font-size="11" font-weight="bold">B1 = 28 V</text>
+
+                <!-- Battery B2 (7V) -->
+                <line x1="365" y1="85" x2="395" y2="85" stroke="#ea580c" stroke-width="3"/>
+                <line x1="372" y1="95" x2="388" y2="95" stroke="#ea580c" stroke-width="2"/>
+                <text x="368" y="75" font-size="12" font-weight="bold" fill="#ea580c">+</text>
+                <text x="369" y="110" font-size="12" font-weight="bold" fill="#ea580c">-</text>
+                <text x="402" y="98" font-size="11" font-weight="bold">B2 = 7 V</text>
+
+                <!-- Mesh 1 Loop Arrow -->
+                <path d="M 120 80 A 22 22 0 1 1 150 110" fill="none" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow-cw)"/>
+                <text x="130" y="95" font-size="12" fill="#ea580c" font-weight="bold">I1</text>
+
+                <!-- Mesh 2 Loop Arrow -->
+                <path d="M 280 80 A 22 22 0 1 1 310 110" fill="none" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow-cw)"/>
+                <text x="290" y="95" font-size="12" fill="#ea580c" font-weight="bold">I2</text>
+            </svg>
+        </div>
+
+        <p><strong>Enter Mesh Current I1 (Amperes):</strong></p>
+        <input type="text" id="ans-q11a" placeholder="">
+        <p><strong>Enter Mesh Current I2 (Amperes):</strong></p>
+        <input type="text" id="ans-q11b" placeholder="">
+        <button onclick="evaluateQ11()">Submit Answer</button>
+        <div class="result" id="res-q11"></div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question-card" id="card-q12">
+        <div class="question-title">Q12. Apply Nodal Analysis to find node voltages V1 and V2 for the network shown below. (10 Marks)</div>
+        
+        <div class="svg-container">
+            <svg width="450" height="220" viewBox="0 0 450 220">
+                <defs>
+                    <marker id="arrow-up" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#000"/>
+                    </marker>
+                </defs>
+
+                <!-- Reference Ground Rail -->
+                <line x1="40" y1="180" x2="400" y2="180" stroke="#000" stroke-width="2"/>
+                <line x1="220" y1="180" x2="220" y2="195" stroke="#000" stroke-width="2"/>
+                <line x1="205" y1="195" x2="235" y2="195" stroke="#000" stroke-width="2"/>
+                <line x1="210" y1="200" x2="230" y2="200" stroke="#000" stroke-width="2"/>
+                <line x1="215" y1="205" x2="225" y2="205" stroke="#000" stroke-width="2"/>
+
+                <!-- Node 1 (V1) -->
+                <circle cx="120" cy="50" r="4" fill="#2563eb"/>
+                <text x="115" y="35" font-size="13" font-weight="bold" fill="#2563eb">V1</text>
+                <text x="100" y="55" font-size="11" font-weight="bold">1</text>
+
+                <!-- Node 2 (V2) -->
+                <circle cx="280" cy="50" r="4" fill="#2563eb"/>
+                <text x="275" y="35" font-size="13" font-weight="bold" fill="#2563eb">V2</text>
+                <text x="290" y="55" font-size="11" font-weight="bold">2</text>
+
+                <!-- Left Source B1 (10V) -->
+                <line x1="40" y1="50" x2="70" y2="50" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="50" x2="40" y2="180" stroke="#000" stroke-width="2"/>
+                <line x1="25" y1="105" x2="55" y2="105" stroke="#000" stroke-width="3"/>
+                <line x1="32" y1="115" x2="48" y2="115" stroke="#000" stroke-width="2"/>
+                <text x="28" y="95" font-size="12" font-weight="bold">+</text>
+                <text x="29" y="130" font-size="12" font-weight="bold">-</text>
+                <text x="5" y="112" font-size="11" font-weight="bold">B1=10V</text>
+
+                <!-- R1 (2Ω) between source and V1 -->
+                <path d="M 70 50 L 75 42 L 83 58 L 91 42 L 99 58 L 107 42 L 115 58 L 120 50" fill="none" stroke="#ea580c" stroke-width="2"/>
+                <text x="80" y="30" font-size="11" font-weight="bold" fill="#ea580c">R1 = 2 Ω</text>
+
+                <!-- R2 (4Ω) from V1 to GND -->
+                <line x1="120" y1="50" x2="120" y2="80" stroke="#000" stroke-width="2"/>
+                <path d="M 120 80 L 112 88 L 128 98 L 112 108 L 128 118 L 112 128 L 128 138 L 120 145" fill="none" stroke="#ea580c" stroke-width="2"/>
+                <line x1="120" y1="145" x2="120" y2="180" stroke="#000" stroke-width="2"/>
+                <text x="130" y="115" font-size="11" font-weight="bold" fill="#ea580c">R2 = 4 Ω</text>
+
+                <!-- R3 (2.5Ω) between V1 and V2 -->
+                <path d="M 120 50 L 160 50 L 165 42 L 175 58 L 185 42 L 195 58 L 205 42 L 215 58 L 220 50 L 280 50" fill="none" stroke="#ea580c" stroke-width="2"/>
+                <text x="180" y="30" font-size="11" font-weight="bold" fill="#ea580c">R3 = 2.5 Ω</text>
+
+                <!-- R4 (5Ω) from V2 to GND -->
+                <line x1="280" y1="50" x2="280" y2="80" stroke="#000" stroke-width="2"/>
+                <path d="M 280 80 L 272 88 L 288 98 L 272 108 L 288 118 L 272 128 L 288 138 L 280 145" fill="none" stroke="#ea580c" stroke-width="2"/>
+                <line x1="280" y1="145" x2="280" y2="180" stroke="#000" stroke-width="2"/>
+                <text x="290" y="115" font-size="11" font-weight="bold" fill="#ea580c">R4 = 5 Ω</text>
+
+                <!-- R5 (1Ω) between V2 and B2 -->
+                <path d="M 280 50 L 320 50 L 325 42 L 333 58 L 341 42 L 349 58 L 357 42 L 365 58 L 370 50 L 400 50" fill="none" stroke="#ea580c" stroke-width="2"/>
+                <text x="330" y="30" font-size="11" font-weight="bold" fill="#ea580c">R5 = 1 Ω</text>
+
+                <!-- Right Source B2 (-4V) -->
+                <line x1="400" y1="50" x2="400" y2="180" stroke="#000" stroke-width="2"/>
+                <line x1="385" y1="105" x2="415" y2="105" stroke="#000" stroke-width="2"/>
+                <line x1="392" y1="115" x2="408" y2="115" stroke="#000" stroke-width="3"/>
+                <text x="388" y="95" font-size="12" font-weight="bold">-</text>
+                <text x="389" y="130" font-size="12" font-weight="bold">+</text>
+                <text x="418" y="112" font-size="11" font-weight="bold">B2 = -4 V</text>
+            </svg>
+        </div>
+
+        <p><strong>Enter Node Voltage V1 (Volts):</strong></p>
+        <input type="text" id="ans-q12a" placeholder="">
+        <p><strong>Enter Node Voltage V2 (Volts):</strong></p>
+        <input type="text" id="ans-q12b" placeholder="">
+        <button onclick="evaluateQ12()">Submit Answer</button>
+        <div class="result" id="res-q12"></div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="question-card" id="card-q13">
+        <div class="question-title">Q13. Determine the node voltages Va, Vb, and Vc for the complex network with multiple ideal voltage and current sources. (10 Marks)</div>
+        
+        <div class="svg-container">
+            <svg width="450" height="220" viewBox="0 0 450 220">
+                <!-- Reference Ground Rail -->
+                <line x1="50" y1="180" x2="380" y2="180" stroke="#000" stroke-width="2"/>
+                <line x1="215" y1="180" x2="215" y2="195" stroke="#000" stroke-width="2"/>
+                <line x1="200" y1="195" x2="230" y2="195" stroke="#000" stroke-width="2"/>
+                <line x1="205" y1="200" x2="225" y2="200" stroke="#000" stroke-width="2"/>
+
+                <!-- Top Supernode Branch Source 10V -->
+                <line x1="50" y1="40" x2="380" y2="40" stroke="#000" stroke-width="2"/>
+                <circle cx="215" cy="40" r="16" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="206" y="44" font-size="11" font-weight="bold">+ -</text>
+                <text x="202" y="20" font-size="11" font-weight="bold">10 V</text>
+
+                <!-- Node a -->
+                <circle cx="50" cy="100" r="4" fill="#2563eb"/>
+                <text x="35" y="105" font-size="12" font-weight="bold" fill="#2563eb">a</text>
+                <line x1="50" y1="40" x2="50" y2="180" stroke="#000" stroke-width="2"/>
+
+                <!-- Left Current Source 5A -->
+                <circle cx="50" cy="140" r="14" fill="#fff" stroke="#000" stroke-width="2"/>
+                <line x1="50" y1="148" x2="50" y2="132" stroke="#000" stroke-width="2" marker-end="url(#arrow-up)"/>
+                <text x="15" y="144" font-size="11" font-weight="bold">5 A</text>
+
+                <!-- Resistor 10 Ω (a to b) -->
+                <path d="M 50 100 L 90 100 L 95 92 L 105 108 L 115 92 L 125 108 L 135 92 L 145 108 L 150 100 L 215 100" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="110" y="85" font-size="11" font-weight="bold">10 Ω</text>
+
+                <!-- Node b -->
+                <circle cx="215" cy="100" r="4" fill="#2563eb"/>
+                <text x="222" y="95" font-size="12" font-weight="bold" fill="#2563eb">b</text>
+
+                <!-- Middle Voltage Source 12V (GND to b) -->
+                <line x1="215" y1="100" x2="215" y2="180" stroke="#000" stroke-width="2"/>
+                <circle cx="215" cy="140" r="14" fill="#fff" stroke="#000" stroke-width="2"/>
+                <text x="210" y="135" font-size="10" font-weight="bold">-</text>
+                <text x="210" y="150" font-size="10" font-weight="bold">+</text>
+                <text x="233" y="144" font-size="11" font-weight="bold">12 V</text>
+
+                <!-- Resistor 40 Ω (b to c) -->
+                <path d="M 215 100 L 260 100 L 265 92 L 275 108 L 285 92 L 295 108 L 305 92 L 315 108 L 320 100 L 380 100" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="280" y="85" font-size="11" font-weight="bold">40 Ω</text>
+
+                <!-- Node c -->
+                <circle cx="380" cy="100" r="4" fill="#2563eb"/>
+                <text x="390" y="105" font-size="12" font-weight="bold" fill="#2563eb">c</text>
+
+                <!-- Right Current Source 2A -->
+                <line x1="380" y1="40" x2="380" y2="180" stroke="#000" stroke-width="2"/>
+                <circle cx="380" cy="140" r="14" fill="#fff" stroke="#000" stroke-width="2"/>
+                <line x1="380" y1="132" x2="380" y2="148" stroke="#000" stroke-width="2" marker-end="url(#arrow-up)"/>
+                <text x="400" y="144" font-size="11" font-weight="bold">2 A</text>
+            </svg>
+        </div>
+
+        <p><strong>Enter Node Voltage Va (Volts):</strong></p>
+        <input type="text" id="ans-q13a" placeholder="">
+        <p><strong>Enter Node Voltage Vb (Volts):</strong></p>
+        <input type="text" id="ans-q13b" placeholder="">
+        <p><strong>Enter Node Voltage Vc (Volts):</strong></p>
+        <input type="text" id="ans-q13c" placeholder="">
+        <button onclick="evaluateQ13()">Submit Answer</button>
+        <div class="result" id="res-q13"></div>
+    </div>
+
+    <button class="submit-all-btn" onclick="evaluateAll()">Evaluate Complete Test</button>
+    <div id="finalScore"></div>
+
+</div>
+
+<script>
+    let scores = {};
+
+    function evaluateText(id, keywords, solution) {
+        let val = document.getElementById('ans-' + id).value.toLowerCase();
+        let res = document.getElementById('res-' + id);
+        let passed = keywords.some(kw => val.includes(kw));
+
+        res.style.display = "block";
+        if (passed && val.length > 5) {
+            res.className = "result correct";
+            res.innerHTML = "<strong>Correct! (2/2 Marks)</strong><br>Solution: " + solution;
+            scores[id] = 2;
+        } else {
+            res.className = "result incorrect";
+            res.innerHTML = "<strong>Incorrect / Incomplete (0/2 Marks)</strong><br>Solution: " + solution;
+            scores[id] = 0;
+        }
+    }
+
+    function evaluateNumeric(id, correctVal, solution) {
+        let val = parseFloat(document.getElementById('ans-' + id).value);
+        let res = document.getElementById('res-' + id);
+        res.style.display = "block";
+
+        if (!isNaN(val) && Math.abs(val - correctVal) <= 0.2) {
+            res.className = "result correct";
+            res.innerHTML = "<strong>Correct! (2/2 Marks)</strong><br>Solution: " + solution;
+            scores[id] = 2;
+        } else {
+            res.className = "result incorrect";
+            res.innerHTML = "<strong>Incorrect (0/2 Marks)</strong><br>Solution: " + solution;
+            scores[id] = 0;
+        }
+    }
+
+    function evaluateQ11() {
+        let i1 = parseFloat(document.getElementById('ans-q11a').value);
+        let i2 = parseFloat(document.getElementById('ans-q11b').value);
+        let res = document.getElementById('res-q11');
+        res.style.display = "block";
+
+        let i1Correct = Math.abs(i1 - 5.0) <= 0.2;
+        let i2Correct = Math.abs(i2 - 1.0) <= 0.2;
+
+        if (i1Correct && i2Correct) {
+            res.className = "result correct";
+            res.innerHTML = "<strong>Correct! (10/10 Marks)</strong><br>KVL Mesh 1: 6*I1 - 2*I2 = 28<br>KVL Mesh 2: -2*I1 + 3*I2 = -7<br>Solving gives: I1 = 5 A, I2 = 1 A.";
+            scores['q11'] = 10;
+        } else {
+            res.className = "result incorrect";
+            res.innerHTML = "<strong>Incorrect (0/10 Marks)</strong><br>Solution: Mesh 1 Equation: 4*I1 + 2*(I1 - I2) = 28 => 6*I1 - 2*I2 = 28.<br>Mesh 2 Equation: 1*I2 + 7 + 2*(I2 - I1) = 0 => -2*I1 + 3*I2 = -7.<br>Solving simultaneously: I1 = 5 A, I2 = 1 A.";
+            scores['q11'] = 0;
+        }
+    }
+
+    function evaluateQ12() {
+        let v1 = parseFloat(document.getElementById('ans-q12a').value);
+        let v2 = parseFloat(document.getElementById('ans-q12b').value);
+        let res = document.getElementById('res-q12');
+        res.style.display = "block";
+
+        let v1Correct = Math.abs(v1 - 5.0) <= 0.2;
+        let v2Correct = Math.abs(v2 - 2.0) <= 0.2;
+
+        if (v1Correct && v2Correct) {
+            res.className = "result correct";
+            res.innerHTML = "<strong>Correct! (10/10 Marks)</strong><br>Nodal Eq at Node 1: (V1 - 10)/2 + V1/4 + (V1 - V2)/2.5 = 0<br>Nodal Eq at Node 2: (V2 - V1)/2.5 + V2/5 + (V2 - (-4))/1 = 0<br>Solving gives V1 = 5 V, V2 = 2 V.";
+            scores['q12'] = 10;
+        } else {
+            res.className = "result incorrect";
+            res.innerHTML = "<strong>Incorrect (0/10 Marks)</strong><br>Solution: <br>Node 1: 1.15*V1 - 0.4*V2 = 5<br>Node 2: -0.4*V1 + 1.6*V2 = -4<br>Solving simultaneously yields: V1 = 5.0 V and V2 = 2.0 V.";
+            scores['q12'] = 0;
+        }
+    }
+
+    function evaluateQ13() {
+        let va = parseFloat(document.getElementById('ans-q13a').value);
+        let vb = parseFloat(document.getElementById('ans-q13b').value);
+        let vc = parseFloat(document.getElementById('ans-q13c').value);
+        let res = document.getElementById('res-q13');
+        res.style.display = "block";
+
+        let vaCorrect = Math.abs(va - (-2.0)) <= 0.3;
+        let vbCorrect = Math.abs(vb - (-12.0)) <= 0.3;
+        let vcCorrect = Math.abs(vc - (-12.0)) <= 0.3;
+
+        if (vaCorrect && vbCorrect && vcCorrect) {
+            res.className = "result correct";
+            res.innerHTML = "<strong>Correct! (10/10 Marks)</strong><br>Node b is fixed relative to GND: Vb = -12 V.<br>Supernode constraint: Va - Vc = 10 V => Va = Vc + 10.<br>KCL at Supernode (a,c) gives: Va = -2 V, Vb = -12 V, Vc = -12 V.";
+            scores['q13'] = 10;
+        } else {
+            res.className = "result incorrect";
+            res.innerHTML = "<strong>Incorrect (0/10 Marks)</strong><br>Solution: <br>1) Connected source fixes Vb = -12 V.<br>2) Supernode between a & c: Va - Vc = 10 V.<br>3) KCL on Supernode (a,c): -5 + (Va - Vb)/10 + (Vc - Vb)/40 + 2 = 0.<br>Substituting Vb = -12 V and Va = Vc + 10 gives: Vc = -12 V, Va = -2 V, Vb = -12 V.";
+            scores['q13'] = 0;
+        }
+    }
+
+    function evaluateAll() {
+        let total = 0;
+        for (let key in scores) {
+            total += scores[key];
+        }
+        let scoreDiv = document.getElementById('finalScore');
+        scoreDiv.innerHTML = "Final Score: " + total + " / 50 Marks";
+    }
+</script>
+
+</body>
+</html>

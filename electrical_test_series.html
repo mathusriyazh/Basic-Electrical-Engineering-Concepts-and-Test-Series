@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Electrical Engineering - Power, Ratings & Resistance Test</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2b6cb0;
+            --accent: #d69e2e;
+            --bg: #f7fafc;
+            --card-bg: #ffffff;
+            --text: #2d3748;
+            --border: #cbd5e0;
+            --correct: #2f855a;
+            --incorrect: #c53030;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin: 0 0 10px 0;
+        }
+
+        .paper-info {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            color: #4a5568;
+            margin-top: 15px;
+            padding: 12px 18px;
+            background: #edf2f7;
+            border-radius: 6px;
+        }
+
+        .section-title {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin: 30px 0 20px 0;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .question-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .q-text {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin: 15px 0;
+            background: #ffffff;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .input-group {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        input[type="number"] {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            width: 110px;
+            font-size: 1em;
+        }
+
+        .feedback {
+            margin-top: 12px;
+            padding: 12px 15px;
+            border-radius: 4px;
+            display: none;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        .feedback.correct {
+            background-color: #c6f6d5;
+            color: var(--correct);
+            border: 1px solid #9ae6b4;
+        }
+
+        .feedback.incorrect {
+            background-color: #fed7d7;
+            color: var(--incorrect);
+            border: 1px solid #feb2b2;
+        }
+
+        .action-bar {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border);
+        }
+
+        .btn-submit {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary);
+        }
+
+        #score-summary {
+            display: none;
+            background: #ebf8ff;
+            border: 2px solid #90cdf4;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        #score-summary h2 {
+            margin: 0 0 10px 0;
+            color: var(--primary);
+        }
+
+        #score-summary p {
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+
+        @media print {
+            .input-group, .action-bar, #score-summary { display: none; }
+            .feedback { display: none !important; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Basic Electrical Engineering Test Series</h1>
+        <div style="font-size: 1.1em; color: var(--secondary); font-weight: 600;">Power Ratings, Series Dropping Resistors & Mixed Bulb Circuits</div>
+        <div class="paper-info">
+            <span>Subject: Basic Electrical (EEE101)</span>
+            <span>Time: 2 Hours</span>
+            <span>Total Marks: 70</span>
+        </div>
+    </header>
+
+    <div id="score-summary">
+        <h2>Evaluation Result</h2>
+        <p id="score-text">Your Score: 0 / 70</p>
+        <p id="percentage-text" style="font-weight: bold; color: var(--secondary);"></p>
+    </div>
+
+    <form id="quizForm">
+        <!-- PART A -->
+        <div class="section-title">PART - A (20 Numerical Questions × 2 Marks = 40 Marks)</div>
+
+        <!-- Q1 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 1</span><span>2 Marks</span></div>
+            <div class="q-text">
+                The heating element of a <b>500 W</b> electric iron is designed for <b>200 V</b>. What series resistance must be added to operate it safely on a <b>240 V</b> supply?
+            </div>
+            <div class="input-group">
+                <label for="q1">Series Resistance (Ω):</label>
+                <input type="number" id="q1" step="0.01" placeholder="R_series">
+            </div>
+            <div class="feedback" id="fb-q1"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 2</span><span>2 Marks</span></div>
+            <div class="q-text">
+                A <b>100 V, 60 W</b> lamp is connected in series with a <b>100 V, 100 W</b> lamp across a <b>200 V</b> main. Calculate the resistance that should be shunted across the 60 W lamp so both operate at rated current.
+            </div>
+            <div class="input-group">
+                <label for="q2">Shunt Resistance (Ω):</label>
+                <input type="number" id="q2" step="0.01" placeholder="R_shunt">
+            </div>
+            <div class="feedback" id="fb-q2"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 3</span><span>2 Marks</span></div>
+            <div class="q-text">
+                A <b>1000 W, 220 V</b> electric heater element is operated from a <b>250 V</b> supply. Find the required series resistor value to maintain original power consumption.
+            </div>
+            <div class="input-group">
+                <label for="q3">Series Resistance (Ω):</label>
+                <input type="number" id="q3" step="0.01" placeholder="R_series">
+            </div>
+            <div class="feedback" id="fb-q3"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 4</span><span>2 Marks</span></div>
+            <div class="q-text">
+                A <b>110 V, 40 W</b> bulb and a <b>110 V, 100 W</b> bulb are connected in series across <b>220 V</b>. Calculate the resistance connected in parallel across the 40 W bulb for proper current.
+            </div>
+            <div class="input-group">
+                <label for="q4">Shunt Resistance (Ω):</label>
+                <input type="number" id="q4" step="0.01" placeholder="R_shunt">
+            </div>
+            <div class="feedback" id="fb-q4"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 5</span><span>2 Marks</span></div>
+            <div class="q-text">
+                A <b>230 V, 1150 W0</b> toaster is connected across <b>250 V</b> mains. Calculate the series resistance needed to drop excess voltage.
+            </div>
+            <div class="input-group">
+                <label for="q5">Series Resistance (Ω):</label>
+                <input type="number" id="q5" step="0.01" placeholder="R_series">
+            </div>
+            <div class="feedback" id="fb-q5"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 6</span><span>2 Marks</span></div>
+            <div class="q-text">
+                Calculate hot resistance of a <b>220 V, 100 W</b> incandescent bulb.
+            </div>
+            <div class="input-group">
+                <label for="q6">Resistance (Ω):</label>
+                <input type="number" id="q6" step="0.01" placeholder="R_hot">
+            </div>
+            <div class="feedback" id="fb-q6"></div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 7</span><span>2 Marks</span></div>
+            <div class="q-text">
+                Two lamps rated <b>120 V, 60 W</b> and <b>120 V, 40 W</b> are connected in series across <b>240 V</b>. What resistor in parallel across the 40 W lamp allows normal operation?
+            </div>
+            <div class="input-group">
+                <label for="q7">Shunt Resistance (Ω):</label>
+                <input type="number" id="q7" step="0.01" placeholder="R_shunt">
+            </div>
+            <div class="feedback" id="fb-q7"></div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 8</span><span>2 Marks</span></div>
+            <div class="q-text">
+                A <b>12 V, 24 W</b> automotive lamp is powered from a <b>24 V</b> battery. Calculate necessary series resistance and its power rating.
+            </div>
+            <div class="input-group">
+                <label for="q8">Series Resistance (Ω):</label>
+                <input type="number" id="q8" step="0.01" placeholder="R_series">
+            </div>
+            <div class="feedback" id="fb-q8"></div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 9</span><span>2 Marks</span></div>
+            <div class="q-text">
+                A <b>75 W, 110 V</b> bulb is operating in series with a <b>25 W, 110 V</b> bulb on a <b>220 V</b> supply. Find parallel resistor across 25 W bulb for safe rating.
+            </div>
+            <div class="input-group">
+                <label for="q9">Shunt Resistance (Ω):</label>
+                <input type="number" id="q9" step="0.01" placeholder="R_shunt">
+            </div>
+            <div class="feedback" id="fb-q9"></div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 10</span><span>2 Marks</span></div>
+            <div class="q-text">
+                An electric heater takes <b>5 A</b> at <b>200 V</b>. What series resistance will reduce current to <b>4 A</b> at same supply voltage?
+            </div>
+            <div class="input-group">
+                <label for="q10">Added Resistance (Ω):</label>
+                <input type="number" id="q10" step="0.01" placeholder="R_added">
+            </div>
+            <div class="feedback" id="fb-q10"></div>
+        </div>
+
+        <!-- Q11 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 11</span><span>2 Marks</span></div>
+            <div class="q-text">
+                Two <b>230 V</b> bulbs of ratings <b>100 W</b> and <b>200 W</b> are connected in series across <b>230 V</b> supply. Calculate total power consumed by combination.
+            </div>
+            <div class="input-group">
+                <label for="q11">Total Power (W):</label>
+                <input type="number" id="q11" step="0.01" placeholder="P_total">
+            </div>
+            <div class="feedback" id="fb-q11"></div>
+        </div>
+
+        <!-- Q12 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 12</span><span>2 Marks</span></div>
+            <div class="q-text">
+                A <b>500 W, 100 V</b> heater is to be used on <b>230 V</b> line. Calculate required series dropping resistor value.
+            </div>
+            <div class="input-group">
+                <label for="q12">Series Resistance (Ω):</label>
+                <input type="number" id="q12" step="0.01" placeholder="R_series">
+            </div>
+            <div class="feedback" id="fb-q12"></div>
+        </div>
+
+        <!-- Q13 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 13</span><span>2 Marks</span></div>
+            <div class="q-text">
+                A <b>100 V, 40 W</b> lamp and <b>100 V, 80 W</b> lamp are connected in series across <b>200 V</b> mains. Determine resistor needed in parallel with 40 W lamp.
+            </div>
+            <div class="input-group">
+                <label for="q13">Shunt Resistance (Ω):</label>
+                <input type="number" id="q13" step="0.01" placeholder="R_shunt">
+            </div>
+            <div class="feedback" id="fb-q13"></div>
+        </div>
+
+        <!-- Q14 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 14</span><span>2 Marks</span></div>
+            <div class="q-text">
+                A soldering iron rated <b>60 W, 120 V</b> is operated on <b>240 V</b> line. What series resistor should be added?
+            </div>
+            <div class="input-group">
+                <label for="q14">Series Resistance (Ω):</label>
+                <input type="number" id="q14" step="0.01" placeholder="R_series">
+            </div>
+            <div class="feedback" id="fb-q14"></div>
+        </div>
+
+        <!-- Q15 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 15</span><span>2 Marks</span></div>
+            <div class="q-text">
+                Three identical <b>100 W, 220 V</b> lamps are connected in series across <b>220 V</b> supply. Find total power dissipated.
+            </div>
+            <div class="input-group">
+                <label for="q15">Power Dissipated (W):</label>
+                <input type="number" id="q15" step="0.01" placeholder="P_total">
+            </div>
+            <div class="feedback" id="fb-q15"></div>
+        </div>
+
+        <!-- Q16 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 16</span><span>2 Marks</span></div>
+            <div class="q-text">
+                A <b>200 V, 800 W</b> kettle needs to operate on <b>260 V</b> mains. Calculate value of series resistor.
+            </div>
+            <div class="input-group">
+                <label for="q16">Series Resistance (Ω):</label>
+                <input type="number" id="q16" step="0.01" placeholder="R_series">
+            </div>
+            <div class="feedback" id="fb-q16"></div>
+        </div>
+
+        <!-- Q17 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 17</span><span>2 Marks</span></div>
+            <div class="q-text">
+                A <b>110 V, 50 W</b> bulb is in series with <b>110 V, 100 W</b> bulb across <b>220 V</b>. Find bypass resistance across 50 W bulb.
+            </div>
+            <div class="input-group">
+                <label for="q17">Bypass Resistance (Ω):</label>
+                <input type="number" id="q17" step="0.01" placeholder="R_bypass">
+            </div>
+            <div class="feedback" id="fb-q17"></div>
+        </div>
+
+        <!-- Q18 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 18</span><span>2 Marks</span></div>
+            <div class="q-text">
+                Find current drawn by a <b>240 V, 1200 W0</b> water heater under rated condition.
+            </div>
+            <div class="input-group">
+                <label for="q18">Rated Current (A):</label>
+                <input type="number" id="q18" step="0.01" placeholder="I_rated">
+            </div>
+            <div class="feedback" id="fb-q18"></div>
+        </div>
+
+        <!-- Q19 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 19</span><span>2 Marks</span></div>
+            <div class="q-text">
+                A <b>100 V, 200 W</b> device is supplied from <b>150 V</b> source. Find extra series resistance to prevent overvoltage.
+            </div>
+            <div class="input-group">
+                <label for="q19">Series Resistance (Ω):</label>
+                <input type="number" id="q19" step="0.01" placeholder="R_series">
+            </div>
+            <div class="feedback" id="fb-q19"></div>
+        </div>
+
+        <!-- Q20 -->
+        <div class="question-card">
+            <div class="q-header"><span>Question 20</span><span>2 Marks</span></div>
+            <div class="q-text">
+                Two lamps rated <b>100 V, 30 W</b> and <b>100 V, 90 W</b> are connected in series across <b>200 V</b>. Calculate shunt resistance across 30 W bulb.
+            </div>
+            <div class="input-group">
+                <label for="q20">Shunt Resistance (Ω):</label>
+                <input type="number" id="q20" step="0.01" placeholder="R_shunt">
+            </div>
+            <div class="feedback" id="fb-q20"></div>
+        </div>
+
+
+        <!-- PART B -->
+        <div class="section-title">PART - B (3 Comprehensive Questions × 10 Marks = 30 Marks)</div>
+
+        <!-- Q21 -->
+        <div class="question-card">
+            <div class="q-header">
+                <span>Question 21 (Mixed Rating Lamps Circuit Design)</span>
+                <span>10 Marks</span>
+            </div>
+            <div class="q-text">
+                A circuit consists of two lamps <b>L1 (100 V, 60 W)</b> and <b>L2 (100 V, 100 W)</b> connected in series across a <b>200 V DC mains</b> as shown in schematic.
+                <br>To operate both lamps safely at rated power, a resistor <b>R<sub>S</sub></b> is connected in parallel with <b>L1</b>.
+                <br><br>
+                <b>(a)</b> Calculate normal rated current <b>I<sub>1</sub></b> of Lamp L1 and <b>I<sub>2</sub></b> of Lamp L2 in Amperes. [3 Marks]
+                <br><b>(b)</b> Determine the value of shunt resistance <b>R<sub>S</sub></b> in Ohms across L1. [4 Marks]
+                <br><b>(c)</b> Calculate total power supplied by the 200 V supply in Watts. [3 Marks]
+            </div>
+            <div class="diagram-container">
+                <svg width="450" height="180" viewBox="0 0 450 180" stroke="#000" stroke-width="2" fill="none">
+                    <style>text { font-family: sans-serif; font-size: 12px; fill: #000; stroke: none; }</style>
+                    <line x1="40" y1="30" x2="400" y2="30"/>
+                    <line x1="40" y1="150" x2="400" y2="150"/>
+
+                    <!-- Source 200V -->
+                    <circle cx="40" cy="90" r="16"/>
+                    <text x="36" y="85" font-weight="bold">+</text>
+                    <text x="37" y="102" font-weight="bold">-</text>
+                    <text x="5" y="95" font-weight="bold">200 V</text>
+                    <line x1="40" y1="30" x2="40" y2="74"/>
+                    <line x1="40" y1="106" x2="40" y2="150"/>
+
+                    <!-- Lamp L1 with parallel RS -->
+                    <line x1="140" y1="30" x2="140" y2="50"/>
+                    <circle cx="140" cy="65" r="15"/>
+                    <line x1="129" y1="54" x2="151" y2="76"/>
+                    <line x1="129" y1="76" x2="151" y2="54"/>
+                    <line x1="140" y1="80" x2="140" y2="150"/>
+                    <text x="110" y="98" font-weight="bold">L1 (60W, 100V)</text>
+
+                    <!-- Shunt Resistor RS -->
+                    <line x1="220" y1="30" x2="220" y2="55"/>
+                    <path d="M 220 55 L 210 62 L 230 74 L 210 86 L 230 98 L 210 110 L 220 117"/>
+                    <line x1="220" y1="117" x2="220" y2="150"/>
+                    <text x="232" y="90" font-weight="bold">Rs</text>
+
+                    <line x1="40" y1="30" x2="280" y2="30"/>
+                    <line x1="40" y1="150" x2="280" y2="150"/>
+
+                    <!-- Lamp L2 -->
+                    <line x1="340" y1="30" x2="340" y2="75"/>
+                    <circle cx="340" cy="90" r="15"/>
+                    <line x1="329" y1="79" x2="351" y2="101"/>
+                    <line x1="329" y1="101" x2="351" y2="79"/>
+                    <line x1="340" y1="105" x2="340" y2="150"/>
+                    <text x="310" y="125" font-weight="bold">L2 (100W, 100V)</text>
+                    <line x1="280" y1="30" x2="400" y2="30"/>
+                    <line x1="400" y1="30" x2="400" y2="150"/>
+                    <line x1="280" y1="150" x2="400" y2="150"/>
+                </svg>
+            </div>
+            <div class="input-group">
+                <label for="q21a">L1 Current I1 (A):</label>
+                <input type="number" id="q21a" step="0.01" placeholder="I1">
+                <label for="q21b" style="margin-left: 10px;">L2 Current I2 (A):</label>
+                <input type="number" id="q21b" step="0.01" placeholder="I2">
+                <label for="q21c" style="margin-left: 10px;">Shunt Rs (Ω):</label>
+                <input type="number" id="q21c" step="0.01" placeholder="Rs">
+                <label for="q21d" style="margin-left: 10px;">Total Power (W):</label>
+                <input type="number" id="q21d" step="0.01" placeholder="P_total">
+            </div>
+            <div class="feedback" id="fb-q21"></div>
+        </div>
+
+        <!-- Q22 -->
+        <div class="question-card">
+            <div class="q-header">
+                <span>Question 22 (Industrial Appliance Adaptation & Wire Sizing)</span>
+                <span>10 Marks</span>
+            </div>
+            <div class="q-text">
+                An industrial heating unit is rated <b>2000 W, 200 V</b>. It must be operated on a <b>280 V</b> supply using a Nichrome series resistor.
+                <br><br>
+                <b>(a)</b> Calculate resistance <b>R<sub>H</sub></b> of the heating unit and operating current <b>I</b> in Amperes. [3 Marks]
+                <br><b>(b)</b> Calculate required series dropping resistor value <b>R<sub>drop</sub></b> in Ohms. [3 Marks]
+                <br><b>(c)</b> Calculate minimum power rating required for <b>R<sub>drop</sub></b> (with 25% safety margin) and overall system efficiency. [4 Marks]
+            </div>
+            <div class="diagram-container">
+                <svg width="450" height="140" viewBox="0 0 450 140" stroke="#000" stroke-width="2" fill="none">
+                    <style>text { font-family: sans-serif; font-size: 12px; fill: #000; stroke: none; }</style>
+                    <line x1="40" y1="30" x2="410" y2="30"/>
+                    <line x1="40" y1="110" x2="410" y2="110"/>
+
+                    <!-- Source 280V -->
+                    <circle cx="40" cy="70" r="16"/>
+                    <text x="36" y="65" font-weight="bold">+</text>
+                    <text x="37" y="82" font-weight="bold">-</text>
+                    <text x="5" y="75" font-weight="bold">280 V</text>
+                    <line x1="40" y1="30" x2="40" y2="54"/>
+                    <line x1="40" y1="86" x2="40" y2="110"/>
+
+                    <!-- R_drop -->
+                    <path d="M 120 30 L 127 20 L 139 40 L 151 20 L 163 40 L 175 20 L 182 30"/>
+                    <text x="135" y="15" font-weight="bold">R_drop</text>
+                    <line x1="40" y1="30" x2="120" y2="30"/>
+
+                    <!-- Heater Unit RH -->
+                    <path d="M 270 30 L 277 20 L 289 40 L 301 20 L 313 40 L 325 20 L 332 30"/>
+                    <text x="260" y="15" font-weight="bold">Heater (2000W, 200V)</text>
+                    <line x1="182" y1="30" x2="270" y2="30"/>
+                    <line x1="332" y1="30" x2="410" y2="30"/>
+                    <line x1="410" y1="30" x2="410" y2="110"/>
+                </svg>
+            </div>
+            <div class="input-group">
+                <label for="q22a">Heater RH (Ω):</label>
+                <input type="number" id="q22a" step="0.01" placeholder="RH">
+                <label for="q22b" style="margin-left: 10px;">Operating Current (A):</label>
+                <input type="number" id="q22b" step="0.01" placeholder="I">
+                <label for="q22c" style="margin-left: 10px;">R_drop (Ω):</label>
+                <input type="number" id="q22c" step="0.01" placeholder="R_drop">
+                <label for="q22d" style="margin-left: 10px;">Efficiency (%):</label>
+                <input type="number" id="q22d" step="0.01" placeholder="Efficiency">
+            </div>
+            <div class="feedback" id="fb-q22"></div>
+        </div>
+
+        <!-- Q23 -->
+        <div class="question-card">
+            <div class="q-header">
+                <span>Question 23 (3-Lamp Series-Parallel Network Optimization)</span>
+                <span>10 Marks</span>
+            </div>
+            <div class="q-text">
+                Three lamps <b>L1 (100 V, 40 W)</b>, <b>L2 (100 V, 60 W)</b>, and <b>L3 (100 V, 100 W)</b> are configured such that L1 and L2 are in parallel, and this combination is connected in series with L3 across a <b>200 V DC supply</b>.
+                <br>A single external resistor <b>R<sub>X</sub></b> is added in parallel with the (L1 || L2) group so that ALL THREE lamps operate at their rated voltages.
+                <br><br>
+                <b>(a)</b> Calculate individual rated currents <b>I<sub>1</sub></b>, <b>I<sub>2</sub></b>, and <b>I<sub>3</sub></b> in Amperes. [3 Marks]
+                <br><b>(b)</b> Determine required current through resistor <b>R<sub>X</sub></b> and compute its resistance in Ohms. [4 Marks]
+                <br><b>(c)</b> Calculate total power drawn from supply and percentage power lost in <b>R<sub>X</sub></b>. [3 Marks]
+            </div>
+            <div class="input-group">
+                <label for="q23a">L3 Current I3 (A):</label>
+                <input type="number" id="q23a" step="0.01" placeholder="I3">
+                <label for="q23b" style="margin-left: 10px;">Rx Resistance (Ω):</label>
+                <input type="number" id="q23b" step="0.01" placeholder="Rx">
+                <label for="q23c" style="margin-left: 10px;">Total Power (W):</label>
+                <input type="number" id="q23c" step="0.01" placeholder="P_total">
+                <label for="q23d" style="margin-left: 10px;">Power Loss in Rx (%):</label>
+                <input type="number" id="q23d" step="0.01" placeholder="Loss %">
+            </div>
+            <div class="feedback" id="fb-q23"></div>
+        </div>
+
+        <div class="action-bar">
+            <button type="button" class="btn-submit" onclick="evaluateQuiz()">Submit & Evaluate Test</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    const solutionKey = {
+        q1: { ans: 16.0, tol: 0.2, marks: 2, explain: "R_iron = V²/P = 200²/500 = 80 Ω. Current I = P/V = 500/200 = 2.5 A. Voltage drop needed across series resistor = 240 - 200 = 40 V. R_series = 40 / 2.5 = 16.0 Ω." },
+        q2: { ans: 250.0, tol: 2.0, marks: 2, explain: "I1 = 60/100 = 0.6 A, I2 = 100/100 = 1.0 A. To give both 100V, total current must be I2 = 1.0 A. Extra current through shunt across bulb 1 = 1.0 - 0.6 = 0.4 A. R_shunt = 100 V / 0.4 A = 250.0 Ω." },
+        q3: { ans: 6.05, tol: 0.1, marks: 2, explain: "R_element = 220²/1000 = 48.4 Ω. Rated current I = 1000/220 = 4.545 A. Series drop = 250 - 220 = 30 V. R_series = 30 / 4.545 ≈ 6.6 Ω (or 250/4.545 - 48.4 = 6.6 Ω)." },
+        q4: { ans: 201.67, tol: 2.0, marks: 2, explain: "I1 = 40/110 = 0.3636 A, I2 = 100/110 = 0.9091 A. Extra current through shunt = 0.9091 - 0.3636 = 0.5455 A. R_shunt = 110 / 0.5455 ≈ 201.67 Ω." },
+        q5: { ans: 0.88, tol: 0.05, marks: 2, explain: "R_toaster = 230²/11500 = 4.6 Ω. Rated current = 11500/230 = 50 A. R_series = (250 - 230)/50 = 0.4 Ω." },
+        q6: { ans: 484.0, tol: 1.0, marks: 2, explain: "R = V²/P = 220²/100 = 484.0 Ω." },
+        q7: { ans: 720.0, tol: 5.0, marks: 2, explain: "I_60W = 60/120 = 0.5 A, I_40W = 40/120 = 0.333 A. Shunt current = 0.5 - 0.333 = 0.1667 A. R_shunt = 120 / 0.1667 = 720.0 Ω." },
+        q8: { ans: 6.0, tol: 0.1, marks: 2, explain: "I = 24/12 = 2 A. R_series = (24 - 12)/2 = 6.0 Ω." },
+        q9: { ans: 242.0, tol: 2.0, marks: 2, explain: "I_75W = 75/110 = 0.6818 A, I_25W = 25/110 = 0.2273 A. Shunt I = 0.6818 - 0.2273 = 0.4545 A. R_shunt = 110 / 0.4545 = 242.0 Ω." },
+        q10: { ans: 10.0, tol: 0.2, marks: 2, explain: "R_initial = 200/5 = 40 Ω. For I = 4 A, total R_new = 200/4 = 50 Ω. Added R = 50 - 40 = 10.0 Ω." },
+        q11: { ans: 66.67, tol: 1.0, marks: 2, explain: "R1 = 230²/100 = 529 Ω, R2 = 230²/200 = 264.5 Ω. R_total = 793.5 Ω. P_total = 230²/793.5 = 66.67 W." },
+        q12: { ans: 26.0, tol: 0.5, marks: 2, explain: "I = 500/100 = 5 A. R_series = (230 - 100)/5 = 26.0 Ω." },
+        q13: { ans: 250.0, tol: 2.0, marks: 2, explain: "I_80W = 80/100 = 0.8 A, I_40W = 40/100 = 0.4 A. Shunt current = 0.8 - 0.4 = 0.4 A. R_shunt = 100 / 0.4 = 250.0 Ω." },
+        q14: { ans: 240.0, tol: 2.0, marks: 2, explain: "I = 60/120 = 0.5 A. R_series = (240 - 120)/0.5 = 240.0 Ω." },
+        q15: { ans: 33.33, tol: 0.5, marks: 2, explain: "Three identical lamps in series across rated single lamp voltage get 1/3 voltage each. P_total = P_rated / 3 = 100 / 3 = 33.33 W." },
+        q16: { ans: 15.0, tol: 0.2, marks: 2, explain: "I = 800/200 = 4 A. R_series = (260 - 200)/4 = 15.0 Ω." },
+        q17: { ans: 242.0, tol: 2.0, marks: 2, explain: "I_100W = 100/110 = 0.909 A, I_50W = 50/110 = 0.4545 A. Bypass current = 0.4545 A. R_bypass = 110 / 0.4545 = 242.0 Ω." },
+        q18: { ans: 5.0, tol: 0.1, marks: 2, explain: "I = P/V = 1200 / 240 = 5.0 A." },
+        q19: { ans: 25.0, tol: 0.5, marks: 2, explain: "I = 200/100 = 2 A. R_series = (150 - 100)/2 = 25.0 Ω." },
+        q20: { ans: 166.67, tol: 2.0, marks: 2, explain: "I_90W = 90/100 = 0.9 A, I_30W = 30/100 = 0.3 A. Shunt I = 0.6 A. R_shunt = 100 / 0.6 = 166.67 Ω." },
+
+        // Part B Solutions
+        q21a: { ans: 0.6, tol: 0.02, marks: 3 },
+        q21b: { ans: 1.0, tol: 0.02, marks: 3 },
+        q21c: { ans: 250.0, tol: 2.0, marks: 2 },
+        q21d: { ans: 200.0, tol: 2.0, marks: 2, explain: "I1 = 60/100 = 0.6 A, I2 = 100/100 = 1.0 A. Shunt current IS = 1.0 - 0.6 = 0.4 A. Rs = 100 / 0.4 = 250 Ω. Total Power = V_total * I2 = 200 * 1.0 = 200 W." },
+
+        q22a: { ans: 20.0, tol: 0.2, marks: 3 },
+        q22b: { ans: 10.0, tol: 0.1, marks: 3 },
+        q22c: { ans: 8.0, tol: 0.1, marks: 2 },
+        q22d: { ans: 71.43, tol: 0.5, marks: 2, explain: "RH = 200²/2000 = 20 Ω. I = 2000/200 = 10 A. R_drop = (280 - 200)/10 = 8.0 Ω. Efficiency = (P_useful / P_total) * 100 = (2000 / (280 * 10)) * 100 = 71.43%." },
+
+        q23a: { ans: 1.0, tol: 0.02, marks: 3 },
+        q23b: { ans: 0.0, tol: 0.0, marks: 0 }, 
+        q23c: { ans: 200.0, tol: 2.0, marks: 3 },
+        q23d: { ans: 0.0, tol: 0.0, marks: 0 }
+    };
+
+    // Specific corrections for Q3 and Q23
+    solutionKey.q3 = { ans: 6.6, tol: 0.2, marks: 2, explain: "R_element = 220²/1000 = 48.4 Ω. Rated current I = 1000/220 = 4.545 A. Series drop = 250 - 220 = 30 V. R_series = 30 / 4.545 ≈ 6.6 Ω." };
+    solutionKey.q5 = { ans: 0.4, tol: 0.05, marks: 2, explain: "R_toaster = 230²/11500 = 4.6 Ω. Rated current = 11500/230 = 50 A. R_series = (250 - 230)/50 = 0.4 Ω." };
+
+    solutionKey.q23a = { ans: 1.0, tol: 0.02, marks: 3 };
+    solutionKey.q23b = { ans: 0.0, tol: 0.0, marks: 0 };
+    solutionKey.q23_rx = { ans: 0.0, tol: 0.0, marks: 0 };
+
+    function evaluateQuiz() {
+        let totalScore = 0;
+
+        for (let i = 1; i <= 20; i++) {
+            const inputElement = document.getElementById(`q${i}`);
+            if(!inputElement) continue;
+            const inputVal = parseFloat(inputElement.value);
+            const key = solutionKey[`q${i}`];
+            const fb = document.getElementById(`fb-q${i}`);
+            
+            if (!isNaN(inputVal) && Math.abs(inputVal - key.ans) <= key.tol) {
+                totalScore += key.marks;
+                fb.className = "feedback correct";
+                fb.innerHTML = `<b>Correct! (+${key.marks} Marks)</b><br>${key.explain}`;
+            } else {
+                fb.className = "feedback incorrect";
+                fb.innerHTML = `<b>Incorrect (0 / ${key.marks} Marks)</b>. Correct Answer: <b>${key.ans}</b><br>${key.explain}`;
+            }
+            fb.style.display = "block";
+        }
+
+        // Q21
+        const q21a = parseFloat(document.getElementById('q21a').value);
+        const q21b = parseFloat(document.getElementById('q21b').value);
+        const q21c = parseFloat(document.getElementById('q21c').value);
+        const q21d = parseFloat(document.getElementById('q21d').value);
+        const fb21 = document.getElementById('fb-q21');
+        let m21 = 0;
+        if (!isNaN(q21a) && Math.abs(q21a - 0.6) <= 0.02) m21 += 2;
+        if (!isNaN(q21b) && Math.abs(q21b - 1.0) <= 0.02) m21 += 2;
+        if (!isNaN(q21c) && Math.abs(q21c - 250.0) <= 2.0) m21 += 3;
+        if (!isNaN(q21d) && Math.abs(q21d - 200.0) <= 2.0) m21 += 3;
+        totalScore += m21;
+        fb21.className = m21 >= 7 ? "feedback correct" : "feedback incorrect";
+        fb21.innerHTML = `<b>Score for Q21: ${m21} / 10 Marks</b><br>I1 = 60/100 = 0.6A; I2 = 100/100 = 1.0A; Shunt current = 1.0 - 0.6 = 0.4A; Rs = 100/0.4 = 250 Ω; Total Power = 200V * 1.0A = 200 W.`;
+        fb21.style.display = "block";
+
+        // Q22
+        const q22a = parseFloat(document.getElementById('q22a').value);
+        const q22b = parseFloat(document.getElementById('q22b').value);
+        const q22c = parseFloat(document.getElementById('q22c').value);
+        const q22d = parseFloat(document.getElementById('q22d').value);
+        const fb22 = document.getElementById('fb-q22');
+        let m22 = 0;
+        if (!isNaN(q22a) && Math.abs(q22a - 20.0) <= 0.2) m22 += 3;
+        if (!isNaN(q22b) && Math.abs(q22b - 10.0) <= 0.1) m22 += 2;
+        if (!isNaN(q22c) && Math.abs(q22c - 8.0) <= 0.1) m22 += 3;
+        if (!isNaN(q22d) && Math.abs(q22d - 71.43) <= 0.5) m22 += 2;
+        totalScore += m22;
+        fb22.className = m22 >= 7 ? "feedback correct" : "feedback incorrect";
+        fb22.innerHTML = `<b>Score for Q22: ${m22} / 10 Marks</b><br>RH = 200²/2000 = 20 Ω; I = 10A; R_drop = (280-200)/10 = 8.0 Ω; Efficiency = 2000 / (280*10) = 71.43%.`;
+        fb22.style.display = "block";
+
+        // Q23
+        const q23a = parseFloat(document.getElementById('q23a').value);
+        const q23b = parseFloat(document.getElementById('q23b').value);
+        const q23c = parseFloat(document.getElementById('q23c').value);
+        const q23d = parseFloat(document.getElementById('q23d').value);
+        const fb23 = document.getElementById('fb-q23');
+        let m23 = 0;
+        // Calculations for Q23:
+        // I1 = 40/100 = 0.4A, I2 = 60/100 = 0.6A, I3 = 100/100 = 1.0A.
+        // Group (L1||L2) total current needed = 0.4 + 0.6 = 1.0A.
+        // Series L3 needs 1.0A. Thus I_Rx = I3 - (I1+I2) = 1.0 - 1.0 = 0 A.
+        // Rx resistance required = Infinity (or not needed/0 current). Loss % = 0%. Total Power = 200 * 1.0 = 200 W.
+        if (!isNaN(q23a) && Math.abs(q23a - 1.0) <= 0.02) m23 += 3;
+        if (!isNaN(q23c) && Math.abs(q23c - 200.0) <= 2.0) m23 += 4;
+        if (!isNaN(q23d) && Math.abs(q23d - 0.0) <= 0.1) m23 += 3;
+        totalScore += m23;
+        fb23.className = m23 >= 7 ? "feedback correct" : "feedback incorrect";
+        fb23.innerHTML = `<b>Score for Q23: ${m23} / 10 Marks</b><br>I1 = 0.4A, I2 = 0.6A, I3 = 1.0A. Since (I1 + I2) = 1.0A matches I3 exactly, no current flows through Rx (Rx is not needed / infinite). Total Power = 200W, Power loss in Rx = 0%.`;
+        fb23.style.display = "block";
+
+        const summary = document.getElementById('score-summary');
+        document.getElementById('score-text').innerText = `Your Total Score: ${totalScore} / 70 Marks`;
+        const percentage = ((totalScore / 70) * 100).toFixed(1);
+        document.getElementById('percentage-text').innerText = `Percentage: ${percentage}%`;
+        summary.style.display = "block";
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
