@@ -593,17 +593,23 @@ function runSingleCompAnim() {
         detailsHtml = `<h4>Pure Capacitance (C)</h4><p>Current <b>leads voltage by $90^\\circ$</b> ($\\phi = +90^\\circ$, $\\text{PF} = 0\\text{ leading}$).</p><p>Reactance $X_C = \\frac{1}{2\\pi f C} = ${XC}\\text{ }\\Omega$.</p><p>Average Power $P = 0\\text{ W}$.</p>`;
     }
 
+    // APPEND SVG CIRCUIT SCHEMATIC HERE
+    detailsHtml += `<div style="text-align:center; margin-top:10px;">
+                        <p style="margin:0; font-size:12px; font-weight:bold;">Circuit Schematic:</p>
+                        ${getCircuitSVG(type)}
+                    </div>`;
+
     document.getElementById('singleCardDetails').innerHTML = detailsHtml;
     if (window.renderMathInElement) {
-  renderMathInElement(document.body, {
-    delimiters: [
-      {left: '$$', right: '$$', display: true},
-      {left: '$', right: '$', display: false},
-      {left: '\\(', right: '\\)', display: false},
-      {left: '\\[', right: '\\]', display: true}
-    ]
-  });
-}
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '\\[', right: '\\]', display: true}
+            ]
+        });
+    }
 
     let [canvas, ctx] = setupCanvas('singleCanvas');
 
@@ -649,7 +655,6 @@ function runSingleCompAnim() {
     }
     animate();
 }
-
 function checkSingle() {
     let s = document.getElementById('singleAns').value.toLowerCase();
     if (s.includes('31.4') && s.includes('7.3')) {
@@ -687,17 +692,24 @@ function runRLCAnim() {
         $$|Z| = ${Z.toFixed(2)}\\text{ }\\Omega, \\quad I_{rms} = \\frac{${V}}{${Z.toFixed(2)}} = ${I.toFixed(2)}\\text{ A}$$
         $$\\phi = ${(phi * 180 / Math.PI).toFixed(1)}^\\circ, \\quad \\text{Power Factor} = ${Math.abs(PF).toFixed(3)}\\text{ }(${X >= 0 ? 'Lagging' : 'Leading'})$$
     `;
+
+    // ADD SVG DIAGRAM HERE (Right before setting innerHTML)
+    calcText += `<div style="text-align:center; margin-top:10px;">
+                    <p style="margin:0; font-size:12px; font-weight:bold; color:#0f172a;">Circuit Schematic:</p>
+                    ${getCircuitSVG(mode)}
+                </div>`;
+
     document.getElementById('rlcCalculations').innerHTML = calcText;
     if (window.renderMathInElement) {
-  renderMathInElement(document.body, {
-    delimiters: [
-      {left: '$$', right: '$$', display: true},
-      {left: '$', right: '$', display: false},
-      {left: '\\(', right: '\\)', display: false},
-      {left: '\\[', right: '\\]', display: true}
-    ]
-  });
-}
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '\\[', right: '\\]', display: true}
+            ]
+        });
+    }
 
     let [canvas, ctx] = setupCanvas('rlcCanvas');
 
@@ -816,6 +828,13 @@ function runParallelAnim() {
         <p><b>Total Supply Current ($I_T = V Y_T$):</b> <b>${IT.toFixed(2)} A</b></p>
         <p><b>Overall Power Factor ($\cos\phi$):</b> ${PF.toFixed(3)} (${BT >= 0 ? 'Leading' : 'Lagging'})</p>
     `;
+
+html += `<div style="text-align:center; margin-top:10px;">
+                <p style="margin:0; font-size:12px; font-weight:bold; color:#0f172a;">Circuit Schematic:</p>
+                ${getCircuitSVG('PARALLEL')}
+            </div>`;
+
+
     document.getElementById('parallelDetails').innerHTML = html;
    if (window.renderMathInElement) {
   renderMathInElement(document.body, {
@@ -975,6 +994,97 @@ window.addEventListener('DOMContentLoaded', () => {
     renderWaveformSection();
     renderBank();
 });
+
+// Function to generate SVG diagrams for all circuit configurations
+function getCircuitSVG(type) {
+    // Return early with custom dimensions for the PARALLEL schematic layout
+    if (type === 'PARALLEL') {
+        const parallelHeader = `<svg width="280" height="150" viewBox="0 0 280 150" style="background:#ffffff; border-radius:6px; border:1px solid #cbd5e1; display:block; margin:10px auto;">`;
+        const parallelFooter = `</svg>`;
+        
+        const wire = (x1, y1, x2, y2) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#334155" stroke-width="2"/>`;
+        const arrow = (x, y, dir="down") => dir === "right" 
+            ? `<polygon points="${x},${y-4} ${x+8},${y} ${x},${y+4}" fill="#0f172a"/>`
+            : `<polygon points="${x-4},${y} ${x+4},${y} ${x},${y+8}" fill="#0f172a"/>`;
+
+        const source = `<circle cx="40" cy="75" r="14" stroke="#2563eb" stroke-width="2" fill="none"/>
+                        <path d="M 33 75 Q 37 67 40 75 T 47 75" stroke="#2563eb" stroke-width="2" fill="none"/>
+                        <text x="18" y="79" font-size="11" font-weight="bold" fill="#2563eb">V</text>`;
+
+        const R = (x, y, label="R") => `
+            <rect x="${x-10}" y="${y}" width="20" height="26" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+            <text x="${x+14}" y="${y+17}" font-size="11" font-weight="bold" fill="#0f172a">${label}</text>`;
+                                     
+        const L = (x, y) => `
+            <path d="M ${x} ${y} Q ${x-12} ${y+6} ${x} ${y+12} Q ${x-12} ${y+18} ${x} ${y+24} Q ${x-12} ${y+30} ${x} ${y+36}" stroke="#0f172a" stroke-width="2" fill="none"/>
+            <text x="${x+12}" y="${y+22}" font-size="11" font-weight="bold" fill="#0f172a">X<tspan font-size="8" dy="2">L</tspan></text>`;
+                          
+        const C = (x, y) => `
+            <line x1="${x-10}" y1="${y}" x2="${x+10}" y2="${y}" stroke="#0f172a" stroke-width="2"/>
+            <line x1="${x-10}" y1="${y+6}" x2="${x+10}" y2="${y+6}" stroke="#0f172a" stroke-width="2"/>
+            <text x="${x+14}" y="${y+6}" font-size="11" font-weight="bold" fill="#0f172a">X<tspan font-size="8" dy="2">C</tspan></text>`;
+
+        return parallelHeader + 
+            wire(40, 20, 220, 20) + wire(40, 130, 220, 130) + 
+            wire(40, 20, 40, 61) + wire(40, 89, 40, 130) +
+            wire(130, 20, 130, 35) + R(130, 35, "R<tspan font-size='8' dy='2'>L</tspan>") + 
+            wire(130, 61, 130, 75) + L(130, 75) + wire(130, 111, 130, 130) +
+            wire(220, 20, 220, 35) + R(220, 35, "R<tspan font-size='8' dy='2'>C</tspan>") + 
+            wire(220, 61, 220, 80) + C(220, 80) + wire(220, 86, 220, 130) +
+            source + 
+            arrow(80, 20, "right") + `<text x="76" y="14" font-size="10" font-weight="bold" fill="#0f172a">I</text>` +
+            arrow(130, 24, "down") + `<text x="136" y="30" font-size="10" font-weight="bold" fill="#0f172a">I<tspan font-size="7" dy="2">L</tspan></text>` +
+            arrow(220, 24, "down") + `<text x="226" y="30" font-size="10" font-weight="bold" fill="#0f172a">I<tspan font-size="7" dy="2">C</tspan></text>` +
+            parallelFooter;
+    }
+
+    // Standard single-row series layout configurations
+    const svgHeader = `<svg width="240" height="100" style="background:#ffffff; border-radius:6px; border:1px solid #cbd5e1; display:block; margin:10px auto;">`;
+    const svgFooter = `</svg>`;
+    
+    const wire = (x1, y1, x2, y2) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#334155" stroke-width="2"/>`;
+    const source = `<circle cx="30" cy="50" r="14" stroke="#2563eb" stroke-width="2" fill="none"/>
+                    <path d="M 23 50 Q 27 42 30 50 T 37 50" stroke="#2563eb" stroke-width="2" fill="none"/>
+                    <text x="21" y="25" font-size="10" fill="#2563eb" font-weight="bold">AC Source</text>`;
+    
+    const R = (x, label="R") => `<rect x="${x}" y="40" width="30" height="20" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+                                 <text x="${x+10}" y="54" font-size="11" font-weight="bold">${label}</text>`;
+                                 
+    const L = (x) => `<path d="M ${x} 50 Q ${x+5} 35 ${x+10} 50 Q ${x+15} 35 ${x+20} 50 Q ${x+25} 35 ${x+30} 50" stroke="#0f172a" stroke-width="2" fill="none"/>
+                      <text x="${x+10}" y="28" font-size="11" font-weight="bold">L</text>`;
+                      
+    const C = (x) => `<line x1="${x+10}" y1="38" x2="${x+10}" y2="62" stroke="#0f172a" stroke-width="2"/>
+                      <line x1="${x+18}" y1="38" x2="${x+18}" y2="62" stroke="#0f172a" stroke-width="2"/>
+                      <text x="${x+10}" y="28" font-size="11" font-weight="bold">C</text>`;
+
+    let components = "";
+    
+    switch(type) {
+        case 'R':
+            components = wire(44, 50, 100, 50) + R(100) + wire(130, 50, 210, 50);
+            break;
+        case 'L':
+            components = wire(44, 50, 100, 50) + L(100) + wire(130, 50, 210, 50);
+            break;
+        case 'C':
+            components = wire(44, 50, 100, 50) + C(95) + wire(113, 50, 210, 50);
+            break;
+        case 'RL':
+            components = wire(44, 50, 75, 50) + R(75) + wire(105, 50, 135, 50) + L(135) + wire(165, 50, 210, 50);
+            break;
+        case 'RC':
+            components = wire(44, 50, 75, 50) + R(75) + wire(105, 50, 135, 50) + C(135) + wire(153, 50, 210, 50);
+            break;
+        case 'RLC':
+            components = wire(44, 50, 60, 50) + R(60) + wire(90, 50, 110, 50) + L(110) + wire(140, 50, 160, 50) + C(160) + wire(178, 50, 210, 50);
+            break;
+    }
+
+    const loop = wire(210, 50, 210, 80) + wire(210, 80, 30, 80) + wire(30, 80, 30, 64);
+
+    return svgHeader + source + components + loop + svgFooter;
+}
+
 </script>
 </body>
 </html>
