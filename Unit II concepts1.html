@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC Circuits & Waveforms — Interactive Virtual Lab</title>
+<!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+<!-- KaTeX JS and Auto-render extension -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, { 
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true}
+    ]
+  });">
+</script>
+
+<style>
+*{box-sizing:border-box} 
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#f3f6fb;color:#172033}
+header{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:white;padding:22px;text-align:center}
+header h1{margin:0 0 7px;font-size:28px} header p{margin:0;opacity:.9}
+nav{display:flex;flex-wrap:wrap;gap:7px;background:#0f172a;padding:9px;position:sticky;top:0;z-index:100}
+nav button{border:0;background:#1e293b;color:white;padding:11px 14px;border-radius:7px;cursor:pointer;font-weight:600;transition:0.2s}
+nav button.active,nav button:hover{background:#2563eb}
+main{max-width:1250px;margin:auto;padding:18px}
+.tab{display:none}.tab.active{display:block}
+.card{background:white;border-radius:12px;padding:20px;margin-bottom:18px;box-shadow:0 3px 14px #00000012}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+h2{color:#0f172a;margin-top:0} h3{color:#1e3a8a} h4{color:#2563eb;margin-top:0}
+.badge{display:inline-block;padding:5px 10px;border-radius:15px;background:#e0f2fe;color:#0369a1;font-size:12px;font-weight:bold}
+.formula{background:#eef5ff;border-left:5px solid #2563eb;padding:12px;font-size:16px;font-weight:bold;margin:10px 0}
+.canvas-wrapper{width:100%;max-width:620px;background:#0f172a;border-radius:9px;padding:10px;box-shadow:inset 0 0 10px rgba(0,0,0,0.5)}
+canvas{width:100%;height:260px;display:block;}
+.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:14px 0}
+input,textarea,select{padding:9px;border:1px solid #cbd5e1;border-radius:6px;font:inherit}
+textarea{width:100%;min-height:90px;resize:vertical}
+button.primary{background:#2563eb;color:#fff;border:0;border-radius:6px;padding:10px 16px;cursor:pointer;font-weight:bold;transition:0.2s}
+button.primary:hover{background:#1d4ed8}
+.result{padding:12px;border-radius:7px;background:#f1f5f9;margin-top:10px;min-height:40px}
+.correct{background:#dff6e7!important;color:#126b39;border:1px solid #bbf7d0}.wrong{background:#fff0f0!important;color:#a52828;border:1px solid #fecaca}
+.small{font-size:13px;color:#5d6b7a}.topic-title{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.question{border:1px solid #dce5ef;border-radius:9px;padding:14px;margin:12px 0;background:#fff}
+.mark{float:right;background:#fef3c7;color:#92400e;padding:4px 8px;border-radius:10px;font-size:12px;font-weight:bold}
+.chat{height:280px;overflow-y:auto;background:#f8fafc;border:1px solid #cbd5e1;padding:12px;border-radius:8px;margin-bottom:10px}
+.msg{padding:9px 12px;margin:7px 0;border-radius:12px;max-width:85%;font-size:0.95rem;line-height:1.4}
+.bot{background:#e0f2fe;color:#0369a1;margin-right:auto}.user{background:#dbeafe;color:#1e40af;margin-left:auto}
+.flex{display:flex;gap:8px}.flex input{flex:1}
+table{width:100%;border-collapse:collapse;margin:10px 0}th,td{border:1px solid #cbd5e1;padding:9px;text-align:left}th{background:#f1f5f9}
+.progress{height:12px;background:#e2e8f0;border-radius:8px;overflow:hidden}.progress div{height:100%;background:#2563eb;width:0;transition:0.3s}
+.input-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:10px;}
+.input-field{display:flex;flex-direction:column;gap:4px;}
+.input-field label{font-size:13px;font-weight:bold;color:#334155;}
+.hint-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px;margin:10px 0;}
+footer{text-align:center;color:#64748b;padding:20px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>⚡ Alternating Current (AC) Circuits Virtual Lab</h1>
+<p>Waveforms • Rectifiers • R-L-C Steady State • Phasors • Complex Impedance • Power Factor • Interactive Assistant</p>
+</header>
+
+<nav id="nav">
+<button class="active" onclick="showTab('home',this)">Home</button>
+<button onclick="showTab('waveforms',this)">AC Waveforms & Factors</button>
+<button onclick="showTab('single',this)">R, L, C Elements</button>
+<button onclick="showTab('rlc',this)">Series R-L, R-C & R-L-C</button>
+<button onclick="showTab('parallel',this)">Parallel AC Circuits</button>
+<button onclick="showTab('power',this)">Complex Power & PF</button>
+<button onclick="showTab('bank',this)">Question Bank</button>
+<button onclick="showTab('chat',this)">Ask AC Tutor</button>
+</nav>
+
+<main>
+
+<!-- HOME TAB -->
+<section id="home" class="tab active">
+<div class="card">
+<h2>AC Fundamentals & Circuit Analysis Module</h2>
+<p>Welcome to the Interactive AC Engineering Lab. Select any tab above to explore AC waveform characteristics, single and combination R-L-C circuits, phasor diagrams, complex impedance calculations, and power factor analysis.</p>
+<div class="grid-2">
+<div>
+<h3>Core Modules</h3>
+<ul>
+<li><b>AC Waveforms:</b> Pure Sinusoidal, Half-Wave & Full-Wave Rectified signals.</li>
+<li><b>Pure Elements:</b> Analysis of Pure Resistance ($R$), Inductor ($L$), and Capacitor ($C$).</li>
+<li><b>Series Circuits:</b> $R-L$, $R-C$, and $R-L-C$ Series Networks with Phasor Diagrams.</li>
+<li><b>Parallel Networks:</b> Admittance ($Y$), Conductance ($G$), and Susceptance ($B$).</li>
+<li><b>Power Factors:</b> Real ($P$), Reactive ($Q$), Apparent Power ($S$), and Power Factor correction.</li>
+</ul>
+</div>
+<div>
+<h3>Interactive Features</h3>
+<ul>
+<li>Real-time dynamic canvas schematic rendering and time-domain animations.</li>
+<li>Calculus derivations for $V_{rms}$, $V_{avg}$, Form Factor ($K_f$), and Peak Factor ($K_p$).</li>
+<li>Interactive numerical problem evaluators with step-by-step guidance.</li>
+<li>Integrated offline rule-based AC Assistant chatbot.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="card">
+<h2>Learning Progress</h2>
+<div class="progress"><div id="progressBar"></div></div>
+<p id="progressText">0 activities evaluated.</p>
+</div>
+</section>
+
+<!-- TAB 1: AC WAVEFORMS & FACTORS -->
+<section id="waveforms" class="tab">
+<div class="card">
+<h2>1. AC Waveforms: Derivations & Rectifiers</h2>
+<div class="controls">
+<label for="waveformSelect"><b>Select Waveform:</b> </label>
+<select id="waveformSelect" onchange="renderWaveformSection()">
+<option value="full">1. Pure Sinusoidal Waveform</option>
+<option value="half">2. Half-Wave Rectified Waveform</option>
+<option value="full-rectified">3. Full-Wave Rectified Waveform</option>
+</select>
+</div>
+
+<div id="waveformDynamicContent"></div>
+</div>
+</section>
+
+<!-- TAB 2: PURE R, L, C ELEMENTS -->
+<section id="single" class="tab">
+<div class="card">
+<div class="topic-title"><h2>2. Pure R, L, and C Elements in AC Steady-State</h2><span class="badge">Phasors & Phase Angles</span></div>
+<p>Study the relationship between voltage $v(t)$ and current $i(t)$ across individual circuit components in steady state.</p>
+
+<div class="controls">
+<label><b>Select Component:</b></label>
+<select id="singleCompSelect" onchange="runSingleCompAnim()">
+<option value="R">Pure Resistance (R) [In Phase, θ = 0°]</option>
+<option value="L">Pure Inductance (L) [Current Lags by 90°]</option>
+<option value="C">Pure Capacitance (C) [Current Leads by 90°]</option>
+</select>
+<label>Frequency $f$: <input id="singleF" type="number" value="50" min="1" max="200"> Hz</label>
+<label>Value ($R/\Omega, L/\text{mH}, C/\mu\text{F}$): <input id="singleVal" type="number" value="10" min="0.1" step="0.1"></label>
+<button class="primary" onclick="runSingleCompAnim()">Animate Phasor & Waveform</button>
+</div>
+
+<div class="grid-2">
+<div class="canvas-wrapper"><canvas id="singleCanvas" width="620" height="260"></canvas></div>
+<div class="info-card" id="singleCardDetails"></div>
+</div>
+
+<div id="singleResult" class="result"></div>
+
+<h3>Numerical Problem</h3>
+<p>A pure $100\text{ mH}$ inductor is connected to a $230\text{ V}, 50\text{ Hz}$ supply. Calculate the inductive reactance ($X_L$) and RMS current ($I_{rms}$).</p>
+<input id="singleAns" placeholder="Enter XL and I, e.g. XL=31.42 ohm, I=7.32 A" style="width: 320px;">
+<button class="primary" onclick="checkSingle()">Evaluate Answer</button>
+<div id="singleCheck" class="result"></div>
+</div>
+</section>
+
+<!-- TAB 3: SERIES R-L, R-C, R-L-C CIRCUITS -->
+<section id="rlc" class="tab">
+<div class="card">
+<h2>3. Series R-L, R-C, and R-L-C Circuits</h2>
+<p>Analysis of combined elements under sinusoidal steady-state using complex impedance $\mathbf{Z} = R + jX$.</p>
+
+<div class="controls">
+<label><b>Circuit Config:</b></label>
+<select id="rlcMode" onchange="runRLCAnim()">
+<option value="RL">Series R-L Network</option>
+<option value="RC">Series R-C Network</option>
+<option value="RLC">Series R-L-C Network</option>
+</select>
+<label>Voltage $V_{rms}$: <input id="rlcV" type="number" value="230" min="1"> V</label>
+<label>Freq $f$: <input id="rlcF" type="number" value="50" min="1"> Hz</label>
+<label>R: <input id="rlcR" type="number" value="15" min="0.1"> Ω</label>
+<label>L: <input id="rlcL" type="number" value="50" min="0"> mH</label>
+<label>C: <input id="rlcC" type="number" value="100" min="0"> µF</label>
+<button class="primary" onclick="runRLCAnim()">Animate & Calculate</button>
+</div>
+
+<div class="grid-2">
+<div class="canvas-wrapper"><canvas id="rlcCanvas" width="620" height="260"></canvas></div>
+<div class="info-card">
+<h4>Complex Impedance & Vector Equations</h4>
+<div id="rlcCalculations" class="formula"></div>
+</div>
+</div>
+
+<!-- IMPROVED STUDENT NUMERICAL PROBLEM SECTION -->
+<div class="card" style="margin-top:20px; border:2px solid #2563eb; background:#f8fafc;">
+<h3>Practice Numerical Problem: Series R-L-C Circuit</h3>
+<p><b>Given Parameters:</b></p>
+<ul>
+<li>Resistance ($R$) = $10\text{ }\Omega$</li>
+<li>Inductance ($L$) = $31.8\text{ mH} = 0.0318\text{ H}$</li>
+<li>Capacitance ($C$) = $63.7\text{ }\mu\text{F} = 63.7 \times 10^{-6}\text{ F}$</li>
+<li>Supply Voltage ($V_{rms}$) = $230\text{ V}$, Frequency ($f$) = $50\text{ Hz}$</li>
+</ul>
+
+<div class="hint-box">
+<h4 style="margin-top:0; color:#166534;">Formula Roadmap to Solve This Problem:</h4>
+<ol style="margin-bottom:0; padding-left:20px;">
+<li><b>Inductive Reactance:</b> $X_L = 2 \pi f L = 2 \times \pi \times 50 \times 0.0318$</li>
+<li><b>Capacitive Reactance:</b> $X_C = \frac{1}{2 \pi f C} = \frac{1}{2 \times \pi \times 50 \times 63.7 \times 10^{-6}}$</li>
+<li><b>Total Impedance Magnitude:</b> $|Z| = \sqrt{R^2 + (X_L - X_C)^2}$</li>
+<li><b>Power Factor:</b> $\text{PF} = \cos\phi = \frac{R}{|Z|}$ (State if <i>leading</i> or <i>lagging</i> based on whether $X_C > X_L$ or $X_L > X_C$)</li>
+</ol>
+</div>
+
+<p><b>Enter your calculated values below to test your solution:</b></p>
+<div class="input-grid">
+<div class="input-field">
+<label for="ansXL">1. Inductive Reactance $X_L$ ($\Omega$):</label>
+<input id="ansXL" type="number" step="0.01" placeholder="e.g. 10">
+</div>
+<div class="input-field">
+<label for="ansXC">2. Capacitive Reactance $X_C$ ($\Omega$):</label>
+<input id="ansXC" type="number" step="0.01" placeholder="e.g. 50">
+</div>
+<div class="input-field">
+<label for="ansZ">3. Total Impedance $|Z|$ ($\Omega$):</label>
+<input id="ansZ" type="number" step="0.01" placeholder="e.g. 41.23">
+</div>
+<div class="input-field">
+<label for="ansPF">4. Power Factor ($\cos\phi$):</label>
+<input id="ansPF" type="number" step="0.001" placeholder="e.g. 0.242">
+</div>
+</div>
+
+<div style="margin-top:14px; display:flex; gap:10px;">
+<button class="primary" onclick="checkRLC()">Evaluate My Answers</button>
+<button style="background:#64748b; color:white; border:0; border-radius:6px; padding:10px 16px; cursor:pointer;" onclick="toggleSolution()">Show / Hide Step-by-Step Solution</button>
+</div>
+
+<div id="rlcCheck" class="result"></div>
+
+<div id="solutionBox" style="display:none; margin-top:15px; padding:15px; background:#fff; border-left:4px solid #2563eb; border-radius:6px;">
+<h4>Step-by-Step Solution:</h4>
+<p><b>Step 1: Calculate $X_L$</b><br>
+$$X_L = 2 \times \pi \times 50 \times 0.0318 \approx 10.0\text{ }\Omega$$</p>
+<p><b>Step 2: Calculate $X_C$</b><br>
+$$X_C = \frac{1}{2 \times \pi \times 50 \times 63.7 \times 10^{-6}} = \frac{1}{0.02001} \approx 50.0\text{ }\Omega$$</p>
+<p><b>Step 3: Calculate Total Impedance $|Z|$</b><br>
+$$|Z| = \sqrt{R^2 + (X_L - X_C)^2} = \sqrt{10^2 + (10 - 50)^2} = \sqrt{100 + 1600} = \sqrt{1700} \approx 41.23\text{ }\Omega$$</p>
+<p><b>Step 4: Calculate Power Factor</b><br>
+$$\text{PF} = \frac{R}{|Z|} = \frac{10}{41.23} \approx 0.242\text{ (Leading, because } X_C > X_L \text{)}$$</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- TAB 4: PARALLEL AC CIRCUITS -->
+<section id="parallel" class="tab">
+<div class="card">
+<h2>4. Parallel AC Circuits & Admittance</h2>
+<p>In parallel AC circuits, total current is solved using Admittance ($\mathbf{Y} = G + jB = 1/\mathbf{Z}$).</p>
+<div class="formula">$$\mathbf{I}_T = \mathbf{I}_1 + \mathbf{I}_2 = \mathbf{V} \mathbf{Y}_T = \mathbf{V} (G_T + jB_T)$$</div>
+
+<div class="controls">
+<label>Branch 1: $R_1 =$ <input id="parR1" type="number" value="10" min="0.1"> Ω, $X_{L1} =$ <input id="parXL1" type="number" value="15" min="0"> Ω</label><br>
+<label>Branch 2: $R_2 =$ <input id="parR2" type="number" value="20" min="0.1"> Ω, $X_{C2} =$ <input id="parXC2" type="number" value="25" min="0"> Ω</label>
+<label>Supply Voltage $V_{rms}$: <input id="parV" type="number" value="200" min="1"> V</label>
+<button class="primary" onclick="runParallelAnim()">Compute Admittance & Current</button>
+</div>
+
+<div class="grid-2">
+<div class="canvas-wrapper"><canvas id="parallelCanvas" width="620" height="260"></canvas></div>
+<div id="parallelDetails" class="info-card" style="background:#f8fafc; border:1px solid #cbd5e1; padding:15px; border-radius:8px;"></div>
+</div>
+
+<h3>Numerical Problem</h3>
+<p>A parallel circuit has two branches: Branch 1 with $R=6\text{ }\Omega, X_L=8\text{ }\Omega$ and Branch 2 with $R=8\text{ }\Omega, X_C=6\text{ }\Omega$ across a $100\text{ V}$ supply. Find total current $I_T$.</p>
+<input id="parAns" placeholder="Enter IT, e.g. IT=14.14 A" style="width: 280px;">
+<button class="primary" onclick="checkParallel()">Evaluate Answer</button>
+<div id="parCheck" class="result"></div>
+</div>
+</section>
+
+<!-- TAB 5: POWER & POWER FACTOR -->
+<section id="power" class="tab">
+<div class="card">
+<h2>5. Power & Power Factor in AC Circuits</h2>
+<p>AC circuits deliver Active Power ($P$), Reactive Power ($Q$), and Apparent Power ($S$). The Power Factor is $\cos\phi = P/S$.</p>
+
+<div class="grid-2">
+<div class="info-card">
+<h4>Power Equations</h4>
+<p><b>Active Power ($P$):</b> $P = V I \cos\phi \quad (\text{Watts, W})$</p>
+<p><b>Reactive Power ($Q$):</b> $Q = V I \sin\phi \quad (\text{VAR})$</p>
+<p><b>Apparent Power ($S$):</b> $S = V I = \sqrt{P^2 + Q^2} \quad (\text{VA})$</p>
+<p><b>Complex Power ($\mathbf{S}$):</b> $\mathbf{S} = \mathbf{V} \mathbf{I}^* = P + jQ$</p>
+</div>
+<div class="canvas-wrapper"><canvas id="powerCanvas" width="620" height="260"></canvas></div>
+</div>
+
+<div class="controls">
+<label>Active Power $P$: <input id="powP" type="number" value="1200" min="0"> W</label>
+<label>Reactive Power $Q$: <input id="powQ" type="number" value="900" min="-5000" max="5000"> VAR (+ Inductive, - Capacitive)</label>
+<button class="primary" onclick="runPowerAnim()">Plot Power Triangle</button>
+</div>
+<div id="powerResult" class="result"></div>
+
+<h3>Numerical Problem</h3>
+<p>A single-phase motor absorbs $5\text{ kW}$ at a lagging power factor of $0.8$ from a $230\text{ V}, 50\text{ Hz}$ supply. Determine the reactive power $Q$ and apparent power $S$.</p>
+<input id="powAns" placeholder="Enter Q and S, e.g. Q=3.75 kVAR, S=6.25 kVA" style="width: 320px;">
+<button class="primary" onclick="checkPower()">Evaluate Answer</button>
+<div id="powCheck" class="result"></div>
+</div>
+</section>
+
+<!-- TAB 6: QUESTION BANK -->
+<section id="bank" class="tab">
+<div class="card">
+<h2>AC Circuits Question Bank & Self Assessment</h2>
+<p>Attempt all conceptual and numerical questions below. Your answers will be automatically evaluated.</p>
+<div id="bankQuestions"></div>
+<button class="primary" onclick="evaluateBank()">Evaluate Question Bank</button>
+<div id="bankScore" class="result"></div>
+</div>
+</section>
+
+<!-- TAB 7: OFFLINE TUTOR CHATBOT -->
+<section id="chat" class="tab">
+<div class="card">
+<h2>💬 AC Engineering Concept Assistant</h2>
+<p>Ask any question regarding form factor, peak factor, phasors, impedance, power factor, or series/parallel AC circuits.</p>
+<div id="chatWindow" class="chat">
+<div class="msg bot">Hello! I am your offline AC Assistant. Ask me questions like "What is form factor?", "Explain power factor", or "How to calculate RLC impedance?".</div>
+</div>
+<div class="flex">
+<input type="text" id="chatInput" placeholder="Type your query here...">
+<button class="primary" onclick="handleChat()">Send</button>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>AC Circuits Interactive Virtual Learning Module • Engineering Pedagogy</footer>
+
+<script>
+let activities = 0;
+let animFrameId = null;
+
+function showTab(id, btn) {
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('nav button').forEach(x => x.classList.remove('active'));
+    btn.classList.add('active');
+
+    if (id === 'waveforms') renderWaveformSection();
+    if (id === 'single') runSingleCompAnim();
+    if (id === 'rlc') runRLCAnim();
+    if (id === 'parallel') runParallelAnim();
+    if (id === 'power') runPowerAnim();
+}
+
+function success(id, msg) {
+    const e = document.getElementById(id);
+    e.className = 'result correct';
+    e.innerHTML = msg;
+    activities++;
+    updateProgress();
+}
+
+function fail(id, msg) {
+    const e = document.getElementById(id);
+    e.className = 'result wrong';
+    e.innerHTML = msg;
+}
+
+function updateProgress() {
+    document.getElementById('progressText').textContent = activities + ' activities evaluated.';
+    document.getElementById('progressBar').style.width = Math.min(100, activities * 10) + '%';
+}
+
+function setupCanvas(id) {
+    const c = document.getElementById(id);
+    if(!c) return [null, null];
+    const ctx = c.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    c.width = 620 * dpr;
+    c.height = 260 * dpr;
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, 620, 260);
+    ctx.font = '13px Segoe UI, Arial, sans-serif';
+    return [c, ctx];
+}
+
+// ==================== TAB 1: AC WAVEFORMS DATA & CALCULATIONS ====================
+const waveformData = {
+    'full': {
+        title: "1. Pure Sinusoidal Waveform",
+        formFactor: "1.11",
+        peakFactor: "1.414",
+        vRms: "V_m / \\sqrt{2} \\approx 0.707 V_m",
+        vAvg: "2V_m / \\pi \\approx 0.637 V_m",
+        circuitSVG: `<svg width="220" height="110" style="background:#fff; border-radius:4px; border:1px solid #cbd5e1;">
+            <circle cx="50" cy="55" r="18" stroke="#2563eb" stroke-width="2" fill="none"/>
+            <path d="M 40 55 Q 45 45 50 55 T 60 55" stroke="#2563eb" stroke-width="2" fill="none"/>
+            <line x1="68" y1="55" x2="140" y2="55" stroke="#333" stroke-width="2"/>
+            <rect x="110" y="42" width="30" height="26" fill="#e2e8f0" stroke="#333" stroke-width="2"/>
+            <text x="120" y="59" font-size="11" font-weight="bold">R</text>
+            <line x1="140" y1="55" x2="170" y2="55" stroke="#333" stroke-width="2"/>
+            <line x1="170" y1="55" x2="170" y2="85" stroke="#333" stroke-width="2"/>
+            <line x1="50" y1="73" x2="50" y2="85" stroke="#333" stroke-width="2"/>
+            <line x1="50" y1="85" x2="170" y2="85" stroke="#333" stroke-width="2"/>
+            <text x="35" y="25" font-size="11" fill="#2563eb" font-weight="bold">AC Voltage Source</text>
+        </svg>`,
+        derivation: `
+            <p><b>1. Average Value ($V_{avg}$) over half-cycle:</b></p>
+            <p>$$V_{avg} = \\frac{1}{\\pi} \\int_{0}^{\\pi} V_m \\sin(\\theta) d\\theta = \\frac{V_m}{\\pi} [-\\cos(\\theta)]_{0}^{\\pi} = \\frac{2V_m}{\\pi} \\approx 0.637 V_m$$</p>
+            <p><b>2. RMS Value ($V_{rms}$) over full cycle:</b></p>
+            <p>$$V_{rms} = \\sqrt{\\frac{1}{\\pi} \\int_{0}^{\\pi} V_m^2 \\sin^2(\\theta) d\\theta} = \\sqrt{\\frac{V_m^2}{2\\pi} \\int_{0}^{\\pi} (1 - \\cos(2\\theta)) d\\theta} = \\frac{V_m}{\\sqrt{2}} \\approx 0.707 V_m$$</p>
+            <p><b>3. Form Factor ($K_f$) & Peak Factor ($K_p$):</b></p>
+            <p>$$K_f = \\frac{V_{rms}}{V_{avg}} = \\frac{V_m / \\sqrt{2}}{2V_m / \\pi} = \\frac{\\pi}{2\\sqrt{2}} \\approx 1.11, \\quad K_p = \\frac{V_m}{V_{rms}} = \\frac{V_m}{V_m / \\sqrt{2}} = \\sqrt{2} \\approx 1.414$$</p>
+        `,
+        problem: "<b>Problem:</b> An AC voltage has a peak amplitude of $311\\text{ V}$. Find $V_{rms}$, $V_{avg}$, $K_f$, and $K_p$.<br><b>Solution:</b><br>• $V_{rms} = 311 / 1.414 = 220\\text{ V}$<br>• $V_{avg} = 0.637 \\times 311 = 198.1\\text{ V}$<br>• $K_f = 220 / 198.1 = 1.11$<br>• $K_p = 311 / 220 = 1.414$"
+    },
+    'half': {
+        title: "2. Half-Wave Rectified Sinusoidal Waveform",
+        formFactor: "1.57",
+        peakFactor: "2.0",
+        vRms: "V_m / 2 = 0.5 V_m",
+        vAvg: "V_m / \\pi \\approx 0.318 V_m",
+        circuitSVG: `<svg width="220" height="110" style="background:#fff; border-radius:4px; border:1px solid #cbd5e1;">
+            <circle cx="40" cy="55" r="15" stroke="#2563eb" stroke-width="2" fill="none"/>
+            <path d="M 32 55 Q 36 47 40 55 T 48 55" stroke="#2563eb" stroke-width="2" fill="none"/>
+            <line x1="55" y1="55" x2="80" y2="55" stroke="#333" stroke-width="2"/>
+            <polygon points="80,47 80,63 95,55" fill="#2563eb"/>
+            <line x1="95" y1="47" x2="95" y2="63" stroke="#2563eb" stroke-width="2"/>
+            <line x1="95" y1="55" x2="130" y2="55" stroke="#333" stroke-width="2"/>
+            <rect x="130" y="43" width="25" height="24" fill="#e2e8f0" stroke="#333" stroke-width="2"/>
+            <line x1="155" y1="55" x2="180" y2="55" stroke="#333" stroke-width="2"/>
+            <line x1="180" y1="55" x2="180" y2="85" stroke="#333" stroke-width="2"/>
+            <line x1="40" y1="70" x2="40" y2="85" stroke="#333" stroke-width="2"/>
+            <line x1="40" y1="85" x2="180" y2="85" stroke="#333" stroke-width="2"/>
+            <text x="75" y="38" font-size="10" fill="#2563eb" font-weight="bold">Diode</text>
+        </svg>`,
+        derivation: `
+            <p><b>1. Average Value ($V_{avg}$) over full period $2\\pi$:</b></p>
+            <p>$$V_{avg} = \\frac{1}{2\\pi} \\int_{0}^{\\pi} V_m \\sin(\\theta) d\\theta = \\frac{V_m}{2\\pi} [-\\cos(\\theta)]_{0}^{\\pi} = \\frac{V_m}{\\pi} \\approx 0.318 V_m$$</p>
+            <p><b>2. RMS Value ($V_{rms}$) over full period $2\\pi$:</b></p>
+            <p>$$V_{rms} = \\sqrt{\\frac{1}{2\\pi} \\int_{0}^{\\pi} V_m^2 \\sin^2(\\theta) d\\theta} = \\sqrt{\\frac{V_m^2}{4\\pi} [\\theta]_{0}^{\\pi}} = \\frac{V_m}{2} = 0.5 V_m$$</p>
+            <p><b>3. Form Factor ($K_f$) & Peak Factor ($K_p$):</b></p>
+            <p>$$K_f = \\frac{V_{rms}}{V_{avg}} = \\frac{V_m / 2}{V_m / \\pi} = \\frac{\\pi}{2} \\approx 1.57, \\quad K_p = \\frac{V_m}{V_{rms}} = \\frac{V_m}{V_m / 2} = 2.0$$</p>
+        `,
+        problem: "<b>Problem:</b> A half-wave rectifier has a peak input voltage of $100\\text{ V}$. Calculate $V_{rms}$, $V_{avg}$, $K_f$, and $K_p$.<br><b>Solution:</b><br>• $V_{rms} = 100 / 2 = 50\\text{ V}$<br>• $V_{avg} = 100 / \\pi = 31.83\\text{ V}$<br>• $K_f = 50 / 31.83 = 1.57$<br>• $K_p = 100 / 50 = 2.0$"
+    },
+    'full-rectified': {
+        title: "3. Full-Wave Rectified Sinusoidal Waveform",
+        formFactor: "1.11",
+        peakFactor: "1.414",
+        vRms: "V_m / \\sqrt{2} \\approx 0.707 V_m",
+        vAvg: "2V_m / \\pi \\approx 0.637 V_m",
+        circuitSVG: `<svg width="220" height="110" style="background:#fff; border-radius:4px; border:1px solid #cbd5e1;">
+            <rect x="65" y="25" width="90" height="60" fill="none" stroke="#2563eb" stroke-width="2"/>
+            <text x="73" y="60" font-size="11" font-weight="bold" fill="#2563eb">Bridge Rectifier</text>
+            <line x1="20" y1="40" x2="65" y2="40" stroke="#333" stroke-width="2"/>
+            <line x1="20" y1="70" x2="65" y2="70" stroke="#333" stroke-width="2"/>
+            <line x1="155" y1="40" x2="195" y2="40" stroke="#333" stroke-width="2"/>
+            <line x1="155" y1="70" x2="195" y2="70" stroke="#333" stroke-width="2"/>
+        </svg>`,
+        derivation: `
+            <p><b>1. Average Value ($V_{avg}$) over period $\\pi$:</b></p>
+            <p>$$V_{avg} = \\frac{1}{\\pi} \\int_{0}^{\\pi} V_m \\sin(\\theta) d\\theta = \\frac{2V_m}{\\pi} \\approx 0.637 V_m$$</p>
+            <p><b>2. RMS Value ($V_{rms}$) over period $\\pi$:</b></p>
+            <p>$$V_{rms} = \\sqrt{\\frac{1}{\\pi} \\int_{0}^{\\pi} V_m^2 \\sin^2(\\theta) d\\theta} = \\frac{V_m}{\\sqrt{2}} \\approx 0.707 V_m$$</p>
+            <p><b>3. Form Factor ($K_f$) & Peak Factor ($K_p$):</b></p>
+            <p>$$K_f = \\frac{V_{rms}}{V_{avg}} = 1.11, \\quad K_p = \\frac{V_m}{V_{rms}} = 1.414$$</p>
+        `,
+        problem: "<b>Problem:</b> A full-wave bridge rectifier delivers a peak current of $10\\text{ A}$. Calculate $I_{avg}$ and $I_{rms}$.<br><b>Solution:</b><br>• $I_{avg} = (2 \\times 10) / \\pi = 6.37\\text{ A}$<br>• $I_{rms} = 10 / \\sqrt{2} = 7.07\\text{ A}$"
+    }
+};
+
+let waveAngle = 0;
+function renderWaveformSection() {
+    const type = document.getElementById('waveformSelect').value;
+    const data = waveformData[type];
+
+    const html = `
+        <div class="grid-2">
+            <div class="info-card">
+                <h4>${data.title}</h4>
+                <p><b>RMS Value ($V_{rms}$):</b> \\(${data.vRms}\\)</p>
+                <p><b>Average Value ($V_{avg}$):</b> \\(${data.vAvg}\\)</p>
+                <p><b>Form Factor ($K_f = V_{rms}/V_{avg}$):</b> ${data.formFactor}</p>
+                <p><b>Peak Factor ($K_p = V_m/V_{rms}$):</b> ${data.peakFactor}</p>
+                <div style="margin-top: 15px; text-align: center;">
+                    <p style="margin-bottom:5px;"><b>Circuit Schematic:</b></p>
+                    ${data.circuitSVG}
+                </div>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="waveCanvas" width="620" height="260"></canvas>
+            </div>
+        </div>
+        <div class="card" style="margin-top:15px; background:#f8fafc;">
+            <h4>Mathematical Derivations</h4>
+            ${data.derivation}
+        </div>
+        <div class="card" style="margin-top:15px; background:#f0fdf4; border:1px solid #bbf7d0;">
+            <h4 style="color:#166534;">Solved Sample Numerical</h4>
+            <p style="margin:0;">${data.problem}</p>
+        </div>
+    `;
+
+    document.getElementById('waveformDynamicContent').innerHTML = html;
+    if (window.renderMathInElement) {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true}
+    ]
+  });
+}
+    startWaveformAnimation(type);
+}
+
+function startWaveformAnimation(type) {
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    let [canvas, ctx] = setupCanvas('waveCanvas');
+    if (!canvas) return;
+
+    function draw() {
+        ctx.clearRect(0, 0, 620, 260);
+
+        let cx = 80, cy = 130, radius = 50;
+        ctx.strokeStyle = '#64748b'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(cx, cy, radius, 0, 2 * Math.PI); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx - 65, cy); ctx.lineTo(cx + 65, cy); ctx.moveTo(cx, cy - 65); ctx.lineTo(cx, cy + 65); ctx.stroke();
+
+        let px = cx + radius * Math.cos(waveAngle);
+        let py = cy - radius * Math.sin(waveAngle);
+        ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(px, py); ctx.stroke();
+
+        let startX = 180, axisY = 130;
+        ctx.strokeStyle = '#64748b'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(startX, axisY); ctx.lineTo(580, axisY); ctx.stroke();
+
+        ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        for (let x = 0; x < 380; x++) {
+            let angle = waveAngle - (x * 0.025);
+            let val = Math.sin(angle);
+            if (type === 'half') val = val < 0 ? 0 : val;
+            else if (type === 'full-rectified') val = Math.abs(val);
+
+            let y = axisY - (val * radius);
+            if (x === 0) ctx.moveTo(startX + x, y);
+            else ctx.lineTo(startX + x, y);
+        }
+        ctx.stroke();
+
+        waveAngle += 0.035;
+        animFrameId = requestAnimationFrame(draw);
+    }
+    draw();
+}
+
+// ==================== TAB 2: PURE R, L, C MODULE ====================
+let singleAngle = 0;
+function runSingleCompAnim() {
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    let type = document.getElementById('singleCompSelect').value;
+    let f = +document.getElementById('singleF').value;
+    let val = +document.getElementById('singleVal').value;
+
+    let detailsHtml = "";
+    let phaseShift = 0;
+
+    if (type === 'R') {
+        phaseShift = 0;
+        detailsHtml = `<h4>Pure Resistance (R)</h4><p>Voltage and Current are <b>in phase</b> ($\\phi = 0^\\circ$, $\\text{PF} = 1$).</p><p>Impedance $\\mathbf{Z} = R + j0\\text{ }\\Omega$.</p><p>Average Power $P = V_{rms} I_{rms} = I_{rms}^2 R$.</p>`;
+    } else if (type === 'L') {
+        phaseShift = -Math.PI / 2;
+        let XL = (2 * Math.PI * f * (val / 1000)).toFixed(2);
+        detailsHtml = `<h4>Pure Inductance (L)</h4><p>Current <b>lags voltage by $90^\\circ$</b> ($\\phi = -90^\\circ$, $\\text{PF} = 0\\text{ lagging}$).</p><p>Reactance $X_L = 2\\pi f L = ${XL}\\text{ }\\Omega$.</p><p>Average Power $P = 0\\text{ W}$.</p>`;
+    } else {
+        phaseShift = Math.PI / 2;
+        let XC = (1 / (2 * Math.PI * f * (val * 1e-6))).toFixed(2);
+        detailsHtml = `<h4>Pure Capacitance (C)</h4><p>Current <b>leads voltage by $90^\\circ$</b> ($\\phi = +90^\\circ$, $\\text{PF} = 0\\text{ leading}$).</p><p>Reactance $X_C = \\frac{1}{2\\pi f C} = ${XC}\\text{ }\\Omega$.</p><p>Average Power $P = 0\\text{ W}$.</p>`;
+    }
+
+    document.getElementById('singleCardDetails').innerHTML = detailsHtml;
+    if (window.renderMathInElement) {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true}
+    ]
+  });
+}
+
+    let [canvas, ctx] = setupCanvas('singleCanvas');
+
+    function animate() {
+        ctx.clearRect(0, 0, 620, 260);
+
+        let cx = 100, cy = 130, r = 50;
+        ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2*Math.PI); ctx.stroke();
+
+        let vx = cx + r * Math.cos(singleAngle);
+        let vy = cy - r * Math.sin(singleAngle);
+        ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(vx, vy); ctx.stroke();
+
+        let ix = cx + (r - 10) * Math.cos(singleAngle + phaseShift);
+        let iy = cy - (r - 10) * Math.sin(singleAngle + phaseShift);
+        ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(ix, iy); ctx.stroke();
+
+        let startX = 220, axisY = 130;
+        ctx.strokeStyle = '#64748b'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(startX, axisY); ctx.lineTo(580, axisY); ctx.stroke();
+
+        ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2; ctx.beginPath();
+        for (let x = 0; x < 350; x++) {
+            let a = singleAngle - (x * 0.025);
+            let y = axisY - Math.sin(a) * r;
+            if (x === 0) ctx.moveTo(startX + x, y); else ctx.lineTo(startX + x, y);
+        }
+        ctx.stroke();
+
+        ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 2; ctx.beginPath();
+        for (let x = 0; x < 350; x++) {
+            let a = singleAngle + phaseShift - (x * 0.025);
+            let y = axisY - Math.sin(a) * (r - 10);
+            if (x === 0) ctx.moveTo(startX + x, y); else ctx.lineTo(startX + x, y);
+        }
+        ctx.stroke();
+
+        singleAngle += 0.035;
+        animFrameId = requestAnimationFrame(animate);
+    }
+    animate();
+}
+
+function checkSingle() {
+    let s = document.getElementById('singleAns').value.toLowerCase();
+    if (s.includes('31.4') && s.includes('7.3')) {
+        success('singleCheck', '✓ Correct! $X_L = 2\\pi \\times 50 \\times 0.1 = 31.42\\text{ }\\Omega$, $I = 230 / 31.42 = 7.32\\text{ A}$.');
+    } else {
+        fail('singleCheck', 'Incorrect. Use $X_L = 2\\pi f L$ and $I = V / X_L$. Expected: $X_L \\approx 31.42\\text{ }\\Omega$, $I \\approx 7.32\\text{ A}$.');
+    }
+}
+
+// ==================== TAB 3: SERIES R-L, R-C, R-L-C MODULE ====================
+let rlcAngle = 0;
+function runRLCAnim() {
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    let mode = document.getElementById('rlcMode').value;
+    let V = +document.getElementById('rlcV').value;
+    let f = +document.getElementById('rlcF').value;
+    let R = +document.getElementById('rlcR').value;
+    let L = +document.getElementById('rlcL').value / 1000;
+    let C = +document.getElementById('rlcC').value * 1e-6;
+
+    let XL = 2 * Math.PI * f * L;
+    let XC = C > 0 ? 1 / (2 * Math.PI * f * C) : 0;
+
+    if (mode === 'RL') XC = 0;
+    if (mode === 'RC') XL = 0;
+
+    let X = XL - XC;
+    let Z = Math.sqrt(R * R + X * X);
+    let phi = Math.atan2(X, R);
+    let I = V / Z;
+    let PF = Math.cos(phi);
+
+    let calcText = `
+        $$\\mathbf{Z} = ${R.toFixed(1)} + j(${XL.toFixed(1)} - ${XC.toFixed(1)}) = ${R.toFixed(1)} ${X >= 0 ? '+' : ''}${X.toFixed(1)}j\\text{ }\\Omega$$
+        $$|Z| = ${Z.toFixed(2)}\\text{ }\\Omega, \\quad I_{rms} = \\frac{${V}}{${Z.toFixed(2)}} = ${I.toFixed(2)}\\text{ A}$$
+        $$\\phi = ${(phi * 180 / Math.PI).toFixed(1)}^\\circ, \\quad \\text{Power Factor} = ${Math.abs(PF).toFixed(3)}\\text{ }(${X >= 0 ? 'Lagging' : 'Leading'})$$
+    `;
+    document.getElementById('rlcCalculations').innerHTML = calcText;
+    if (window.renderMathInElement) {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true}
+    ]
+  });
+}
+
+    let [canvas, ctx] = setupCanvas('rlcCanvas');
+
+    function animate() {
+        ctx.clearRect(0, 0, 620, 260);
+
+        let cx = 110, cy = 130;
+        ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(cx - 80, cy); ctx.lineTo(cx + 150, cy); ctx.moveTo(cx, cy - 100); ctx.lineTo(cx, cy + 100); ctx.stroke();
+
+        let rScale = 4, xScale = 4;
+        let rx = cx + R * rScale;
+        let zy = cy - X * xScale;
+
+        ctx.strokeStyle = '#22c55e'; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(rx, cy); ctx.stroke();
+
+        ctx.strokeStyle = '#eab308'; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(rx, cy); ctx.lineTo(rx, zy); ctx.stroke();
+
+        ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(rx, zy); ctx.stroke();
+
+        ctx.fillStyle = "#f8fafc"; ctx.font = "bold 12px Arial";
+        ctx.fillText("R", cx + (R * rScale) / 2, cy + 18);
+        ctx.fillText("X", rx + 8, cy - (X * xScale) / 2);
+        ctx.fillText("Z", cx + (R * rScale) / 2 - 10, cy - (X * xScale) / 2 - 10);
+
+        let pcx = 420, pcy = 130, pr = 50;
+        ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(pcx, pcy, pr, 0, 2*Math.PI); ctx.stroke();
+
+        let pvx = pcx + pr * Math.cos(rlcAngle);
+        let pvy = pcy - pr * Math.sin(rlcAngle);
+        ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(pcx, pcy); ctx.lineTo(pvx, pvy); ctx.stroke();
+
+        let pix = pcx + (pr - 12) * Math.cos(rlcAngle - phi);
+        let piy = pcy - (pr - 12) * Math.sin(rlcAngle - phi);
+        ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(pcx, pcy); ctx.lineTo(pix, piy); ctx.stroke();
+
+        rlcAngle += 0.035;
+        animFrameId = requestAnimationFrame(animate);
+    }
+    animate();
+}
+
+// UPDATED MULTI-INPUT EVALUATOR FOR STUDENT COMPREHENSION
+function checkRLC() {
+    let xl = parseFloat(document.getElementById('ansXL').value);
+    let xc = parseFloat(document.getElementById('ansXC').value);
+    let z = parseFloat(document.getElementById('ansZ').value);
+    let pf = parseFloat(document.getElementById('ansPF').value);
+
+    let xlCorrect = Math.abs(xl - 9.99) < 0.2 || Math.abs(xl - 10.0) < 0.2;
+    let xcCorrect = Math.abs(xc - 49.97) < 0.5 || Math.abs(xc - 50.0) < 0.5;
+    let zCorrect = Math.abs(z - 41.23) < 0.5;
+    let pfCorrect = Math.abs(pf - 0.242) < 0.02 || Math.abs(pf - 0.24) < 0.02;
+
+    if (xlCorrect && xcCorrect && zCorrect && pfCorrect) {
+        success('rlcCheck', '<b>Great job! All parameters are calculated correctly!</b><br>• $X_L = 9.99\\text{ }\\Omega \\approx 10\\text{ }\\Omega$<br>• $X_C = 49.97\\text{ }\\Omega \\approx 50\\text{ }\\Omega$<br>• $|Z| = \\sqrt{10^2 + (10-50)^2} = 41.23\\text{ }\\Omega$<br>• Power Factor ($\cos\\phi$) = $10 / 41.23 = 0.242\\text{ (Leading)}$');
+    } else {
+        let errs = [];
+        if (!xlCorrect) errs.push("$X_L$ (Expected ~ $9.99 - 10\\text{ }\\Omega$)");
+        if (!xcCorrect) errs.push("$X_C$ (Expected ~ $49.97 - 50\\text{ }\\Omega$)");
+        if (!zCorrect) errs.push("Total Impedance $|Z|$ (Expected ~ $41.23\\text{ }\\Omega$)");
+        if (!pfCorrect) errs.push("Power Factor (Expected ~ $0.242$)");
+
+        fail('rlcCheck', `<b>Please review the following fields:</b> ${errs.join(', ')}.<br><span class="small">Click 'Show Step-by-Step Solution' above for full calculations!</span>`);
+    }
+}
+
+function toggleSolution() {
+    let box = document.getElementById('solutionBox');
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    if (window.renderMathInElement) {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true}
+    ]
+  });
+}
+}
+
+// ==================== TAB 4: PARALLEL AC CIRCUITS MODULE ====================
+function runParallelAnim() {
+    let R1 = +document.getElementById('parR1').value;
+    let XL1 = +document.getElementById('parXL1').value;
+    let R2 = +document.getElementById('parR2').value;
+    let XC2 = +document.getElementById('parXC2').value;
+    let V = +document.getElementById('parV').value;
+
+    let Z1_sq = R1*R1 + XL1*XL1;
+    let G1 = R1 / Z1_sq, B1 = -XL1 / Z1_sq;
+
+    let Z2_sq = R2*R2 + XC2*XC2;
+    let G2 = R2 / Z2_sq, B2 = XC2 / Z2_sq;
+
+    let GT = G1 + G2;
+    let BT = B1 + B2;
+    let YT = Math.sqrt(GT*GT + BT*BT);
+    let IT = V * YT;
+    let PF = GT / YT;
+
+    let html = `
+        <h4>Admittance & Current Results</h4>
+        <p><b>Branch 1 Admittance (Y1):</b> $G_1 = ${G1.toFixed(4)}\\text{ S}$, $B_1 = ${B1.toFixed(4)}\\text{ S}$</p>
+        <p><b>Branch 2 Admittance (Y2):</b> $G_2 = ${G2.toFixed(4)}\\text{ S}$, $B_2 = ${B2.toFixed(4)}\\text{ S}$</p>
+        <p><b>Total Conductance ($G_T$):</b> ${GT.toFixed(4)} S</p>
+        <p><b>Total Susceptance ($B_T$):</b> ${BT.toFixed(4)} S</p>
+        <p><b>Total Admittance ($Y_T$):</b> ${YT.toFixed(4)} S</p>
+        <p><b>Total Supply Current ($I_T = V Y_T$):</b> <b>${IT.toFixed(2)} A</b></p>
+        <p><b>Overall Power Factor ($\cos\phi$):</b> ${PF.toFixed(3)} (${BT >= 0 ? 'Leading' : 'Lagging'})</p>
+    `;
+    document.getElementById('parallelDetails').innerHTML = html;
+   if (window.renderMathInElement) {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true}
+    ]
+  });
+}
+
+    let [canvas, ctx] = setupCanvas('parallelCanvas');
+    ctx.clearRect(0, 0, 620, 260);
+
+    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2.5;
+    ctx.strokeRect(80, 50, 440, 160);
+    ctx.beginPath(); ctx.moveTo(280, 50); ctx.lineTo(280, 210); ctx.stroke();
+
+    ctx.fillStyle = '#f8fafc'; ctx.font = 'bold 13px Arial';
+    ctx.fillText(`V = ${V}V`, 20, 135);
+    ctx.fillText(`Branch 1: R=${R1}Ω, XL=${XL1}Ω`, 110, 35);
+    ctx.fillText(`Branch 2: R=${R2}Ω, XC=${XC2}Ω`, 310, 35);
+    ctx.fillText(`Total IT = ${IT.toFixed(2)} A`, 240, 240);
+}
+
+function checkParallel() {
+    let s = document.getElementById('parAns').value.toLowerCase();
+    if (s.includes('14.1') || s.includes('14.2') || s.includes('14')) {
+        success('parCheck', '✓ Correct! $I_1 = 100 / 10 = 10\\text{ A}$, $I_2 = 100 / 10 = 10\\text{ A}$. Phase angles are $-53.13^\\circ$ and $+36.87^\\circ$. $I_T = 14.14\\text{ A}$.');
+    } else {
+        fail('parCheck', 'Incorrect. $Z_1 = 10\\text{ }\\Omega$, $Z_2 = 10\\text{ }\\Omega$. $I_T = \\sqrt{(I_{1r}+I_{2r})^2 + (I_{1x}+I_{2x})^2} = 14.14\\text{ A}$.');
+    }
+}
+
+// ==================== TAB 5: POWER & POWER FACTOR MODULE ====================
+function runPowerAnim() {
+    let P = +document.getElementById('powP').value;
+    let Q = +document.getElementById('powQ').value;
+    let S = Math.sqrt(P * P + Q * Q);
+    let PF = S > 0 ? P / S : 1;
+
+    let resText = `<b>Apparent Power ($S$):</b> ${S.toFixed(2)} VA &nbsp;|&nbsp; <b>Power Factor ($\cos\phi$):</b> ${PF.toFixed(3)} (${Q >= 0 ? 'Lagging' : 'Leading'})`;
+    document.getElementById('powerResult').innerHTML = resText;
+
+    let [canvas, ctx] = setupCanvas('powerCanvas');
+    ctx.clearRect(0, 0, 620, 260);
+
+    let cx = 100, cy = Q >= 0 ? 190 : 70;
+    let scaleP = 0.25, scaleQ = 0.25;
+
+    let px = cx + P * scaleP;
+    let py = cy - Q * scaleQ;
+
+    ctx.strokeStyle = '#22c55e'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(px, cy); ctx.stroke();
+
+    ctx.strokeStyle = '#eab308'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(px, cy); ctx.lineTo(px, py); ctx.stroke();
+
+    ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(px, py); ctx.stroke();
+
+    ctx.fillStyle = '#f8fafc'; ctx.font = 'bold 13px Arial';
+    ctx.fillText(`P = ${P} W`, cx + (P * scaleP) / 2 - 20, cy + (Q >= 0 ? 20 : -10));
+    ctx.fillText(`Q = ${Q} VAR`, px + 10, cy - (Q * scaleQ) / 2);
+    ctx.fillText(`S = ${S.toFixed(1)} VA`, cx + (P * scaleP) / 2 - 20, cy - (Q * scaleQ) / 2 - 10);
+}
+
+function checkPower() {
+    let s = document.getElementById('powAns').value.toLowerCase();
+    if (s.includes('3.75') && s.includes('6.25')) {
+        success('powCheck', '✓ Correct! $\\cos\\phi = 0.8 \\implies \\sin\\phi = 0.6$. $S = 5 / 0.8 = 6.25\\text{ kVA}$, $Q = 6.25 \\times 0.6 = 3.75\\text{ kVAR}$.');
+    } else {
+        fail('powCheck', 'Incorrect. $S = P / \\text{PF} = 5 / 0.8 = 6.25\\text{ kVA}$, $Q = S \\sin\\phi = 3.75\\text{ kVAR}$.');
+    }
+}
+
+// ==================== QUESTION BANK ====================
+const bank = [
+    ['2 Marks', 'Define Form Factor of an AC waveform.', 'ratio of rms value to average value', 'waveforms'],
+    ['2 Marks', 'Define Peak Factor (Crest Factor).', 'ratio of maximum peak value to rms value', 'waveforms'],
+    ['2 Marks', 'What is the form factor of a pure sinusoidal wave?', '1.11', 'waveforms'],
+    ['2 Marks', 'State the phase relationship between voltage and current in a pure capacitor.', 'current leads voltage by 90 degrees', 'single'],
+    ['2 Marks', 'What is inductive reactance equation?', '2 pi f L', 'single'],
+    ['2 Marks', 'Write the impedance equation for a series R-L-C circuit.', 'sqrt(R^2 + (XL-XC)^2)', 'rlc'],
+    ['2 Marks', 'What is power factor?', 'cosine of phase angle or ratio of active power to apparent power', 'power'],
+    ['10 Marks', 'A sinusoidal voltage v = 200 sin(314t) V is applied to a half-wave rectifier. Calculate average voltage, RMS voltage, form factor and peak factor.', 'Vavg=63.66 V, Vrms=100 V, Kf=1.57, Kp=2.0', 'waveforms'],
+    ['10 Marks', 'A series R-L circuit with R = 30 ohm and L = 0.12 H is connected to 230 V, 50 Hz. Find XL, Z, Current and Power Factor.', 'XL=37.7 ohm, Z=48.18 ohm, I=4.77 A, PF=0.622 lagging', 'rlc'],
+    ['10 Marks', 'An AC load consumes 10 kW at 0.8 power factor lagging from 230 V supply. Calculate Apparent Power, Reactive Power and Current.', 'S=12.5 kVA, Q=7.5 kVAR, I=54.35 A', 'power']
+];
+
+function renderBank() {
+    let d = document.getElementById('bankQuestions');
+    d.innerHTML = bank.map((q, i) => `
+        <div class="question">
+            <span class="mark">${q[0]}</span>
+            <b>Q${i + 1}. ${q[1]}</b>
+            <textarea id="qb${i}" placeholder="Write your worked answer here..."></textarea>
+        </div>
+    `).join('');
+}
+
+function evaluateBank() {
+    let score = 0;
+    for (let i = 0; i < bank.length; i++) {
+        let a = document.getElementById('qb' + i).value.toLowerCase();
+        let key = bank[i][2].toLowerCase().split(/[^a-z0-9.]+/).filter(x => x.length > 1);
+        let hits = key.filter(k => a.includes(k.replace('.', ''))).length;
+        if (hits >= Math.max(1, Math.ceil(key.length * 0.3))) score += bank[i][0] === '2 Marks' ? 2 : 10;
+    }
+    document.getElementById('bankScore').innerHTML = `Self-assessment score: <b>${score} / 44</b><br><span class="small">Automated evaluator matching key numerical/conceptual targets.</span>`;
+}
+
+// ==================== OFFLINE CHATBOT ====================
+const tutorDB = {
+    'form factor': "Form Factor ($K_f$) is the ratio of RMS Value to Average Value ($K_f = V_{rms}/V_{avg}$). For a pure sine wave, $K_f = 1.11$, and for a half-wave rectified wave, $K_f = 1.57$.",
+    'peak factor': "Peak Factor ($K_p$) is the ratio of Maximum (Peak) Value to RMS Value ($K_p = V_m/V_{rms}$). For a pure sine wave, $K_p = 1.414$.",
+    'half wave': "For a half-wave rectified wave: $V_{rms} = V_m/2 = 0.5V_m$, $V_{avg} = V_m/\\pi = 0.318V_m$, Form Factor = 1.57, Peak Factor = 2.0.",
+    'full wave': "For a full-wave rectified wave: $V_{rms} = V_m/\\sqrt{2} = 0.707V_m$, $V_{avg} = 2V_m/\\pi = 0.637V_m$, Form Factor = 1.11, Peak Factor = 1.414.",
+    'power factor': "Power Factor is $\\cos\\phi = P/S$, where $P$ is Active Power (W) and $S$ is Apparent Power (VA). It is lagging for inductive loads and leading for capacitive loads.",
+    'rlc': "In a series R-L-C circuit, total impedance is $\\mathbf{Z} = R + j(X_L - X_C)$, where $X_L = 2\\pi f L$ and $X_C = 1/(2\\pi f C)$."
+};
+
+function handleChat() {
+    let input = document.getElementById('chatInput').value.trim().toLowerCase();
+    let chatWindow = document.getElementById('chatWindow');
+    if (!input) return;
+
+    chatWindow.innerHTML += `<div class="msg user"><b>You:</b> ${document.getElementById('chatInput').value}</div>`;
+
+    let reply = "I am trained to answer queries on AC waveforms, rectifiers, R-L-C circuits, phasors, and power factor. Try asking about 'form factor', 'peak factor', 'half wave', or 'power factor'.";
+
+    for (let key in tutorDB) {
+        if (input.includes(key)) {
+            reply = tutorDB[key];
+            break;
+        }
+    }
+
+    chatWindow.innerHTML += `<div class="msg bot"><b>Bot:</b> ${reply}</div>`;
+    document.getElementById('chatInput').value = '';
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+    if (window.renderMathInElement) {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true}
+    ]
+  });
+}
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    renderWaveformSection();
+    renderBank();
+});
+</script>
+</body>
+</html>
