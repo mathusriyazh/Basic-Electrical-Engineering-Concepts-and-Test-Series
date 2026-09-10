@@ -507,8 +507,8 @@
             </div>
             <div class="q-text">
                 For the multi-source network shown below:
-                <br><b>(a)</b> Find the loop current <b>I<sub>1</sub></b> in Mesh 1 (left loop containing 50 V battery). [3 Marks]
-                <br><b>(b)</b> Find the loop current <b>I<sub>2</sub></b> in Mesh 2 (top loop). [3 Marks]
+                <br><b>(a)</b> Find the loop current <b>I<sub>2</sub></b> in Mesh 2 ( loop containing 20 V battery). [3 Marks]
+                <br><b>(b)</b> Find the loop current <b>I<sub>3</sub></b> in Mesh 3 (top loop). [3 Marks]
                 <br><b>(c)</b> Calculate the total battery current supplied by the <b>50 V</b> source. [4 Marks]
             </div>
             <div class="diagram-container">
@@ -588,9 +588,9 @@
                 </svg>
             </div>
             <div class="input-group">
-                <label for="q11a">Loop Current I<sub>1</sub> (A):</label>
+                <label for="q11a">Loop Current I<sub>2</sub> (A):</label>
                 <input type="number" id="q11a" step="0.01" placeholder="Enter value">
-                <label for="q11b">Loop Current I<sub>2</sub> (A):</label>
+                <label for="q11b">Loop Current I<sub>3</sub> (A):</label>
                 <input type="number" id="q11b" step="0.01" placeholder="Enter value">
                 <label for="q11c">50V Source Current (A):</label>
                 <input type="number" id="q11c" step="0.01" placeholder="Enter value">
@@ -763,9 +763,9 @@
         q9: { ans: 2.0, tol: 0.1, marks: 2, explain: "Equivalent parallel resistance R_p = 1 Ω. Total voltage V = 12A × 1Ω = 12V. Current I_6 = 12V / 6Ω = 2 A." },
         q10: { ans: 20.0, tol: 0.2, marks: 2, explain: "Short-circuit current source value I_s = V_s / R_int = 100V / 5Ω = 20 A." },
 
-        q11a: { ans: 3.12, tol: 0.4, marks: 3 },
-        q11b: { ans: 0.83, tol: 0.4, marks: 3 },
-        q11c: { ans: 3.12, tol: 0.4, marks: 4, explain: "Mesh analysis gives loop currents I1 = 3.12A and I2 = 0.83A. Supply current from 50V source = 3.12 A." },
+        q11a: { ans: -0.021, tol: 0.4, marks: 3 },
+        q11b: { ans: 2.564, tol: 0.4, marks: 3 },
+        q11c: { ans: 1.642, tol: 0.4, marks: 4, explain: "Mesh analysis gives loop currents I2 = -0.021A and I3 = 2.564A. Supply current from 50V source = 1.642 A." },
 
         q12a: { ans: 1.25, tol: 0.3, marks: 3 },
         q12b: { ans: 1.00, tol: 0.3, marks: 3 },
