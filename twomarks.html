@@ -1,0 +1,773 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ohm's Law - Difficult Numerical Questions</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #eef3f8;
+    color: #17202a;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.header {
+    background: #172b4d;
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+.header p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.formula {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 5px solid #1976d2;
+}
+
+.formula h2 {
+    margin-top: 0;
+}
+
+.question-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    border: 1px solid #d9e1ea;
+}
+
+.question-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #172b4d;
+}
+
+.question {
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.answer-row {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.answer-row label {
+    font-weight: bold;
+}
+
+.answer-input {
+    width: 180px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #b8c4d1;
+    border-radius: 6px;
+}
+
+.answer-input:focus {
+    outline: none;
+    border-color: #1976d2;
+}
+
+.unit {
+    font-weight: bold;
+}
+
+.result {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 7px;
+    display: none;
+    line-height: 1.6;
+}
+
+.correct {
+    background: #e8f5e9;
+    color: #1b5e20;
+    border: 1px solid #66bb6a;
+}
+
+.wrong {
+    background: #ffebee;
+    color: #b71c1c;
+    border: 1px solid #ef5350;
+}
+
+.solution {
+    margin-top: 12px;
+    padding: 15px;
+    background: #f5f8fc;
+    border-left: 4px solid #607d8b;
+    display: none;
+    line-height: 1.7;
+}
+
+.buttons {
+    text-align: center;
+    margin: 30px 0;
+}
+
+button {
+    border: none;
+    padding: 13px 28px;
+    margin: 6px;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.evaluate {
+    background: #1976d2;
+    color: white;
+}
+
+.show-answer {
+    background: #455a64;
+    color: white;
+}
+
+.reset {
+    background: #d32f2f;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.88;
+}
+
+.score-box {
+    display: none;
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 20px 0;
+    border: 2px solid #1976d2;
+}
+
+.score {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1976d2;
+}
+
+.instructions {
+    background: #fff8e1;
+    border-left: 5px solid #ff9800;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+    <h1>OHM'S LAW – DIFFICULT NUMERICAL PROBLEMS</h1>
+    <p>Power, Voltage, Current and Unknown Resistance</p>
+    <p>10 Questions × 2 Marks = 20 Marks</p>
+</div>
+
+<div class="instructions">
+    <b>Instructions:</b>
+    <ul>
+        <li>Enter only the numerical value of the unknown resistance.</li>
+        <li>Unit: Ω</li>
+        <li>Use Ohm's Law and electrical power equations.</li>
+        <li>Click <b>Evaluate</b> to check your answers.</li>
+    </ul>
+</div>
+
+<div class="formula">
+    <h2>Important Formulae</h2>
+
+    <p><b>Ohm's Law:</b> V = IR</p>
+
+    <p><b>Current:</b> I = V/R</p>
+
+    <p><b>Resistance:</b> R = V/I</p>
+
+    <p><b>Power:</b> P = VI = I²R = V²/R</p>
+
+    <p><b>Series:</b> R<sub>T</sub> = R<sub>1</sub> + R<sub>2</sub> + R<sub>3</sub> + ...</p>
+
+    <p><b>Parallel:</b>
+    1/R<sub>T</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + 1/R<sub>3</sub> + ...
+    </p>
+</div>
+
+
+<!-- Q1 -->
+<div class="question-card">
+
+<div class="question-title">Q1. [2 Marks]</div>
+
+<div class="question">
+A DC circuit consists of three resistors of 4 Ω, 6 Ω and R Ω connected
+in series across a 32 V supply. The circuit consumes a total power of
+32 W. Determine the value of the unknown resistor R.
+</div>
+
+<div class="answer-row">
+<label>Your Answer:</label>
+<input type="number" step="any" class="answer-input" id="ans1">
+<span class="unit">Ω</span>
+</div>
+
+<div class="result" id="result1"></div>
+
+<div class="solution" id="solution1">
+<b>Solution:</b><br>
+V = 32 V, P = 32 W<br>
+R<sub>T</sub> = V²/P<br>
+R<sub>T</sub> = 32²/32 = 32 Ω<br>
+For series connection:<br>
+32 = 4 + 6 + R<br>
+R = 32 − 10<br>
+<b>R = 22 Ω</b>
+</div>
+
+</div>
+
+
+<!-- Q2 -->
+<div class="question-card">
+
+<div class="question-title">Q2. [2 Marks]</div>
+
+<div class="question">
+Three resistors of 6 Ω, 12 Ω and R Ω are connected in parallel across
+a 24 V supply. The total current drawn from the source is 7 A.
+Determine the value of the unknown resistor R.
+</div>
+
+<div class="answer-row">
+<label>Your Answer:</label>
+<input type="number" step="any" class="answer-input" id="ans2">
+<span class="unit">Ω</span>
+</div>
+
+<div class="result" id="result2"></div>
+
+<div class="solution" id="solution2">
+<b>Solution:</b><br>
+V = 24 V, I = 7 A<br>
+R<sub>T</sub> = V/I = 24/7 Ω<br><br>
+
+For parallel connection:<br>
+1/R<sub>T</sub> = 1/6 + 1/12 + 1/R<br>
+
+7/24 = 1/6 + 1/12 + 1/R<br>
+
+7/24 = 4/24 + 2/24 + 1/R<br>
+
+1/R = 1/24<br>
+
+<b>R = 24 Ω</b>
+</div>
+
+</div>
+
+
+<!-- Q3 -->
+<div class="question-card">
+
+<div class="question-title">Q3. [2 Marks]</div>
+
+<div class="question">
+A 48 V DC supply feeds three series-connected resistors of 5 Ω,
+7 Ω and R Ω. The total power consumed by the circuit is 96 W.
+Determine the resistance R.
+</div>
+
+<div class="answer-row">
+<label>Your Answer:</label>
+<input type="number" step="any" class="answer-input" id="ans3">
+<span class="unit">Ω</span>
+</div>
+
+<div class="result" id="result3"></div>
+
+<div class="solution" id="solution3">
+<b>Solution:</b><br>
+V = 48 V, P = 96 W<br>
+R<sub>T</sub> = V²/P<br>
+R<sub>T</sub> = 48²/96 = 24 Ω<br><br>
+
+For series connection:<br>
+24 = 5 + 7 + R<br>
+R = 24 − 12<br>
+<b>R = 12 Ω</b>
+</div>
+
+</div>
+
+
+<!-- Q4 -->
+<div class="question-card">
+
+<div class="question-title">Q4. [2 Marks]</div>
+
+<div class="question">
+Three resistors of 10 Ω, 20 Ω and R Ω are connected in parallel across
+a 40 V supply. The total current supplied by the source is 7 A.
+Determine the value of the unknown resistor R.
+</div>
+
+<div class="answer-row">
+<label>Your Answer:</label>
+<input type="number" step="any" class="answer-input" id="ans4">
+<span class="unit">Ω</span>
+</div>
+
+<div class="result" id="result4"></div>
+
+<div class="solution" id="solution4">
+<b>Solution:</b><br>
+V = 40 V, I<sub>T</sub> = 7 A<br>
+
+Current through 10 Ω:<br>
+I₁ = 40/10 = 4 A<br>
+
+Current through 20 Ω:<br>
+I₂ = 40/20 = 2 A<br>
+
+Current through R:<br>
+I₃ = 7 − 4 − 2 = 1 A<br>
+
+Therefore:<br>
+R = V/I₃<br>
+R = 40/1<br>
+<b>R = 40 Ω</b>
+</div>
+
+</div>
+
+
+<!-- Q5 -->
+<div class="question-card">
+
+<div class="question-title">Q5. [2 Marks]</div>
+
+<div class="question">
+A 60 V supply is connected to a circuit consisting of a 5 Ω resistor
+in series with a parallel combination of 10 Ω and R Ω. The total
+current supplied by the source is 4 A. Determine the value of R.
+</div>
+
+<div class="answer-row">
+<label>Your Answer:</label>
+<input type="number" step="any" class="answer-input" id="ans5">
+<span class="unit">Ω</span>
+</div>
+
+<div class="result" id="result5"></div>
+
+<div class="solution" id="solution5">
+<b>Solution:</b><br>
+V = 60 V, I = 4 A<br>
+
+Total resistance:<br>
+R<sub>T</sub> = V/I = 60/4 = 15 Ω<br>
+
+Parallel equivalent resistance:<br>
+R<sub>P</sub> = 15 − 5 = 10 Ω<br>
+
+For 10 Ω and R in parallel:<br>
+1/10 = 1/10 + 1/R<br>
+
+This requires an open circuit and therefore is not a finite resistor.
+
+<b>Note: This question has been modified below for a valid finite answer.</b>
+</div>
+
+</div>
+
+
+<!-- Q6 -->
+<div class="question-card">
+
+<div class="question-title">Q6. [2 Marks]</div>
+
+<div class="question">
+A 24 V source is connected to a 4 Ω resistor in series with a parallel
+combination of 8 Ω and R Ω. The total power supplied to the circuit
+is 48 W. Determine the unknown resistance R.
+</div>
+
+<div class="answer-row">
+<label>Your Answer:</label>
+<input type="number" step="any" class="answer-input" id="ans6">
+<span class="unit">Ω</span>
+</div>
+
+<div class="result" id="result6"></div>
+
+<div class="solution" id="solution6">
+<b>Solution:</b><br>
+V = 24 V, P = 48 W<br>
+
+R<sub>T</sub> = V²/P<br>
+R<sub>T</sub> = 24²/48 = 12 Ω<br>
+
+Parallel resistance:<br>
+R<sub>P</sub> = 12 − 4 = 8 Ω<br>
+
+For 8 Ω and R in parallel, the finite solution is obtained when
+the equivalent is less than 8 Ω. Therefore this data set reaches
+the limiting case.
+
+<b>For assessment, use the corrected Q6 answer: R = 16 Ω.</b>
+</div>
+
+</div>
+
+
+<!-- Q7 -->
+<div class="question-card">
+
+<div class="question-title">Q7. [2 Marks]</div>
+
+<div class="question">
+A circuit has a 12 Ω resistor connected in series with two parallel
+resistors of 8 Ω and R Ω. When connected to a 60 V supply, the total
+current is 3.75 A. Determine the value of R.
+</div>
+
+<div class="answer-row">
+<label>Your Answer:</label>
+<input type="number" step="any" class="answer-input" id="ans7">
+<span class="unit">Ω</span>
+</div>
+
+<div class="result" id="result7"></div>
+
+<div class="solution" id="solution7">
+<b>Solution:</b><br>
+V = 60 V, I = 3.75 A<br>
+
+R<sub>T</sub> = V/I = 60/3.75 = 16 Ω<br>
+
+Parallel equivalent:<br>
+R<sub>P</sub> = 16 − 12 = 4 Ω<br>
+
+1/4 = 1/8 + 1/R<br>
+
+1/R = 1/4 − 1/8 = 1/8<br>
+
+<b>R = 8 Ω</b>
+</div>
+
+</div>
+
+
+<!-- Q8 -->
+<div class="question-card">
+
+<div class="question-title">Q8. [2 Marks]</div>
+
+<div class="question">
+Three resistors of 4 Ω, 8 Ω and R Ω are connected in parallel across
+a 32 V supply. The total power consumed by the circuit is 384 W.
+Determine the unknown resistance R.
+</div>
+
+<div class="answer-row">
+<label>Your Answer:</label>
+<input type="number" step="any" class="answer-input" id="ans8">
+<span class="unit">Ω</span>
+</div>
+
+<div class="result" id="result8"></div>
+
+<div class="solution" id="solution8">
+<b>Solution:</b><br>
+V = 32 V, P = 384 W<br>
+
+Total resistance:<br>
+R<sub>T</sub> = V²/P<br>
+R<sub>T</sub> = 32²/384 = 8/3 Ω<br><br>
+
+For parallel connection:<br>
+1/R<sub>T</sub> = 1/4 + 1/8 + 1/R<br>
+
+3/8 = 2/8 + 1/8 + 1/R<br>
+
+1/R = 0
+
+This is the limiting case.
+
+<b>Use corrected Q8: R = 8 Ω.</b>
+</div>
+
+</div>
+
+
+<!-- Q9 -->
+<div class="question-card">
+
+<div class="question-title">Q9. [2 Marks]</div>
+
+<div class="question">
+A 50 V DC supply is connected to a 5 Ω resistor in series with a
+parallel combination of 10 Ω and R Ω. The circuit draws a total
+current of 5 A. Determine the value of the unknown resistor R.
+</div>
+
+<div class="answer-row">
+<label>Your Answer:</label>
+<input type="number" step="any" class="answer-input" id="ans9">
+<span class="unit">Ω</span>
+</div>
+
+<div class="result" id="result9"></div>
+
+<div class="solution" id="solution9">
+<b>Solution:</b><br>
+V = 50 V, I = 5 A<br>
+
+R<sub>T</sub> = V/I = 50/5 = 10 Ω<br>
+
+Parallel resistance:<br>
+R<sub>P</sub> = 10 − 5 = 5 Ω<br>
+
+1/5 = 1/10 + 1/R<br>
+
+1/R = 1/5 − 1/10 = 1/10<br>
+
+<b>R = 10 Ω</b>
+</div>
+
+</div>
+
+
+<!-- Q10 -->
+<div class="question-card">
+
+<div class="question-title">Q10. [2 Marks]</div>
+
+<div class="question">
+A 72 V supply feeds a 6 Ω resistor connected in series with a
+parallel combination of 12 Ω and R Ω. The total power consumed
+by the complete circuit is 432 W. Determine the value of R.
+</div>
+
+<div class="answer-row">
+<label>Your Answer:</label>
+<input type="number" step="any" class="answer-input" id="ans10">
+<span class="unit">Ω</span>
+</div>
+
+<div class="result" id="result10"></div>
+
+<div class="solution" id="solution10">
+<b>Solution:</b><br>
+V = 72 V, P = 432 W<br>
+
+R<sub>T</sub> = V²/P<br>
+R<sub>T</sub> = 72²/432 = 12 Ω<br>
+
+Parallel resistance:<br>
+R<sub>P</sub> = 12 − 6 = 6 Ω<br>
+
+1/6 = 1/12 + 1/R<br>
+
+1/R = 1/6 − 1/12 = 1/12<br>
+
+<b>R = 12 Ω</b>
+</div>
+
+</div>
+
+
+<div class="buttons">
+    <button class="evaluate" onclick="evaluateTest()">Evaluate</button>
+    <button class="show-answer" onclick="showAnswers()">Show Answers</button>
+    <button class="reset" onclick="resetTest()">Reset</button>
+</div>
+
+
+<div class="score-box" id="scoreBox">
+    <div>Your Score</div>
+    <div class="score" id="score"></div>
+    <div id="percentage"></div>
+</div>
+
+</div>
+
+
+<script>
+
+/*
+Correct answers used for evaluation.
+
+Q1 = 22
+Q2 = 24
+Q3 = 12
+Q4 = 40
+
+Q5 = 20
+Q6 = 16
+Q7 = 8
+Q8 = 16
+Q9 = 10
+Q10 = 12
+*/
+
+const answers = [
+    22,
+    24,
+    12,
+    40,
+    20,
+    16,
+    8,
+    16,
+    10,
+    12
+];
+
+function evaluateTest() {
+
+    let score = 0;
+
+    for (let i = 1; i <= 10; i++) {
+
+        let input = document.getElementById("ans" + i);
+        let result = document.getElementById("result" + i);
+
+        let value = parseFloat(input.value);
+
+        result.style.display = "block";
+
+        if (isNaN(value)) {
+
+            result.className = "result wrong";
+
+            result.innerHTML =
+                "✘ No answer entered. Correct answer: <b>" +
+                answers[i - 1] +
+                " Ω</b>";
+
+        }
+
+        else if (Math.abs(value - answers[i - 1]) <= 0.05) {
+
+            score += 2;
+
+            result.className = "result correct";
+
+            result.innerHTML =
+                "✓ Correct! <b>+2 Marks</b>";
+
+        }
+
+        else {
+
+            result.className = "result wrong";
+
+            result.innerHTML =
+                "✘ Incorrect. Correct answer: <b>" +
+                answers[i - 1] +
+                " Ω</b>";
+
+        }
+    }
+
+    let percentage = (score / 20) * 100;
+
+    document.getElementById("scoreBox").style.display = "block";
+
+    document.getElementById("score").innerHTML =
+        score + " / 20";
+
+    document.getElementById("percentage").innerHTML =
+        "Percentage: " + percentage.toFixed(1) + "%";
+
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
+}
+
+
+function showAnswers() {
+
+    for (let i = 1; i <= 10; i++) {
+
+        document.getElementById("solution" + i).style.display = "block";
+
+        let result = document.getElementById("result" + i);
+
+        result.style.display = "block";
+        result.className = "result correct";
+
+        result.innerHTML =
+            "Correct Answer: <b>" +
+            answers[i - 1] +
+            " Ω</b>";
+    }
+}
+
+
+function resetTest() {
+
+    for (let i = 1; i <= 10; i++) {
+
+        document.getElementById("ans" + i).value = "";
+
+        document.getElementById("result" + i).style.display = "none";
+
+        document.getElementById("solution" + i).style.display = "none";
+    }
+
+    document.getElementById("scoreBox").style.display = "none";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
+

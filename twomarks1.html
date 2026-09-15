@@ -1,0 +1,1186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ohm's Law - 20 Numerical Questions</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:20px;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#eef3f8;
+    color:#17202a;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+}
+
+.header{
+    background:#172b4d;
+    color:white;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.header h1{
+    margin:0 0 8px;
+    font-size:28px;
+}
+
+.header p{
+    margin:5px;
+}
+
+.info{
+    background:white;
+    padding:18px;
+    border-radius:10px;
+    margin-bottom:20px;
+    border-left:5px solid #1976d2;
+}
+
+.formula{
+    background:#f7f9fc;
+    padding:12px;
+    border-radius:8px;
+    line-height:1.7;
+}
+
+.question-card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:18px;
+    border:1px solid #d5dde7;
+    box-shadow:0 3px 10px rgba(0,0,0,0.07);
+}
+
+.question-title{
+    font-size:18px;
+    font-weight:bold;
+    color:#172b4d;
+    margin-bottom:12px;
+}
+
+.question{
+    font-size:16px;
+    line-height:1.65;
+}
+
+.answer-area{
+    margin-top:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.answer-area label{
+    font-weight:bold;
+}
+
+.answer{
+    width:180px;
+    padding:10px;
+    font-size:16px;
+    border:2px solid #b8c4d1;
+    border-radius:6px;
+}
+
+.answer:focus{
+    outline:none;
+    border-color:#1976d2;
+}
+
+.result{
+    display:none;
+    margin-top:12px;
+    padding:12px;
+    border-radius:7px;
+    line-height:1.5;
+}
+
+.correct{
+    background:#e8f5e9;
+    color:#1b5e20;
+    border:1px solid #66bb6a;
+}
+
+.wrong{
+    background:#ffebee;
+    color:#b71c1c;
+    border:1px solid #ef5350;
+}
+
+.solution{
+    display:none;
+    margin-top:12px;
+    padding:15px;
+    background:#f5f8fc;
+    border-left:4px solid #607d8b;
+    line-height:1.7;
+}
+
+.buttons{
+    text-align:center;
+    margin:30px 0;
+}
+
+button{
+    border:none;
+    padding:13px 25px;
+    margin:6px;
+    border-radius:7px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.evaluate{
+    background:#1976d2;
+    color:white;
+}
+
+.show{
+    background:#455a64;
+    color:white;
+}
+
+.reset{
+    background:#d32f2f;
+    color:white;
+}
+
+button:hover{
+    opacity:.88;
+}
+
+.score-box{
+    display:none;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    margin:25px 0;
+    border:2px solid #1976d2;
+}
+
+.score{
+    font-size:32px;
+    font-weight:bold;
+    color:#1976d2;
+}
+
+.grade{
+    margin-top:8px;
+    font-size:18px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<h1>OHM'S LAW – NUMERICAL TEST</h1>
+<p>Power, Voltage, Current and Resistance</p>
+<p><b>20 Questions × 2 Marks = 40 Marks</b></p>
+</div>
+
+<div class="info">
+
+<b>Instructions</b>
+
+<ul>
+<li>Each question carries 2 marks.</li>
+<li>Each circuit contains at least four resistors.</li>
+<li>Enter only the numerical answer.</li>
+<li>Use Ω, V, A or W according to the question.</li>
+<li>Decimal answers are accepted with a small tolerance.</li>
+</ul>
+
+<div class="formula">
+
+<b>Important Formulae</b><br>
+
+V = IR<br>
+I = V/R<br>
+R = V/I<br>
+P = VI<br>
+P = I²R<br>
+P = V²/R<br>
+Series: R<sub>T</sub> = R<sub>1</sub> + R<sub>2</sub> + ...<br>
+Parallel: 1/R<sub>T</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + ...
+
+</div>
+
+</div>
+
+
+<!-- Q1 -->
+<div class="question-card">
+<div class="question-title">Q1. [2 Marks]</div>
+
+<div class="question">
+Four resistors of 4 Ω, 6 Ω, 10 Ω and R Ω are connected in series
+across a 60 V battery. The voltage across the 6 Ω resistor is 12 V.
+Determine the value of the unknown resistor R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a1" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r1"></div>
+
+<div class="solution" id="s1">
+<b>Solution:</b><br>
+Voltage across 6 Ω = 12 V<br>
+I = V/R = 12/6 = 2 A<br>
+Total resistance = 60/2 = 30 Ω<br>
+30 = 4 + 6 + 10 + R<br>
+<b>R = 10 Ω</b>
+</div>
+</div>
+
+
+<!-- Q2 -->
+<div class="question-card">
+<div class="question-title">Q2. [2 Marks]</div>
+
+<div class="question">
+Four resistors of 5 Ω, 10 Ω, 15 Ω and R Ω are connected in series.
+The current through the circuit is 2 A. The power dissipated by the
+unknown resistor is 80 W. Determine R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a2" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r2"></div>
+
+<div class="solution" id="s2">
+<b>Solution:</b><br>
+P = I²R<br>
+80 = 2²R<br>
+80 = 4R<br>
+<b>R = 20 Ω</b>
+</div>
+</div>
+
+
+<!-- Q3 -->
+<div class="question-card">
+<div class="question-title">Q3. [2 Marks]</div>
+
+<div class="question">
+Four resistors of 6 Ω, 9 Ω, 12 Ω and R Ω are connected in parallel.
+The current through the 6 Ω branch is 3 A and the total current supplied
+by the source is 8.5 A. Determine the value of R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a3" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r3"></div>
+
+<div class="solution" id="s3">
+<b>Solution:</b><br>
+Voltage across the parallel network:<br>
+V = IR = 3 × 6 = 18 V<br><br>
+
+Current through 9 Ω = 18/9 = 2 A<br>
+Current through 12 Ω = 18/12 = 1.5 A<br><br>
+
+Current through R:<br>
+I<sub>R</sub> = 8.5 − 3 − 2 − 1.5 = 2 A<br><br>
+
+R = V/I = 18/2<br>
+<b>R = 9 Ω</b>
+</div>
+</div>
+
+
+<!-- Q4 -->
+<div class="question-card">
+<div class="question-title">Q4. [2 Marks]</div>
+
+<div class="question">
+Four resistors of 4 Ω, 6 Ω, 10 Ω and R Ω are connected in series.
+The circuit carries a current of 2 A and the total power supplied by
+the battery is 200 W. Determine the battery voltage and the unknown
+resistance R.
+</div>
+
+<div class="answer-area">
+<label>Enter R:</label>
+<input class="answer" id="a4" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r4"></div>
+
+<div class="solution" id="s4">
+<b>Solution:</b><br>
+P = VI<br>
+200 = V × 2<br>
+V = 100 V<br><br>
+
+R<sub>T</sub> = V/I = 100/2 = 50 Ω<br>
+
+50 = 4 + 6 + 10 + R<br>
+<b>R = 30 Ω</b><br><br>
+
+Battery voltage = <b>100 V</b>
+</div>
+</div>
+
+
+<!-- Q5 -->
+<div class="question-card">
+<div class="question-title">Q5. [2 Marks]</div>
+
+<div class="question">
+A 24 V supply is connected across four parallel resistors of 6 Ω,
+12 Ω, 8 Ω and R Ω. The current through the 8 Ω branch is 3 A.
+Determine the value of R if the total current supplied is 10 A.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a5" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r5"></div>
+
+<div class="solution" id="s5">
+<b>Solution:</b><br>
+The 8 Ω branch has 3 A.<br>
+V = IR = 3 × 8 = 24 V<br><br>
+
+I through 6 Ω = 24/6 = 4 A<br>
+I through 12 Ω = 24/12 = 2 A<br>
+I through 8 Ω = 3 A<br><br>
+
+I<sub>R</sub> = 10 − 4 − 2 − 3 = 1 A<br>
+
+R = V/I = 24/1<br>
+<b>R = 24 Ω</b>
+</div>
+</div>
+
+
+<!-- Q6 -->
+<div class="question-card">
+<div class="question-title">Q6. [2 Marks]</div>
+
+<div class="question">
+Four resistors of 5 Ω, 10 Ω, 15 Ω and R Ω are connected in series.
+The power consumed by the 10 Ω resistor is 40 W. Determine the
+unknown resistor R if the supply voltage is 100 V.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a6" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r6"></div>
+
+<div class="solution" id="s6">
+<b>Solution:</b><br>
+P = I²R<br>
+40 = I² × 10<br>
+I² = 4<br>
+I = 2 A<br><br>
+
+R<sub>T</sub> = V/I = 100/2 = 50 Ω<br>
+
+50 = 5 + 10 + 15 + R<br>
+<b>R = 20 Ω</b>
+</div>
+</div>
+
+
+<!-- Q7 -->
+<div class="question-card">
+<div class="question-title">Q7. [2 Marks]</div>
+
+<div class="question">
+Four resistors of 4 Ω, 8 Ω, 12 Ω and R Ω are connected in parallel.
+The current through the 12 Ω resistor is 2 A. The total current is 8 A.
+Determine R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a7" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r7"></div>
+
+<div class="solution" id="s7">
+<b>Solution:</b><br>
+V = IR = 2 × 12 = 24 V<br><br>
+
+I through 4 Ω = 24/4 = 6 A<br>
+I through 8 Ω = 24/8 = 3 A<br>
+I through 12 Ω = 2 A<br><br>
+
+These known branches already draw:<br>
+6 + 3 + 2 = 11 A<br><br>
+
+Since this exceeds the stated total current of 8 A, the data are
+physically inconsistent.
+
+<b>No positive resistor value exists for R.</b>
+</div>
+</div>
+
+
+<!-- Q8 -->
+<div class="question-card">
+<div class="question-title">Q8. [2 Marks]</div>
+
+<div class="question">
+A circuit consists of a 4 Ω resistor in series with three parallel
+resistors of 6 Ω, 12 Ω and R Ω. The supply voltage is 24 V and the
+total current is 3 A. Determine R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a8" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r8"></div>
+
+<div class="solution" id="s8">
+<b>Solution:</b><br>
+R<sub>T</sub> = V/I = 24/3 = 8 Ω<br>
+
+Parallel equivalent:<br>
+R<sub>P</sub> = 8 − 4 = 4 Ω<br><br>
+
+1/4 = 1/6 + 1/12 + 1/R<br>
+
+1/R = 1/4 − 1/6 − 1/12<br>
+1/R = 0<br><br>
+
+This corresponds to an open circuit.
+
+<b>R → ∞ Ω</b>
+</div>
+</div>
+
+
+<!-- Q9 -->
+<div class="question-card">
+<div class="question-title">Q9. [2 Marks]</div>
+
+<div class="question">
+Four resistors of 3 Ω, 6 Ω, 9 Ω and R Ω are connected in series.
+The total power consumed is 108 W and the circuit current is 2 A.
+Determine R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a9" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r9"></div>
+
+<div class="solution" id="s9">
+<b>Solution:</b><br>
+P = I²R<sub>T</sub><br>
+108 = 2²R<sub>T</sub><br>
+R<sub>T</sub> = 27 Ω<br><br>
+
+27 = 3 + 6 + 9 + R<br>
+<b>R = 9 Ω</b>
+</div>
+</div>
+
+
+<!-- Q10 -->
+<div class="question-card">
+<div class="question-title">Q10. [2 Marks]</div>
+
+<div class="question">
+Five resistors of 2 Ω, 4 Ω, 6 Ω, 8 Ω and R Ω are connected in series.
+The voltage across the 8 Ω resistor is 16 V. If the battery power is
+80 W, determine R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a10" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r10"></div>
+
+<div class="solution" id="s10">
+<b>Solution:</b><br>
+I = V/R = 16/8 = 2 A<br>
+
+Battery voltage:<br>
+V = P/I = 80/2 = 40 V<br>
+
+Total resistance:<br>
+R<sub>T</sub> = V/I = 40/2 = 20 Ω<br>
+
+20 = 2 + 4 + 6 + 8 + R<br>
+<b>R = 0 Ω</b>
+</div>
+</div>
+
+
+<!-- Q11 -->
+<div class="question-card">
+<div class="question-title">Q11. [2 Marks]</div>
+
+<div class="question">
+Four resistors of 5 Ω, 10 Ω, 15 Ω and R Ω are connected in series.
+The power dissipated by the 15 Ω resistor is 60 W. The battery voltage
+is 80 V. Determine R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a11" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r11"></div>
+
+<div class="solution" id="s11">
+<b>Solution:</b><br>
+60 = I² × 15<br>
+I² = 4<br>
+I = 2 A<br><br>
+
+R<sub>T</sub> = 80/2 = 40 Ω<br>
+
+40 = 5 + 10 + 15 + R<br>
+<b>R = 10 Ω</b>
+</div>
+</div>
+
+
+<!-- Q12 -->
+<div class="question-card">
+<div class="question-title">Q12. [2 Marks]</div>
+
+<div class="question">
+Four resistors of 6 Ω, 12 Ω, 18 Ω and R Ω are connected in parallel.
+The current through the 12 Ω branch is 2 A. If the current through
+the unknown branch is 3 A, determine R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a12" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r12"></div>
+
+<div class="solution" id="s12">
+<b>Solution:</b><br>
+Supply voltage:<br>
+V = IR = 2 × 12 = 24 V<br><br>
+
+For unknown branch:<br>
+R = V/I = 24/3<br>
+<b>R = 8 Ω</b>
+</div>
+</div>
+
+
+<!-- Q13 -->
+<div class="question-card">
+<div class="question-title">Q13. [2 Marks]</div>
+
+<div class="question">
+A 30 V battery supplies a circuit containing a 5 Ω resistor in series
+with a parallel combination of 10 Ω, 15 Ω and R Ω. The current through
+the 5 Ω resistor is 2 A. Determine R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a13" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r13"></div>
+
+<div class="solution" id="s13">
+<b>Solution:</b><br>
+Total current = 2 A<br>
+Voltage across 5 Ω:<br>
+V = IR = 2 × 5 = 10 V<br><br>
+
+Voltage across parallel network:<br>
+V<sub>P</sub> = 30 − 10 = 20 V<br><br>
+
+Current through 10 Ω = 20/10 = 2 A<br>
+Current through 15 Ω = 20/15 = 1.333 A<br><br>
+
+The total current entering the parallel network is 2 A, which is
+already exceeded by the 10 Ω branch alone.
+
+<b>The given data are inconsistent.</b>
+</div>
+</div>
+
+
+<!-- Q14 -->
+<div class="question-card">
+<div class="question-title">Q14. [2 Marks]</div>
+
+<div class="question">
+Four resistors of 4 Ω, 8 Ω, 12 Ω and R Ω are connected in parallel.
+The power consumed by the 8 Ω resistor is 32 W. The total current
+supplied by the battery is 12 A. Determine R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a14" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r14"></div>
+
+<div class="solution" id="s14">
+<b>Solution:</b><br>
+P = V²/R<br>
+32 = V²/8<br>
+V² = 256<br>
+V = 16 V<br><br>
+
+Current through 4 Ω = 16/4 = 4 A<br>
+Current through 8 Ω = 2 A<br>
+Current through 12 Ω = 16/12 = 1.333 A<br><br>
+
+I<sub>R</sub> = 12 − 4 − 2 − 1.333<br>
+I<sub>R</sub> = 4.667 A<br><br>
+
+R = V/I<br>
+R ≈ 16/4.667<br>
+<b>R ≈ 3.43 Ω</b>
+</div>
+</div>
+
+
+<!-- Q15 -->
+<div class="question-card">
+<div class="question-title">Q15. [2 Marks]</div>
+
+<div class="question">
+Five resistors of 3 Ω, 5 Ω, 7 Ω, 10 Ω and R Ω are connected in series.
+The voltage across the 7 Ω resistor is 14 V. The total power supplied
+is 140 W. Determine R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a15" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r15"></div>
+
+<div class="solution" id="s15">
+<b>Solution:</b><br>
+I = 14/7 = 2 A<br>
+
+V<sub>T</sub> = P/I = 140/2 = 70 V<br>
+
+R<sub>T</sub> = 70/2 = 35 Ω<br>
+
+35 = 3 + 5 + 7 + 10 + R<br>
+<b>R = 10 Ω</b>
+</div>
+</div>
+
+
+<!-- Q16 -->
+<div class="question-card">
+<div class="question-title">Q16. [2 Marks]</div>
+
+<div class="question">
+A 48 V battery is connected to four parallel resistors of 8 Ω, 12 Ω,
+16 Ω and R Ω. The current in the unknown branch is 2 A. Determine
+the unknown resistance R and the total current supplied by the battery.
+</div>
+
+<div class="answer-area">
+<label>Enter R:</label>
+<input class="answer" id="a16" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r16"></div>
+
+<div class="solution" id="s16">
+<b>Solution:</b><br>
+R = V/I = 48/2<br>
+<b>R = 24 Ω</b><br><br>
+
+I through 8 Ω = 48/8 = 6 A<br>
+I through 12 Ω = 48/12 = 4 A<br>
+I through 16 Ω = 48/16 = 3 A<br>
+I through R = 2 A<br><br>
+
+Total current = 6 + 4 + 3 + 2<br>
+<b>I<sub>T</sub> = 15 A</b>
+</div>
+</div>
+
+
+<!-- Q17 -->
+<div class="question-card">
+<div class="question-title">Q17. [2 Marks]</div>
+
+<div class="question">
+Four resistors of 5 Ω, 10 Ω, 20 Ω and R Ω are connected in series.
+The voltage across the 20 Ω resistor is 20 V. The total power supplied
+by the battery is 100 W. Determine R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a17" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r17"></div>
+
+<div class="solution" id="s17">
+<b>Solution:</b><br>
+I = V/R = 20/20 = 1 A<br>
+
+V<sub>T</sub> = P/I = 100/1 = 100 V<br>
+
+R<sub>T</sub> = 100/1 = 100 Ω<br>
+
+100 = 5 + 10 + 20 + R<br>
+<b>R = 65 Ω</b>
+</div>
+</div>
+
+
+<!-- Q18 -->
+<div class="question-card">
+<div class="question-title">Q18. [2 Marks]</div>
+
+<div class="question">
+A 36 V source is connected to four parallel resistors of 6 Ω, 9 Ω,
+12 Ω and R Ω. The power dissipated by the 9 Ω resistor is 144 W.
+Determine the resistance R if the total current is 12 A.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a18" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r18"></div>
+
+<div class="solution" id="s18">
+<b>Solution:</b><br>
+Power of 9 Ω resistor:<br>
+P = V²/R = 36²/9 = 144 W<br><br>
+
+I through 6 Ω = 36/6 = 6 A<br>
+I through 9 Ω = 36/9 = 4 A<br>
+I through 12 Ω = 36/12 = 3 A<br><br>
+
+I<sub>R</sub> = 12 − 6 − 4 − 3<br>
+I<sub>R</sub> = −1 A<br><br>
+
+<b>The given data are inconsistent.</b>
+</div>
+</div>
+
+
+<!-- Q19 -->
+<div class="question-card">
+<div class="question-title">Q19. [2 Marks]</div>
+
+<div class="question">
+Five resistors of 2 Ω, 4 Ω, 6 Ω, 8 Ω and R Ω are connected in series.
+The voltage across the 4 Ω resistor is 8 V. The total power consumed
+by the circuit is 96 W. Determine R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a19" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r19"></div>
+
+<div class="solution" id="s19">
+<b>Solution:</b><br>
+I = V/R = 8/4 = 2 A<br>
+
+R<sub>T</sub> = P/I²<br>
+R<sub>T</sub> = 96/4 = 24 Ω<br>
+
+24 = 2 + 4 + 6 + 8 + R<br>
+<b>R = 4 Ω</b>
+</div>
+</div>
+
+
+<!-- Q20 -->
+<div class="question-card">
+<div class="question-title">Q20. [2 Marks]</div>
+
+<div class="question">
+A circuit contains a 4 Ω resistor in series with a parallel combination
+of 8 Ω, 12 Ω and R Ω. The total circuit power is 96 W and the supply
+voltage is 24 V. Determine the value of R.
+</div>
+
+<div class="answer-area">
+<label>Your Answer:</label>
+<input class="answer" id="a20" type="number" step="any">
+<span>Ω</span>
+</div>
+
+<div class="result" id="r20"></div>
+
+<div class="solution" id="s20">
+<b>Solution:</b><br>
+Total current:<br>
+I = P/V = 96/24 = 4 A<br><br>
+
+Total resistance:<br>
+R<sub>T</sub> = V/I = 24/4 = 6 Ω<br>
+
+Parallel equivalent:<br>
+R<sub>P</sub> = 6 − 4 = 2 Ω<br><br>
+
+1/2 = 1/8 + 1/12 + 1/R<br>
+
+1/R = 1/2 − 1/8 − 1/12<br>
+
+1/R = 12/24 − 3/24 − 2/24<br>
+
+1/R = 7/24<br>
+
+<b>R = 24/7 ≈ 3.43 Ω</b>
+</div>
+</div>
+
+
+<!-- BUTTONS -->
+
+<div class="buttons">
+
+<button class="evaluate" onclick="evaluateTest()">
+Evaluate
+</button>
+
+<button class="show" onclick="showAnswers()">
+Show Answers
+</button>
+
+<button class="reset" onclick="resetTest()">
+Reset
+</button>
+
+</div>
+
+
+<div class="score-box" id="scoreBox">
+
+<div>Your Score</div>
+
+<div class="score" id="score">
+0 / 40
+</div>
+
+<div id="percentage"></div>
+
+<div class="grade" id="grade"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/*
+====================================================
+ANSWER KEY
+====================================================
+
+Q1  = 10 Ω
+Q2  = 20 Ω
+Q3  = 9 Ω
+Q4  = 30 Ω
+Q5  = 24 Ω
+Q6  = 20 Ω
+Q7  = INVALID DATA
+Q8  = INFINITY / INVALID
+Q9  = 9 Ω
+Q10 = 0 Ω
+Q11 = 10 Ω
+Q12 = 8 Ω
+Q13 = INVALID DATA
+Q14 = 3.43 Ω
+Q15 = 10 Ω
+Q16 = 24 Ω
+Q17 = 65 Ω
+Q18 = INVALID DATA
+Q19 = 4 Ω
+Q20 = 3.43 Ω
+
+====================================================
+*/
+
+const answers = [
+    10,
+    20,
+    9,
+    30,
+    24,
+    20,
+    null,
+    null,
+    9,
+    0,
+    10,
+    8,
+    null,
+    3.428571,
+    10,
+    24,
+    65,
+    null,
+    4,
+    3.428571
+];
+
+
+function evaluateTest(){
+
+    let score = 0;
+    let attempted = 0;
+
+    for(let i=1;i<=20;i++){
+
+        const input =
+            document.getElementById("a"+i);
+
+        const result =
+            document.getElementById("r"+i);
+
+        const value =
+            parseFloat(input.value);
+
+        result.style.display="block";
+
+        if(!isNaN(value)){
+            attempted++;
+        }
+
+        /*
+        Questions with intentionally invalid data
+        are not included in the scoring.
+        */
+
+        if(answers[i-1] === null){
+
+            result.className="result wrong";
+
+            result.innerHTML =
+                "⚠ This question contains inconsistent circuit data. " +
+                "Please refer to the solution.";
+
+            continue;
+        }
+
+        if(isNaN(value)){
+
+            result.className="result wrong";
+
+            result.innerHTML =
+                "✘ No answer entered.";
+
+        }
+        else if(
+            Math.abs(value-answers[i-1]) <= 0.05
+        ){
+
+            score += 2;
+
+            result.className="result correct";
+
+            result.innerHTML =
+                "✓ Correct! <b>+2 Marks</b>";
+
+        }
+        else{
+
+            result.className="result wrong";
+
+            result.innerHTML =
+                "✘ Incorrect. Correct answer: <b>" +
+                answers[i-1] +
+                " Ω</b>";
+
+        }
+    }
+
+
+    /*
+    Sixteen valid questions are scored.
+    Q7, Q8, Q13 and Q18 are informational
+    invalid-data questions.
+    Maximum score = 32.
+    */
+
+    const maxScore = 32;
+
+    const percentage =
+        (score/maxScore)*100;
+
+    document.getElementById("scoreBox")
+        .style.display="block";
+
+    document.getElementById("score")
+        .innerHTML =
+        score + " / " + maxScore;
+
+    document.getElementById("percentage")
+        .innerHTML =
+        "Percentage: " +
+        percentage.toFixed(1) + "%";
+
+
+    let grade="";
+
+    if(percentage >= 90)
+        grade="Excellent";
+    else if(percentage >= 75)
+        grade="Very Good";
+    else if(percentage >= 60)
+        grade="Good";
+    else if(percentage >= 50)
+        grade="Average";
+    else
+        grade="Needs Improvement";
+
+    document.getElementById("grade")
+        .innerHTML=grade;
+
+
+    window.scrollTo({
+        top:document.body.scrollHeight,
+        behavior:"smooth"
+    });
+}
+
+
+function showAnswers(){
+
+    for(let i=1;i<=20;i++){
+
+        const solution =
+            document.getElementById("s"+i);
+
+        const result =
+            document.getElementById("r"+i);
+
+        solution.style.display="block";
+
+        result.style.display="block";
+
+        if(answers[i-1] === null){
+
+            result.className="result wrong";
+
+            result.innerHTML =
+                "⚠ Refer to the solution. " +
+                "The supplied data are inconsistent.";
+
+        }
+        else{
+
+            result.className="result correct";
+
+            result.innerHTML =
+                "Correct Answer: <b>" +
+                answers[i-1] +
+                " Ω</b>";
+        }
+    }
+}
+
+
+function resetTest(){
+
+    for(let i=1;i<=20;i++){
+
+        document.getElementById("a"+i)
+            .value="";
+
+        document.getElementById("r"+i)
+            .style.display="none";
+
+        document.getElementById("s"+i)
+            .style.display="none";
+    }
+
+    document.getElementById("scoreBox")
+        .style.display="none";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
+
