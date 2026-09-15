@@ -628,7 +628,7 @@
 
         if (correctV1 && correctV2) {
             res.className = "result correct";
-            res.innerHTML = "<strong>Correct! (10/10 Marks)</strong><br>Solution: KCL at V1: (V1 - 20)/5 + V1/10 + (V1 - V2)/10 = 0 => 4V1 - V2 = 40. KCL at V2: (V2 - V1)/10 + V2/20 = 4 => -V1 + 1.5V2 = 40. Solving gives V1 = 12 V and V2 = 32 V.";
+            res.innerHTML = "<strong>Correct! (10/10 Marks)</strong><br>Solution: KCL at V1: (V1 - 20)/5 + V1/10 + (V1 - V2)/10 = 0 => 4V1 - V2 = 40. KCL at V2: (V2 - V1)/10 + V2/20 = 4 => -V1 + 0.15V2 = 40. Solving gives V1 = 20 V and V2 = 40 V.";
             scores['q13'] = 10;
         } else {
             res.className = "result incorrect";
