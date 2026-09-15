@@ -603,12 +603,12 @@
         let res = document.getElementById('res-q12');
         res.style.display = "block";
 
-        let correctV1 = Math.abs(v1 - 53.33) <= 0.5;
-        let correctV2 = Math.abs(v2 - 33.33) <= 0.5;
+        let correctV1 = Math.abs(v1 - 40) <= 0.5;
+        let correctV2 = Math.abs(v2 - 20) <= 0.5;
 
         if (correctV1 && correctV2) {
             res.className = "result correct";
-            res.innerHTML = "<strong>Correct! (10/10 Marks)</strong><br>Solution: Supernode equation V1 - V2 = 20 V. KCL at supernode: 12 = (V1/10) + (V2/5) + (V2/5). Substituting V1 = V2 + 20 gives V2 = 33.33 V and V1 = 53.33 V.";
+            res.innerHTML = "<strong>Correct! (10/10 Marks)</strong><br>Solution: Supernode equation V1 - V2 = 20 V. KCL at supernode: 12 = (V1/10) + (V2/5) + (V2/5). Substituting V1 = V2 + 20 gives V2 = 20 V and V1 = 40 V.";
             scores['q12'] = 10;
         } else {
             res.className = "result incorrect";
