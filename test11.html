@@ -735,10 +735,10 @@
 
 <script>
     const solutionKey = {
-        q1: { ans: 22.0, tol: 0.5, marks: 2, explain: "Nodal Equation at E: (V_E - 10)/1 + (V_E - (-30))/2 + (V_E - 50)/2 = 0 ⇒ V_E(1 + 0.5 + 0.5) = 10 - 15 + 25 = 20 ⇒ V_E = 22 V." },
-        q2: { ans: 12.0, tol: 0.3, marks: 2, explain: "Branch current I_FE = (V_E - 10) / 1 = (22 - 10) / 1 = 12 A." },
+        q1: { ans: 22.0, tol: 0.5, marks: 2, explain: "Nodal Equation at E: (V_E - 10)/1 + (V_E - (30))/2 + (V_E - 50)/2 = 0 ⇒ V_E(1 + 0.5 + 0.5) = 10 + 15 + 25 = 50 ⇒ V_E(2) = 25 V." },
+        q2: { ans: 12.0, tol: 0.3, marks: 2, explain: "Branch current I_FE = (V_E - 10) / 1 = (25 - 10) / 1 = 15 A." },
         q3: { ans: 0.1, tol: 0.02, marks: 2, explain: "Voltage across parallel resistor R1 is fixed by V1 = 10V. I_R1 = 10V / 100Ω = 0.1 A." },
-        q4: { ans: 0.0, tol: 0.02, marks: 2, explain: "KVL in right loop: V1 - I_R2(100) - V2 = 0 ⇒ 10 - 100(I_R2) - 10 = 0 ⇒ I_R2 = 0 A." },
+        q4: { ans: 0.0, tol: 0.02, marks: 2, explain: "KVL in right loop: V1 - I_R2(100) + V2 = 0 ⇒ 10 - 100(I_R2) + 10 = 0.2 ⇒ I_R2 = 0.2 A." },
         q5: { ans: 4.0, tol: 0.1, marks: 2, explain: "Left node: 3A in - 1A out = 2A right. Right node: 2A in = 1A out + 1A out + I out ⇒ I = 4 A total outward node balance." },
         q6: { ans: 0.2, tol: 0.05, marks: 2, explain: "Left node: 0.6A in, 0.3A down ⇒ 0.3A right. Right node: 0.3A in = I + 0.1A ⇒ I = 0.2 A." },
         q7: { ans: 2.4, tol: 0.1, marks: 2, explain: "Single junction: ΣI_in = 1.2 + 3.0 = 4.2 A. ΣI_out = 1.8 + I. Thus I = 4.2 - 1.8 = 2.4 A." },
