@@ -1,0 +1,841 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AC Quantities - 50 Two Mark Questions</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+    color: #1f2937;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.header {
+    background: #17365d;
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+.header p {
+    margin: 5px;
+    font-size: 16px;
+}
+
+.instructions {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 5px solid #17365d;
+}
+
+.formula {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    line-height: 1.8;
+}
+
+.question-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.08);
+}
+
+.question-title {
+    font-weight: bold;
+    color: #17365d;
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+.question {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.answer-area {
+    margin-top: 15px;
+}
+
+.answer {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    border: 1px solid #aab4c3;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.result {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.correct {
+    color: #16803c;
+}
+
+.wrong {
+    color: #c62828;
+}
+
+.solution {
+    display: none;
+    margin-top: 12px;
+    padding: 14px;
+    background: #f1f5f9;
+    border-left: 4px solid #17365d;
+    line-height: 1.6;
+}
+
+.buttons {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding: 18px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 -3px 12px rgba(0,0,0,0.12);
+    text-align: center;
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    margin: 5px;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.evaluate {
+    background: #17365d;
+    color: white;
+}
+
+.answers-btn {
+    background: #2e7d32;
+    color: white;
+}
+
+.reset {
+    background: #b71c1c;
+    color: white;
+}
+
+.score-box {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid #17365d;
+}
+
+.score {
+    font-size: 28px;
+    font-weight: bold;
+    color: #17365d;
+}
+
+.grade {
+    font-size: 20px;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.unit {
+    color: #555;
+    margin-left: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+    <h1>AC Quantities – 50 Two-Mark Questions</h1>
+    <p>Form Factor • Peak Factor • RMS • Average Value • Rectified Waveforms</p>
+    <p>Maximum Marks: 100 | Each Question: 2 Marks</p>
+</div>
+
+<div class="instructions">
+
+<strong>Instructions:</strong>
+
+<ul>
+<li>Answer all 50 questions.</li>
+<li>Each question carries 2 marks.</li>
+<li>For numerical questions, enter the numerical value.</li>
+<li>Use the formulas given below where required.</li>
+<li>Click <strong>Evaluate</strong> to calculate your score.</li>
+<li>Click <strong>Show Answers</strong> to view the correct answers and solutions.</li>
+</ul>
+
+<div class="formula">
+
+<strong>Important Formulae</strong><br>
+
+RMS value of sine wave:
+V<sub>rms</sub> = V<sub>m</sub>/√2
+
+<br>
+
+Average value of half-wave rectified sine:
+V<sub>avg</sub> = V<sub>m</sub>/π
+
+<br>
+
+Average value of full-wave rectified sine:
+V<sub>avg</sub> = 2V<sub>m</sub>/π
+
+<br>
+
+Form Factor:
+Form Factor = RMS Value / Average Value
+
+<br>
+
+Peak Factor:
+Peak Factor = Maximum Value / RMS Value
+
+<br>
+
+For a sine wave:
+Form Factor = 1.11
+
+<br>
+
+For a sine wave:
+Peak Factor = √2 = 1.414
+
+</div>
+</div>
+
+<div id="questions"></div>
+
+<div class="buttons">
+
+<button class="evaluate" onclick="evaluateTest()">
+Evaluate
+</button>
+
+<button class="answers-btn" onclick="showAnswers()">
+Show Answers
+</button>
+
+<button class="reset" onclick="resetTest()">
+Reset
+</button>
+
+<div id="scoreBox" class="score-box">
+    <div class="score" id="score"></div>
+    <div id="percentage"></div>
+    <div class="grade" id="grade"></div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const questions = [
+
+/* =========================================================
+   1 - 10 : BASIC DEFINITIONS
+========================================================= */
+
+{
+q: "Define an alternating quantity.",
+answer: "A quantity whose magnitude and direction change periodically with time.",
+solution: "An alternating quantity is a quantity that changes its magnitude and reverses its direction periodically with time."
+},
+
+{
+q: "What is meant by instantaneous value of an AC quantity?",
+answer: "The value of an AC quantity at a particular instant of time.",
+solution: "Instantaneous value is the magnitude of an alternating quantity at any particular instant of time."
+},
+
+{
+q: "Define maximum value or peak value of an AC waveform.",
+answer: "The maximum value attained by the waveform during a cycle.",
+solution: "Peak value is the maximum positive or negative magnitude reached by an alternating waveform."
+},
+
+{
+q: "Define cycle of an AC waveform.",
+answer: "One complete repetition of the waveform.",
+solution: "A cycle is one complete sequence of positive and negative variations of an AC waveform."
+},
+
+{
+q: "Define time period of an AC waveform.",
+answer: "The time required to complete one cycle.",
+solution: "Time period T is the time taken by an AC waveform to complete one complete cycle."
+},
+
+{
+q: "Define frequency of an AC quantity.",
+answer: "Number of cycles completed per second.",
+solution: "Frequency is the number of complete cycles produced per second. Its unit is hertz (Hz)."
+},
+
+{
+q: "What is the relationship between frequency and time period?",
+answer: "f = 1/T",
+solution: "Frequency and time period are reciprocals: f = 1/T."
+},
+
+{
+q: "Define angular frequency of a sinusoidal waveform.",
+answer: "Angular frequency is the rate of change of phase in radians per second.",
+solution: "Angular frequency is given by ω = 2πf rad/s."
+},
+
+{
+q: "What is phase angle in an AC waveform?",
+answer: "The angular displacement of a waveform relative to a reference.",
+solution: "Phase angle represents the angular displacement of one sinusoidal quantity with respect to a reference quantity."
+},
+
+{
+q: "Write the equation of a sinusoidal voltage waveform.",
+answer: "v = Vm sin(ωt + φ)",
+solution: "The general sinusoidal voltage equation is v = Vm sin(ωt + φ), where Vm is peak value and φ is phase angle."
+},
+
+/* =========================================================
+   11 - 20 : RMS AND AVERAGE VALUE
+========================================================= */
+
+{
+q: "Define RMS value of an AC quantity.",
+answer: "The DC value producing the same heating effect as the AC quantity.",
+solution: "RMS value is the equivalent DC value that produces the same heating effect in a resistor."
+},
+
+{
+q: "What is the RMS value of a sinusoidal voltage having maximum value Vm?",
+answer: "Vrms = Vm/√2",
+solution: "For a sinusoidal waveform, Vrms = Vm/√2 = 0.707Vm."
+},
+
+{
+q: "A sinusoidal voltage has a peak value of 100 V. Find its RMS value.",
+answer: "70.71",
+solution: "Vrms = Vm/√2 = 100/√2 = 70.71 V."
+},
+
+{
+q: "A sinusoidal current has a peak value of 10 A. Find its RMS value.",
+answer: "7.071",
+solution: "Irms = Im/√2 = 10/√2 = 7.071 A."
+},
+
+{
+q: "Define average value of an AC quantity.",
+answer: "The arithmetic mean of all instantaneous values over the interval considered.",
+solution: "Average value is obtained by integrating the instantaneous values over the selected interval and dividing by that interval."
+},
+
+{
+q: "Why is the average value of a pure sine wave over one complete cycle zero?",
+answer: "Because the positive and negative half cycles cancel each other.",
+solution: "The positive half-cycle has equal area to the negative half-cycle, so their algebraic sum over one cycle is zero."
+},
+
+{
+q: "What is the average value of a half-wave rectified sine wave with peak Vm?",
+answer: "Vm/π",
+solution: "For a half-wave rectified sine wave, Vavg = Vm/π = 0.318Vm."
+},
+
+{
+q: "What is the average value of a full-wave rectified sine wave with peak Vm?",
+answer: "2Vm/π",
+solution: "For a full-wave rectified sine wave, Vavg = 2Vm/π = 0.637Vm."
+},
+
+{
+q: "A half-wave rectified sine wave has peak value 100 V. Find its average value.",
+answer: "31.83",
+solution: "Vavg = Vm/π = 100/π = 31.83 V."
+},
+
+{
+q: "A full-wave rectified sine wave has peak value 100 V. Find its average value.",
+answer: "63.66",
+solution: "Vavg = 2Vm/π = 200/π = 63.66 V."
+},
+
+/* =========================================================
+   21 - 30 : FORM FACTOR
+========================================================= */
+
+{
+q: "Define form factor of an AC waveform.",
+answer: "The ratio of RMS value to average value.",
+solution: "Form Factor = RMS Value / Average Value."
+},
+
+{
+q: "Write the formula for form factor.",
+answer: "Form Factor = Vrms/Vavg",
+solution: "Form Factor = Vrms/Vavg."
+},
+
+{
+q: "What is the form factor of a sinusoidal waveform?",
+answer: "1.11",
+solution: "For a sine wave, Form Factor = (Vm/√2)/(2Vm/π) = π/(2√2) ≈ 1.11."
+},
+
+{
+q: "What is the RMS value of a sine wave whose average value is 50 V?",
+answer: "55.5",
+solution: "Form Factor = Vrms/Vavg = 1.11. Therefore Vrms = 1.11 × 50 = 55.5 V."
+},
+
+{
+q: "A sinusoidal waveform has RMS value 70.71 V. Find its peak value.",
+answer: "100",
+solution: "Vm = √2 Vrms = 1.414 × 70.71 = 100 V."
+},
+
+{
+q: "A sinusoidal waveform has average rectified value 63.66 V. Find its peak value.",
+answer: "100",
+solution: "For full-wave rectified sine, Vavg = 0.637Vm. Therefore Vm = 63.66/0.637 ≈ 100 V."
+},
+
+{
+q: "What is the form factor of a half-wave rectified sine wave?",
+answer: "1.57",
+solution: "RMS = Vm/2 and average = Vm/π. Therefore FF = (Vm/2)/(Vm/π) = π/2 ≈ 1.57."
+},
+
+{
+q: "What is the form factor of a full-wave rectified sine wave?",
+answer: "1.11",
+solution: "Full-wave rectification does not change the RMS value, while average value is 2Vm/π. Therefore FF ≈ 1.11."
+},
+
+{
+q: "A waveform has RMS value 80 V and average value 50 V. Find its form factor.",
+answer: "1.6",
+solution: "Form Factor = Vrms/Vavg = 80/50 = 1.6."
+},
+
+{
+q: "A waveform has RMS value 120 V and average value 100 V. Find its form factor.",
+answer: "1.2",
+solution: "Form Factor = 120/100 = 1.2."
+},
+
+/* =========================================================
+   31 - 40 : PEAK / CREST FACTOR
+========================================================= */
+
+{
+q: "Define peak factor of an AC waveform.",
+answer: "The ratio of maximum value to RMS value.",
+solution: "Peak Factor = Maximum Value / RMS Value."
+},
+
+{
+q: "Write the formula for peak factor.",
+answer: "Peak Factor = Vm/Vrms",
+solution: "Peak Factor = Vm/Vrms."
+},
+
+{
+q: "What is the peak factor of a sinusoidal waveform?",
+answer: "1.414",
+solution: "For a sine wave, Peak Factor = Vm/(Vm/√2) = √2 = 1.414."
+},
+
+{
+q: "A sinusoidal voltage has RMS value 230 V. Find its peak value.",
+answer: "325.27",
+solution: "Vm = √2 × Vrms = 1.414 × 230 = 325.27 V."
+},
+
+{
+q: "A sinusoidal current has RMS value 5 A. Find its peak value.",
+answer: "7.071",
+solution: "Im = √2 × Irms = 1.414 × 5 = 7.071 A."
+},
+
+{
+q: "A waveform has maximum value 100 V and RMS value 50 V. Find its peak factor.",
+answer: "2",
+solution: "Peak Factor = Vm/Vrms = 100/50 = 2."
+},
+
+{
+q: "A waveform has maximum value 200 V and RMS value 100 V. Find its peak factor.",
+answer: "2",
+solution: "Peak Factor = 200/100 = 2."
+},
+
+{
+q: "What is another name for peak factor?",
+answer: "Crest factor",
+solution: "Peak factor is also called crest factor."
+},
+
+{
+q: "What does a high peak factor indicate about an AC waveform?",
+answer: "The waveform has a high peak compared with its RMS value.",
+solution: "A high peak factor indicates that the waveform has a relatively large maximum value compared with its RMS value."
+},
+
+{
+q: "Why are form factor and peak factor useful?",
+answer: "They describe the shape and peak characteristics of an AC waveform.",
+solution: "Form factor indicates the relationship between RMS and average values, while peak factor indicates the relationship between peak and RMS values."
+},
+
+/* =========================================================
+   41 - 50 : DIFFERENT WAVEFORMS AND RECTIFICATION
+========================================================= */
+
+{
+q: "What is a half-wave rectified waveform?",
+answer: "A waveform in which only one half-cycle of the AC input is allowed to appear at the output.",
+solution: "A half-wave rectifier passes either the positive or negative half-cycle and blocks the other half-cycle."
+},
+
+{
+q: "What is a full-wave rectified waveform?",
+answer: "A waveform in which both half-cycles of the AC input appear as pulses of the same polarity.",
+solution: "A full-wave rectifier converts both positive and negative half-cycles into a unidirectional waveform."
+},
+
+{
+q: "Which has a higher average value for the same peak value: half-wave or full-wave rectified sine wave?",
+answer: "Full-wave rectified sine wave",
+solution: "Half-wave average = Vm/π, whereas full-wave average = 2Vm/π. Hence full-wave rectification gives twice the average value."
+},
+
+{
+q: "For the same peak voltage, compare the average values of half-wave and full-wave rectified sine waves.",
+answer: "Full-wave average value is twice the half-wave average value.",
+solution: "Half-wave: Vm/π. Full-wave: 2Vm/π. Therefore full-wave average is twice the half-wave average."
+},
+
+{
+q: "What is the RMS value of a half-wave rectified sine wave with peak value Vm?",
+answer: "Vm/2",
+solution: "The RMS value of a half-wave rectified sine wave is Vm/2."
+},
+
+{
+q: "What is the RMS value of a full-wave rectified sine wave with peak value Vm?",
+answer: "Vm/√2",
+solution: "The RMS value of a full-wave rectified sine wave is the same as that of the original sine wave: Vm/√2."
+},
+
+{
+q: "What is a square wave?",
+answer: "A periodic waveform that alternates between two constant levels.",
+solution: "A square wave consists of alternating high and low constant voltage or current levels."
+},
+
+{
+q: "What is a triangular waveform?",
+answer: "A periodic waveform having linearly increasing and decreasing portions.",
+solution: "A triangular wave has a linear rise followed by a linear fall, producing a triangular shape."
+},
+
+{
+q: "What is a sawtooth waveform?",
+answer: "A periodic waveform with a gradual linear rise or fall followed by a sudden change.",
+solution: "A sawtooth waveform consists of a linear ramp followed by an abrupt return to its initial value."
+},
+
+{
+q: "A sinusoidal waveform has peak value 141.4 V. Find its RMS value and peak factor.",
+answer: "RMS = 100 V, Peak Factor = 1.414",
+solution: "Vrms = 141.4/√2 = 100 V. Peak Factor = 141.4/100 = 1.414."
+}
+
+];
+
+
+/* =========================================================
+   DISPLAY QUESTIONS
+========================================================= */
+
+function renderQuestions() {
+
+    const container = document.getElementById("questions");
+
+    container.innerHTML = "";
+
+    questions.forEach((item, index) => {
+
+        const card = document.createElement("div");
+
+        card.className = "question-card";
+
+        card.innerHTML = `
+            <div class="question-title">
+                Question ${index + 1} <span class="unit">(2 Marks)</span>
+            </div>
+
+            <div class="question">
+                ${item.q}
+            </div>
+
+            <div class="answer-area">
+                <input
+                    type="text"
+                    class="answer"
+                    id="ans${index}"
+                    placeholder="Enter your answer">
+            </div>
+
+            <div
+                class="result"
+                id="result${index}">
+            </div>
+
+            <div
+                class="solution"
+                id="solution${index}">
+                <strong>Answer:</strong><br>
+                ${item.answer}
+                <br><br>
+                <strong>Explanation:</strong><br>
+                ${item.solution}
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+
+/* =========================================================
+   ANSWER CHECKING
+========================================================= */
+
+function normalize(text) {
+
+    return text
+        .toLowerCase()
+        .replace(/[.,]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+
+function checkAnswer(user, correct) {
+
+    if (!user) return false;
+
+    const u = normalize(user);
+    const c = normalize(correct);
+
+    /* Numerical answer */
+    const userNumber = parseFloat(
+        u.replace(/[^0-9.+-]/g, "")
+    );
+
+    const correctNumber = parseFloat(
+        c.replace(/[^0-9.+-]/g, "")
+    );
+
+    if (!isNaN(userNumber) && !isNaN(correctNumber)) {
+
+        const tolerance =
+            Math.max(0.05, Math.abs(correctNumber) * 0.02);
+
+        return Math.abs(userNumber - correctNumber) <= tolerance;
+    }
+
+    /* Text answer */
+    const keywords = c
+        .split(" ")
+        .filter(word => word.length > 3);
+
+    let matched = 0;
+
+    keywords.forEach(word => {
+
+        if (u.includes(word)) {
+            matched++;
+        }
+
+    });
+
+    return matched >= Math.max(1, Math.ceil(keywords.length * 0.35));
+}
+
+
+/* =========================================================
+   EVALUATE
+========================================================= */
+
+function evaluateTest() {
+
+    let totalMarks = 0;
+
+    questions.forEach((item, index) => {
+
+        const input =
+            document.getElementById("ans" + index);
+
+        const result =
+            document.getElementById("result" + index);
+
+        const userAnswer = input.value;
+
+        if (checkAnswer(userAnswer, item.answer)) {
+
+            totalMarks += 2;
+
+            result.innerHTML =
+                "✓ Correct – 2 Marks";
+
+            result.className =
+                "result correct";
+
+        } else {
+
+            result.innerHTML =
+                "✗ Incorrect – 0 Marks";
+
+            result.className =
+                "result wrong";
+        }
+    });
+
+    const percentage =
+        (totalMarks / 100) * 100;
+
+    let grade = "";
+
+    if (percentage >= 90)
+        grade = "Excellent";
+    else if (percentage >= 80)
+        grade = "Very Good";
+    else if (percentage >= 70)
+        grade = "Good";
+    else if (percentage >= 60)
+        grade = "Satisfactory";
+    else if (percentage >= 50)
+        grade = "Needs Improvement";
+    else
+        grade = "Needs More Practice";
+
+    document.getElementById("score").innerHTML =
+        "Score: " + totalMarks + " / 100";
+
+    document.getElementById("percentage").innerHTML =
+        "Percentage: " + percentage.toFixed(2) + "%";
+
+    document.getElementById("grade").innerHTML =
+        "Performance: " + grade;
+
+    document.getElementById("scoreBox").style.display =
+        "block";
+
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================================
+   SHOW ANSWERS
+========================================================= */
+
+function showAnswers() {
+
+    questions.forEach((item, index) => {
+
+        const solution =
+            document.getElementById("solution" + index);
+
+        solution.style.display = "block";
+    });
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetTest() {
+
+    questions.forEach((item, index) => {
+
+        document.getElementById("ans" + index).value = "";
+
+        document.getElementById("result" + index).innerHTML = "";
+
+        document.getElementById("result" + index).className =
+            "result";
+
+        document.getElementById("solution" + index).style.display =
+            "none";
+    });
+
+    document.getElementById("scoreBox").style.display =
+        "none";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+renderQuestions();
+
+</script>
+
+</body>
+</html>
+

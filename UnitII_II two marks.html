@@ -1,0 +1,923 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Steady-State AC Circuits - 50 Two Mark Questions</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+    color: #1f2937;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.header {
+    background: #17365d;
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0 0 10px;
+}
+
+.header p {
+    margin: 6px;
+}
+
+.instructions,
+.formula-box {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.formula-box {
+    border-left: 5px solid #17365d;
+    line-height: 1.8;
+}
+
+.question-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.08);
+}
+
+.question-title {
+    font-weight: bold;
+    color: #17365d;
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+.question {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.answer-area {
+    margin-top: 15px;
+}
+
+.answer {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    border: 1px solid #aab4c3;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.result {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.correct {
+    color: #16803c;
+}
+
+.wrong {
+    color: #c62828;
+}
+
+.solution {
+    display: none;
+    margin-top: 12px;
+    padding: 14px;
+    background: #f1f5f9;
+    border-left: 4px solid #17365d;
+    line-height: 1.6;
+}
+
+.buttons {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding: 18px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 -3px 12px rgba(0,0,0,0.12);
+    text-align: center;
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    margin: 5px;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.evaluate {
+    background: #17365d;
+    color: white;
+}
+
+.answers-btn {
+    background: #2e7d32;
+    color: white;
+}
+
+.reset {
+    background: #b71c1c;
+    color: white;
+}
+
+.score-box {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid #17365d;
+}
+
+.score {
+    font-size: 28px;
+    font-weight: bold;
+    color: #17365d;
+}
+
+.grade {
+    font-size: 20px;
+    margin-top: 8px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+    <h1>Steady-State AC Circuits</h1>
+    <p>R, L, C, R-L, R-C, R-L-C • Complex Notation • Phasors • Power • Power Factor</p>
+    <p>50 Questions | 2 Marks Each | Maximum Marks: 100</p>
+</div>
+
+<div class="instructions">
+
+<strong>Instructions</strong>
+
+<ul>
+<li>Answer all 50 questions.</li>
+<li>Each question carries 2 marks.</li>
+<li>For numerical questions, enter only the numerical answer.</li>
+<li>For theory questions, enter the key term or short definition.</li>
+<li>Click <b>Evaluate</b> to calculate the score.</li>
+<li>Click <b>Show Answers</b> to display the answers and solutions.</li>
+</ul>
+
+</div>
+
+<div class="formula-box">
+
+<h3>Important Formulae</h3>
+
+<b>Inductive Reactance:</b>
+X<sub>L</sub> = 2πfL
+
+<br>
+
+<b>Capacitive Reactance:</b>
+X<sub>C</sub> = 1/(2πfC)
+
+<br>
+
+<b>Impedance of Series R-L:</b>
+Z = R + jX<sub>L</sub>
+
+<br>
+
+<b>Impedance of Series R-C:</b>
+Z = R - jX<sub>C</sub>
+
+<br>
+
+<b>Impedance of Series R-L-C:</b>
+Z = R + j(X<sub>L</sub> - X<sub>C</sub>)
+
+<br>
+
+<b>Magnitude:</b>
+|Z| = √(R² + X²)
+
+<br>
+
+<b>Ohm's Law for AC:</b>
+I = V/Z
+
+<br>
+
+<b>Real Power:</b>
+P = VI cosφ
+
+<br>
+
+<b>Reactive Power:</b>
+Q = VI sinφ
+
+<br>
+
+<b>Apparent Power:</b>
+S = VI
+
+<br>
+
+<b>Power Factor:</b>
+cosφ = P/S
+
+</div>
+
+<div id="questions"></div>
+
+<div class="buttons">
+
+<button class="evaluate" onclick="evaluateTest()">
+Evaluate
+</button>
+
+<button class="answers-btn" onclick="showAnswers()">
+Show Answers
+</button>
+
+<button class="reset" onclick="resetTest()">
+Reset
+</button>
+
+<div id="scoreBox" class="score-box">
+
+<div class="score" id="score"></div>
+
+<div id="percentage"></div>
+
+<div class="grade" id="grade"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const questions = [
+
+/* =========================================================
+   1 - 10 : BASIC THEORY
+========================================================= */
+
+{
+q:"What is meant by steady-state AC circuit analysis?",
+answer:"Analysis of an AC circuit after transient effects have disappeared.",
+solution:"Steady-state analysis determines voltage, current, phase angle and power after all transient components have vanished."
+},
+
+{
+q:"Define impedance of an AC circuit.",
+answer:"Impedance is the total opposition offered by an AC circuit to current flow.",
+solution:"Impedance is represented by Z and is measured in ohms. It includes resistance and reactance."
+},
+
+{
+q:"What is the impedance of a pure resistor?",
+answer:"Z = R",
+solution:"For a pure resistor, impedance is purely real: Z = R."
+},
+
+{
+q:"What is the impedance of a pure inductor?",
+answer:"Z = jXL",
+solution:"For an ideal inductor, Z = jXL, where XL = 2πfL."
+},
+
+{
+q:"What is the impedance of a pure capacitor?",
+answer:"Z = -jXC",
+solution:"For an ideal capacitor, Z = -jXC, where XC = 1/(2πfC)."
+},
+
+{
+q:"Define inductive reactance.",
+answer:"Opposition offered by an inductor to AC current.",
+solution:"Inductive reactance is XL = 2πfL and is measured in ohms."
+},
+
+{
+q:"Define capacitive reactance.",
+answer:"Opposition offered by a capacitor to AC current.",
+solution:"Capacitive reactance is XC = 1/(2πfC) and is measured in ohms."
+},
+
+{
+q:"What is the phase relationship between voltage and current in a pure resistor?",
+answer:"Voltage and current are in phase.",
+solution:"For a pure resistor, φ = 0° and voltage and current are in phase."
+},
+
+{
+q:"What is the phase relationship between voltage and current in a pure inductor?",
+answer:"Current lags voltage by 90°.",
+solution:"In a pure inductive circuit, current lags voltage by 90°."
+},
+
+{
+q:"What is the phase relationship between voltage and current in a pure capacitor?",
+answer:"Current leads voltage by 90°.",
+solution:"In a pure capacitive circuit, current leads voltage by 90°."
+},
+
+/* =========================================================
+   11 - 20 : COMPLEX NOTATION
+========================================================= */
+
+{
+q:"What is meant by complex notation in AC circuit analysis?",
+answer:"Representing AC quantities using real and imaginary components.",
+solution:"Complex notation represents quantities such as impedance using rectangular or polar form, for example Z = R + jX."
+},
+
+{
+q:"What does the symbol j represent in AC circuit analysis?",
+answer:"The imaginary unit √(-1).",
+solution:"The symbol j is used instead of i in electrical engineering to represent √(-1)."
+},
+
+{
+q:"Convert 3 + j4 Ω into polar form.",
+answer:"5∠53.13° Ω",
+solution:"Magnitude = √(3²+4²) = 5 Ω. Angle = tan⁻¹(4/3) = 53.13°."
+},
+
+{
+q:"Convert 5∠0° Ω into rectangular form.",
+answer:"5 + j0 Ω",
+solution:"5∠0° = 5(cos0° + j sin0°) = 5 + j0 Ω."
+},
+
+{
+q:"Convert 4 - j3 Ω into polar form.",
+answer:"5∠-36.87° Ω",
+solution:"Magnitude = √(4²+3²) = 5 Ω. Angle = tan⁻¹(-3/4) = -36.87°."
+},
+
+{
+q:"Convert 10∠90° Ω into rectangular form.",
+answer:"j10 Ω",
+solution:"10∠90° = 10(cos90° + j sin90°) = j10 Ω."
+},
+
+{
+q:"Write the complex impedance of a series R-L circuit.",
+answer:"Z = R + jXL",
+solution:"The resistor contributes R and the inductor contributes jXL. Hence Z = R + jXL."
+},
+
+{
+q:"Write the complex impedance of a series R-C circuit.",
+answer:"Z = R - jXC",
+solution:"The capacitor has negative reactance in complex notation, so Z = R - jXC."
+},
+
+{
+q:"Write the complex impedance of a series R-L-C circuit.",
+answer:"Z = R + j(XL-XC)",
+solution:"The net reactance is XL - XC, giving Z = R + j(XL-XC)."
+},
+
+{
+q:"What is the difference between rectangular and polar form of an AC phasor?",
+answer:"Rectangular form uses real and imaginary components; polar form uses magnitude and phase angle.",
+solution:"Rectangular: a + jb. Polar: M∠θ."
+},
+
+/* =========================================================
+   21 - 30 : REACTANCE AND IMPEDANCE NUMERICALS
+========================================================= */
+
+{
+q:"A 0.1 H inductor is connected to a 50 Hz AC supply. Find its inductive reactance.",
+answer:"31.42 Ω",
+solution:"XL = 2πfL = 2π(50)(0.1) = 31.42 Ω."
+},
+
+{
+q:"A 0.2 H inductor is connected to a 50 Hz supply. Find XL.",
+answer:"62.83 Ω",
+solution:"XL = 2π(50)(0.2) = 62.83 Ω."
+},
+
+{
+q:"A 100 μF capacitor is connected to a 50 Hz supply. Find its capacitive reactance.",
+answer:"31.83 Ω",
+solution:"XC = 1/(2πfC) = 1/[2π(50)(100×10⁻⁶)] = 31.83 Ω."
+},
+
+{
+q:"A 50 μF capacitor is connected to a 50 Hz supply. Find XC.",
+answer:"63.66 Ω",
+solution:"XC = 1/[2π(50)(50×10⁻⁶)] = 63.66 Ω."
+},
+
+{
+q:"A series R-L circuit has R = 6 Ω and XL = 8 Ω. Find the magnitude of impedance.",
+answer:"10 Ω",
+solution:"|Z| = √(R²+XL²) = √(36+64) = 10 Ω."
+},
+
+{
+q:"A series R-C circuit has R = 12 Ω and XC = 5 Ω. Find |Z|.",
+answer:"13 Ω",
+solution:"|Z| = √(12²+5²) = √169 = 13 Ω."
+},
+
+{
+q:"A series R-L circuit has R = 8 Ω and XL = 6 Ω. Find the impedance angle.",
+answer:"36.87°",
+solution:"φ = tan⁻¹(XL/R) = tan⁻¹(6/8) = 36.87°."
+},
+
+{
+q:"A series R-C circuit has R = 8 Ω and XC = 6 Ω. Find the impedance angle.",
+answer:"-36.87°",
+solution:"φ = -tan⁻¹(XC/R) = -tan⁻¹(6/8) = -36.87°."
+},
+
+{
+q:"A series R-L circuit has R = 3 Ω and XL = 4 Ω. Find its impedance magnitude.",
+answer:"5 Ω",
+solution:"|Z| = √(3²+4²) = 5 Ω."
+},
+
+{
+q:"A series R-L-C circuit has R = 8 Ω, XL = 10 Ω and XC = 4 Ω. Find the impedance magnitude.",
+answer:"10 Ω",
+solution:"Net reactance = 10-4 = 6 Ω. |Z| = √(8²+6²) = 10 Ω."
+},
+
+/* =========================================================
+   31 - 40 : SERIES AND PARALLEL CIRCUITS
+========================================================= */
+
+{
+q:"Two resistors 6 Ω and 4 Ω are connected in series. Find the total impedance.",
+answer:"10 Ω",
+solution:"For series resistors, Z = R1 + R2 = 6+4 = 10 Ω."
+},
+
+{
+q:"A 10 Ω resistor and an inductive reactance of 10 Ω are connected in series. Find |Z|.",
+answer:"14.14 Ω",
+solution:"|Z| = √(10²+10²) = 14.14 Ω."
+},
+
+{
+q:"A 12 Ω resistor and capacitive reactance of 5 Ω are connected in series. Find |Z|.",
+answer:"13 Ω",
+solution:"|Z| = √(12²+5²) = 13 Ω."
+},
+
+{
+q:"A series R-L circuit has Z = 10 Ω and R = 8 Ω. Find XL.",
+answer:"6 Ω",
+solution:"Z² = R²+XL². XL = √(100-64) = 6 Ω."
+},
+
+{
+q:"A series R-C circuit has Z = 13 Ω and R = 12 Ω. Find XC.",
+answer:"5 Ω",
+solution:"XC = √(13²-12²) = √25 = 5 Ω."
+},
+
+{
+q:"A series R-L circuit has a 100 V supply and impedance 20 Ω. Find current.",
+answer:"5 A",
+solution:"I = V/Z = 100/20 = 5 A."
+},
+
+{
+q:"A series R-C circuit has a 120 V supply and impedance 30 Ω. Find current.",
+answer:"4 A",
+solution:"I = V/Z = 120/30 = 4 A."
+},
+
+{
+q:"Two impedances 4 Ω and j3 Ω are connected in series. Find the magnitude of total impedance.",
+answer:"5 Ω",
+solution:"Z = 4+j3. |Z| = √(4²+3²) = 5 Ω."
+},
+
+{
+q:"Two parallel resistors of 6 Ω and 3 Ω are connected across an AC source. Find equivalent resistance.",
+answer:"2 Ω",
+solution:"Req = (6×3)/(6+3) = 18/9 = 2 Ω."
+},
+
+{
+q:"Two equal impedances of 10 Ω are connected in parallel. Find equivalent impedance.",
+answer:"5 Ω",
+solution:"For two equal impedances in parallel, Z_eq = Z/2 = 10/2 = 5 Ω."
+},
+
+/* =========================================================
+   41 - 50 : PHASORS, POWER AND POWER FACTOR
+========================================================= */
+
+{
+q:"What is a phasor?",
+answer:"A rotating vector representation of a sinusoidal quantity.",
+solution:"A phasor represents the magnitude and phase angle of a sinusoidal voltage or current."
+},
+
+{
+q:"What is a phasor diagram?",
+answer:"A graphical representation of the magnitude and phase relationship of AC quantities.",
+solution:"Phasor diagrams show AC voltage and current quantities as vectors with their relative phase angles."
+},
+
+{
+q:"In a pure inductive circuit, what is the power factor?",
+answer:"Zero lagging",
+solution:"In a pure inductor, φ = 90°. Therefore cos90° = 0, and the power factor is zero lagging."
+},
+
+{
+q:"In a pure capacitive circuit, what is the power factor?",
+answer:"Zero leading",
+solution:"In a pure capacitor, φ = -90°. Therefore the power factor is zero leading."
+},
+
+{
+q:"What is the power factor of a pure resistive circuit?",
+answer:"1",
+solution:"Voltage and current are in phase, so φ = 0°. Therefore cosφ = 1."
+},
+
+{
+q:"A single-phase AC load draws 10 A from a 230 V supply at 0.8 power factor. Find real power.",
+answer:"1840 W",
+solution:"P = VI cosφ = 230×10×0.8 = 1840 W."
+},
+
+{
+q:"An AC circuit operates at 230 V and 5 A. Find apparent power.",
+answer:"1150 VA",
+solution:"S = VI = 230×5 = 1150 VA."
+},
+
+{
+q:"An AC load consumes 800 W and has apparent power 1000 VA. Find power factor.",
+answer:"0.8",
+solution:"Power factor = P/S = 800/1000 = 0.8."
+},
+
+{
+q:"A load takes 10 A from a 200 V supply at 0.6 lagging power factor. Find reactive power.",
+answer:"1600 VAR",
+solution:"sinφ = √(1-0.6²) = 0.8. Q = VI sinφ = 200×10×0.8 = 1600 VAR."
+},
+
+{
+q:"An AC load has resistance 8 Ω and reactance 6 Ω. Find its power factor.",
+answer:"0.8",
+solution:"|Z| = √(8²+6²) = 10 Ω. Power factor = R/|Z| = 8/10 = 0.8 lagging."
+}
+
+];
+
+
+/* =========================================================
+   RENDER QUESTIONS
+========================================================= */
+
+function renderQuestions() {
+
+    const container =
+        document.getElementById("questions");
+
+    container.innerHTML = "";
+
+    questions.forEach((item,index) => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "question-card";
+
+        card.innerHTML = `
+
+            <div class="question-title">
+                Question ${index+1}
+                <span style="color:#555;">
+                    (2 Marks)
+                </span>
+            </div>
+
+            <div class="question">
+                ${item.q}
+            </div>
+
+            <div class="answer-area">
+
+                <input
+                    type="text"
+                    class="answer"
+                    id="ans${index}"
+                    placeholder="Enter your answer">
+
+            </div>
+
+            <div
+                class="result"
+                id="result${index}">
+            </div>
+
+            <div
+                class="solution"
+                id="solution${index}">
+
+                <strong>Answer:</strong>
+                ${item.answer}
+
+                <br><br>
+
+                <strong>Solution:</strong>
+                ${item.solution}
+
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+
+/* =========================================================
+   NORMALIZE
+========================================================= */
+
+function normalize(text) {
+
+    return text
+        .toLowerCase()
+        .replace(/,/g,"")
+        .replace(/\s+/g," ")
+        .trim();
+
+}
+
+
+/* =========================================================
+   CHECK ANSWER
+========================================================= */
+
+function checkAnswer(user,correct) {
+
+    if(!user.trim())
+        return false;
+
+    const u =
+        normalize(user);
+
+    const c =
+        normalize(correct);
+
+    /*
+       Try numerical comparison
+    */
+
+    const userNumber =
+        parseFloat(
+            u.replace(/[^0-9.+-]/g,"")
+        );
+
+    const correctNumber =
+        parseFloat(
+            c.replace(/[^0-9.+-]/g,"")
+        );
+
+    if(!isNaN(userNumber) &&
+       !isNaN(correctNumber)) {
+
+        const tolerance =
+            Math.max(
+                0.05,
+                Math.abs(correctNumber)*0.02
+            );
+
+        return Math.abs(
+            userNumber-correctNumber
+        ) <= tolerance;
+    }
+
+    /*
+       Text comparison using keywords
+    */
+
+    const keywords =
+        c.split(" ")
+         .filter(word => word.length > 3);
+
+    let matched = 0;
+
+    keywords.forEach(word => {
+
+        if(u.includes(word))
+            matched++;
+
+    });
+
+    return matched >=
+        Math.max(
+            1,
+            Math.ceil(keywords.length*0.35)
+        );
+}
+
+
+/* =========================================================
+   EVALUATE
+========================================================= */
+
+function evaluateTest() {
+
+    let totalMarks = 0;
+
+    questions.forEach((item,index) => {
+
+        const input =
+            document.getElementById(
+                "ans"+index
+            );
+
+        const result =
+            document.getElementById(
+                "result"+index
+            );
+
+        if(
+            checkAnswer(
+                input.value,
+                item.answer
+            )
+        ) {
+
+            totalMarks += 2;
+
+            result.innerHTML =
+                "✓ Correct – 2 Marks";
+
+            result.className =
+                "result correct";
+
+        }
+        else {
+
+            result.innerHTML =
+                "✗ Incorrect – 0 Marks";
+
+            result.className =
+                "result wrong";
+        }
+
+    });
+
+    const percentage =
+        totalMarks;
+
+    let grade = "";
+
+    if(percentage >= 90)
+        grade = "Excellent";
+
+    else if(percentage >= 80)
+        grade = "Very Good";
+
+    else if(percentage >= 70)
+        grade = "Good";
+
+    else if(percentage >= 60)
+        grade = "Satisfactory";
+
+    else if(percentage >= 50)
+        grade = "Needs Improvement";
+
+    else
+        grade = "Needs More Practice";
+
+
+    document.getElementById("score").innerHTML =
+        "Score: " + totalMarks + " / 100";
+
+    document.getElementById("percentage").innerHTML =
+        "Percentage: " +
+        percentage.toFixed(2) +
+        "%";
+
+    document.getElementById("grade").innerHTML =
+        "Performance: " +
+        grade;
+
+    document.getElementById("scoreBox")
+        .style.display = "block";
+
+    window.scrollTo({
+        top:document.body.scrollHeight,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   SHOW ANSWERS
+========================================================= */
+
+function showAnswers() {
+
+    questions.forEach((item,index) => {
+
+        document.getElementById(
+            "solution"+index
+        ).style.display = "block";
+
+    });
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetTest() {
+
+    questions.forEach((item,index) => {
+
+        document.getElementById(
+            "ans"+index
+        ).value = "";
+
+        document.getElementById(
+            "result"+index
+        ).innerHTML = "";
+
+        document.getElementById(
+            "result"+index
+        ).className = "result";
+
+        document.getElementById(
+            "solution"+index
+        ).style.display = "none";
+
+    });
+
+    document.getElementById(
+        "scoreBox"
+    ).style.display = "none";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+renderQuestions();
+
+</script>
+
+</body>
+</html>
+
