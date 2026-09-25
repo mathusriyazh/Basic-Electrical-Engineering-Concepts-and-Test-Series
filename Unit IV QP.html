@@ -1,0 +1,4986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Unit IV Question Bank - Electrical Supply System</title>
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+
+    --bg:#03080d;
+    --panel:#07131d;
+    --panel2:#0a1b28;
+
+    --cyan:#27d9ff;
+    --green:#45f59a;
+    --yellow:#ffd166;
+    --orange:#ff9f43;
+    --red:#ff5c7a;
+    --blue:#5da9ff;
+
+    --text:#eaf7ff;
+    --muted:#9bb5c6;
+
+    --border:#18384b;
+
+}
+
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    margin:0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(39,217,255,.09),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(69,245,154,.06),
+            transparent 30%
+        ),
+
+        var(--bg);
+
+    color:var(--text);
+
+    line-height:1.6;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+
+    padding:
+        30px 15px;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #071824,
+            #03080d
+        );
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+}
+
+header h1{
+
+    margin:0;
+
+    color:var(--cyan);
+
+    font-size:
+        clamp(
+            28px,
+            5vw,
+            48px
+        );
+
+    text-shadow:
+        0 0 20px
+        rgba(39,217,255,.35);
+
+}
+
+header h2{
+
+    color:var(--green);
+
+    margin:
+        5px 0;
+
+}
+
+header p{
+
+    color:var(--muted);
+
+    margin:
+        5px 0;
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.container{
+
+    width:
+        min(1250px,96%);
+
+    margin:auto;
+
+    padding-bottom:60px;
+
+}
+
+
+/* =========================================================
+   SET TABS
+========================================================= */
+
+.set-tabs{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin:
+        20px 0;
+
+    padding:10px;
+
+    background:#06111a;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:14px;
+
+}
+
+.set-button{
+
+    flex:
+        1 1 150px;
+
+    padding:
+        13px;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:#081923;
+
+    color:var(--muted);
+
+    border-radius:9px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.set-button:hover{
+
+    color:var(--cyan);
+
+    border-color:
+        var(--cyan);
+
+}
+
+.set-button.active{
+
+    background:
+        var(--cyan);
+
+    color:#001018;
+
+    border-color:
+        var(--cyan);
+
+    box-shadow:
+        0 0 18px
+        rgba(39,217,255,.35);
+
+}
+
+
+/* =========================================================
+   SET
+========================================================= */
+
+.question-set{
+
+    display:none;
+
+}
+
+.question-set.active{
+
+    display:block;
+
+    animation:
+        fadeIn
+        .35s
+        ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(8px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--panel),
+            #041019
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:15px;
+
+    padding:22px;
+
+    margin:
+        20px 0;
+
+    box-shadow:
+        0 0 25px
+        rgba(39,217,255,.06);
+
+}
+
+.card h2{
+
+    color:var(--green);
+
+    margin-top:0;
+
+}
+
+.card h3{
+
+    color:var(--yellow);
+
+}
+
+
+/* =========================================================
+   PAPER INFORMATION
+========================================================= */
+
+.paper-info{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(200px,1fr)
+        );
+
+    gap:12px;
+
+}
+
+.info-box{
+
+    padding:15px;
+
+    background:
+        var(--panel2);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:10px;
+
+}
+
+.info-box strong{
+
+    color:var(--cyan);
+
+}
+
+
+/* =========================================================
+   QUESTION
+========================================================= */
+
+.question{
+
+    padding:20px;
+
+    margin:
+        18px 0;
+
+    background:
+        #041019;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:13px;
+
+    transition:.25s;
+
+}
+
+.question:hover{
+
+    border-color:
+        #286079;
+
+}
+
+.question-number{
+
+    color:var(--cyan);
+
+    font-weight:bold;
+
+    font-size:18px;
+
+}
+
+.question-type{
+
+    display:inline-block;
+
+    margin-left:8px;
+
+    padding:
+        3px 8px;
+
+    border-radius:20px;
+
+    font-size:11px;
+
+    background:
+        #123247;
+
+    color:var(--yellow);
+
+}
+
+.marks{
+
+    float:right;
+
+    color:var(--green);
+
+    font-weight:bold;
+
+}
+
+.question-text{
+
+    font-size:17px;
+
+    margin:
+        12px 0;
+
+}
+
+
+/* =========================================================
+   ANSWER AREA
+========================================================= */
+
+.answer-box{
+
+    width:100%;
+
+    min-height:130px;
+
+    resize:vertical;
+
+    padding:13px;
+
+    border:
+        1px solid
+        #21485d;
+
+    border-radius:9px;
+
+    background:#02090e;
+
+    color:white;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:15px;
+
+    line-height:1.6;
+
+}
+
+.answer-box:focus{
+
+    outline:none;
+
+    border-color:
+        var(--cyan);
+
+    box-shadow:
+        0 0 10px
+        rgba(39,217,255,.15);
+
+}
+
+
+/* =========================================================
+   SOLUTION
+========================================================= */
+
+.solution{
+
+    display:none;
+
+    margin-top:15px;
+
+    padding:18px;
+
+    border:
+        1px solid
+        var(--green);
+
+    border-radius:10px;
+
+    background:
+        rgba(69,245,154,.05);
+
+}
+
+.solution.show{
+
+    display:block;
+
+    animation:
+        fadeIn .3s ease;
+
+}
+
+.solution-title{
+
+    color:var(--green);
+
+    font-weight:bold;
+
+    font-size:17px;
+
+}
+
+.solution-step{
+
+    margin:
+        8px 0;
+
+}
+
+.formula{
+
+    margin:
+        12px 0;
+
+    padding:13px;
+
+    background:#02070b;
+
+    border:
+        1px solid
+        #1d4256;
+
+    border-radius:9px;
+
+    text-align:center;
+
+    color:var(--yellow);
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+
+/* =========================================================
+   EVALUATION
+========================================================= */
+
+.evaluation{
+
+    display:none;
+
+    margin-top:15px;
+
+    padding:15px;
+
+    border-radius:10px;
+
+}
+
+.evaluation.show{
+
+    display:block;
+
+}
+
+.correct{
+
+    background:
+        rgba(69,245,154,.08);
+
+    border:
+        1px solid
+        var(--green);
+
+    color:var(--green);
+
+}
+
+.partial{
+
+    background:
+        rgba(255,209,102,.08);
+
+    border:
+        1px solid
+        var(--yellow);
+
+    color:var(--yellow);
+
+}
+
+.incorrect{
+
+    background:
+        rgba(255,92,122,.08);
+
+    border:
+        1px solid
+        var(--red);
+
+    color:var(--red);
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+button{
+
+    border:0;
+
+    border-radius:8px;
+
+    padding:
+        10px 17px;
+
+    margin:
+        4px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    background:
+        var(--cyan);
+
+    color:#001018;
+
+    transition:.2s;
+
+}
+
+button:hover{
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 0 15px
+        rgba(39,217,255,.3);
+
+}
+
+.btn-green{
+
+    background:
+        var(--green);
+
+}
+
+.btn-yellow{
+
+    background:
+        var(--yellow);
+
+}
+
+.btn-red{
+
+    background:
+        var(--red);
+
+}
+
+.btn-blue{
+
+    background:
+        var(--blue);
+
+}
+
+.btn-dark{
+
+    background:
+        #173445;
+
+    color:white;
+
+}
+
+
+/* =========================================================
+   TOP ACTIONS
+========================================================= */
+
+.action-bar{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:8px;
+
+    padding:
+        10px 0;
+
+    margin-bottom:10px;
+
+}
+
+
+/* =========================================================
+   SCORE
+========================================================= */
+
+.score-card{
+
+    display:none;
+
+    padding:25px;
+
+    text-align:center;
+
+    border:
+        1px solid
+        var(--green);
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #071c16,
+            #041019
+        );
+
+}
+
+.score-card.show{
+
+    display:block;
+
+}
+
+.score{
+
+    font-size:42px;
+
+    color:var(--green);
+
+    font-weight:bold;
+
+}
+
+.score-message{
+
+    font-size:18px;
+
+    color:var(--yellow);
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-container{
+
+    width:100%;
+
+    height:12px;
+
+    background:#10232e;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin:
+        10px 0 20px;
+
+}
+
+.progress-bar{
+
+    height:100%;
+
+    width:0%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--green)
+        );
+
+    transition:.4s;
+
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+th,td{
+
+    border:
+        1px solid
+        var(--border);
+
+    padding:10px;
+
+    text-align:left;
+
+}
+
+th{
+
+    background:#0b2636;
+
+    color:var(--cyan);
+
+}
+
+
+/* =========================================================
+   SYLLABUS
+========================================================= */
+
+.syllabus-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(230px,1fr)
+        );
+
+    gap:12px;
+
+}
+
+.syllabus-item{
+
+    padding:15px;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:#06131c;
+
+    border-radius:10px;
+
+}
+
+.syllabus-item strong{
+
+    color:var(--cyan);
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:700px){
+
+    .marks{
+
+        float:none;
+
+        display:block;
+
+        margin-top:5px;
+
+    }
+
+    .set-button{
+
+        flex:
+            1 1 45%;
+
+    }
+
+    .question-text{
+
+        font-size:15px;
+
+    }
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+    body{
+
+        background:white;
+
+        color:black;
+
+    }
+
+    .set-tabs,
+    .action-bar,
+    button{
+
+        display:none!important;
+
+    }
+
+    .question-set{
+
+        display:block!important;
+
+    }
+
+    .card,
+    .question{
+
+        background:white;
+
+        color:black;
+
+        box-shadow:none;
+
+    }
+
+    .solution{
+
+        display:block!important;
+
+        color:black;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header>
+
+<h1>UNIT – IV</h1>
+
+<h2>Electrical Supply System</h2>
+
+<p>
+Question Paper &nbsp;|&nbsp;
+Set 1 – Set 5
+</p>
+
+<p>
+Theory + Numerical Problems
+</p>
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- =========================================================
+     SYLLABUS
+========================================================= -->
+
+<div class="card">
+
+<h2>Unit IV – Question Paper Coverage</h2>
+
+<div class="syllabus-grid">
+
+<div class="syllabus-item">
+
+<strong>1.</strong>
+
+Domestic wiring and accessories
+
+</div>
+
+<div class="syllabus-item">
+
+<strong>2.</strong>
+
+Basic principles of earthing
+
+</div>
+
+<div class="syllabus-item">
+
+<strong>3.</strong>
+
+General safety requirements
+
+</div>
+
+<div class="syllabus-item">
+
+<strong>4.</strong>
+
+Single-line diagram of electric power supply system
+
+</div>
+
+<div class="syllabus-item">
+
+<strong>5.</strong>
+
+Single-phase supply system
+
+</div>
+
+<div class="syllabus-item">
+
+<strong>6.</strong>
+
+Three-phase supply system
+
+</div>
+
+<div class="syllabus-item">
+
+<strong>7.</strong>
+
+Electrical loads and power rating
+
+</div>
+
+<div class="syllabus-item">
+
+<strong>8.</strong>
+
+Star rating
+
+</div>
+
+<div class="syllabus-item">
+
+<strong>9.</strong>
+
+Line and phase relationships of balanced loads
+
+</div>
+
+<div class="syllabus-item">
+
+<strong>10.</strong>
+
+Energy consumption
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     SET TABS
+========================================================= -->
+
+<div class="set-tabs">
+
+<button
+class="set-button active"
+onclick="openSet(1,this)">
+QUESTION SET – 1
+</button>
+
+<button
+class="set-button"
+onclick="openSet(2,this)">
+QUESTION SET – 2
+</button>
+
+<button
+class="set-button"
+onclick="openSet(3,this)">
+QUESTION SET – 3
+</button>
+
+<button
+class="set-button"
+onclick="openSet(4,this)">
+QUESTION SET – 4
+</button>
+
+<button
+class="set-button"
+onclick="openSet(5,this)">
+QUESTION SET – 5
+</button>
+
+</div>
+
+
+
+<!-- =========================================================
+     SET 1
+========================================================= -->
+
+<div
+id="set1"
+class="question-set active">
+
+<div class="card">
+
+<h2>Question Paper – Set 1</h2>
+
+<div class="paper-info">
+
+<div class="info-box">
+<strong>Unit:</strong><br>
+IV – Electrical Supply System
+</div>
+
+<div class="info-box">
+<strong>Set:</strong><br>
+1
+</div>
+
+<div class="info-box">
+<strong>Questions:</strong><br>
+10
+</div>
+
+<div class="info-box">
+<strong>Mode:</strong><br>
+Theory + Numerical
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Q1 -->
+
+<div class="question"
+data-set="1"
+data-q="1"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">
+Q1.
+</span>
+
+<span class="question-type">
+THEORY
+</span>
+
+<span class="marks">
+5 Marks
+</span>
+
+<div class="question-text">
+
+Explain the basic principles of domestic wiring and list the
+important wiring accessories used in a domestic electrical installation.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer here..."></textarea>
+
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<p>
+Domestic wiring is the arrangement of conductors, protective devices,
+switches and accessories used for distributing electrical energy
+safely within a building.
+</p>
+
+<ul>
+
+<li>Conductors should be of suitable current-carrying capacity.</li>
+
+<li>Switches should normally be connected in the phase conductor.</li>
+
+<li>Suitable protective devices should be provided.</li>
+
+<li>Equipment bodies should be properly earthed.</li>
+
+<li>Wiring should be properly insulated and mechanically protected.</li>
+
+</ul>
+
+<p>
+Common accessories include switches, socket outlets, plugs, fuses,
+MCBs, RCCBs, distribution boards and energy meters.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<!-- Q2 -->
+
+<div class="question"
+data-set="1"
+data-q="2"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q2.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain the purpose of earthing. State the important safety
+requirements associated with an electrical installation.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer here..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<ul>
+
+<li>Earthing provides a low-resistance path for fault current.</li>
+
+<li>It reduces the risk of electric shock.</li>
+
+<li>It allows protective devices to operate during faults.</li>
+
+<li>Exposed conductive parts should be connected to protective earth.</li>
+
+<li>Earthing conductors should be properly sized and mechanically protected.</li>
+
+<li>Earthing connections should be inspected and maintained periodically.</li>
+
+</ul>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<!-- Q3 -->
+
+<div class="question"
+data-set="1"
+data-q="3"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q3.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Draw and explain the single-line diagram of an electrical power
+supply system from generating station to consumers.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Describe the diagram and explain each stage..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+Generating Station → Step-up Transformer →
+Transmission → Receiving Station →
+Substation → Distribution → Consumer
+
+</div>
+
+<p>
+The generating station produces electrical power. A step-up transformer
+raises the voltage for transmission. High-voltage transmission carries
+power over long distances. At the receiving station and substations,
+the voltage is progressively reduced. Distribution systems then supply
+consumers.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<!-- Q4 Numerical -->
+
+<div class="question"
+data-set="1"
+data-q="4"
+data-type="numerical"
+data-marks="5"
+data-answer="5.75"
+data-tolerance="0.05">
+
+<span class="question-number">Q4.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A single-phase heater is rated at 230 V and consumes 1322.5 W.
+Calculate the current drawn by the heater.
+
+</div>
+
+<div class="formula">
+
+I = P / V
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Show your calculation and final answer with unit..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="solution-step">
+
+Given:
+
+<br>
+
+V = 230 V
+
+<br>
+
+P = 1322.5 W
+
+</div>
+
+<div class="formula">
+
+I = P / V
+
+</div>
+
+<div class="formula">
+
+I = 1322.5 / 230
+
+= 5.75 A
+
+</div>
+
+<p>
+<strong>Answer: 5.75 A</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<!-- Q5 Numerical -->
+
+<div class="question"
+data-set="1"
+data-q="5"
+data-type="numerical"
+data-marks="5"
+data-answer="7.5"
+data-tolerance="0.05">
+
+<span class="question-number">Q5.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A balanced three-phase load is supplied at 415 V line voltage.
+The line current is 7.5 A and the power factor is 0.8.
+Calculate the total three-phase power.
+
+</div>
+
+<div class="formula">
+
+P = √3 V<sub>L</sub>I<sub>L</sub> cosφ
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Show your calculation..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+P =
+√3 × 415 × 7.5 × 0.8
+
+</div>
+
+<div class="formula">
+
+P ≈ 4314 W
+
+</div>
+
+<p>
+Therefore,
+
+<strong>
+P ≈ 4.31 kW
+</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<!-- Q6 -->
+
+<div class="question"
+data-set="1"
+data-q="6"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q6.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Differentiate between single-phase and three-phase supply systems.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write the differences..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<table>
+
+<tr>
+<th>Single Phase</th>
+<th>Three Phase</th>
+</tr>
+
+<tr>
+<td>One alternating voltage</td>
+<td>Three voltages displaced by 120°</td>
+</tr>
+
+<tr>
+<td>Suitable for domestic/light loads</td>
+<td>Suitable for larger and industrial loads</td>
+</tr>
+
+<tr>
+<td>Lower power transfer capability</td>
+<td>Higher power transfer capability</td>
+</tr>
+
+<tr>
+<td>Single-phase motors may be used</td>
+<td>Three-phase motors are widely used</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<!-- Q7 Numerical -->
+
+<div class="question"
+data-set="1"
+data-q="7"
+data-type="numerical"
+data-marks="5"
+data-answer="13.2"
+data-tolerance="0.1">
+
+<span class="question-number">Q7.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A domestic installation has a 1000 W heater operating for 3 hours
+per day and a 100 W television operating for 5 hours per day.
+Calculate the total energy consumed in 30 days.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Calculate energy for each appliance and total..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+Heater Energy =
+1000 × 3 × 30 / 1000
+= 90 kWh
+
+</div>
+
+<div class="formula">
+
+Television Energy =
+100 × 5 × 30 / 1000
+= 15 kWh
+
+</div>
+
+<div class="formula">
+
+Total = 90 + 15 = 105 kWh
+
+</div>
+
+<p>
+<strong>Answer: 105 kWh/month</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<!-- Q8 -->
+
+<div class="question"
+data-set="1"
+data-q="8"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q8.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain the terms feeder, distributor and service mains in an
+electrical distribution system.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<ul>
+
+<li>
+<strong>Feeder:</strong> Carries electrical power from a substation
+to the distribution area.
+</li>
+
+<li>
+<strong>Distributor:</strong> Supplies power to consumers through
+tapping points.
+</li>
+
+<li>
+<strong>Service mains:</strong> Connect the distributor to the
+consumer installation.
+</li>
+
+</ul>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<!-- Q9 Numerical -->
+
+<div class="question"
+data-set="1"
+data-q="9"
+data-type="numerical"
+data-marks="5"
+data-answer="0.4"
+data-tolerance="0.01">
+
+<span class="question-number">Q9.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A balanced star-connected load has a phase impedance of 10 Ω.
+If the phase voltage is 230 V, calculate the line current.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Show the calculation..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+I<sub>ph</sub> = V<sub>ph</sub> / Z<sub>ph</sub>
+
+</div>
+
+<div class="formula">
+
+I<sub>ph</sub> = 230 / 10 = 23 A
+
+</div>
+
+<p>
+For star connection:
+</p>
+
+<div class="formula">
+
+I<sub>L</sub> = I<sub>ph</sub>
+
+</div>
+
+<p>
+Therefore,
+
+<strong>I<sub>L</sub> = 23 A</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<!-- Q10 -->
+
+<div class="question"
+data-set="1"
+data-q="10"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q10.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain power rating and star rating of electrical appliances.
+How do these ratings help consumers?
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<p>
+Power rating indicates the electrical power normally consumed by an
+appliance under its rated operating condition.
+</p>
+
+<p>
+Star rating is an energy-efficiency indication used for applicable
+electrical appliances. A higher efficiency rating generally indicates
+lower energy consumption for the same service, subject to the product
+and rating conditions.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     SET 2
+========================================================= -->
+
+<div
+id="set2"
+class="question-set">
+
+<div class="card">
+
+<h2>Question Paper – Set 2</h2>
+
+<div class="paper-info">
+
+<div class="info-box">
+<strong>Unit:</strong><br>
+IV – Electrical Supply System
+</div>
+
+<div class="info-box">
+<strong>Set:</strong><br>
+2
+</div>
+
+<div class="info-box">
+<strong>Questions:</strong><br>
+10
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q1.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain the different types of domestic wiring systems.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<p>
+Common domestic wiring systems include cleat wiring, casing-capping
+wiring, TRS/CTS wiring and conduit wiring. They differ in construction,
+mechanical protection, cost, appearance and suitability.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q2.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain pipe earthing with a neat labelled diagram.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Describe the construction and working..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<p>
+In pipe earthing, a galvanized iron pipe is placed vertically in the
+ground. The earth conductor is connected to the electrode. Moisture
+around the electrode helps establish a conducting path to earth.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q3.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+State the general electrical safety precautions to be followed during
+installation and maintenance of domestic wiring.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write the safety precautions..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<ul>
+
+<li>Isolate the supply before working.</li>
+
+<li>Use suitable protective devices.</li>
+
+<li>Use properly rated conductors.</li>
+
+<li>Ensure effective earthing.</li>
+
+<li>Avoid overloading.</li>
+
+<li>Use proper insulation.</li>
+
+</ul>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="10"
+data-tolerance="0.05">
+
+<span class="question-number">Q4.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A single-phase load of 2.3 kW is connected to a 230 V supply at unity
+power factor. Calculate the current drawn.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Show the calculation..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+I = P / V
+
+</div>
+
+<div class="formula">
+
+I = 2300 / 230 = 10 A
+
+</div>
+
+<p>
+<strong>Answer: 10 A</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="415"
+data-tolerance="2">
+
+<span class="question-number">Q5.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A balanced star-connected load has a phase voltage of 240 V.
+Calculate the line voltage.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Use the line-phase relationship..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+V<sub>L</sub> = √3 V<sub>ph</sub>
+
+</div>
+
+<div class="formula">
+
+V<sub>L</sub>
+=
+√3 × 240
+≈ 415.7 V
+
+</div>
+
+<p>
+<strong>Answer: approximately 416 V</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q6.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain the main stages in an electrical power supply system.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write the stages..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<p>
+
+Generation → Step-up transformation → Transmission →
+Receiving station → Distribution substation → Consumers.
+
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="4.5"
+data-tolerance="0.1">
+
+<span class="question-number">Q7.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+An electric iron rated at 1500 W is operated for 3 hours per day
+for 30 days. Calculate its monthly energy consumption.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Calculate the monthly energy..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+E =
+P × t × days / 1000
+
+</div>
+
+<div class="formula">
+
+E =
+1500 × 3 × 30 / 1000
+
+= 135 kWh
+
+</div>
+
+<p>
+<strong>Answer: 135 kWh/month</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q8.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+What is meant by a balanced three-phase load? State its important
+characteristics.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<ul>
+
+<li>Three phase impedances have equal magnitude in a balanced load.</li>
+
+<li>The phase quantities are displaced by 120°.</li>
+
+<li>Phase currents have equal magnitude for a balanced system.</li>
+
+<li>The neutral current is zero for an ideal balanced star load.</li>
+
+</ul>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="8.77"
+data-tolerance="0.1">
+
+<span class="question-number">Q9.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A balanced three-phase load consumes 5 kW from a 400 V supply
+at 0.82 power factor. Calculate the line current.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Show the calculation..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+P =
+√3 V<sub>L</sub>I<sub>L</sub>cosφ
+
+</div>
+
+<div class="formula">
+
+I<sub>L</sub>
+=
+5000 /
+(√3 × 400 × 0.82)
+
+</div>
+
+<div class="formula">
+
+I<sub>L</sub>
+≈ 8.81 A
+
+</div>
+
+<p>
+<strong>Answer: approximately 8.8 A</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q10.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain the importance of power rating and energy-efficiency rating
+when selecting electrical appliances.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<p>
+Power rating indicates the power requirement of an appliance.
+Energy-efficiency information helps compare energy use under the
+specified rating conditions and can assist in selecting appliances
+with lower energy consumption.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     SET 3
+========================================================= -->
+
+<div
+id="set3"
+class="question-set">
+
+<div class="card">
+
+<h2>Question Paper – Set 3</h2>
+
+<div class="paper-info">
+
+<div class="info-box">
+<strong>Unit:</strong><br>
+IV – Electrical Supply System
+</div>
+
+<div class="info-box">
+<strong>Set:</strong><br>
+3
+</div>
+
+<div class="info-box">
+<strong>Questions:</strong><br>
+10
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q1.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+List the important accessories used in domestic wiring and explain
+the function of any five.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<p>
+Accessories include switches, sockets, plugs, fuses, MCBs, RCCBs,
+distribution boards and energy meters.
+</p>
+
+<p>
+A switch controls a circuit, a socket provides an outlet, a fuse
+provides overcurrent protection, an MCB provides automatic circuit
+protection, an RCCB detects earth leakage and an energy meter measures
+electrical energy consumption.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q2.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain plate earthing and state its applications.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Explain construction and working..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<p>
+In plate earthing, a metal plate electrode is buried in the ground
+and connected to the installation through an earthing conductor.
+The electrode provides a low-resistance path for fault current.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q3.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain why high voltage is used for electrical power transmission.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Explain using suitable equations..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+P = VI
+
+</div>
+
+<div class="formula">
+
+P<sub>loss</sub> = I²R
+
+</div>
+
+<p>
+For a given transmitted power, increasing voltage reduces current.
+Since conductor loss is proportional to I², reducing current reduces
+transmission losses.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="12"
+data-tolerance="0.1">
+
+<span class="question-number">Q4.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A single-phase motor takes 2760 W from a 230 V supply at a power factor
+of 0.9. Calculate the current drawn.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Show your calculation..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+P = VI cosφ
+
+</div>
+
+<div class="formula">
+
+I =
+2760 /
+(230 × 0.9)
+
+= 13.33 A
+
+</div>
+
+<p>
+<strong>Answer: approximately 13.3 A</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="20"
+data-tolerance="0.2">
+
+<span class="question-number">Q5.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A balanced delta-connected load has a phase current of 20 A.
+Calculate the line current.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Use the delta line-phase relationship..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+I<sub>L</sub> = √3 I<sub>ph</sub>
+
+</div>
+
+<div class="formula">
+
+I<sub>L</sub>
+=
+√3 × 20
+≈ 34.64 A
+
+</div>
+
+<p>
+<strong>Answer: approximately 34.6 A</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q6.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Differentiate between feeder, distributor and service mains.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write the differences..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<table>
+
+<tr>
+
+<th>Feeder</th>
+
+<th>Distributor</th>
+
+<th>Service Mains</th>
+
+</tr>
+
+<tr>
+
+<td>
+Carries power from substation.
+</td>
+
+<td>
+Supplies power through consumer tapping points.
+</td>
+
+<td>
+Connects distributor to consumer.
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="10"
+data-tolerance="0.1">
+
+<span class="question-number">Q7.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A 2 kW water heater is operated for 2.5 hours per day for 30 days.
+Calculate the monthly energy consumption.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Calculate energy..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+E =
+2 × 2.5 × 30
+
+= 150 kWh
+
+</div>
+
+<p>
+<strong>Answer: 150 kWh/month</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q8.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain the terms line voltage, phase voltage, line current and phase
+current in a three-phase system.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write the definitions..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<ul>
+
+<li>
+Line voltage is the voltage measured between two line conductors.
+</li>
+
+<li>
+Phase voltage is the voltage across an individual phase of the load.
+</li>
+
+<li>
+Line current is the current in a line conductor.
+</li>
+
+<li>
+Phase current is the current through an individual phase impedance.
+</li>
+
+</ul>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="5196"
+data-tolerance="20">
+
+<span class="question-number">Q9.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A balanced three-phase load operates at 415 V line voltage,
+12 A line current and 0.85 power factor. Calculate the input power.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Show the calculation..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+P =
+√3 V<sub>L</sub>I<sub>L</sub>cosφ
+
+</div>
+
+<div class="formula">
+
+P =
+√3 × 415 × 12 × 0.85
+
+≈ 7338 W
+
+</div>
+
+<p>
+<strong>Answer: approximately 7.34 kW</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q10.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain how electrical energy consumption is measured and expressed
+in a domestic installation.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+Energy = Power × Time
+
+</div>
+
+<p>
+Electrical energy consumed by domestic consumers is commonly expressed
+in kilowatt-hour (kWh). An energy meter records the electrical energy
+consumed by the installation.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     SET 4
+========================================================= -->
+
+<div
+id="set4"
+class="question-set">
+
+<div class="card">
+
+<h2>Question Paper – Set 4</h2>
+
+<div class="paper-info">
+
+<div class="info-box">
+<strong>Unit:</strong><br>
+IV – Electrical Supply System
+</div>
+
+<div class="info-box">
+<strong>Set:</strong><br>
+4
+</div>
+
+<div class="info-box">
+<strong>Questions:</strong><br>
+10
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q1.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain the basic requirements of a safe domestic electrical installation.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<ul>
+
+<li>Proper insulation.</li>
+
+<li>Correct conductor size.</li>
+
+<li>Suitable protective devices.</li>
+
+<li>Proper earthing.</li>
+
+<li>Correct polarity and switching.</li>
+
+<li>Protection against overload and short circuit.</li>
+
+<li>Regular inspection and maintenance.</li>
+
+</ul>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q2.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain the function of an MCB, RCCB and fuse in a domestic electrical
+installation.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Explain each protective device..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<ul>
+
+<li>
+Fuse melts when excessive current flows.
+</li>
+
+<li>
+MCB automatically disconnects the circuit during overload or short circuit.
+</li>
+
+<li>
+RCCB provides protection against residual/earth leakage current.
+</li>
+
+</ul>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q3.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain the purpose and importance of a single-line diagram of an
+electrical power supply system.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<p>
+A single-line diagram represents the major components and power flow
+of an electrical system using simplified symbols and one line. It helps
+in understanding generation, transformation, transmission and
+distribution arrangements.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="15"
+data-tolerance="0.1">
+
+<span class="question-number">Q4.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A single-phase load consumes 3.45 kW at 230 V with unity power factor.
+Calculate the load current.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Show the calculation..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+I = P/V
+
+</div>
+
+<div class="formula">
+
+I =
+3450 / 230
+=
+15 A
+
+</div>
+
+<p>
+<strong>Answer: 15 A</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="10"
+data-tolerance="0.1">
+
+<span class="question-number">Q5.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A balanced star-connected load has a line voltage of 415 V and a
+phase impedance of 20 Ω. Calculate the phase voltage and line current.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Calculate both phase voltage and line current..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+V<sub>ph</sub>
+=
+V<sub>L</sub>/√3
+
+</div>
+
+<div class="formula">
+
+V<sub>ph</sub>
+=
+415/√3
+≈ 239.6 V
+
+</div>
+
+<div class="formula">
+
+I<sub>ph</sub>
+=
+V<sub>ph</sub>/Z<sub>ph</sub>
+
+≈
+239.6/20
+
+≈ 11.98 A
+
+</div>
+
+<p>
+For star connection:
+
+</p>
+
+<div class="formula">
+
+I<sub>L</sub>=I<sub>ph</sub>≈12 A
+
+</div>
+
+<p>
+<strong>Answer: Phase voltage ≈ 240 V; line current ≈ 12 A</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q6.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain star and delta connections of a three-phase balanced load.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Explain both connections..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<p>
+In a star connection, one end of each phase impedance is connected to
+a common point. In a delta connection, the three phase impedances are
+connected end-to-end to form a closed loop.
+</p>
+
+<div class="formula">
+
+Star:
+V<sub>L</sub>=√3V<sub>ph</sub>,
+I<sub>L</sub>=I<sub>ph</sub>
+
+</div>
+
+<div class="formula">
+
+Delta:
+V<sub>L</sub>=V<sub>ph</sub>,
+I<sub>L</sub>=√3I<sub>ph</sub>
+
+</div>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="7.23"
+data-tolerance="0.1">
+
+<span class="question-number">Q7.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Three identical appliances each consume 750 W and operate for 4 hours
+per day. Calculate their total monthly energy consumption for 30 days.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Show the calculation..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+Total Power =
+3 × 750
+=
+2250 W
+
+</div>
+
+<div class="formula">
+
+E =
+2250 × 4 × 30 / 1000
+
+=
+270 kWh
+
+</div>
+
+<p>
+<strong>Answer: 270 kWh/month</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q8.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+What is an electrical load? Classify electrical loads with suitable
+examples.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write the classification and examples..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<p>
+An electrical load is a device or equipment that consumes electrical
+power.
+</p>
+
+<ul>
+
+<li>Lighting loads – lamps.</li>
+
+<li>Heating loads – heaters and irons.</li>
+
+<li>Motor loads – fans, pumps and motors.</li>
+
+<li>Electronic loads – televisions, computers and electronic equipment.</li>
+
+</ul>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="12.0"
+data-tolerance="0.2">
+
+<span class="question-number">Q9.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A balanced delta-connected load has a phase voltage of 240 V and a
+phase impedance of 20 Ω. Calculate the phase current and line current.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Calculate phase and line currents..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+I<sub>ph</sub>
+=
+V<sub>ph</sub>/Z<sub>ph</sub>
+
+=
+240/20
+=
+12 A
+
+</div>
+
+<div class="formula">
+
+I<sub>L</sub>
+=
+√3 × 12
+≈ 20.78 A
+
+</div>
+
+<p>
+<strong>
+Phase current = 12 A;
+Line current ≈ 20.8 A
+</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q10.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain how the power rating of an appliance is related to its energy
+consumption.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+Energy = Power × Time
+
+</div>
+
+<p>
+For a given operating time, a higher power-rated appliance consumes
+more electrical energy. Energy consumption also depends on the number
+of appliances and their operating duration.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     SET 5
+========================================================= -->
+
+<div
+id="set5"
+class="question-set">
+
+<div class="card">
+
+<h2>Question Paper – Set 5</h2>
+
+<div class="paper-info">
+
+<div class="info-box">
+<strong>Unit:</strong><br>
+IV – Electrical Supply System
+</div>
+
+<div class="info-box">
+<strong>Set:</strong><br>
+5
+</div>
+
+<div class="info-box">
+<strong>Questions:</strong><br>
+10
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q1.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain the different types of domestic wiring and mention their
+advantages and applications.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<p>
+Domestic wiring systems include cleat, casing-capping, TRS/CTS and
+conduit wiring. Their selection depends on cost, mechanical protection,
+appearance, durability and installation requirements.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q2.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+What is earthing? Explain how earthing improves electrical safety.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<p>
+Earthing connects exposed conductive parts of electrical equipment to
+earth through a low-resistance path. During an insulation fault, the
+fault current can flow through the protective path, helping protective
+devices disconnect the faulty circuit and reducing shock risk.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q3.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Draw and explain the stages of generation, transmission and distribution
+of electrical power.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Explain the complete power flow..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+Generation
+→
+Transmission
+→
+Receiving Station
+→
+Substation
+→
+Distribution
+→
+Consumer
+
+</div>
+
+<p>
+Electrical power is generated at the generating station, transmitted
+at high voltage, received and stepped down at substations and finally
+distributed to consumers.
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="10"
+data-tolerance="0.1">
+
+<span class="question-number">Q4.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A single-phase 230 V supply feeds a 2 kW resistive load. Calculate the
+current drawn by the load.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Show the calculation..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+I = P/V
+
+</div>
+
+<div class="formula">
+
+I =
+2000/230
+=
+8.70 A
+
+</div>
+
+<p>
+<strong>Answer: approximately 8.7 A</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="5"
+data-tolerance="0.1">
+
+<span class="question-number">Q5.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A balanced three-phase system has a line voltage of 400 V and line
+current of 5 A at unity power factor. Calculate the total power.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Use the three-phase power equation..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+P =
+√3 V<sub>L</sub>I<sub>L</sub>cosφ
+
+</div>
+
+<div class="formula">
+
+P =
+√3 × 400 × 5 × 1
+
+≈ 3464 W
+
+</div>
+
+<p>
+<strong>Answer: approximately 3.46 kW</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q6.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain the relationship between line and phase voltage and current
+for balanced star and delta-connected loads.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write all four relationships..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<h3>Star Connection</h3>
+
+<div class="formula">
+
+V<sub>L</sub> = √3 V<sub>ph</sub>
+
+</div>
+
+<div class="formula">
+
+I<sub>L</sub> = I<sub>ph</sub>
+
+</div>
+
+<h3>Delta Connection</h3>
+
+<div class="formula">
+
+V<sub>L</sub> = V<sub>ph</sub>
+
+</div>
+
+<div class="formula">
+
+I<sub>L</sub> = √3 I<sub>ph</sub>
+
+</div>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="5.5"
+data-tolerance="0.1">
+
+<span class="question-number">Q7.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A household uses a 100 W fan for 8 hours per day, two 20 W lamps
+for 5 hours per day and a 500 W television for 4 hours per day.
+Calculate the total energy consumption for 30 days.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Calculate each load and total energy..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+Fan:
+100 × 8 × 30 / 1000
+= 24 kWh
+
+</div>
+
+<div class="formula">
+
+Lamps:
+2 × 20 × 5 × 30 / 1000
+= 6 kWh
+
+</div>
+
+<div class="formula">
+
+TV:
+500 × 4 × 30 / 1000
+= 60 kWh
+
+</div>
+
+<div class="formula">
+
+Total =
+24 + 6 + 60
+=
+90 kWh
+
+</div>
+
+<p>
+<strong>Answer: 90 kWh/month</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q8.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Define electrical load and explain resistive, inductive and electronic
+loads with suitable examples.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write the classification..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<ul>
+
+<li>
+<strong>Resistive loads:</strong> heaters, incandescent lamps.
+</li>
+
+<li>
+<strong>Inductive loads:</strong> motors, fans and transformers.
+</li>
+
+<li>
+<strong>Electronic loads:</strong> televisions, computers and electronic
+power supplies.
+</li>
+
+</ul>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="numerical"
+data-marks="5"
+data-answer="17.32"
+data-tolerance="0.2">
+
+<span class="question-number">Q9.</span>
+
+<span class="question-type">NUMERICAL</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+A balanced delta-connected load is supplied from a 415 V three-phase
+system. Each phase has an impedance of 24 Ω and is assumed to be
+resistive. Calculate the phase current and line current.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Calculate phase and line current..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<div class="formula">
+
+For delta:
+V<sub>ph</sub>=V<sub>L</sub>=415 V
+
+</div>
+
+<div class="formula">
+
+I<sub>ph</sub>
+=
+415/24
+≈ 17.29 A
+
+</div>
+
+<div class="formula">
+
+I<sub>L</sub>
+=
+√3 × 17.29
+≈ 29.95 A
+
+</div>
+
+<p>
+<strong>
+Phase current ≈ 17.3 A;
+Line current ≈ 30 A
+</strong>
+</p>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+
+
+<div class="question"
+data-type="theory"
+data-marks="5">
+
+<span class="question-number">Q10.</span>
+
+<span class="question-type">THEORY</span>
+
+<span class="marks">5 Marks</span>
+
+<div class="question-text">
+
+Explain the importance of energy consumption calculation in a domestic
+electrical installation.
+
+</div>
+
+<textarea
+class="answer-box"
+placeholder="Write your answer..."></textarea>
+
+<div class="solution">
+
+<div class="solution-title">
+Answer / Solution
+</div>
+
+<ul>
+
+<li>Helps estimate monthly energy consumption.</li>
+
+<li>Helps identify high-energy-consuming appliances.</li>
+
+<li>Supports energy conservation.</li>
+
+<li>Helps compare appliance operating patterns.</li>
+
+<li>Helps estimate electricity expenditure when the applicable tariff is known.</li>
+
+</ul>
+
+</div>
+
+<div class="evaluation"></div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     EVALUATION PANEL
+========================================================= -->
+
+<div
+id="scoreCard"
+class="score-card">
+
+<h2>Evaluation Result</h2>
+
+<div
+class="score"
+id="score">
+0 / 50
+</div>
+
+<div
+class="score-message"
+id="scoreMessage">
+</div>
+
+<p id="evaluationSummary"></p>
+
+</div>
+
+
+
+<!-- =========================================================
+     ACTION BAR
+========================================================= -->
+
+<div class="card">
+
+<h2>Question Paper Controls</h2>
+
+<div class="action-bar">
+
+<button
+class="btn-green"
+onclick="evaluateCurrentSet()">
+
+Submit & Evaluate
+
+</button>
+
+
+<button
+class="btn-yellow"
+onclick="showSolutions()">
+
+Show Answer / Solution
+
+</button>
+
+
+<button
+class="btn-dark"
+onclick="hideSolutions()">
+
+Hide Solutions
+
+</button>
+
+
+<button
+class="btn-red"
+onclick="resetCurrentSet()">
+
+Reset Set
+
+</button>
+
+
+<button
+class="btn-blue"
+onclick="window.print()">
+
+Print / Save PDF
+
+</button>
+
+</div>
+
+
+<div class="progress-container">
+
+<div
+class="progress-bar"
+id="progressBar">
+</div>
+
+</div>
+
+<p
+id="progressText"
+style="color:var(--muted);">
+
+Progress: 0 / 10 answered
+
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   CURRENT SET
+========================================================= */
+
+let currentSet = 1;
+
+
+/* =========================================================
+   SET NAVIGATION
+========================================================= */
+
+function openSet(setNumber,button){
+
+    currentSet =
+        setNumber;
+
+
+    document
+        .querySelectorAll(
+            ".question-set"
+        )
+        .forEach(function(set){
+
+            set.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    const target =
+        document.getElementById(
+            "set" + setNumber
+        );
+
+
+    if(target){
+
+        target.classList.add(
+            "active"
+        );
+
+    }
+
+
+    document
+        .querySelectorAll(
+            ".set-button"
+        )
+        .forEach(function(btn){
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if(button){
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    document.getElementById(
+        "scoreCard"
+    ).classList.remove(
+        "show"
+    );
+
+
+    updateProgress();
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+
+/* =========================================================
+   CURRENT SET QUESTIONS
+========================================================= */
+
+function getCurrentQuestions(){
+
+    const set =
+        document.getElementById(
+            "set" + currentSet
+        );
+
+
+    if(!set){
+
+        return [];
+
+    }
+
+
+    return Array.from(
+        set.querySelectorAll(
+            ".question"
+        )
+    );
+
+}
+
+
+
+/* =========================================================
+   NORMALISE ANSWER
+========================================================= */
+
+function extractNumber(text){
+
+    if(!text){
+
+        return NaN;
+
+    }
+
+
+    /*
+       Remove commas and locate
+       the first numerical value.
+    */
+
+    const cleaned =
+        text
+        .replace(/,/g,"")
+        .replace(/√/g,"")
+        .replace(/≈/g,"");
+
+
+    const matches =
+        cleaned.match(
+            /[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?/g
+        );
+
+
+    if(!matches){
+
+        return NaN;
+
+    }
+
+
+    return parseFloat(
+        matches[matches.length-1]
+    );
+
+}
+
+
+
+/* =========================================================
+   THEORY EVALUATION
+========================================================= */
+
+function evaluateTheory(answer){
+
+    if(!answer){
+
+        return {
+            score:0,
+            className:"incorrect",
+            message:
+                "No answer entered."
+        };
+
+    }
+
+
+    const words =
+        answer
+        .toLowerCase()
+        .split(/\s+/);
+
+
+    /*
+       This is a simple offline
+       keyword-based evaluation.
+
+       It is not an AI semantic grader.
+    */
+
+    return {
+
+        score:0.6,
+
+        className:"partial",
+
+        message:
+            "Answer submitted. Review the model answer/solution for detailed comparison."
+
+    };
+
+}
+
+
+
+/* =========================================================
+   NUMERICAL EVALUATION
+========================================================= */
+
+function evaluateNumerical(question,answer){
+
+    const expected =
+        parseFloat(
+            question.dataset.answer
+        );
+
+
+    const tolerance =
+        parseFloat(
+            question.dataset.tolerance
+        ) || 0.05;
+
+
+    const studentValue =
+        extractNumber(answer);
+
+
+    if(isNaN(studentValue)){
+
+        return {
+
+            score:0,
+
+            className:"incorrect",
+
+            message:
+                "No numerical answer could be identified."
+
+        };
+
+    }
+
+
+    const difference =
+        Math.abs(
+            studentValue -
+            expected
+        );
+
+
+    if(difference <= tolerance){
+
+        return {
+
+            score:1,
+
+            className:"correct",
+
+            message:
+                "Correct numerical answer."
+
+        };
+
+    }
+
+
+    if(
+        difference <=
+        tolerance * 5
+    ){
+
+        return {
+
+            score:.5,
+
+            className:"partial",
+
+            message:
+                "Numerical answer is close. Check the calculation and unit."
+
+        };
+
+    }
+
+
+    return {
+
+        score:0,
+
+        className:"incorrect",
+
+        message:
+            "Numerical answer does not match the expected result."
+
+    };
+
+}
+
+
+
+/* =========================================================
+   EVALUATE SET
+========================================================= */
+
+function evaluateCurrentSet(){
+
+    const questions =
+        getCurrentQuestions();
+
+
+    let totalMarks = 0;
+
+    let obtainedMarks = 0;
+
+    let answered = 0;
+
+
+    questions.forEach(
+        function(question){
+
+            const marks =
+                parseFloat(
+                    question.dataset.marks
+                ) || 5;
+
+
+            totalMarks += marks;
+
+
+            const answerBox =
+                question.querySelector(
+                    ".answer-box"
+                );
+
+
+            const answer =
+                answerBox.value.trim();
+
+
+            const evaluation =
+                question.querySelector(
+                    ".evaluation"
+                );
+
+
+            if(answer){
+
+                answered++;
+
+            }
+
+
+            let result;
+
+
+            if(
+                question.dataset.type ===
+                "numerical"
+            ){
+
+                result =
+                    evaluateNumerical(
+                        question,
+                        answer
+                    );
+
+            }
+
+            else{
+
+                result =
+                    evaluateTheory(
+                        answer
+                    );
+
+            }
+
+
+            const marksObtained =
+                result.score *
+                marks;
+
+
+            obtainedMarks +=
+                marksObtained;
+
+
+            evaluation.className =
+                "evaluation show " +
+                result.className;
+
+
+            evaluation.innerHTML = `
+
+                <strong>
+                    Evaluation:
+                </strong>
+
+                ${result.message}
+
+                <br>
+
+                <strong>
+                    Marks awarded:
+                </strong>
+
+                ${marksObtained.toFixed(1)}
+                /
+                ${marks}
+
+            `;
+
+        }
+    );
+
+
+    const percentage =
+        totalMarks > 0
+        ?
+        (
+            obtainedMarks /
+            totalMarks
+        ) * 100
+        :
+        0;
+
+
+    document.getElementById(
+        "score"
+    ).textContent =
+
+        obtainedMarks.toFixed(1)
+        +
+        " / "
+        +
+        totalMarks;
+
+
+    let message;
+
+
+    if(percentage >= 80){
+
+        message =
+            "Excellent performance.";
+
+    }
+
+    else if(percentage >= 60){
+
+        message =
+            "Good performance. Review the solutions for further improvement.";
+
+    }
+
+    else if(percentage >= 40){
+
+        message =
+            "Satisfactory. More practice is recommended.";
+
+    }
+
+    else{
+
+        message =
+            "Review the unit concepts and attempt the questions again.";
+
+    }
+
+
+    document.getElementById(
+        "scoreMessage"
+    ).textContent =
+        message;
+
+
+    document.getElementById(
+        "evaluationSummary"
+    ).innerHTML =
+
+        "Attempted: " +
+        answered +
+        " / " +
+        questions.length +
+
+        "<br>" +
+
+        "Percentage: " +
+        percentage.toFixed(1) +
+        "%";
+
+
+    document.getElementById(
+        "scoreCard"
+    ).classList.add(
+        "show"
+    );
+
+
+    updateProgress();
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+
+/* =========================================================
+   SHOW SOLUTIONS
+========================================================= */
+
+function showSolutions(){
+
+    getCurrentQuestions()
+    .forEach(
+        function(question){
+
+            const solution =
+                question.querySelector(
+                    ".solution"
+                );
+
+
+            if(solution){
+
+                solution.classList.add(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   HIDE SOLUTIONS
+========================================================= */
+
+function hideSolutions(){
+
+    getCurrentQuestions()
+    .forEach(
+        function(question){
+
+            const solution =
+                question.querySelector(
+                    ".solution"
+                );
+
+
+            if(solution){
+
+                solution.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   RESET CURRENT SET
+========================================================= */
+
+function resetCurrentSet(){
+
+    const questions =
+        getCurrentQuestions();
+
+
+    questions.forEach(
+        function(question){
+
+            const answer =
+                question.querySelector(
+                    ".answer-box"
+                );
+
+
+            if(answer){
+
+                answer.value = "";
+
+            }
+
+
+            const evaluation =
+                question.querySelector(
+                    ".evaluation"
+                );
+
+
+            evaluation.className =
+                "evaluation";
+
+
+            evaluation.innerHTML =
+                "";
+
+
+            const solution =
+                question.querySelector(
+                    ".solution"
+                );
+
+
+            if(solution){
+
+                solution.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "scoreCard"
+    ).classList.remove(
+        "show"
+    );
+
+
+    updateProgress();
+
+}
+
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+function updateProgress(){
+
+    const questions =
+        getCurrentQuestions();
+
+
+    let answered = 0;
+
+
+    questions.forEach(
+        function(question){
+
+            const answer =
+                question.querySelector(
+                    ".answer-box"
+                );
+
+
+            if(
+                answer &&
+                answer.value.trim()
+            ){
+
+                answered++;
+
+            }
+
+        }
+    );
+
+
+    const total =
+        questions.length;
+
+
+    const percentage =
+        total
+        ?
+        (answered / total) * 100
+        :
+        0;
+
+
+    document.getElementById(
+        "progressBar"
+    ).style.width =
+        percentage + "%";
+
+
+    document.getElementById(
+        "progressText"
+    ).textContent =
+
+        "Progress: "
+        +
+        answered
+        +
+        " / "
+        +
+        total
+        +
+        " answered";
+
+}
+
+
+
+/* =========================================================
+   LIVE PROGRESS
+========================================================= */
+
+document.addEventListener(
+    "input",
+    function(event){
+
+        if(
+            event.target.classList.contains(
+                "answer-box"
+            )
+        ){
+
+            updateProgress();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALISE
+========================================================= */
+
+updateProgress();
+
+</script>
+
+</body>
+
+</html>

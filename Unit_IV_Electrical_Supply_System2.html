@@ -1,0 +1,5372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>UNIT IV - Electrical Supply System</title>
+
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+
+    --bg:#03080d;
+    --panel:#07131d;
+    --panel2:#0a1b28;
+
+    --cyan:#27d9ff;
+    --green:#45f59a;
+    --yellow:#ffd166;
+    --orange:#ff9f43;
+    --red:#ff5c7a;
+
+    --text:#eaf7ff;
+    --muted:#9bb5c6;
+    --border:#18384b;
+
+}
+
+
+/* =========================================================
+   BASIC
+========================================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+
+    margin:0;
+    padding:0;
+    min-height:100%;
+
+}
+
+body{
+
+    font-family:Arial,Helvetica,sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(39,217,255,.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(69,245,154,.06),
+            transparent 30%
+        ),
+        var(--bg);
+
+    color:var(--text);
+
+    line-height:1.6;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+
+    text-align:center;
+
+    padding:30px 15px;
+
+    border-bottom:1px solid var(--border);
+
+    background:
+        linear-gradient(
+            180deg,
+            #071824,
+            #03080d
+        );
+
+}
+
+header h1{
+
+    margin:0;
+
+    color:var(--cyan);
+
+    font-size:
+        clamp(
+            28px,
+            5vw,
+            48px
+        );
+
+    text-shadow:
+        0 0 18px
+        rgba(39,217,255,.4);
+
+}
+
+header p{
+
+    margin:6px 0;
+
+    color:var(--muted);
+
+}
+
+
+/* =========================================================
+   TAB BAR
+========================================================= */
+
+.tab-container{
+
+    width:min(1250px,96%);
+
+    margin:
+        20px auto 0;
+
+}
+
+.tabs{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:8px;
+
+    padding:10px;
+
+    background:#06111a;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        14px
+        14px
+        0
+        0;
+
+}
+
+.tab-button{
+
+    flex:
+        1 1 150px;
+
+    min-width:130px;
+
+    padding:
+        12px
+        14px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:9px;
+
+    background:#081923;
+
+    color:var(--muted);
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.25s;
+
+}
+
+.tab-button:hover{
+
+    color:var(--cyan);
+
+    border-color:
+        var(--cyan);
+
+}
+
+.tab-button.active{
+
+    background:
+        var(--cyan);
+
+    color:#001018;
+
+    border-color:
+        var(--cyan);
+
+    box-shadow:
+        0 0 18px
+        rgba(39,217,255,.3);
+
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.tab-content{
+
+    display:none;
+
+    animation:
+        fadeIn
+        .35s
+        ease;
+
+}
+
+.tab-content.active{
+
+    display:block;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(8px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+main{
+
+    width:min(1250px,96%);
+
+    margin:auto;
+
+    padding-bottom:60px;
+
+}
+
+.card{
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--panel),
+            #041019
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:15px;
+
+    padding:22px;
+
+    margin:20px 0;
+
+    box-shadow:
+        0 0 25px
+        rgba(39,217,255,.08);
+
+}
+
+.card h2{
+
+    color:var(--green);
+
+    margin-top:0;
+
+}
+
+.card h3{
+
+    color:var(--yellow);
+
+}
+
+.section-heading{
+
+    color:var(--cyan);
+
+    font-size:30px;
+
+    border-left:
+        5px solid
+        var(--cyan);
+
+    padding-left:14px;
+
+    margin-top:25px;
+
+}
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(240px,1fr)
+        );
+
+    gap:18px;
+
+}
+
+.info{
+
+    background:
+        var(--panel2);
+
+    border:
+        1px solid
+        var(--border);
+
+    padding:18px;
+
+    border-radius:12px;
+
+}
+
+.info h3{
+
+    margin-top:0;
+
+}
+
+.highlight{
+
+    color:var(--cyan);
+
+    font-weight:bold;
+
+}
+
+.warning{
+
+    border-left:
+        4px solid
+        var(--orange);
+
+    background:
+        rgba(255,159,67,.08);
+
+    padding:15px;
+
+    border-radius:8px;
+
+    margin-top:18px;
+
+}
+
+.formula{
+
+    background:#02070b;
+
+    border:
+        1px solid
+        #1c4054;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    font-size:19px;
+
+    color:var(--yellow);
+
+    margin:15px 0;
+
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.topic-image-wrap{
+
+    background:#041019;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:14px;
+
+    padding:15px;
+
+    margin:20px 0;
+
+    text-align:center;
+
+}
+
+.topic-image{
+
+    display:block;
+
+    width:auto;
+
+    max-width:100%;
+
+    max-height:600px;
+
+    height:auto;
+
+    margin:auto;
+
+    border-radius:10px;
+
+    border:
+        1px solid
+        #31566d;
+
+    object-fit:contain;
+
+    cursor:zoom-in;
+
+    transition:.25s;
+
+}
+
+.topic-image:hover{
+
+    transform:scale(1.01);
+
+    box-shadow:
+        0 0 25px
+        rgba(39,217,255,.25);
+
+}
+
+.image-caption{
+
+    color:var(--muted);
+
+    font-size:14px;
+
+    margin:
+        10px 0 0;
+
+}
+
+
+/* =========================================================
+   IMAGE MODAL
+========================================================= */
+
+.image-modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:5000;
+
+    background:
+        rgba(0,0,0,.94);
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:25px;
+
+}
+
+.image-modal.show{
+
+    display:flex;
+
+}
+
+.image-modal-content{
+
+    text-align:center;
+
+    max-width:96vw;
+
+    max-height:95vh;
+
+}
+
+.image-modal img{
+
+    max-width:95vw;
+
+    max-height:85vh;
+
+    border-radius:12px;
+
+    border:
+        1px solid
+        var(--cyan);
+
+}
+
+.image-modal p{
+
+    color:white;
+
+}
+
+.close-image{
+
+    position:absolute;
+
+    right:30px;
+
+    top:15px;
+
+    color:white;
+
+    font-size:42px;
+
+    cursor:pointer;
+
+}
+
+.close-image:hover{
+
+    color:var(--cyan);
+
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrap{
+
+    overflow-x:auto;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+th,td{
+
+    padding:11px;
+
+    border:
+        1px solid
+        var(--border);
+
+}
+
+th{
+
+    background:#0b2636;
+
+    color:var(--cyan);
+
+}
+
+tr:nth-child(even){
+
+    background:
+        rgba(255,255,255,.025);
+
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+button{
+
+    padding:
+        10px 17px;
+
+    border:0;
+
+    border-radius:8px;
+
+    background:var(--cyan);
+
+    color:#001018;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    margin:4px;
+
+}
+
+button:hover{
+
+    box-shadow:
+        0 0 16px
+        rgba(39,217,255,.4);
+
+    transform:
+        translateY(-1px);
+
+}
+
+button.green{
+
+    background:
+        var(--green);
+
+}
+
+button.yellow{
+
+    background:
+        var(--yellow);
+
+}
+
+button.red{
+
+    background:
+        var(--red);
+
+}
+
+button.secondary{
+
+    background:#173445;
+
+    color:white;
+
+}
+
+button:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+}
+
+
+/* =========================================================
+   STAIRCASE
+========================================================= */
+
+.staircase-demo{
+
+    text-align:center;
+
+}
+
+.switch-area{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:40px;
+
+    flex-wrap:wrap;
+
+    margin-top:25px;
+
+}
+
+.switch-box{
+
+    width:120px;
+
+    height:65px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+        2px solid
+        var(--cyan);
+
+    border-radius:10px;
+
+    background:#071923;
+
+    cursor:pointer;
+
+}
+
+.switch-box:hover{
+
+    box-shadow:
+        0 0 20px
+        rgba(39,217,255,.3);
+
+}
+
+.lamp{
+
+    width:85px;
+
+    height:85px;
+
+    border-radius:50%;
+
+    border:
+        3px solid
+        #777;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#111;
+
+    font-size:30px;
+
+}
+
+.lamp.on{
+
+    background:#fff4a3;
+
+    border-color:
+        var(--yellow);
+
+    box-shadow:
+        0 0 20px var(--yellow),
+        0 0 50px var(--yellow);
+
+}
+
+
+/* =========================================================
+   FAULT ANIMATION
+========================================================= */
+
+.fault-path{
+
+    position:relative;
+
+    height:170px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    background:#041019;
+
+    overflow:hidden;
+
+}
+
+.fault-line{
+
+    position:absolute;
+
+    left:10%;
+
+    right:10%;
+
+    top:50%;
+
+    height:4px;
+
+    background:#294452;
+
+}
+
+.electron{
+
+    position:absolute;
+
+    top:calc(50% - 6px);
+
+    left:10%;
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    background:var(--red);
+
+    box-shadow:
+        0 0 12px
+        var(--red);
+
+    animation:
+        electronMove
+        3s
+        linear
+        infinite;
+
+}
+
+@keyframes electronMove{
+
+    0%{
+        left:10%;
+    }
+
+    100%{
+        left:88%;
+    }
+
+}
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+canvas{
+
+    display:block;
+
+    width:100%;
+
+    max-width:900px;
+
+    height:320px;
+
+    margin:20px auto;
+
+    background:#02080d;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+}
+
+
+/* =========================================================
+   SVG
+========================================================= */
+
+.svg-box{
+
+    background:#02080d;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    padding:10px;
+
+    overflow:auto;
+
+}
+
+svg{
+
+    width:100%;
+
+    min-width:350px;
+
+}
+
+
+/* =========================================================
+   CALCULATOR
+========================================================= */
+
+.calculator{
+
+    background:#041019;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    padding:20px;
+
+}
+
+.result{
+
+    margin-top:15px;
+
+    padding:15px;
+
+    border:
+        1px solid
+        var(--green);
+
+    color:var(--green);
+
+    background:#02080d;
+
+    border-radius:10px;
+
+    font-size:18px;
+
+}
+
+input,select{
+
+    width:100%;
+
+    padding:10px;
+
+    margin:
+        5px 0 12px;
+
+    background:#02090e;
+
+    color:white;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:7px;
+
+}
+
+label{
+
+    color:var(--muted);
+
+}
+
+
+/* =========================================================
+   ENERGY TABLE
+========================================================= */
+
+#energyTable{
+
+    min-width:950px;
+
+}
+
+#energyTable input{
+
+    width:100%;
+
+    min-width:80px;
+
+    margin:0;
+
+}
+
+#energyTable th{
+
+    white-space:nowrap;
+
+}
+
+#energyTable td{
+
+    vertical-align:middle;
+
+}
+
+.monthly-energy{
+
+    text-align:center;
+
+    color:var(--green);
+
+    font-weight:bold;
+
+    font-size:17px;
+
+    min-width:110px;
+
+}
+
+
+/* =========================================================
+   ENERGY BAR
+========================================================= */
+
+.energy-bar{
+
+    height:25px;
+
+    background:#10232e;
+
+    border-radius:8px;
+
+    overflow:hidden;
+
+    margin:15px 0;
+
+}
+
+.energy-fill{
+
+    height:100%;
+
+    width:0%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--green)
+        );
+
+    transition:.5s;
+
+}
+
+#energyTotal{
+
+    text-align:center;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    color:var(--cyan);
+
+    margin-top:10px;
+
+}
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+.question{
+
+    background:#041019;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    padding:18px;
+
+    margin:18px 0;
+
+}
+
+.option{
+
+    display:block;
+
+    padding:10px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:8px;
+
+    margin:7px 0;
+
+    cursor:pointer;
+
+}
+
+.option:hover{
+
+    border-color:
+        var(--cyan);
+
+}
+
+.correct{
+
+    border-color:
+        var(--green)!important;
+
+    background:
+        rgba(69,245,154,.08);
+
+}
+
+.wrong{
+
+    border-color:
+        var(--red)!important;
+
+    background:
+        rgba(255,92,122,.08);
+
+}
+
+#quizResult{
+
+    color:var(--green);
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    margin-top:15px;
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.tab-navigation{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-top:25px;
+
+    padding-top:15px;
+
+    border-top:
+        1px solid
+        var(--border);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+    text-align:center;
+
+    padding:25px;
+
+    color:var(--muted);
+
+    border-top:
+        1px solid
+        var(--border);
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:700px){
+
+    .tab-button{
+
+        flex:
+            1 1 45%;
+
+        min-width:100px;
+
+        font-size:12px;
+
+        padding:
+            10px 7px;
+
+    }
+
+    .section-heading{
+
+        font-size:24px;
+
+    }
+
+    #energyTable{
+
+        min-width:950px;
+
+    }
+
+    canvas{
+
+        height:250px;
+
+    }
+
+    .switch-area{
+
+        gap:20px;
+
+    }
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+    .tabs,
+    .tab-navigation,
+    button{
+
+        display:none!important;
+
+    }
+
+    .tab-content{
+
+        display:block!important;
+
+    }
+
+    body{
+
+        background:white;
+
+        color:black;
+
+    }
+
+    .card,
+    .info{
+
+        background:white;
+
+        color:black;
+
+        box-shadow:none;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header>
+
+<h1>UNIT – IV</h1>
+
+<p>Electrical Supply System</p>
+
+<p>
+Domestic Wiring • Earthing • Transmission • Distribution • Three-Phase Supply
+</p>
+
+</header>
+
+
+
+<!-- =========================================================
+     TABS
+========================================================= -->
+
+<div class="tab-container">
+
+<div class="tabs">
+
+<button
+class="tab-button active"
+onclick="openTab('wiring',this)">
+01. Domestic Wiring
+</button>
+
+<button
+class="tab-button"
+onclick="openTab('accessories',this)">
+02. Accessories
+</button>
+
+<button
+class="tab-button"
+onclick="openTab('staircase',this)">
+03. Staircase Wiring
+</button>
+
+<button
+class="tab-button"
+onclick="openTab('earthing',this)">
+04. Earthing
+</button>
+
+<button
+class="tab-button"
+onclick="openTab('supply',this)">
+05. Supply System
+</button>
+
+<button
+class="tab-button"
+onclick="openTab('transmission',this)">
+06. Transmission
+</button>
+
+<button
+class="tab-button"
+onclick="openTab('threephase',this)">
+07. Three Phase
+</button>
+
+<button
+class="tab-button"
+onclick="openTab('stardelta',this)">
+08. Star / Delta
+</button>
+
+<button
+class="tab-button"
+onclick="openTab('energy',this)">
+09. Energy
+</button>
+
+<button
+class="tab-button"
+onclick="openTab('quiz',this)">
+10. Quiz
+</button>
+
+</div>
+
+
+<main>
+
+
+<!-- =========================================================
+     TAB 1
+========================================================= -->
+
+<div
+id="wiring"
+class="tab-content active">
+
+<h2 class="section-heading">
+1. Domestic Wiring
+</h2>
+
+
+<div class="card">
+
+<h2>Basic Principles of Domestic Wiring</h2>
+
+<p>
+Domestic wiring is the electrical installation used to supply electrical
+energy safely to lighting points, fans, sockets, appliances and other
+loads in a building.
+</p>
+
+
+<div class="grid">
+
+<div class="info">
+
+<h3>Supply</h3>
+
+<p>
+Electrical energy is supplied from the distribution system through
+service mains to the consumer installation.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Protection</h3>
+
+<p>
+Fuse, MCB, RCCB and proper earthing are used to protect people and
+equipment.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Switching</h3>
+
+<p>
+Switches should normally be connected in the phase conductor.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Earthing</h3>
+
+<p>
+Exposed metallic parts of electrical equipment are connected to the
+protective earthing system.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Types of Domestic Wiring</h2>
+
+
+<div class="topic-image-wrap">
+
+<img
+src="types-of-wiring.jpg"
+class="topic-image"
+alt="Types of domestic wiring"
+onclick="openImage(this.src,this.alt)"
+>
+
+<p class="image-caption">
+Figure: Types of Domestic Wiring
+</p>
+
+</div>
+
+
+<div class="grid">
+
+
+<div class="info">
+
+<h3>Cleat Wiring</h3>
+
+<ul>
+
+<li>Wires are supported on cleats.</li>
+
+<li>Simple and inexpensive.</li>
+
+<li>Easy to install.</li>
+
+<li>Suitable mainly for temporary installations.</li>
+
+</ul>
+
+</div>
+
+
+<div class="info">
+
+<h3>Wooden Casing-Capping</h3>
+
+<ul>
+
+<li>Wires are placed inside casing.</li>
+
+<li>Capping provides protection.</li>
+
+<li>Neat appearance.</li>
+
+<li>Used for indoor wiring.</li>
+
+</ul>
+
+</div>
+
+
+<div class="info">
+
+<h3>TRS / CTS Wiring</h3>
+
+<ul>
+
+<li>TRS = Tough Rubber Sheathed.</li>
+
+<li>CTS = Cab Tyre Sheathed.</li>
+
+<li>Good mechanical protection.</li>
+
+</ul>
+
+</div>
+
+
+<div class="info">
+
+<h3>Conduit Wiring</h3>
+
+<ul>
+
+<li>Conductors are enclosed in conduit.</li>
+
+<li>Conduit can be metallic or non-metallic.</li>
+
+<li>Excellent mechanical protection.</li>
+
+<li>Widely used in modern installations.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Learning Outcome</h2>
+
+<p>
+Students will be able to identify different domestic wiring systems,
+explain their construction and select an appropriate wiring method for
+different applications.
+</p>
+
+</div>
+
+
+<div class="tab-navigation">
+
+<button disabled>
+← Previous
+</button>
+
+<button onclick="nextTab('accessories')">
+Next: Accessories →
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TAB 2
+========================================================= -->
+
+<div
+id="accessories"
+class="tab-content">
+
+<h2 class="section-heading">
+2. Domestic Wiring Accessories
+</h2>
+
+
+<div class="card">
+
+<h2>Common Accessories</h2>
+
+
+<div class="grid">
+
+
+<div class="info">
+
+<h3>Switch</h3>
+
+<p>
+Controls the supply to an electrical load.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Socket Outlet</h3>
+
+<p>
+Provides connection for portable appliances.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Plug</h3>
+
+<p>
+Connects portable electrical equipment to a socket.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Fuse</h3>
+
+<p>
+Protects the circuit by melting during excessive current.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>MCB</h3>
+
+<p>
+Automatically disconnects the circuit during overload or short circuit.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>RCCB</h3>
+
+<p>
+Provides protection against earth leakage and electric shock.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Distribution Board</h3>
+
+<p>
+Distributes electrical power to different circuits.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Energy Meter</h3>
+
+<p>
+Measures electrical energy consumption in kWh.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Domestic Wiring Safety</h2>
+
+<ol>
+
+<li>Switch OFF the supply before maintenance.</li>
+
+<li>Use correctly rated protective devices.</li>
+
+<li>Use suitable size conductors.</li>
+
+<li>Provide proper earthing.</li>
+
+<li>Do not overload socket outlets.</li>
+
+<li>Inspect wiring periodically.</li>
+
+</ol>
+
+
+<div class="warning">
+
+<strong>Safety:</strong>
+
+Electrical installation and maintenance should be performed by
+qualified personnel following applicable electrical safety requirements.
+
+</div>
+
+</div>
+
+
+<div class="tab-navigation">
+
+<button onclick="nextTab('wiring')">
+← Previous: Wiring
+</button>
+
+<button onclick="nextTab('staircase')">
+Next: Staircase Wiring →
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TAB 3
+========================================================= -->
+
+<div
+id="staircase"
+class="tab-content">
+
+<h2 class="section-heading">
+3. Staircase Wiring
+</h2>
+
+
+<div class="card">
+
+<h2>Two-Way Switch Staircase Wiring</h2>
+
+<p>
+Staircase wiring allows one lamp to be controlled from two different
+locations using two two-way switches.
+</p>
+
+
+<div class="topic-image-wrap">
+
+<img
+src="staircase-wiring.jpg"
+class="topic-image"
+alt="Staircase wiring diagram"
+onclick="openImage(this.src,this.alt)"
+>
+
+<p class="image-caption">
+Figure: Staircase Wiring Using Two-Way Switches
+</p>
+
+</div>
+
+
+<h3>Working Principle</h3>
+
+<ol>
+
+<li>
+Two two-way switches are used.
+</li>
+
+<li>
+The first switch is connected to the phase supply.
+</li>
+
+<li>
+Two traveller wires connect the switches.
+</li>
+
+<li>
+The second switch is connected to the lamp.
+</li>
+
+<li>
+The lamp can be switched ON or OFF from either location.
+</li>
+
+</ol>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Interactive Staircase Wiring Simulation</h2>
+
+<p>
+Click either switch to observe the lamp operation.
+</p>
+
+
+<div class="switch-area">
+
+
+<div>
+
+<div
+class="switch-box"
+id="switch1"
+onclick="toggleSwitch(1)"
+>
+Switch 1
+</div>
+
+<p style="text-align:center">
+Location 1
+</p>
+
+</div>
+
+
+<div
+class="lamp"
+id="lamp">
+💡
+</div>
+
+
+<div>
+
+<div
+class="switch-box"
+id="switch2"
+onclick="toggleSwitch(2)"
+>
+Switch 2
+</div>
+
+<p style="text-align:center">
+Location 2
+</p>
+
+</div>
+
+
+</div>
+
+
+<p
+id="stairStatus"
+style="
+text-align:center;
+color:var(--yellow)
+">
+Click either switch.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>Applications</h2>
+
+<div class="grid">
+
+
+<div class="info">
+
+<h3>Staircases</h3>
+
+<p>
+Control one lamp from the bottom and top of a staircase.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Corridors</h3>
+
+<p>
+Control corridor lighting from two locations.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Bedrooms</h3>
+
+<p>
+Control a light from the entrance and bedside.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Large Rooms</h3>
+
+<p>
+Provide convenient switching from two different locations.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="tab-navigation">
+
+<button onclick="nextTab('accessories')">
+← Previous
+</button>
+
+<button onclick="nextTab('earthing')">
+Next: Earthing →
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TAB 4
+========================================================= -->
+
+<div
+id="earthing"
+class="tab-content">
+
+<h2 class="section-heading">
+4. Earthing
+</h2>
+
+
+<div class="card">
+
+<h2>Definition of Earthing</h2>
+
+<p>
+Earthing is the process of connecting exposed metallic parts of electrical
+equipment to the general mass of earth through a low-resistance conducting
+path.
+</p>
+
+
+<div class="grid">
+
+
+<div class="info">
+
+<h3>Protection Against Shock</h3>
+
+<p>
+Provides a low-resistance path for fault current.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Fault Current Path</h3>
+
+<p>
+Allows protective devices to operate during faults.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Equipment Protection</h3>
+
+<p>
+Helps protect electrical equipment against insulation faults.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Voltage Reference</h3>
+
+<p>
+Provides a reference potential for the electrical system.
+</p>
+
+</div>
+
+
+</div>
+
+
+<div class="formula">
+
+Earthing Resistance ≤ 2 Ω
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Types of Earthing</h2>
+
+
+<div class="topic-image-wrap">
+
+<img
+src="types-of-earthing.jpg"
+class="topic-image"
+alt="Types of earthing"
+onclick="openImage(this.src,this.alt)"
+>
+
+<p class="image-caption">
+Figure: Types of Earthing
+</p>
+
+</div>
+
+
+<div class="grid">
+
+
+<div class="info">
+
+<h3>G.I. Pipe Earthing</h3>
+
+<p>
+A galvanized iron pipe is installed vertically in the ground and connected
+to the electrical installation through an earthing conductor.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Plate Earthing</h3>
+
+<p>
+A copper or galvanized iron plate is buried in the ground and connected
+to the electrical installation.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Pipe Electrode</h3>
+
+<p>
+The pipe electrode provides a conducting path between the electrical
+installation and earth.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Maintenance</h3>
+
+<p>
+The earthing system should be inspected periodically and its resistance
+should be measured.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Animated Fault Current Path</h2>
+
+<p>
+During an insulation fault, fault current flows through the protective
+earthing path.
+</p>
+
+
+<div class="fault-path">
+
+<div class="fault-line"></div>
+
+<div class="electron"></div>
+
+
+<div style="
+position:absolute;
+left:3%;
+top:38%;
+color:var(--yellow);
+">
+
+FAULT
+
+</div>
+
+
+<div style="
+position:absolute;
+right:3%;
+top:38%;
+color:var(--green);
+">
+
+EARTH
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Earthing vs Grounding</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+
+<th>Parameter</th>
+
+<th>Earthing</th>
+
+<th>Grounding</th>
+
+</tr>
+
+
+<tr>
+
+<td>Purpose</td>
+
+<td>
+Protection of people and equipment
+</td>
+
+<td>
+System reference and stabilisation
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Connection</td>
+
+<td>
+Equipment metallic body
+</td>
+
+<td>
+Neutral/system point
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Main objective</td>
+
+<td>
+Safety
+</td>
+
+<td>
+System operation
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Example</td>
+
+<td>
+Motor body connected to earth
+</td>
+
+<td>
+Transformer neutral grounded
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div class="tab-navigation">
+
+<button onclick="nextTab('staircase')">
+← Previous
+</button>
+
+<button onclick="nextTab('supply')">
+Next: Supply System →
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TAB 5
+========================================================= -->
+
+<div
+id="supply"
+class="tab-content">
+
+<h2 class="section-heading">
+5. Electrical Supply System
+</h2>
+
+
+<div class="card">
+
+<h2>Single Line Diagram of Electrical Supply System</h2>
+
+
+<div style="
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+align-items:center;
+gap:8px;
+">
+
+
+<div class="info">
+<strong>
+Generating<br>
+Station
+</strong>
+</div>
+
+<div class="highlight">→</div>
+
+
+<div class="info">
+<strong>
+Step-Up<br>
+Transformer
+</strong>
+</div>
+
+<div class="highlight">→</div>
+
+
+<div class="info">
+<strong>
+Primary<br>
+Transmission
+</strong>
+</div>
+
+<div class="highlight">→</div>
+
+
+<div class="info">
+<strong>
+Receiving<br>
+Station
+</strong>
+</div>
+
+<div class="highlight">→</div>
+
+
+<div class="info">
+<strong>
+Substation
+</strong>
+</div>
+
+<div class="highlight">→</div>
+
+
+<div class="info">
+<strong>
+Distribution<br>
+Substation
+</strong>
+</div>
+
+<div class="highlight">→</div>
+
+
+<div class="info">
+<strong>
+Consumers
+</strong>
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Stages of Electrical Supply</h2>
+
+
+<div class="grid">
+
+
+<div class="info">
+
+<h3>Generating Station</h3>
+
+<p>
+Electrical energy is generated using thermal, hydro, nuclear, solar,
+wind and other energy sources.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Primary Transmission</h3>
+
+<p>
+Generated voltage is stepped up to a high voltage for long-distance
+transmission.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Receiving Station</h3>
+
+<p>
+The transmitted electrical energy is received and voltage is stepped down.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Distribution Substation</h3>
+
+<p>
+Voltage is reduced to suitable levels for distribution to consumers.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Types of Generation</h2>
+
+
+<div class="grid">
+
+
+<div class="info">
+
+<h3>Thermal</h3>
+
+<p>
+Fuel is used to produce heat and mechanical energy for the generator.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Hydroelectric</h3>
+
+<p>
+Water energy drives hydraulic turbines.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Nuclear</h3>
+
+<p>
+Nuclear energy produces heat for steam generation.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Solar</h3>
+
+<p>
+Photovoltaic cells convert solar energy into electricity.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Wind</h3>
+
+<p>
+Wind turbines convert wind energy into electrical energy.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="tab-navigation">
+
+<button onclick="nextTab('earthing')">
+← Previous
+</button>
+
+<button onclick="nextTab('transmission')">
+Next: Transmission →
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TAB 6
+========================================================= -->
+
+<div
+id="transmission"
+class="tab-content">
+
+<h2 class="section-heading">
+6. Transmission and Distribution
+</h2>
+
+
+<div class="card">
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+
+<th>Stage</th>
+
+<th>Function</th>
+
+<th>Purpose</th>
+
+</tr>
+
+
+<tr>
+
+<td>Generation</td>
+
+<td>
+Generate electrical energy
+</td>
+
+<td>
+Produce power
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Primary Transmission</td>
+
+<td>
+High-voltage transmission
+</td>
+
+<td>
+Long-distance transfer
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Secondary Transmission</td>
+
+<td>
+Reduced transmission voltage
+</td>
+
+<td>
+Supply receiving stations
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Primary Distribution</td>
+
+<td>
+Distribution feeders
+</td>
+
+<td>
+Supply distribution substations
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Secondary Distribution</td>
+
+<td>
+Low-voltage supply
+</td>
+
+<td>
+Supply consumers
+</td>
+
+</tr>
+
+
+</table>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+Feeder, Distributor and Service Mains
+</h2>
+
+
+<div class="grid">
+
+
+<div class="info">
+
+<h3>Feeder</h3>
+
+<p>
+A feeder carries electrical power from a substation to a distribution
+area. Normally, consumer tapping is not made along the feeder.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Distributor</h3>
+
+<p>
+A distributor supplies power to consumers through tapping points.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Service Mains</h3>
+
+<p>
+Service mains connect the distributor to the consumer installation.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+Why High Voltage Transmission?
+</h2>
+
+
+<div class="formula">
+
+P = VI
+
+</div>
+
+
+<div class="formula">
+
+P<sub>loss</sub> = I²R
+
+</div>
+
+
+<p>
+For a given power, increasing the transmission voltage reduces the current.
+Because transmission loss varies as the square of current, reducing current
+reduces conductor losses.
+</p>
+
+</div>
+
+
+<div class="tab-navigation">
+
+<button onclick="nextTab('supply')">
+← Previous
+</button>
+
+<button onclick="nextTab('threephase')">
+Next: Three Phase →
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TAB 7
+========================================================= -->
+
+<div
+id="threephase"
+class="tab-content">
+
+<h2 class="section-heading">
+7. Three-Phase Balanced System
+</h2>
+
+
+<div class="card">
+
+<h2>Concept</h2>
+
+<p>
+A balanced three-phase system consists of three sinusoidal voltages of
+equal magnitude and frequency displaced by 120° electrical.
+</p>
+
+
+<div class="formula">
+
+V<sub>R</sub>
+=
+V<sub>m</sub> sin(ωt)
+
+</div>
+
+
+<div class="formula">
+
+V<sub>Y</sub>
+=
+V<sub>m</sub> sin(ωt − 120°)
+
+</div>
+
+
+<div class="formula">
+
+V<sub>B</sub>
+=
+V<sub>m</sub> sin(ωt − 240°)
+
+</div>
+
+
+<canvas
+id="threePhaseCanvas"
+width="900"
+height="320">
+</canvas>
+
+
+<div style="text-align:center">
+
+<button onclick="startThreePhase()">
+Start
+</button>
+
+<button
+class="secondary"
+onclick="stopThreePhase()">
+Stop
+</button>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Advantages of Three-Phase System</h2>
+
+
+<div class="grid">
+
+
+<div class="info">
+
+<h3>Efficient Transmission</h3>
+
+<p>
+Suitable for transmission of large amounts of power.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Rotating Magnetic Field</h3>
+
+<p>
+Produces a rotating magnetic field in three-phase motors.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Constant Power</h3>
+
+<p>
+Balanced three-phase loads provide nearly constant power transfer.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<h3>Economical</h3>
+
+<p>
+Requires less conductor material for a given power transfer.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="tab-navigation">
+
+<button onclick="nextTab('transmission')">
+← Previous
+</button>
+
+<button onclick="nextTab('stardelta')">
+Next: Star / Delta →
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TAB 8
+========================================================= -->
+
+<div
+id="stardelta"
+class="tab-content">
+
+<h2 class="section-heading">
+8. Star and Delta Connections
+</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h2>Star Connection</h2>
+
+
+<div class="svg-box">
+
+<svg viewBox="0 0 500 330">
+
+
+<line
+x1="250"
+y1="160"
+x2="100"
+y2="70"
+stroke="#27d9ff"
+stroke-width="4"/>
+
+
+<line
+x1="250"
+y1="160"
+x2="400"
+y2="70"
+stroke="#27d9ff"
+stroke-width="4"/>
+
+
+<line
+x1="250"
+y1="160"
+x2="250"
+y2="285"
+stroke="#45f59a"
+stroke-width="4"/>
+
+
+<circle
+cx="250"
+cy="160"
+r="9"
+fill="#ffd166"/>
+
+
+<text
+x="70"
+y="55"
+fill="white">
+R
+</text>
+
+
+<text
+x="405"
+y="55"
+fill="white">
+Y
+</text>
+
+
+<text
+x="260"
+y="310"
+fill="white">
+B
+</text>
+
+
+<text
+x="260"
+y="150"
+fill="#ffd166">
+N
+</text>
+
+
+</svg>
+
+</div>
+
+
+<div class="formula">
+
+V<sub>L</sub>
+=
+√3 V<sub>ph</sub>
+
+</div>
+
+
+<div class="formula">
+
+I<sub>L</sub>
+=
+I<sub>ph</sub>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Delta Connection</h2>
+
+
+<div class="svg-box">
+
+<svg viewBox="0 0 500 330">
+
+
+<polygon
+points="250,55 100,255 400,255"
+fill="none"
+stroke="#27d9ff"
+stroke-width="5"/>
+
+
+<text
+x="245"
+y="40"
+fill="white">
+R
+</text>
+
+
+<text
+x="70"
+y="275"
+fill="white">
+Y
+</text>
+
+
+<text
+x="405"
+y="275"
+fill="white">
+B
+</text>
+
+
+</svg>
+
+</div>
+
+
+<div class="formula">
+
+V<sub>L</sub>
+=
+V<sub>ph</sub>
+
+</div>
+
+
+<div class="formula">
+
+I<sub>L</sub>
+=
+√3 I<sub>ph</sub>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Star-Delta Comparison</h2>
+
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+
+<th>Parameter</th>
+
+<th>Star</th>
+
+<th>Delta</th>
+
+</tr>
+
+
+<tr>
+
+<td>Line Voltage</td>
+
+<td>
+√3 × Phase Voltage
+</td>
+
+<td>
+Phase Voltage
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Line Current</td>
+
+<td>
+Phase Current
+</td>
+
+<td>
+√3 × Phase Current
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Neutral</td>
+
+<td>
+Possible
+</td>
+
+<td>
+Normally not available
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Star-Delta Calculator</h2>
+
+
+<div class="calculator">
+
+<div class="grid">
+
+
+<div>
+
+<label>
+Phase Voltage (V)
+</label>
+
+<input
+type="number"
+id="phaseVoltage"
+value="230">
+
+</div>
+
+
+<div>
+
+<label>
+Phase Current (A)
+</label>
+
+<input
+type="number"
+id="phaseCurrent"
+value="10">
+
+</div>
+
+
+</div>
+
+
+<button onclick="calculateStarDelta()">
+Calculate
+</button>
+
+
+<div
+class="result"
+id="starDeltaResult">
+
+Enter values and click Calculate.
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="tab-navigation">
+
+<button onclick="nextTab('threephase')">
+← Previous
+</button>
+
+<button onclick="nextTab('energy')">
+Next: Energy →
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TAB 9 - UPDATED ENERGY
+========================================================= -->
+
+<div
+id="energy"
+class="tab-content">
+
+<h2 class="section-heading">
+9. Domestic Energy Consumption
+</h2>
+
+
+<div class="card">
+
+<h2>Electrical Energy Calculation</h2>
+
+
+<p>
+The monthly electrical energy consumption of a domestic appliance can
+be calculated from its power rating, quantity, operating hours per day
+and number of operating days per month.
+</p>
+
+
+<div class="formula">
+
+Monthly Energy (kWh)
+=
+Power (W)
+× Quantity
+× Hours/Day
+× Days/Month
+÷ 1000
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Appliance Energy Calculator</h2>
+
+
+<div class="table-wrap">
+
+<table id="energyTable">
+
+<thead>
+
+<tr>
+
+<th>
+Appliance
+</th>
+
+<th>
+Power (W)
+</th>
+
+<th>
+Quantity
+</th>
+
+<th>
+Hours / Day
+</th>
+
+<th>
+Days / Month
+</th>
+
+<th>
+Monthly kWh
+</th>
+
+<th>
+Remove
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="loadContainer">
+
+
+<!-- ROW 1 -->
+
+<tr class="load-row">
+
+<td>
+
+<input
+type="text"
+class="appliance"
+value="LED Lamp"
+placeholder="Appliance">
+
+</td>
+
+
+<td>
+
+<input
+type="number"
+class="power"
+value="10"
+min="0">
+
+</td>
+
+
+<td>
+
+<input
+type="number"
+class="quantity"
+value="4"
+min="1">
+
+</td>
+
+
+<td>
+
+<input
+type="number"
+class="hours"
+value="5"
+min="0"
+max="24"
+step="0.1">
+
+</td>
+
+
+<td>
+
+<input
+type="number"
+class="days"
+value="30"
+min="1"
+max="31">
+
+</td>
+
+
+<td class="monthly-energy">
+
+0.00
+
+</td>
+
+
+<td>
+
+<button
+class="red"
+onclick="removeLoad(this)">
+
+Remove
+
+</button>
+
+</td>
+
+</tr>
+
+
+
+<!-- ROW 2 -->
+
+<tr class="load-row">
+
+<td>
+
+<input
+type="text"
+class="appliance"
+value="Ceiling Fan"
+placeholder="Appliance">
+
+</td>
+
+
+<td>
+
+<input
+type="number"
+class="power"
+value="75"
+min="0">
+
+</td>
+
+
+<td>
+
+<input
+type="number"
+class="quantity"
+value="3"
+min="1">
+
+</td>
+
+
+<td>
+
+<input
+type="number"
+class="hours"
+value="8"
+min="0"
+max="24"
+step="0.1">
+
+</td>
+
+
+<td>
+
+<input
+type="number"
+class="days"
+value="30"
+min="1"
+max="31">
+
+</td>
+
+
+<td class="monthly-energy">
+
+0.00
+
+</td>
+
+
+<td>
+
+<button
+class="red"
+onclick="removeLoad(this)">
+
+Remove
+
+</button>
+
+</td>
+
+</tr>
+
+
+
+<!-- ROW 3 -->
+
+<tr class="load-row">
+
+<td>
+
+<input
+type="text"
+class="appliance"
+value="Television"
+placeholder="Appliance">
+
+</td>
+
+
+<td>
+
+<input
+type="number"
+class="power"
+value="100"
+min="0">
+
+</td>
+
+
+<td>
+
+<input
+type="number"
+class="quantity"
+value="1"
+min="1">
+
+</td>
+
+
+<td>
+
+<input
+type="number"
+class="hours"
+value="5"
+min="0"
+max="24"
+step="0.1">
+
+</td>
+
+
+<td>
+
+<input
+type="number"
+class="days"
+value="30"
+min="1"
+max="31">
+
+</td>
+
+
+<td class="monthly-energy">
+
+0.00
+
+</td>
+
+
+<td>
+
+<button
+class="red"
+onclick="removeLoad(this)">
+
+Remove
+
+</button>
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<div style="
+margin-top:20px;
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+">
+
+<button
+onclick="addLoad()">
+
++ Add Appliance
+
+</button>
+
+
+<button
+class="green"
+onclick="calculateEnergy()">
+
+Calculate Energy
+
+</button>
+
+
+<button
+class="yellow"
+onclick="resetEnergyCalculation()">
+
+Reset Calculation
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Energy Calculation Result</h2>
+
+
+<div
+class="result"
+id="energyResult">
+
+Enter the appliance details and click
+<strong>Calculate Energy</strong>.
+
+</div>
+
+
+<div
+id="energyDetails"
+style="margin-top:15px;">
+
+</div>
+
+
+<h3>
+Monthly Energy Consumption
+</h3>
+
+
+<div class="energy-bar">
+
+<div
+class="energy-fill"
+id="energyFill">
+</div>
+
+</div>
+
+
+<div
+id="energyTotal">
+
+0.00 kWh / Month
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Example Calculation</h2>
+
+
+<div class="formula">
+
+LED Lamp = 10 W
+
+</div>
+
+
+<ul>
+
+<li>
+Power = 10 W
+</li>
+
+<li>
+Quantity = 4
+</li>
+
+<li>
+Hours / Day = 5
+</li>
+
+<li>
+Days / Month = 30
+</li>
+
+</ul>
+
+
+<div class="formula">
+
+Monthly Energy
+
+=
+
+10 × 4 × 5 × 30 ÷ 1000
+
+=
+
+6 kWh/month
+
+</div>
+
+
+<p>
+
+Therefore, four 10 W LED lamps operating for 5 hours per day
+consume approximately <strong>6 kWh per month</strong>.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Learning Outcome</h2>
+
+<p>
+Students will be able to calculate the monthly electrical energy
+consumption of domestic appliances and identify appliances that
+contribute significantly to household energy consumption.
+</p>
+
+</div>
+
+
+<div class="tab-navigation">
+
+<button onclick="nextTab('stardelta')">
+← Previous
+</button>
+
+<button onclick="nextTab('quiz')">
+Next: Quiz →
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TAB 10 - QUIZ
+========================================================= -->
+
+<div
+id="quiz"
+class="tab-content">
+
+<h2 class="section-heading">
+10. Self Assessment Quiz
+</h2>
+
+
+<div class="card">
+
+
+<div class="question">
+
+<h3>
+Q1. Which conductor should normally be switched in a domestic circuit?
+</h3>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q1"
+value="Neutral">
+
+Neutral
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q1"
+value="Phase">
+
+Phase
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q1"
+value="Earth">
+
+Earth
+
+</label>
+
+</div>
+
+
+
+<div class="question">
+
+<h3>
+Q2. Which wiring method provides good mechanical protection?
+</h3>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q2"
+value="Cleat">
+
+Cleat Wiring
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q2"
+value="Conduit">
+
+Conduit Wiring
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q2"
+value="Temporary">
+
+Temporary Wiring
+
+</label>
+
+</div>
+
+
+
+<div class="question">
+
+<h3>
+Q3. What is the main purpose of earthing?
+</h3>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q3"
+value="Protection">
+
+Protection against electric shock and fault conditions
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q3"
+value="Lighting">
+
+Increase lamp brightness
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q3"
+value="Heating">
+
+Increase heating
+
+</label>
+
+</div>
+
+
+
+<div class="question">
+
+<h3>
+Q4. For the same transmitted power, increasing voltage causes current to:
+</h3>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q4"
+value="Increase">
+
+Increase
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q4"
+value="Decrease">
+
+Decrease
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q4"
+value="Same">
+
+Remain the same
+
+</label>
+
+</div>
+
+
+
+<div class="question">
+
+<h3>
+Q5. The phase displacement between balanced three-phase voltages is:
+</h3>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q5"
+value="60">
+
+60°
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q5"
+value="90">
+
+90°
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q5"
+value="120">
+
+120°
+
+</label>
+
+</div>
+
+
+<button
+class="green"
+onclick="evaluateQuiz()">
+
+Evaluate Quiz
+
+</button>
+
+
+<button
+class="secondary"
+onclick="resetQuiz()">
+
+Reset
+
+</button>
+
+
+<div id="quizResult"></div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Learning Outcome</h2>
+
+<p>
+After completing this unit, students should be able to explain domestic
+wiring systems, wiring accessories, staircase wiring, earthing,
+electrical supply systems, transmission and distribution, and
+three-phase connections.
+</p>
+
+</div>
+
+
+<div class="tab-navigation">
+
+<button onclick="nextTab('energy')">
+← Previous
+</button>
+
+<button disabled>
+End of Unit ✓
+</button>
+
+</div>
+
+</div>
+
+
+</main>
+
+</div>
+
+
+
+<!-- =========================================================
+     IMAGE MODAL
+========================================================= -->
+
+<div
+class="image-modal"
+id="imageModal">
+
+<span
+class="close-image"
+onclick="closeImage()">
+
+&times;
+
+</span>
+
+
+<div class="image-modal-content">
+
+<img
+id="modalImage"
+src=""
+alt="">
+
+<p id="modalCaption"></p>
+
+</div>
+
+</div>
+
+
+
+<footer>
+
+UNIT IV – Electrical Supply System<br>
+
+Interactive E-Learning Module<br>
+Dr. R. Sriranjani
+SAP/SEEE<br>
+SASTRA
+
+</footer>
+
+
+
+<script>
+
+
+/* =========================================================
+   TAB SYSTEM
+========================================================= */
+
+const tabOrder = [
+
+    "wiring",
+    "accessories",
+    "staircase",
+    "earthing",
+    "supply",
+    "transmission",
+    "threephase",
+    "stardelta",
+    "energy",
+    "quiz"
+
+];
+
+
+function openTab(tabId,button){
+
+    document
+    .querySelectorAll(".tab-content")
+    .forEach(function(tab){
+
+        tab.classList.remove("active");
+
+    });
+
+
+    document
+    .querySelectorAll(".tab-button")
+    .forEach(function(btn){
+
+        btn.classList.remove("active");
+
+    });
+
+
+    const target =
+        document.getElementById(tabId);
+
+
+    if(target){
+
+        target.classList.add("active");
+
+    }
+
+
+    if(button){
+
+        button.classList.add("active");
+
+    }
+    else{
+
+        const index =
+            tabOrder.indexOf(tabId);
+
+        const buttons =
+            document.querySelectorAll(
+                ".tab-button"
+            );
+
+        if(index >= 0 && buttons[index]){
+
+            buttons[index]
+                .classList.add("active");
+
+        }
+
+    }
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+function nextTab(tabId){
+
+    openTab(tabId);
+
+}
+
+
+
+/* =========================================================
+   IMAGE VIEWER
+========================================================= */
+
+function openImage(src,caption){
+
+    document.getElementById(
+        "modalImage"
+    ).src = src;
+
+
+    document.getElementById(
+        "modalImage"
+    ).alt = caption;
+
+
+    document.getElementById(
+        "modalCaption"
+    ).textContent = caption;
+
+
+    document.getElementById(
+        "imageModal"
+    ).classList.add("show");
+
+}
+
+
+function closeImage(){
+
+    document.getElementById(
+        "imageModal"
+    ).classList.remove("show");
+
+}
+
+
+document.getElementById(
+    "imageModal"
+)
+.addEventListener(
+    "click",
+    function(event){
+
+        if(event.target === this){
+
+            closeImage();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            closeImage();
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   STAIRCASE WIRING
+========================================================= */
+
+let switch1 = false;
+
+let switch2 = false;
+
+
+function toggleSwitch(number){
+
+    if(number === 1){
+
+        switch1 = !switch1;
+
+    }
+
+
+    if(number === 2){
+
+        switch2 = !switch2;
+
+    }
+
+
+    updateStaircase();
+
+}
+
+
+function updateStaircase(){
+
+    const lamp =
+        document.getElementById(
+            "lamp"
+        );
+
+
+    const s1 =
+        document.getElementById(
+            "switch1"
+        );
+
+
+    const s2 =
+        document.getElementById(
+            "switch2"
+        );
+
+
+    const status =
+        document.getElementById(
+            "stairStatus"
+        );
+
+
+    /*
+       Two-way switching:
+       lamp state changes whenever
+       either switch changes position.
+    */
+
+    const lampState =
+        switch1 !== switch2;
+
+
+    if(lampState){
+
+        lamp.classList.add("on");
+
+        status.innerHTML =
+            "Lamp Status: " +
+            "<strong style='color:var(--green)'>" +
+            "ON" +
+            "</strong>";
+
+    }
+
+    else{
+
+        lamp.classList.remove("on");
+
+        status.innerHTML =
+            "Lamp Status: " +
+            "<strong style='color:var(--red)'>" +
+            "OFF" +
+            "</strong>";
+
+    }
+
+
+    s1.innerHTML =
+        "Switch 1<br>" +
+        (switch1 ? "ON" : "OFF");
+
+
+    s2.innerHTML =
+        "Switch 2<br>" +
+        (switch2 ? "ON" : "OFF");
+
+}
+
+
+
+/* =========================================================
+   THREE PHASE ANIMATION
+========================================================= */
+
+const canvas =
+    document.getElementById(
+        "threePhaseCanvas"
+    );
+
+
+const ctx =
+    canvas.getContext("2d");
+
+
+let phaseAnimation = null;
+
+let phaseTime = 0;
+
+
+function drawThreePhase(){
+
+    const w =
+        canvas.width;
+
+
+    const h =
+        canvas.height;
+
+
+    ctx.clearRect(
+        0,
+        0,
+        w,
+        h
+    );
+
+
+    ctx.fillStyle =
+        "#02080d";
+
+
+    ctx.fillRect(
+        0,
+        0,
+        w,
+        h
+    );
+
+
+    const centerY =
+        h / 2;
+
+
+    const amplitude =
+        90;
+
+
+    /* Grid */
+
+    ctx.strokeStyle =
+        "#173445";
+
+    ctx.lineWidth = 1;
+
+
+    for(
+        let y=40;
+        y<h;
+        y+=40
+    ){
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            0,
+            y
+        );
+
+        ctx.lineTo(
+            w,
+            y
+        );
+
+        ctx.stroke();
+
+    }
+
+
+    for(
+        let x=0;
+        x<w;
+        x+=75
+    ){
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            x,
+            0
+        );
+
+        ctx.lineTo(
+            x,
+            h
+        );
+
+        ctx.stroke();
+
+    }
+
+
+    /* Zero axis */
+
+    ctx.strokeStyle =
+        "#668899";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        0,
+        centerY
+    );
+
+    ctx.lineTo(
+        w,
+        centerY
+    );
+
+    ctx.stroke();
+
+
+    const phases = [
+
+        {
+            shift:0,
+            label:"R",
+            stroke:"#27d9ff"
+        },
+
+        {
+            shift:
+                2*Math.PI/3,
+
+            label:"Y",
+
+            stroke:"#ffd166"
+        },
+
+        {
+            shift:
+                4*Math.PI/3,
+
+            label:"B",
+
+            stroke:"#45f59a"
+        }
+
+    ];
+
+
+    phases.forEach(
+        function(phase){
+
+            ctx.beginPath();
+
+
+            for(
+                let x=0;
+                x<w;
+                x++
+            ){
+
+                const angle =
+                    1.5 *
+                    2 *
+                    Math.PI *
+                    x/w
+                    +
+                    phaseTime
+                    -
+                    phase.shift;
+
+
+                const y =
+                    centerY
+                    -
+                    amplitude *
+                    Math.sin(angle);
+
+
+                if(x===0){
+
+                    ctx.moveTo(
+                        x,
+                        y
+                    );
+
+                }
+
+                else{
+
+                    ctx.lineTo(
+                        x,
+                        y
+                    );
+
+                }
+
+            }
+
+
+            ctx.strokeStyle =
+                phase.stroke;
+
+            ctx.lineWidth = 3;
+
+            ctx.stroke();
+
+
+            ctx.fillStyle =
+                phase.stroke;
+
+            ctx.font =
+                "bold 16px Arial";
+
+
+            ctx.fillText(
+
+                phase.label,
+
+                w-30,
+
+                centerY -
+                amplitude *
+                Math.sin(
+                    1.5 *
+                    2 *
+                    Math.PI
+                    +
+                    phaseTime
+                    -
+                    phase.shift
+                )
+
+            );
+
+        }
+    );
+
+
+    phaseTime += .035;
+
+
+    phaseAnimation =
+        requestAnimationFrame(
+            drawThreePhase
+        );
+
+}
+
+
+function startThreePhase(){
+
+    if(!phaseAnimation){
+
+        drawThreePhase();
+
+    }
+
+}
+
+
+function stopThreePhase(){
+
+    if(phaseAnimation){
+
+        cancelAnimationFrame(
+            phaseAnimation
+        );
+
+        phaseAnimation = null;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   STAR DELTA CALCULATOR
+========================================================= */
+
+function calculateStarDelta(){
+
+    const Vph =
+        parseFloat(
+            document.getElementById(
+                "phaseVoltage"
+            ).value
+        );
+
+
+    const Iph =
+        parseFloat(
+            document.getElementById(
+                "phaseCurrent"
+            ).value
+        );
+
+
+    if(
+        isNaN(Vph) ||
+        isNaN(Iph)
+    ){
+
+        document.getElementById(
+            "starDeltaResult"
+        ).innerHTML =
+            "Please enter valid values.";
+
+        return;
+
+    }
+
+
+    const starVL =
+        Math.sqrt(3) * Vph;
+
+
+    const starIL =
+        Iph;
+
+
+    const deltaVL =
+        Vph;
+
+
+    const deltaIL =
+        Math.sqrt(3) * Iph;
+
+
+    document.getElementById(
+        "starDeltaResult"
+    ).innerHTML =
+
+        "<strong>Star Connection</strong><br>" +
+
+        "Line Voltage = " +
+
+        starVL.toFixed(2) +
+
+        " V<br>" +
+
+        "Line Current = " +
+
+        starIL.toFixed(2) +
+
+        " A<br><br>" +
+
+        "<strong>Delta Connection</strong><br>" +
+
+        "Line Voltage = " +
+
+        deltaVL.toFixed(2) +
+
+        " V<br>" +
+
+        "Line Current = " +
+
+        deltaIL.toFixed(2) +
+
+        " A";
+
+}
+
+
+
+/* =========================================================
+   ADD APPLIANCE
+========================================================= */
+
+function addLoad(){
+
+    const container =
+        document.getElementById(
+            "loadContainer"
+        );
+
+
+    const row =
+        document.createElement(
+            "tr"
+        );
+
+
+    row.className =
+        "load-row";
+
+
+    row.innerHTML = `
+
+        <td>
+
+            <input
+                type="text"
+                class="appliance"
+                value=""
+                placeholder="Appliance">
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="number"
+                class="power"
+                value="100"
+                min="0">
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="number"
+                class="quantity"
+                value="1"
+                min="1">
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="number"
+                class="hours"
+                value="2"
+                min="0"
+                max="24"
+                step="0.1">
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="number"
+                class="days"
+                value="30"
+                min="1"
+                max="31">
+
+        </td>
+
+
+        <td class="monthly-energy">
+
+            0.00
+
+        </td>
+
+
+        <td>
+
+            <button
+                class="red"
+                onclick="removeLoad(this)">
+
+                Remove
+
+            </button>
+
+        </td>
+
+    `;
+
+
+    container.appendChild(row);
+
+}
+
+
+
+/* =========================================================
+   REMOVE APPLIANCE
+========================================================= */
+
+function removeLoad(button){
+
+    const rows =
+        document.querySelectorAll(
+            "#loadContainer .load-row"
+        );
+
+
+    if(rows.length <= 1){
+
+        alert(
+            "At least one appliance must be present."
+        );
+
+        return;
+
+    }
+
+
+    button
+    .closest("tr")
+    .remove();
+
+
+    calculateEnergy();
+
+}
+
+
+
+/* =========================================================
+   CALCULATE ENERGY
+========================================================= */
+
+function calculateEnergy(){
+
+    const rows =
+        document.querySelectorAll(
+            "#loadContainer .load-row"
+        );
+
+
+    let totalEnergy = 0;
+
+    let detailsHTML = "";
+
+
+    rows.forEach(
+        function(row,index){
+
+            const appliance =
+                row.querySelector(
+                    ".appliance"
+                ).value.trim()
+                ||
+                "Appliance " +
+                (index+1);
+
+
+            const power =
+                parseFloat(
+                    row.querySelector(
+                        ".power"
+                    ).value
+                ) || 0;
+
+
+            const quantity =
+                parseFloat(
+                    row.querySelector(
+                        ".quantity"
+                    ).value
+                ) || 0;
+
+
+            const hours =
+                parseFloat(
+                    row.querySelector(
+                        ".hours"
+                    ).value
+                ) || 0;
+
+
+            const days =
+                parseFloat(
+                    row.querySelector(
+                        ".days"
+                    ).value
+                ) || 0;
+
+
+            const monthlyEnergy =
+
+                (
+                    power *
+                    quantity *
+                    hours *
+                    days
+                )
+                /
+                1000;
+
+
+            row.querySelector(
+                ".monthly-energy"
+            ).textContent =
+
+                monthlyEnergy.toFixed(2);
+
+
+            totalEnergy +=
+                monthlyEnergy;
+
+
+            detailsHTML += `
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    gap:10px;
+                    padding:10px;
+                    margin:6px 0;
+                    background:#071923;
+                    border:1px solid var(--border);
+                    border-radius:8px;
+                ">
+
+                    <span>
+
+                        ${index+1}.
+                        <strong>
+                            ${appliance}
+                        </strong>
+
+                    </span>
+
+
+                    <span
+                        style="color:var(--green)">
+
+                        ${monthlyEnergy.toFixed(2)}
+                        kWh/month
+
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    document.getElementById(
+        "energyResult"
+    ).innerHTML = `
+
+        <strong>
+            Total Monthly Energy Consumption:
+        </strong>
+
+        ${totalEnergy.toFixed(2)}
+        kWh
+
+    `;
+
+
+    document.getElementById(
+        "energyDetails"
+    ).innerHTML = `
+
+        <h3>
+            Appliance-wise Monthly Consumption
+        </h3>
+
+        ${detailsHTML}
+
+    `;
+
+
+    document.getElementById(
+        "energyTotal"
+    ).textContent =
+
+        totalEnergy.toFixed(2)
+        +
+        " kWh / Month";
+
+
+    const percentage =
+
+        Math.min(
+            (totalEnergy / 300) * 100,
+            100
+        );
+
+
+    document.getElementById(
+        "energyFill"
+    ).style.width =
+        percentage + "%";
+
+}
+
+
+
+/* =========================================================
+   RESET ENERGY CALCULATION
+========================================================= */
+
+function resetEnergyCalculation(){
+
+    const container =
+        document.getElementById(
+            "loadContainer"
+        );
+
+
+    container.innerHTML = "";
+
+
+    const row =
+        document.createElement(
+            "tr"
+        );
+
+
+    row.className =
+        "load-row";
+
+
+    row.innerHTML = `
+
+        <td>
+
+            <input
+                type="text"
+                class="appliance"
+                value="LED Lamp"
+                placeholder="Appliance">
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="number"
+                class="power"
+                value="10"
+                min="0">
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="number"
+                class="quantity"
+                value="4"
+                min="1">
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="number"
+                class="hours"
+                value="5"
+                min="0"
+                max="24"
+                step="0.1">
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="number"
+                class="days"
+                value="30"
+                min="1"
+                max="31">
+
+        </td>
+
+
+        <td class="monthly-energy">
+
+            0.00
+
+        </td>
+
+
+        <td>
+
+            <button
+                class="red"
+                onclick="removeLoad(this)">
+
+                Remove
+
+            </button>
+
+        </td>
+
+    `;
+
+
+    container.appendChild(row);
+
+
+    document.getElementById(
+        "energyResult"
+    ).innerHTML = `
+
+        Enter the appliance details and click
+        <strong>Calculate Energy</strong>.
+
+    `;
+
+
+    document.getElementById(
+        "energyDetails"
+    ).innerHTML = "";
+
+
+    document.getElementById(
+        "energyTotal"
+    ).textContent =
+        "0.00 kWh / Month";
+
+
+    document.getElementById(
+        "energyFill"
+    ).style.width =
+        "0%";
+
+}
+
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+function evaluateQuiz(){
+
+    const answers = {
+
+        q1:"Phase",
+
+        q2:"Conduit",
+
+        q3:"Protection",
+
+        q4:"Decrease",
+
+        q5:"120"
+
+    };
+
+
+    let score = 0;
+
+    let attempted = 0;
+
+
+    Object.keys(answers)
+    .forEach(
+        function(question){
+
+            const selected =
+                document.querySelector(
+                    'input[name="' +
+                    question +
+                    '"]:checked'
+                );
+
+
+            const options =
+                document.querySelectorAll(
+                    'input[name="' +
+                    question +
+                    '"]'
+                );
+
+
+            options.forEach(
+                function(option){
+
+                    option.parentElement
+                    .classList.remove(
+                        "correct",
+                        "wrong"
+                    );
+
+                }
+            );
+
+
+            if(selected){
+
+                attempted++;
+
+
+                if(
+                    selected.value ===
+                    answers[question]
+                ){
+
+                    score++;
+
+
+                    selected.parentElement
+                    .classList.add(
+                        "correct"
+                    );
+
+                }
+
+                else{
+
+                    selected.parentElement
+                    .classList.add(
+                        "wrong"
+                    );
+
+
+                    options.forEach(
+                        function(option){
+
+                            if(
+                                option.value ===
+                                answers[question]
+                            ){
+
+                                option.parentElement
+                                .classList.add(
+                                    "correct"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "quizResult"
+    ).innerHTML =
+
+        "Score: " +
+        score +
+        " / 5" +
+
+        "<br>Attempted: " +
+        attempted +
+        " / 5";
+
+}
+
+
+
+function resetQuiz(){
+
+    document.querySelectorAll(
+        '#quiz input[type="radio"]'
+    )
+    .forEach(
+        function(input){
+
+            input.checked = false;
+
+        }
+    );
+
+
+    document.querySelectorAll(
+        "#quiz .option"
+    )
+    .forEach(
+        function(option){
+
+            option.classList.remove(
+                "correct",
+                "wrong"
+            );
+
+        }
+    );
+
+
+    document.getElementById(
+        "quizResult"
+    ).innerHTML = "";
+
+}
+
+
+
+/* =========================================================
+   INITIALISE
+========================================================= */
+
+updateStaircase();
+
+startThreePhase();
+
+
+</script>
+
+</body>
+
+</html>
