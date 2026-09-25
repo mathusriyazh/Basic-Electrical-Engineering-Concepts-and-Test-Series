@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Solar PV System – Grid Connected and Standalone</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#071018;
+    color:#eaf5fa;
+}
+
+header{
+    text-align:center;
+    padding:18px;
+    background:linear-gradient(90deg,#0b1b27,#173449,#0b1b27);
+    border-bottom:2px solid #31576b;
+}
+
+header h1{
+    margin:0;
+    font-size:28px;
+}
+
+header p{
+    margin:7px 0 0;
+    color:#a8c6d4;
+}
+
+.toolbar{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+    padding:12px;
+    background:#09151e;
+    border-bottom:1px solid #294654;
+}
+
+button{
+    padding:9px 14px;
+    border-radius:7px;
+    border:1px solid #3d7088;
+    background:#102b3a;
+    color:#e9f8ff;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#19465b;
+}
+
+button.active{
+    background:#28637d;
+}
+
+.main{
+    display:grid;
+    grid-template-columns:minmax(650px,2.1fr) minmax(320px,1fr);
+    gap:14px;
+    padding:14px;
+}
+
+.card{
+    background:#0b1923;
+    border:1px solid #264655;
+    border-radius:12px;
+    box-shadow:0 0 20px rgba(0,0,0,.25);
+}
+
+.diagramCard{
+    padding:10px;
+    min-height:720px;
+}
+
+.infoCard{
+    padding:18px;
+    min-height:720px;
+}
+
+svg{
+    width:100%;
+    height:690px;
+    background:#061018;
+    border-radius:10px;
+}
+
+.block{
+    fill:#102d3c;
+    stroke:#4d879f;
+    stroke-width:2;
+    rx:10;
+}
+
+.block.active{
+    fill:#245a70;
+    stroke:#8de3ff;
+    filter:url(#glow);
+}
+
+.block.battery{
+    fill:#18352f;
+    stroke:#62c9a0;
+}
+
+.block.grid{
+    fill:#263247;
+    stroke:#8497bf;
+}
+
+.block.load{
+    fill:#342a19;
+    stroke:#d4a95c;
+}
+
+.block.control{
+    fill:#292f46;
+    stroke:#8999c5;
+}
+
+.text{
+    fill:#eef9fd;
+    text-anchor:middle;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.small{
+    fill:#a8c6d2;
+    text-anchor:middle;
+    font-size:11px;
+}
+
+.flow{
+    fill:none;
+    stroke:#69d8ff;
+    stroke-width:5;
+    stroke-dasharray:12 10;
+    stroke-linecap:round;
+    animation:flow 1s linear infinite;
+}
+
+@keyframes flow{
+    to{
+        stroke-dashoffset:-44;
+    }
+}
+
+.sunRay{
+    stroke:#ffd95a;
+    stroke-width:4;
+    stroke-linecap:round;
+    animation:sunPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes sunPulse{
+    0%,100%{
+        opacity:.35;
+    }
+    50%{
+        opacity:1;
+    }
+}
+
+.panelCell{
+    fill:#203d4b;
+    stroke:#79c8dc;
+    stroke-width:1;
+}
+
+.panelGlow{
+    fill:#163e55;
+    stroke:#8ee5ff;
+    stroke-width:2;
+}
+
+.solarArrow{
+    stroke:#ffe36b;
+    stroke-width:3;
+    fill:none;
+    marker-end:url(#arrowYellow);
+}
+
+.powerDot{
+    fill:#ffe36b;
+    filter:url(#glow);
+}
+
+.batteryLevel{
+    fill:#54d39e;
+    transition:height .4s;
+}
+
+h2{
+    margin-top:0;
+    color:#a5e6ff;
+}
+
+h3{
+    color:#c1edf9;
+    margin-bottom:7px;
+}
+
+.info{
+    color:#b7cbd5;
+    line-height:1.5;
+}
+
+.metric{
+    background:#08141c;
+    border:1px solid #274754;
+    padding:10px;
+    margin:8px 0;
+    border-radius:8px;
+}
+
+.metric span{
+    float:right;
+    color:#88e0ff;
+    font-weight:bold;
+}
+
+.formula{
+    background:#07131b;
+    border-left:4px solid #55c9ef;
+    padding:10px;
+    margin:9px 0;
+    font-family:"Courier New",monospace;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+td,th{
+    border:1px solid #294754;
+    padding:7px;
+}
+
+th{
+    background:#112d3c;
+}
+
+input[type=range]{
+    width:100%;
+}
+
+select,input[type=number]{
+    width:100%;
+    padding:7px;
+    background:#07131b;
+    color:white;
+    border:1px solid #355667;
+    border-radius:5px;
+}
+
+.progress{
+    height:12px;
+    background:#142832;
+    border-radius:8px;
+    overflow:hidden;
+    margin-top:8px;
+}
+
+.progressBar{
+    height:100%;
+    width:0%;
+    background:#58ccef;
+    transition:width .3s;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    margin:3px;
+    border-radius:12px;
+    background:#15384a;
+    color:#a7e8ff;
+    font-size:12px;
+}
+
+@media(max-width:1000px){
+    .main{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Solar Photovoltaic (PV) System</h1>
+<p>Grid-Connected and Standalone PV Systems • Block Diagram • Energy Flow • MPPT • Battery</p>
+</header>
+
+<div class="toolbar">
+
+<button id="constructionBtn"
+        onclick="constructionMode()">
+Construction
+</button>
+
+<button id="workingBtn"
+        onclick="workingMode()">
+Working
+</button>
+
+<button id="gridBtn"
+        onclick="gridMode()">
+Grid Connected
+</button>
+
+<button id="standaloneBtn"
+        onclick="standaloneMode()">
+Standalone
+</button>
+
+<button id="mpptBtn"
+        onclick="mpptMode()">
+MPPT
+</button>
+
+<button id="batteryBtn"
+        onclick="batteryMode()">
+Battery Charging
+</button>
+
+<button id="lossBtn"
+        onclick="lossMode()">
+Losses
+</button>
+
+<button onclick="resetAll()">
+Reset
+</button>
+
+</div>
+
+
+<div class="main">
+
+<!-- ================= DIAGRAM ================= -->
+
+<div class="card diagramCard">
+
+<svg viewBox="0 0 1150 690">
+
+<defs>
+
+<filter id="glow">
+<feGaussianBlur stdDeviation="4" result="blur"/>
+<feMerge>
+<feMergeNode in="blur"/>
+<feMergeNode in="SourceGraphic"/>
+</feMerge>
+</filter>
+
+<marker id="arrow"
+        markerWidth="10"
+        markerHeight="10"
+        refX="8"
+        refY="3"
+        orient="auto">
+<path d="M0,0 L9,3 L0,6 Z"
+      fill="#69d8ff"/>
+</marker>
+
+<marker id="arrowYellow"
+        markerWidth="10"
+        markerHeight="10"
+        refX="8"
+        refY="3"
+        orient="auto">
+<path d="M0,0 L9,3 L0,6 Z"
+      fill="#ffe36b"/>
+</marker>
+
+</defs>
+
+
+<!-- TITLE -->
+
+<text x="575"
+      y="30"
+      fill="#e5f8ff"
+      font-size="23"
+      font-weight="bold"
+      text-anchor="middle">
+Solar PV Energy Conversion System
+</text>
+
+
+<!-- ================= SUN ================= -->
+
+<g id="sun">
+
+<circle cx="90"
+        cy="140"
+        r="43"
+        fill="#ffd84d"
+        filter="url(#glow)"/>
+
+<line class="sunRay"
+      x1="90" y1="75"
+      x2="90" y2="50"/>
+
+<line class="sunRay"
+      x1="90" y1="205"
+      x2="90" y2="230"/>
+
+<line class="sunRay"
+      x1="25" y1="140"
+      x2="0" y2="140"/>
+
+<line class="sunRay"
+      x1="155" y1="140"
+      x2="180" y2="140"/>
+
+<line class="sunRay"
+      x1="45" y1="95"
+      x2="27" y2="77"/>
+
+<line class="sunRay"
+      x1="135" y1="95"
+      x2="153" y2="77"/>
+
+<line class="sunRay"
+      x1="45" y1="185"
+      x2="27" y2="203"/>
+
+<line class="sunRay"
+      x1="135" y1="185"
+      x2="153" y2="203"/>
+
+<text x="90"
+      y="265"
+      class="text">
+Solar Irradiance
+</text>
+
+<text x="90"
+      y="283"
+      class="small">
+G, W/m²
+</text>
+
+</g>
+
+
+<!-- ================= PV ARRAY ================= -->
+
+<g id="pvArray">
+
+<rect x="220"
+      y="105"
+      width="180"
+      height="120"
+      rx="8"
+      class="panelGlow"/>
+
+<!-- cells -->
+
+<g>
+
+<rect class="panelCell"
+x="230" y="115" width="38" height="25"/>
+
+<rect class="panelCell"
+x="272" y="115" width="38" height="25"/>
+
+<rect class="panelCell"
+x="314" y="115" width="38" height="25"/>
+
+<rect class="panelCell"
+x="356" y="115" width="38" height="25"/>
+
+<rect class="panelCell"
+x="230" y="145" width="38" height="25"/>
+
+<rect class="panelCell"
+x="272" y="145" width="38" height="25"/>
+
+<rect class="panelCell"
+x="314" y="145" width="38" height="25"/>
+
+<rect class="panelCell"
+x="356" y="145" width="38" height="25"/>
+
+<rect class="panelCell"
+x="230" y="175" width="38" height="25"/>
+
+<rect class="panelCell"
+x="272" y="175" width="38" height="25"/>
+
+<rect class="panelCell"
+x="314" y="175" width="38" height="25"/>
+
+<rect class="panelCell"
+x="356" y="175" width="38" height="25"/>
+
+</g>
+
+<text x="310"
+      y="250"
+      class="text">
+PV Array
+</text>
+
+<text x="310"
+      y="268"
+      class="small">
+Solar Cells → Modules → Array
+</text>
+
+<!-- solar energy arrows -->
+
+<path class="solarArrow"
+      d="M145 140 L215 140"/>
+
+<path class="solarArrow"
+      d="M145 165 L215 165"/>
+
+</g>
+
+
+<!-- ================= DC-DC ================= -->
+
+<rect id="dcDc"
+      class="block"
+      x="455"
+      y="105"
+      width="155"
+      height="120"/>
+
+<text x="532"
+      y="140"
+      class="text">
+DC–DC Converter
+</text>
+
+<text x="532"
+      y="162"
+      class="small">
+Boost / Buck-Boost
+</text>
+
+<text x="532"
+      y="184"
+      class="small">
+MPPT Controller
+</text>
+
+<text x="532"
+      y="206"
+      class="small">
+Vdc Regulation
+</text>
+
+
+<!-- ================= DC LINK ================= -->
+
+<rect id="dcLink"
+      class="block"
+      x="665"
+      y="105"
+      width="150"
+      height="120"/>
+
+<text x="740"
+      y="145"
+      class="text">
+DC Link
+</text>
+
+<text x="740"
+      y="167"
+      class="small">
+Capacitor
+</text>
+
+<text x="740"
+      y="189"
+      class="small">
+DC Bus
+</text>
+
+
+<!-- ================= INVERTER ================= -->
+
+<rect id="inverter"
+      class="block"
+      x="870"
+      y="105"
+      width="155"
+      height="120"/>
+
+<text x="947"
+      y="140"
+      class="text">
+DC–AC Inverter
+</text>
+
+<text x="947"
+      y="162"
+      class="small">
+PWM
+</text>
+
+<text x="947"
+      y="184"
+      class="small">
+Grid Synchronization
+</text>
+
+<text x="947"
+      y="206"
+      class="small">
+AC Output
+</text>
+
+
+<!-- ================= GRID ================= -->
+
+<rect id="grid"
+      class="block grid"
+      x="870"
+      y="330"
+      width="155"
+      height="100"/>
+
+<text x="947"
+      y="368"
+      class="text">
+Utility Grid
+</text>
+
+<text x="947"
+      y="390"
+      class="small">
+3-Phase AC
+</text>
+
+<text x="947"
+      y="410"
+      class="small">
+50 Hz
+</text>
+
+
+<!-- ================= LOAD ================= -->
+
+<rect id="load"
+      class="block load"
+      x="665"
+      y="330"
+      width="150"
+      height="100"/>
+
+<text x="740"
+      y="368"
+      class="text">
+AC Load
+</text>
+
+<text x="740"
+      y="390"
+      class="small">
+House / Industry
+</text>
+
+<text x="740"
+      y="410"
+      class="small">
+Electrical Load
+</text>
+
+
+<!-- ================= BATTERY ================= -->
+
+<rect id="battery"
+      class="block battery"
+      x="430"
+      y="330"
+      width="165"
+      height="100"/>
+
+<text x="512"
+      y="365"
+      class="text">
+Battery Bank
+</text>
+
+<text x="512"
+      y="387"
+      class="small">
+Energy Storage
+</text>
+
+<text x="512"
+      y="408"
+      class="small">
+12 / 24 / 48 V etc.
+</text>
+
+
+<!-- ================= CHARGE CONTROLLER ================= -->
+
+<rect id="chargeController"
+      class="block control"
+      x="215"
+      y="330"
+      width="165"
+      height="100"/>
+
+<text x="297"
+      y="365"
+      class="text">
+Charge Controller
+</text>
+
+<text x="297"
+      y="387"
+      class="small">
+MPPT / PWM
+</text>
+
+<text x="297"
+      y="408"
+      class="small">
+Battery Protection
+</text>
+
+
+<!-- ================= STANDALONE INVERTER ================= -->
+
+<rect id="standaloneInverter"
+      class="block"
+      x="430"
+      y="510"
+      width="165"
+      height="85"/>
+
+<text x="512"
+      y="542"
+      class="text">
+Standalone
+</text>
+
+<text x="512"
+      y="562"
+      class="text">
+Inverter
+</text>
+
+<text x="512"
+      y="582"
+      class="small">
+DC → AC
+</text>
+
+
+<!-- ================= DC LOAD ================= -->
+
+<rect id="dcLoad"
+      class="block load"
+      x="215"
+      y="510"
+      width="165"
+      height="85"/>
+
+<text x="297"
+      y="545"
+      class="text">
+DC Load
+</text>
+
+<text x="297"
+      y="565"
+      class="small">
+LED / DC Motor
+</text>
+
+
+<!-- ================= CONTROL ================= -->
+
+<rect id="control"
+      class="block control"
+      x="870"
+      y="510"
+      width="155"
+      height="85"/>
+
+<text x="947"
+      y="542"
+      class="text">
+Energy
+</text>
+
+<text x="947"
+      y="562"
+      class="text">
+Management
+</text>
+
+<text x="947"
+      y="582"
+      class="small">
+Protection / MPPT
+</text>
+
+
+<!-- ================= CONNECTIONS ================= -->
+
+<!-- PV → DC DC -->
+
+<path class="flow"
+      d="M400 165 L455 165"
+      marker-end="url(#arrow)"/>
+
+<!-- DC DC → DC link -->
+
+<path class="flow"
+      d="M610 165 L665 165"
+      marker-end="url(#arrow)"/>
+
+<!-- DC link → inverter -->
+
+<path class="flow"
+      d="M815 165 L870 165"
+      marker-end="url(#arrow)"/>
+
+<!-- inverter → grid -->
+
+<path class="flow"
+      d="M947 225 L947 330"
+      marker-end="url(#arrow)"/>
+
+<!-- inverter → load -->
+
+<path class="flow"
+      d="M870 200 C835 245 780 285 740 330"
+      marker-end="url(#arrow)"/>
+
+
+<!-- PV → charge controller -->
+
+<path class="flow"
+      d="M310 225 L310 330"
+      marker-end="url(#arrow)"/>
+
+<!-- charge controller → battery -->
+
+<path class="flow"
+      d="M380 380 L430 380"
+      marker-end="url(#arrow)"/>
+
+<!-- battery → standalone inverter -->
+
+<path class="flow"
+      d="M512 430 L512 510"
+      marker-end="url(#arrow)"/>
+
+<!-- charge controller → DC load -->
+
+<path class="flow"
+      d="M500 430 L297 510"
+      marker-end="url(#arrow)"/>
+
+<!-- standalone inverter → AC Load -->
+
+<path class="flow"
+      d="M600 560 L702 430"
+      marker-end="url(#arrow)"/>
+
+
+<!-- CONTROL CONNECTION -->
+
+<path class="flow"
+      d="M947 510 C1030 460 1035 270 947 225"
+      marker-end="url(#arrow)"/>
+
+
+<!-- LABELS -->
+
+<text x="425"
+      y="145"
+      class="small">
+PV DC Power
+</text>
+
+<text x="630"
+      y="145"
+      class="small">
+Controlled DC
+</text>
+
+<text x="840"
+      y="145"
+      class="small">
+DC Bus
+</text>
+
+<text x="1015"
+      y="285"
+      class="small">
+AC Power
+</text>
+
+<text x="825"
+      y="300"
+      class="small">
+AC Load Supply
+</text>
+
+
+<!-- POWER DOTS -->
+
+<circle id="dotPV"
+        class="powerDot"
+        cx="425"
+        cy="165"
+        r="6"/>
+
+<circle id="dotDC"
+        class="powerDot"
+        cx="635"
+        cy="165"
+        r="6"/>
+
+<circle id="dotAC"
+        class="powerDot"
+        cx="840"
+        cy="165"
+        r="6"/>
+
+
+<!-- LOSSES -->
+
+<rect id="lossBox"
+      x="650"
+      y="625"
+      width="375"
+      height="40"
+      rx="8"
+      fill="#382b18"
+      stroke="#cda25a"
+      opacity="0"/>
+
+<text id="lossText"
+      x="837"
+      y="651"
+      fill="#ffd993"
+      font-size="13"
+      text-anchor="middle"
+      opacity="0">
+PV mismatch + wiring + converter + inverter + battery losses
+</text>
+
+
+<text x="575"
+      y="675"
+      fill="#6e92a2"
+      font-size="12"
+      text-anchor="middle">
+Solar Radiation → DC Electrical Power → Power Conditioning → AC/DC Loads
+</text>
+
+</svg>
+
+</div>
+
+
+<!-- ================= INFORMATION PANEL ================= -->
+
+<div class="card infoCard">
+
+<h2 id="modeTitle">
+Construction
+</h2>
+
+<div id="description"
+     class="info">
+Solar photovoltaic systems convert solar radiation directly into
+electrical energy using semiconductor photovoltaic cells.
+</div>
+
+
+<div class="metric">
+Solar Irradiance
+<span id="irradianceValue">1000 W/m²</span>
+</div>
+
+<div class="metric">
+PV Array Power
+<span id="pvPowerValue">0 kW</span>
+</div>
+
+<div class="metric">
+DC-Link Voltage
+<span id="dcVoltageValue">400 V</span>
+</div>
+
+<div class="metric">
+AC Output Power
+<span id="acPowerValue">0 kW</span>
+</div>
+
+<div class="metric">
+Battery SOC
+<span id="socValue">70 %</span>
+</div>
+
+
+<h3>Solar Irradiance</h3>
+
+<input type="range"
+       id="irradianceSlider"
+       min="200"
+       max="1200"
+       value="1000"
+       oninput="updateSystem()">
+
+<div class="progress">
+<div id="irradianceBar"
+     class="progressBar">
+</div>
+</div>
+
+
+<h3>PV Conversion Formula</h3>
+
+<div class="formula">
+P<sub>PV</sub> = V<sub>PV</sub> × I<sub>PV</sub>
+</div>
+
+<div class="formula">
+P<sub>PV</sub> =
+η<sub>PV</sub> × G × A
+</div>
+
+<div class="formula">
+P<sub>max</sub> =
+V<sub>mp</sub> × I<sub>mp</sub>
+</div>
+
+
+<h3>MPPT Concept</h3>
+
+<div class="formula">
+P = V × I
+</div>
+
+<div class="formula">
+dP/dV = 0
+</div>
+
+<div class="info">
+
+The Maximum Power Point Tracker continuously changes the
+operating point of the PV array so that maximum available
+power is extracted under changing solar irradiance and
+temperature.
+
+</div>
+
+
+<h3>System Energy Path</h3>
+
+<div>
+
+<span class="badge">Sun</span>
+→
+<span class="badge">PV Array</span>
+→
+<span class="badge">MPPT</span>
+→
+<span class="badge">DC Link</span>
+→
+<span class="badge">Inverter</span>
+
+</div>
+
+
+<h3>Grid-Connected PV</h3>
+
+<div class="info">
+
+PV array → DC–DC converter/MPPT → DC link →
+DC–AC inverter → grid.
+
+The inverter synchronizes its output voltage and frequency
+with the utility grid.
+
+</div>
+
+
+<h3>Standalone PV</h3>
+
+<div class="info">
+
+PV array → charge controller → battery →
+standalone inverter → AC load.
+
+DC loads can also be supplied directly from the DC bus.
+
+</div>
+
+
+<h3>Typical Components</h3>
+
+<table>
+
+<tr>
+<th>Component</th>
+<th>Function</th>
+</tr>
+
+<tr>
+<td>PV Module</td>
+<td>Solar → DC electrical energy</td>
+</tr>
+
+<tr>
+<td>MPPT</td>
+<td>Maximum power extraction</td>
+</tr>
+
+<tr>
+<td>DC–DC Converter</td>
+<td>Voltage/current conditioning</td>
+</tr>
+
+<tr>
+<td>DC Link</td>
+<td>Energy buffering</td>
+</tr>
+
+<tr>
+<td>Inverter</td>
+<td>DC → AC conversion</td>
+</tr>
+
+<tr>
+<td>Battery</td>
+<td>Energy storage</td>
+</tr>
+
+<tr>
+<td>Charge Controller</td>
+<td>Battery charging/protection</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+
+<script>
+
+let mode="construction";
+
+function setActive(id){
+
+    document.querySelectorAll("button")
+        .forEach(b=>b.classList.remove("active"));
+
+    if(id){
+        document.getElementById(id)
+            .classList.add("active");
+    }
+}
+
+
+function clearBlocks(){
+
+    [
+        "dcDc",
+        "dcLink",
+        "inverter",
+        "grid",
+        "load",
+        "battery",
+        "chargeController",
+        "standaloneInverter",
+        "dcLoad",
+        "control"
+    ].forEach(id=>{
+
+        const e=document.getElementById(id);
+
+        if(e)
+            e.classList.remove("active");
+
+    });
+
+}
+
+
+function activate(ids){
+
+    ids.forEach(id=>{
+
+        const e=document.getElementById(id);
+
+        if(e)
+            e.classList.add("active");
+
+    });
+
+}
+
+
+function constructionMode(){
+
+    mode="construction";
+
+    setActive("constructionBtn");
+
+    clearBlocks();
+
+    document.getElementById("modeTitle")
+        .textContent="Solar PV System Construction";
+
+    document.getElementById("description")
+        .innerHTML=
+        "A photovoltaic system consists of PV modules/arrays, " +
+        "power electronic converters, control systems, storage " +
+        "and electrical loads or grid interface.<br><br>" +
+
+        "<b>PV cell → Module → String → Array</b>";
+
+    document.getElementById("lossBox")
+        .setAttribute("opacity","0");
+
+    document.getElementById("lossText")
+        .setAttribute("opacity","0");
+
+    updateSystem();
+
+}
+
+
+function workingMode(){
+
+    mode="working";
+
+    setActive("workingBtn");
+
+    clearBlocks();
+
+    activate([
+        "dcDc",
+        "dcLink",
+        "inverter",
+        "grid",
+        "load"
+    ]);
+
+    document.getElementById("modeTitle")
+        .textContent="Solar PV Working Principle";
+
+    document.getElementById("description")
+        .innerHTML=
+
+        "<b>Step 1:</b> Solar radiation falls on PV cells.<br>" +
+
+        "<b>Step 2:</b> Photovoltaic effect produces DC power.<br>" +
+
+        "<b>Step 3:</b> MPPT extracts maximum available PV power.<br>" +
+
+        "<b>Step 4:</b> DC link maintains the required DC voltage.<br>" +
+
+        "<b>Step 5:</b> Inverter converts DC into AC.<br>" +
+
+        "<b>Step 6:</b> AC power is supplied to grid/load.";
+
+    updateSystem();
+
+}
+
+
+function gridMode(){
+
+    mode="grid";
+
+    setActive("gridBtn");
+
+    clearBlocks();
+
+    activate([
+        "dcDc",
+        "dcLink",
+        "inverter",
+        "grid",
+        "control"
+    ]);
+
+    document.getElementById("modeTitle")
+        .textContent="Grid-Connected Solar PV System";
+
+    document.getElementById("description")
+        .innerHTML=
+
+        "<b>Block diagram:</b><br><br>" +
+
+        "PV Array → MPPT/DC–DC Converter → DC Link → " +
+        "DC–AC Inverter → Utility Grid<br><br>" +
+
+        "<b>Important functions:</b><br>" +
+
+        "• Maximum power point tracking<br>" +
+
+        "• DC-link voltage control<br>" +
+
+        "• Grid synchronization<br>" +
+
+        "• Active power control<br>" +
+
+        "• Reactive power control<br>" +
+
+        "• Anti-islanding protection";
+
+    updateSystem();
+
+}
+
+
+function standaloneMode(){
+
+    mode="standalone";
+
+    setActive("standaloneBtn");
+
+    clearBlocks();
+
+    activate([
+        "chargeController",
+        "battery",
+        "standaloneInverter",
+        "dcLoad",
+        "load",
+        "control"
+    ]);
+
+    document.getElementById("modeTitle")
+        .textContent="Standalone Solar PV System";
+
+    document.getElementById("description")
+        .innerHTML=
+
+        "<b>Block diagram:</b><br><br>" +
+
+        "PV Array → Charge Controller → Battery → " +
+        "Standalone Inverter → AC Load<br><br>" +
+
+        "The battery stores excess solar energy and supplies " +
+        "the load when solar generation is insufficient.";
+
+    updateSystem();
+
+}
+
+
+function mpptMode(){
+
+    mode="mppt";
+
+    setActive("mpptBtn");
+
+    clearBlocks();
+
+    activate([
+        "dcDc",
+        "dcLink",
+        "control"
+    ]);
+
+    document.getElementById("modeTitle")
+        .textContent="Maximum Power Point Tracking";
+
+    document.getElementById("description")
+        .innerHTML=
+
+        "A PV panel has a nonlinear I–V and P–V characteristic. " +
+        "The MPPT controller searches for the operating point " +
+        "at which the product V × I is maximum.<br><br>" +
+
+        "<b>Condition at maximum power:</b><br>" +
+
+        "dP/dV = 0<br><br>" +
+
+        "Common algorithms include Perturb & Observe (P&O) " +
+        "and Incremental Conductance.";
+
+    updateSystem();
+
+}
+
+
+function batteryMode(){
+
+    mode="battery";
+
+    setActive("batteryBtn");
+
+    clearBlocks();
+
+    activate([
+        "chargeController",
+        "battery",
+        "dcLoad",
+        "standaloneInverter"
+    ]);
+
+    document.getElementById("modeTitle")
+        .textContent="Battery Charging in Standalone PV";
+
+    document.getElementById("description")
+        .innerHTML=
+
+        "When PV generation is greater than the load demand, " +
+        "the excess energy can be used to charge the battery.<br><br>" +
+
+        "<b>PV Power > Load Power</b><br>" +
+        "→ Battery Charging<br><br>" +
+
+        "When solar generation is insufficient:<br>" +
+
+        "<b>PV Power < Load Power</b><br>" +
+        "→ Battery supplies the load.";
+
+    updateSystem();
+
+}
+
+
+function lossMode(){
+
+    mode="loss";
+
+    setActive("lossBtn");
+
+    clearBlocks();
+
+    activate([
+        "dcDc",
+        "dcLink",
+        "inverter",
+        "battery"
+    ]);
+
+    document.getElementById("modeTitle")
+        .textContent="Losses in Solar PV System";
+
+    document.getElementById("description")
+        .innerHTML=
+
+        "<b>PV losses:</b> temperature, mismatch and irradiance losses.<br>" +
+
+        "<b>DC losses:</b> cable resistance and converter losses.<br>" +
+
+        "<b>Inverter losses:</b> switching and conduction losses.<br>" +
+
+        "<b>Battery losses:</b> charging/discharging losses.<br>" +
+
+        "<b>Transformer losses:</b> copper and core losses.";
+
+    document.getElementById("lossBox")
+        .setAttribute("opacity","1");
+
+    document.getElementById("lossText")
+        .setAttribute("opacity","1");
+
+    updateSystem();
+
+}
+
+
+function updateSystem(){
+
+    const G =
+        Number(
+            document.getElementById("irradianceSlider").value
+        );
+
+    document.getElementById("irradianceValue")
+        .textContent=G+" W/m²";
+
+    /*
+       Educational PV calculation
+
+       P = eta × G × A
+
+       Assumed:
+       PV area = 100 m²
+       PV efficiency = 20%
+    */
+
+    const area=100;
+
+    const etaPV=0.20;
+
+    let Ppv=
+        etaPV*G*area;
+
+    let converterEfficiency=0.96;
+
+    let inverterEfficiency=0.97;
+
+    if(mode==="loss"){
+        converterEfficiency=0.90;
+        inverterEfficiency=0.90;
+    }
+
+    let Pdc=
+        Ppv*converterEfficiency;
+
+    let Pac=
+        Pdc*inverterEfficiency;
+
+    document.getElementById("pvPowerValue")
+        .textContent=(Ppv/1000).toFixed(2)+" kW";
+
+    document.getElementById("acPowerValue")
+        .textContent=(Pac/1000).toFixed(2)+" kW";
+
+    let dcVoltage=
+        400+(G-1000)*0.02;
+
+    document.getElementById("dcVoltageValue")
+        .textContent=dcVoltage.toFixed(1)+" V";
+
+    let soc=
+        50+(G/1200)*40;
+
+    if(mode==="battery")
+        soc+=5;
+
+    soc=Math.min(100,soc);
+
+    document.getElementById("socValue")
+        .textContent=soc.toFixed(1)+" %";
+
+    document.getElementById("irradianceBar")
+        .style.width=
+        ((G-200)/(1200-200)*100)+"%";
+
+}
+
+
+function resetAll(){
+
+    mode="construction";
+
+    setActive(null);
+
+    clearBlocks();
+
+    document.getElementById("irradianceSlider")
+        .value=1000;
+
+    document.getElementById("lossBox")
+        .setAttribute("opacity","0");
+
+    document.getElementById("lossText")
+        .setAttribute("opacity","0");
+
+    document.getElementById("modeTitle")
+        .textContent="Construction";
+
+    document.getElementById("description")
+        .textContent=
+        "Solar photovoltaic systems convert solar radiation directly into electrical energy using semiconductor photovoltaic cells.";
+
+    updateSystem();
+
+}
+
+
+/* =====================================================
+   ANIMATED POWER FLOW DOTS
+   ===================================================== */
+
+let t=0;
+
+function animatePower(){
+
+    t++;
+
+    const dotPV=document.getElementById("dotPV");
+    const dotDC=document.getElementById("dotDC");
+    const dotAC=document.getElementById("dotAC");
+
+    let f=(t%60)/60;
+
+    if(dotPV){
+
+        dotPV.setAttribute(
+            "cx",
+            400+f*55
+        );
+
+    }
+
+    if(dotDC){
+
+        dotDC.setAttribute(
+            "cx",
+            610+f*55
+        );
+
+    }
+
+    if(dotAC){
+
+        dotAC.setAttribute(
+            "cx",
+            815+f*55
+        );
+
+    }
+
+    requestAnimationFrame(animatePower);
+
+}
+
+animatePower();
+
+updateSystem();
+
+</script>
+
+</body>
+</html>

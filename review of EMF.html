@@ -1,0 +1,2258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Magnetic Principles & Electromagnetic Induction</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#06111c;
+    color:#eaf7ff;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+    background:linear-gradient(135deg,#071a2a,#0c3449);
+    padding:26px;
+    text-align:center;
+    border-bottom:2px solid #35c8f5;
+}
+
+header h1{
+    margin:0;
+    color:#65ddff;
+    font-size:30px;
+}
+
+header p{
+    margin:8px 0 0;
+    color:#afd0df;
+    font-size:16px;
+}
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+    max-width:1450px;
+    margin:auto;
+    padding:20px;
+}
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.nav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:20px;
+}
+
+.nav button{
+    background:#102a3b;
+    border:1px solid #28566c;
+    color:#e9f8ff;
+    padding:11px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.nav button:hover,
+.nav button.active{
+    background:#15516d;
+    border-color:#61dcff;
+}
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.section{
+    display:none;
+}
+
+.section.active{
+    display:block;
+}
+
+.card{
+    background:#0a1926;
+    border:1px solid #21485e;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 7px 25px rgba(0,0,0,.25);
+}
+
+.card h2{
+    color:#68dcff;
+    margin-top:0;
+}
+
+.card h3{
+    color:#8fe5ff;
+}
+
+.explain{
+    background:#081722;
+    border-left:4px solid #51d8ff;
+    border-radius:7px;
+    padding:15px;
+    line-height:1.75;
+    margin-top:15px;
+}
+
+.note{
+    background:#172711;
+    border:1px solid #4c7f43;
+    color:#ddffd7;
+    padding:14px;
+    border-radius:8px;
+    line-height:1.6;
+}
+
+.warning{
+    background:#30240e;
+    border:1px solid #8a702d;
+    color:#ffe8a8;
+    padding:14px;
+    border-radius:8px;
+    line-height:1.6;
+}
+
+/* =====================================================
+   FORMULA
+===================================================== */
+
+.formula{
+    background:#050d14;
+    border:1px solid #24556c;
+    border-radius:8px;
+    padding:13px;
+    margin:10px 0;
+    color:#73e0ff;
+    font-family:"Courier New",monospace;
+    font-size:16px;
+}
+
+/* =====================================================
+   SVG
+===================================================== */
+
+.diagram{
+    width:100%;
+    overflow-x:auto;
+    background:#030a10;
+    border:1px solid #1c4054;
+    border-radius:10px;
+    padding:10px;
+}
+
+svg{
+    width:100%;
+    min-width:1050px;
+}
+
+.block{
+    fill:#102e41;
+    stroke:#55d7ff;
+    stroke-width:2;
+}
+
+.blockGreen{
+    fill:#143526;
+    stroke:#70e18b;
+    stroke-width:2;
+}
+
+.blockYellow{
+    fill:#332b12;
+    stroke:#ffd166;
+    stroke-width:2;
+}
+
+.label{
+    fill:#e9f8ff;
+    text-anchor:middle;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.small{
+    fill:#9cc4d3;
+    text-anchor:middle;
+    font-size:13px;
+}
+
+.flux{
+    fill:none;
+    stroke:#7dceff;
+    stroke-width:4;
+    stroke-dasharray:12 8;
+    animation:fluxMove 1.2s linear infinite;
+}
+
+.current{
+    fill:none;
+    stroke:#ffb84d;
+    stroke-width:4;
+    stroke-dasharray:10 7;
+    animation:currentMove 1s linear infinite;
+}
+
+@keyframes fluxMove{
+    to{
+        stroke-dashoffset:-40;
+    }
+}
+
+@keyframes currentMove{
+    to{
+        stroke-dashoffset:-34;
+    }
+}
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th,
+td{
+    border:1px solid #285369;
+    padding:11px;
+    text-align:left;
+}
+
+th{
+    background:#11374b;
+    color:#72ddff;
+}
+
+td{
+    background:#0a1926;
+}
+
+/* =====================================================
+   NUMERICAL
+===================================================== */
+
+.problem{
+    background:#0c2231;
+    border:1px solid #28556b;
+    border-radius:10px;
+    padding:18px;
+    margin:15px 0;
+}
+
+.problem h3{
+    margin-top:0;
+    color:#70ddff;
+}
+
+.step{
+    background:#06131e;
+    border-left:3px solid #66d8ff;
+    padding:10px 14px;
+    margin:8px 0;
+    line-height:1.6;
+}
+
+.answer{
+    background:#112c1c;
+    border:1px solid #4c8c5b;
+    color:#baffc3;
+    padding:12px;
+    border-radius:7px;
+    font-weight:bold;
+}
+
+/* =====================================================
+   SIMULATOR
+===================================================== */
+
+.controls{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:12px;
+    background:#07141f;
+    border:1px solid #244d62;
+    padding:15px;
+    border-radius:9px;
+}
+
+.controls label{
+    color:#9fe5ff;
+    font-weight:bold;
+}
+
+.controls input{
+    background:#0c2433;
+    color:white;
+    border:1px solid #37677d;
+    padding:8px;
+    border-radius:6px;
+    width:110px;
+}
+
+.controls button{
+    background:#12435b;
+    border:1px solid #42c9f5;
+    color:white;
+    padding:9px 16px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.controls button:hover{
+    background:#17617d;
+}
+
+.metrics{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:12px;
+    margin-top:15px;
+}
+
+.metric{
+    background:#0b2534;
+    border:1px solid #28576e;
+    border-radius:8px;
+    padding:14px;
+    text-align:center;
+}
+
+.metric span{
+    display:block;
+    color:#a7c8d5;
+    font-size:13px;
+}
+
+.metric b{
+    display:block;
+    color:#6ee0ff;
+    font-size:22px;
+    margin-top:6px;
+}
+
+/* =====================================================
+   CANVAS
+===================================================== */
+
+.canvasBox{
+    background:#02080d;
+    border:1px solid #1e485d;
+    border-radius:10px;
+    padding:10px;
+    overflow-x:auto;
+}
+
+canvas{
+    display:block;
+    max-width:100%;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    text-align:center;
+    color:#718b99;
+    padding:25px;
+    border-top:1px solid #193847;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:700px){
+
+    header h1{
+        font-size:23px;
+    }
+
+    .nav button{
+        flex:1 1 45%;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>Magnetic Principles & Electromagnetic Induction</h1>
+
+<p>
+Unit III – Energy Conversion Systems
+</p>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<div class="nav">
+
+<button class="active"
+onclick="showSection('principles',this)">
+Magnetic Principles
+</button>
+
+<button onclick="showSection('magneticCircuit',this)">
+Magnetic Circuit
+</button>
+
+<button onclick="showSection('induction',this)">
+Electromagnetic Induction
+</button>
+
+<button onclick="showSection('laws',this)">
+Faraday & Lenz Laws
+</button>
+
+<button onclick="showSection('formulas',this)">
+Formulas
+</button>
+
+<button onclick="showSection('numericals',this)">
+Numerical Examples
+</button>
+
+<button onclick="showSection('simulator',this)">
+Numerical Simulator
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     MAGNETIC PRINCIPLES
+===================================================== -->
+
+<section id="principles" class="section active">
+
+<div class="card">
+
+<h2>1. Basic Magnetic Principles</h2>
+
+<div class="explain">
+
+A magnetic field is a region around a magnet or current-carrying
+conductor in which magnetic force can be experienced.
+
+The magnetic field is represented using magnetic flux lines.
+
+Magnetic flux lines:
+
+<br><br>
+
+• Travel from North to South outside a magnet.<br>
+• Form closed paths.<br>
+• Never intersect each other.<br>
+• Are more closely spaced where the magnetic field is stronger.
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>2. Important Magnetic Quantities</h2>
+
+<table>
+
+<tr>
+<th>Quantity</th>
+<th>Symbol</th>
+<th>Unit</th>
+<th>Meaning</th>
+</tr>
+
+<tr>
+<td>Magnetic Flux</td>
+<td>Φ</td>
+<td>Weber (Wb)</td>
+<td>Total magnetic field passing through an area</td>
+</tr>
+
+<tr>
+<td>Flux Density</td>
+<td>B</td>
+<td>Tesla (T)</td>
+<td>Flux per unit area</td>
+</tr>
+
+<tr>
+<td>Magnetic Field Strength</td>
+<td>H</td>
+<td>A/m</td>
+<td>Magnetizing force per unit length</td>
+</tr>
+
+<tr>
+<td>MMF</td>
+<td>F</td>
+<td>A-turns</td>
+<td>Force producing magnetic flux</td>
+</tr>
+
+<tr>
+<td>Reluctance</td>
+<td>ℜ</td>
+<td>A/Wb</td>
+<td>Opposition to magnetic flux</td>
+</tr>
+
+<tr>
+<td>Permeability</td>
+<td>μ</td>
+<td>H/m</td>
+<td>Ability of material to conduct magnetic flux</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<div class="card">
+
+<h2>3. Magnetic Flux Density</h2>
+
+<div class="formula">
+B = Φ / A
+</div>
+
+where:
+
+<br>
+
+B = magnetic flux density in tesla
+
+<br>
+Φ = magnetic flux in weber
+
+<br>
+A = cross-sectional area in m²
+
+<div class="explain">
+
+A higher magnetic flux passing through a smaller area produces
+higher magnetic flux density.
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>4. Relationship Between B and H</h2>
+
+<div class="formula">
+B = μH
+</div>
+
+For a magnetic material:
+
+<div class="formula">
+μ = μ₀ μᵣ
+</div>
+
+where:
+
+<br>
+
+μ₀ = permeability of free space
+
+<br>
+
+μᵣ = relative permeability
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     MAGNETIC CIRCUIT
+===================================================== -->
+
+<section id="magneticCircuit" class="section">
+
+<div class="card">
+
+<h2>5. Magnetic Circuit Concept</h2>
+
+<div class="diagram">
+
+<svg viewBox="0 0 1150 430">
+
+<defs>
+
+<marker id="arrowFlux"
+markerWidth="10"
+markerHeight="10"
+refX="8"
+refY="3"
+orient="auto">
+
+<path d="M0,0 L0,6 L9,3 z"
+fill="#7dceff"/>
+
+</marker>
+
+</defs>
+
+
+<!-- Magnetic core -->
+
+<rect x="200"
+y="80"
+width="650"
+height="250"
+rx="25"
+fill="none"
+stroke="#63818e"
+stroke-width="45"/>
+
+
+<!-- Coil -->
+
+<rect x="465"
+y="45"
+width="120"
+height="110"
+fill="none"
+stroke="#ffb84d"
+stroke-width="15"/>
+
+<text x="525"
+y="25"
+class="label">
+Coil
+</text>
+
+<text x="525"
+y="120"
+class="small">
+N turns
+</text>
+
+
+<!-- Flux -->
+
+<path class="flux"
+d="M300 105
+L740 105
+L740 305
+L300 305
+L300 105"
+marker-end="url(#arrowFlux)"/>
+
+
+<text x="525"
+y="205"
+class="label">
+MAGNETIC FLUX Φ
+</text>
+
+<text x="525"
+y="230"
+class="small">
+Closed magnetic path
+</text>
+
+
+<!-- MMF -->
+
+<text x="525"
+y="375"
+class="label">
+MMF = NI
+</text>
+
+</svg>
+
+</div>
+
+<div class="explain">
+
+The magnetic circuit is analogous to an electrical circuit.
+
+<div class="formula">
+Electrical: I = V / R
+</div>
+
+<div class="formula">
+Magnetic: Φ = MMF / Reluctance
+</div>
+
+Therefore:
+
+<div class="formula">
+Φ = NI / ℜ
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>6. Reluctance</h2>
+
+<div class="formula">
+ℜ = l / (μA)
+</div>
+
+where:
+
+<br>
+
+l = magnetic path length
+
+<br>
+
+μ = permeability
+
+<br>
+
+A = cross-sectional area
+
+<br><br>
+
+Therefore:
+
+<div class="formula">
+Φ = NI / ℜ
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>7. Magnetic Circuit Analogy</h2>
+
+<table>
+
+<tr>
+<th>Electrical Circuit</th>
+<th>Magnetic Circuit</th>
+</tr>
+
+<tr>
+<td>Voltage V</td>
+<td>MMF NI</td>
+</tr>
+
+<tr>
+<td>Current I</td>
+<td>Magnetic flux Φ</td>
+</tr>
+
+<tr>
+<td>Resistance R</td>
+<td>Reluctance ℜ</td>
+</tr>
+
+<tr>
+<td>Conductance</td>
+<td>Permeance</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ELECTROMAGNETIC INDUCTION
+===================================================== -->
+
+<section id="induction" class="section">
+
+<div class="card">
+
+<h2>8. Electromagnetic Induction</h2>
+
+<div class="diagram">
+
+<svg viewBox="0 0 1200 450">
+
+<defs>
+
+<marker id="arrowInd"
+markerWidth="10"
+markerHeight="10"
+refX="8"
+refY="3"
+orient="auto">
+
+<path d="M0,0 L0,6 L9,3 z"
+fill="#ffb84d"/>
+
+</marker>
+
+</defs>
+
+
+<!-- Magnet -->
+
+<rect x="100"
+y="150"
+width="150"
+height="90"
+class="blockYellow"/>
+
+<text x="175"
+y="188"
+class="label">
+N
+</text>
+
+<text x="175"
+y="218"
+class="label">
+MAGNET
+</text>
+
+
+<!-- Coil -->
+
+<ellipse cx="620"
+cy="195"
+rx="150"
+ry="100"
+fill="none"
+stroke="#ffb84d"
+stroke-width="7"/>
+
+<ellipse cx="620"
+cy="195"
+rx="125"
+ry="80"
+fill="none"
+stroke="#ffb84d"
+stroke-width="5"/>
+
+
+<!-- Galvanometer -->
+
+<rect x="900"
+y="145"
+width="180"
+height="100"
+class="blockGreen"/>
+
+<text x="990"
+y="185"
+class="label">
+GALVANOMETER
+</text>
+
+<text x="990"
+y="213"
+class="small">
+Induced current
+</text>
+
+
+<!-- Moving magnet -->
+
+<path class="current"
+d="M250 195
+L455 195"
+marker-end="url(#arrowInd)"/>
+
+
+<path class="current"
+d="M770 195
+L900 195"
+marker-end="url(#arrowInd)"/>
+
+
+<text x="350"
+y="170"
+class="small">
+Relative motion
+</text>
+
+<text x="620"
+y="340"
+class="label">
+Changing Flux → Induced EMF
+</text>
+
+</svg>
+
+</div>
+
+
+<div class="explain">
+
+Electromagnetic induction is the phenomenon in which an EMF is
+produced in a conductor or coil whenever the magnetic flux linking
+the conductor changes.
+
+<br><br>
+
+The change in flux may be produced by:
+
+<br>
+
+• Relative motion between conductor and magnetic field<br>
+• Changing current in a nearby coil<br>
+• Rotation of a conductor in a magnetic field<br>
+• Movement of a magnet relative to a coil
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>9. Types of Induced EMF</h2>
+
+<h3>Dynamically Induced EMF</h3>
+
+<div class="explain">
+
+Produced when a conductor moves through a magnetic field and cuts
+magnetic flux.
+
+<br><br>
+
+Example:
+
+<b>DC generator</b>
+
+</div>
+
+
+<h3>Statically Induced EMF</h3>
+
+<div class="explain">
+
+Produced when the conductor is stationary but the magnetic flux
+linking it changes.
+
+<br><br>
+
+Example:
+
+<b>Transformer</b>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>10. Applications of Electromagnetic Induction</h2>
+
+<table>
+
+<tr>
+<th>System</th>
+<th>Energy Conversion</th>
+</tr>
+
+<tr>
+<td>DC Generator</td>
+<td>Mechanical → Electrical</td>
+</tr>
+
+<tr>
+<td>AC Generator</td>
+<td>Mechanical → Electrical</td>
+</tr>
+
+<tr>
+<td>Transformer</td>
+<td>Electrical → Electrical at different voltage</td>
+</tr>
+
+<tr>
+<td>Induction Motor</td>
+<td>Electrical → Mechanical</td>
+</tr>
+
+<tr>
+<td>Wireless Charging</td>
+<td>Electromagnetic energy transfer</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FARADAY AND LENZ
+===================================================== -->
+
+<section id="laws" class="section">
+
+<div class="card">
+
+<h2>11. Faraday's Laws of Electromagnetic Induction</h2>
+
+<h3>First Law</h3>
+
+<div class="explain">
+
+Whenever the magnetic flux linking a circuit changes,
+an EMF is induced in the circuit.
+
+If the circuit is closed, an induced current flows.
+
+</div>
+
+
+<h3>Second Law</h3>
+
+<div class="explain">
+
+The magnitude of induced EMF is proportional to the rate of
+change of flux linkage.
+
+<div class="formula">
+e = -N dΦ/dt
+</div>
+
+For average values:
+
+<div class="formula">
+e = -N (ΔΦ / Δt)
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>12. Lenz's Law</h2>
+
+<div class="explain">
+
+Lenz's law determines the direction of induced EMF and current.
+
+The induced current always produces a magnetic effect that
+opposes the change in magnetic flux responsible for producing it.
+
+</div>
+
+<div class="note">
+
+<b>Easy way to remember:</b>
+
+<br><br>
+
+The induced effect always <b>opposes the change</b> that produced it.
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>13. Fleming's Right-Hand Rule</h2>
+
+<div class="explain">
+
+Fleming's right-hand rule is used to determine the direction of
+induced current in a generator.
+
+<br><br>
+
+Stretch the thumb, first finger and second finger of the right hand
+mutually perpendicular:
+
+<br><br>
+
+<b>Thumb → Motion of conductor</b><br>
+
+<b>First finger → Magnetic field</b><br>
+
+<b>Second finger → Induced current</b>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>14. Fleming's Left-Hand Rule</h2>
+
+<div class="explain">
+
+Fleming's left-hand rule is used to determine the direction of
+force on a current-carrying conductor in a magnetic field.
+
+<br><br>
+
+<b>First finger → Magnetic field</b><br>
+
+<b>Second finger → Current</b><br>
+
+<b>Thumb → Force / Motion</b>
+
+<br><br>
+
+It is particularly useful for understanding the operating principle
+of a <b>DC motor</b>.
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FORMULAS
+===================================================== -->
+
+<section id="formulas" class="section">
+
+<div class="card">
+
+<h2>15. Important Magnetic Formulas</h2>
+
+<div class="formula">
+MMF = NI
+</div>
+
+<div class="formula">
+Reluctance ℜ = l / (μA)
+</div>
+
+<div class="formula">
+Magnetic Flux Φ = NI / ℜ
+</div>
+
+<div class="formula">
+Flux Density B = Φ / A
+</div>
+
+<div class="formula">
+Magnetic Field Strength H = NI / l
+</div>
+
+<div class="formula">
+B = μH
+</div>
+
+<div class="formula">
+μ = μ₀ μᵣ
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>16. Important Electromagnetic Induction Formulas</h2>
+
+<div class="formula">
+e = -N dΦ/dt
+</div>
+
+<div class="formula">
+eaverage = -N(ΔΦ/Δt)
+</div>
+
+<div class="formula">
+Flux Linkage = NΦ
+</div>
+
+<div class="formula">
+e = NΦω
+</div>
+
+<div class="explain">
+
+The negative sign in Faraday's law represents
+<b>Lenz's law</b>.
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     NUMERICAL EXAMPLES
+===================================================== -->
+
+<section id="numericals" class="section">
+
+<div class="card">
+
+<h2>17. Numerical Example – Magnetic Flux</h2>
+
+<div class="problem">
+
+<h3>Problem 1</h3>
+
+A magnetic circuit has an MMF of 500 A-turns and a reluctance
+of 2.5 × 10⁵ A/Wb. Calculate the magnetic flux.
+
+<div class="step">
+
+<b>Given:</b>
+
+<br>
+
+MMF = 500 A-turns
+
+<br>
+
+ℜ = 2.5 × 10⁵ A/Wb
+
+</div>
+
+<div class="step">
+
+<b>Formula:</b>
+
+<div class="formula">
+Φ = MMF / ℜ
+</div>
+
+</div>
+
+<div class="step">
+
+<b>Substitution:</b>
+
+<div class="formula">
+Φ = 500 / (2.5 × 10⁵)
+</div>
+
+</div>
+
+<div class="answer">
+
+Φ = 0.002 Wb = 2 mWb
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>18. Numerical Example – Flux Density</h2>
+
+<div class="problem">
+
+<h3>Problem 2</h3>
+
+A magnetic core carries a flux of 0.015 Wb through a
+cross-sectional area of 0.005 m². Determine the flux density.
+
+<div class="step">
+
+<b>Given:</b>
+
+<br>
+
+Φ = 0.015 Wb
+
+<br>
+
+A = 0.005 m²
+
+</div>
+
+<div class="step">
+
+<b>Formula:</b>
+
+<div class="formula">
+B = Φ / A
+</div>
+
+</div>
+
+<div class="step">
+
+<b>Substitution:</b>
+
+<div class="formula">
+B = 0.015 / 0.005
+</div>
+
+</div>
+
+<div class="answer">
+
+B = 3 T
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>19. Numerical Example – MMF</h2>
+
+<div class="problem">
+
+<h3>Problem 3</h3>
+
+A magnetic coil has 500 turns and carries a current of 2 A.
+Determine the MMF.
+
+<div class="step">
+
+<b>Given:</b>
+
+N = 500 turns
+
+<br>
+
+I = 2 A
+
+</div>
+
+<div class="step">
+
+<b>Formula:</b>
+
+<div class="formula">
+MMF = NI
+</div>
+
+</div>
+
+<div class="step">
+
+<b>Calculation:</b>
+
+<div class="formula">
+MMF = 500 × 2
+</div>
+
+</div>
+
+<div class="answer">
+
+MMF = 1000 A-turns
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>20. Numerical Example – Faraday's Law</h2>
+
+<div class="problem">
+
+<h3>Problem 4</h3>
+
+A coil of 200 turns experiences a change in magnetic flux
+from 0.02 Wb to 0.005 Wb in 0.05 s. Determine the magnitude
+of the average induced EMF.
+
+<div class="step">
+
+<b>Given:</b>
+
+<br>
+
+N = 200
+
+<br>
+
+Φ₁ = 0.02 Wb
+
+<br>
+
+Φ₂ = 0.005 Wb
+
+<br>
+
+Δt = 0.05 s
+
+</div>
+
+<div class="step">
+
+<b>Flux change:</b>
+
+<div class="formula">
+ΔΦ = Φ₂ − Φ₁
+</div>
+
+<div class="formula">
+ΔΦ = 0.005 − 0.02
+</div>
+
+<div class="formula">
+ΔΦ = −0.015 Wb
+</div>
+
+</div>
+
+<div class="step">
+
+<b>Magnitude of EMF:</b>
+
+<div class="formula">
+e = N |ΔΦ| / Δt
+</div>
+
+<div class="formula">
+e = 200 × 0.015 / 0.05
+</div>
+
+</div>
+
+<div class="answer">
+
+e = 60 V
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>21. Numerical Example – Sinusoidal Flux</h2>
+
+<div class="problem">
+
+<h3>Problem 5</h3>
+
+A coil of 500 turns is linked by a sinusoidal flux having a
+maximum value of 0.01 Wb at a frequency of 50 Hz.
+Determine the RMS induced EMF.
+
+<div class="step">
+
+<b>Given:</b>
+
+<br>
+
+N = 500 turns
+
+<br>
+
+Φm = 0.01 Wb
+
+<br>
+
+f = 50 Hz
+
+</div>
+
+<div class="step">
+
+<b>Formula:</b>
+
+<div class="formula">
+E = 4.44 f N Φm
+</div>
+
+</div>
+
+<div class="step">
+
+<b>Substitution:</b>
+
+<div class="formula">
+E = 4.44 × 50 × 500 × 0.01
+</div>
+
+</div>
+
+<div class="answer">
+
+E = 1110 V
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>22. Numerical Example – Magnetic Field Strength</h2>
+
+<div class="problem">
+
+<h3>Problem 6</h3>
+
+A magnetic coil has 800 turns and carries 1.5 A current.
+The mean magnetic path length is 0.4 m. Determine H.
+
+<div class="step">
+
+<b>Formula:</b>
+
+<div class="formula">
+H = NI / l
+</div>
+
+</div>
+
+<div class="step">
+
+<b>Calculation:</b>
+
+<div class="formula">
+H = (800 × 1.5) / 0.4
+</div>
+
+</div>
+
+<div class="answer">
+
+H = 3000 A/m
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>23. Numerical Example – Reluctance</h2>
+
+<div class="problem">
+
+<h3>Problem 7</h3>
+
+A magnetic core has a mean length of 0.5 m, cross-sectional area
+of 0.002 m² and permeability of 0.001 H/m.
+Calculate its reluctance.
+
+<div class="step">
+
+<b>Formula:</b>
+
+<div class="formula">
+ℜ = l / (μA)
+</div>
+
+</div>
+
+<div class="step">
+
+<b>Substitution:</b>
+
+<div class="formula">
+ℜ = 0.5 / (0.001 × 0.002)
+</div>
+
+</div>
+
+<div class="answer">
+
+ℜ = 250,000 A/Wb
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     NUMERICAL SIMULATOR
+===================================================== -->
+
+<section id="simulator" class="section">
+
+<div class="card">
+
+<h2>24. Magnetic Circuit Calculator</h2>
+
+<div class="controls">
+
+<label>
+Turns N
+<input id="N"
+       type="number"
+       value="500">
+</label>
+
+<label>
+Current I (A)
+<input id="I"
+       type="number"
+       value="2">
+</label>
+
+<label>
+Reluctance (A/Wb)
+<input id="reluctance"
+       type="number"
+       value="250000">
+</label>
+
+<button onclick="calculateMagnetic()">
+Calculate
+</button>
+
+</div>
+
+<div class="metrics">
+
+<div class="metric">
+
+<span>MMF</span>
+
+<b id="mmfResult">
+—
+</b>
+
+</div>
+
+<div class="metric">
+
+<span>Flux</span>
+
+<b id="fluxResult">
+—
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>25. Electromagnetic Induction Calculator</h2>
+
+<div class="controls">
+
+<label>
+Turns N
+<input id="indN"
+       type="number"
+       value="200">
+</label>
+
+<label>
+Initial Flux (Wb)
+<input id="phi1"
+       type="number"
+       value="0.02">
+</label>
+
+<label>
+Final Flux (Wb)
+<input id="phi2"
+       type="number"
+       value="0.005">
+</label>
+
+<label>
+Time (s)
+<input id="dt"
+       type="number"
+       value="0.05">
+</label>
+
+<button onclick="calculateEMF()">
+Calculate EMF
+</button>
+
+</div>
+
+<div class="metrics">
+
+<div class="metric">
+
+<span>Flux Change</span>
+
+<b id="deltaPhi">
+—
+</b>
+
+</div>
+
+<div class="metric">
+
+<span>Average Induced EMF</span>
+
+<b id="emfResult">
+—
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>26. Faraday's Law Visualization</h2>
+
+<div class="controls">
+
+<label>
+Flux Change:
+
+<input
+id="fluxSlider"
+type="range"
+min="0"
+max="100"
+value="50"
+oninput="animateInduction()">
+
+</label>
+
+<span id="fluxDisplay">
+50%
+</span>
+
+</div>
+
+<div class="canvasBox">
+
+<canvas
+id="inductionCanvas"
+width="1100"
+height="350">
+</canvas>
+
+</div>
+
+</div>
+
+</section>
+
+
+</div>
+
+
+<footer>
+
+Unit III – Energy Conversion Systems<br>
+Magnetic Principles and Electromagnetic Induction
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   TAB CONTROL
+===================================================== */
+
+function showSection(id,button){
+
+    document
+    .querySelectorAll(".section")
+    .forEach(section=>{
+
+        section.classList.remove("active");
+
+    });
+
+    document
+    .querySelectorAll(".nav button")
+    .forEach(btn=>{
+
+        btn.classList.remove("active");
+
+    });
+
+    document
+    .getElementById(id)
+    .classList.add("active");
+
+    button.classList.add("active");
+
+}
+
+
+/* =====================================================
+   MAGNETIC CIRCUIT CALCULATOR
+===================================================== */
+
+function calculateMagnetic(){
+
+    const N =
+    parseFloat(
+        document.getElementById("N").value
+    );
+
+    const I =
+    parseFloat(
+        document.getElementById("I").value
+    );
+
+    const R =
+    parseFloat(
+        document.getElementById("reluctance").value
+    );
+
+
+    if(N<=0 || I<=0 || R<=0){
+
+        return;
+    }
+
+
+    const mmf =
+    N*I;
+
+    const flux =
+    mmf/R;
+
+
+    document
+    .getElementById("mmfResult")
+    .textContent =
+    mmf.toFixed(2)+" A-turns";
+
+
+    document
+    .getElementById("fluxResult")
+    .textContent =
+    flux.toExponential(4)+" Wb";
+
+}
+
+
+/* =====================================================
+   EMF CALCULATOR
+===================================================== */
+
+function calculateEMF(){
+
+    const N =
+    parseFloat(
+        document.getElementById("indN").value
+    );
+
+    const phi1 =
+    parseFloat(
+        document.getElementById("phi1").value
+    );
+
+    const phi2 =
+    parseFloat(
+        document.getElementById("phi2").value
+    );
+
+    const dt =
+    parseFloat(
+        document.getElementById("dt").value
+    );
+
+
+    if(N<=0 || dt<=0){
+
+        return;
+    }
+
+
+    const dphi =
+    phi2-phi1;
+
+    const emf =
+    Math.abs(
+        N*dphi/dt
+    );
+
+
+    document
+    .getElementById("deltaPhi")
+    .textContent =
+    dphi.toFixed(5)+" Wb";
+
+
+    document
+    .getElementById("emfResult")
+    .textContent =
+    emf.toFixed(3)+" V";
+
+}
+
+
+/* =====================================================
+   INDUCTION VISUALIZATION
+===================================================== */
+
+const canvas =
+document.getElementById(
+    "inductionCanvas"
+);
+
+const ctx =
+canvas.getContext("2d");
+
+
+function animateInduction(){
+
+    const value =
+    parseFloat(
+        document.getElementById(
+            "fluxSlider"
+        ).value
+    );
+
+
+    document
+    .getElementById("fluxDisplay")
+    .textContent =
+    value+"%";
+
+
+    drawInduction(value);
+
+}
+
+
+function drawInduction(value){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    /* =========================
+       Grid
+    ========================= */
+
+    ctx.strokeStyle="#173344";
+
+    ctx.lineWidth=1;
+
+
+    for(let x=0;x<1100;x+=50){
+
+        ctx.beginPath();
+
+        ctx.moveTo(x,0);
+
+        ctx.lineTo(x,350);
+
+        ctx.stroke();
+
+    }
+
+
+    for(let y=0;y<350;y+=50){
+
+        ctx.beginPath();
+
+        ctx.moveTo(0,y);
+
+        ctx.lineTo(1100,y);
+
+        ctx.stroke();
+
+    }
+
+
+    /* =========================
+       Magnet
+    ========================= */
+
+    ctx.fillStyle="#203b4c";
+
+    ctx.fillRect(
+        80,
+        120,
+        160,
+        100
+    );
+
+
+    ctx.fillStyle="#ff6666";
+
+    ctx.fillRect(
+        80,
+        120,
+        80,
+        100
+    );
+
+
+    ctx.fillStyle="#72a7c0";
+
+    ctx.fillRect(
+        160,
+        120,
+        80,
+        100
+    );
+
+
+    ctx.fillStyle="#ffffff";
+
+    ctx.font="bold 28px Arial";
+
+    ctx.fillText(
+        "N",
+        110,
+        180
+    );
+
+    ctx.fillText(
+        "S",
+        200,
+        180
+    );
+
+
+    /* =========================
+       Magnetic field
+    ========================= */
+
+    const lines =
+    Math.max(
+        2,
+        Math.round(
+            value/8
+        )
+    );
+
+
+    ctx.strokeStyle="#65d7ff";
+
+    ctx.lineWidth=3;
+
+
+    for(let i=0;i<lines;i++){
+
+        const y =
+        90+i*12;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            240,
+            y
+        );
+
+        ctx.bezierCurveTo(
+            370,
+            y-30,
+            430,
+            y+30,
+            550,
+            y
+        );
+
+        ctx.stroke();
+
+    }
+
+
+    /* =========================
+       Coil
+    ========================= */
+
+    ctx.strokeStyle="#ffb84d";
+
+    ctx.lineWidth=5;
+
+
+    for(let i=0;i<7;i++){
+
+        ctx.beginPath();
+
+        ctx.ellipse(
+            620+i*8,
+            175,
+            90,
+            55,
+            0,
+            0,
+            Math.PI*2
+        );
+
+        ctx.stroke();
+
+    }
+
+
+    /* =========================
+       Galvanometer
+    ========================= */
+
+    ctx.fillStyle="#163728";
+
+    ctx.fillRect(
+        850,
+        110,
+        170,
+        120
+    );
+
+
+    ctx.fillStyle="#ffffff";
+
+    ctx.font="bold 17px Arial";
+
+    ctx.fillText(
+        "GALVANOMETER",
+        875,
+        155
+    );
+
+
+    /* Needle */
+
+    const angle =
+    -Math.PI/2 +
+    (value/100)*Math.PI;
+
+
+    const cx=935;
+
+    const cy=205;
+
+    const radius=45;
+
+
+    ctx.strokeStyle="#ffdb70";
+
+    ctx.lineWidth=4;
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        cx,
+        cy
+    );
+
+    ctx.lineTo(
+        cx+
+        radius*Math.cos(angle),
+
+        cy+
+        radius*Math.sin(angle)
+    );
+
+    ctx.stroke();
+
+
+    ctx.fillStyle="#ffffff";
+
+    ctx.font="15px Arial";
+
+    ctx.fillText(
+        "Changing flux",
+        310,
+        310
+    );
+
+    ctx.fillText(
+        "Induced EMF",
+        620,
+        310
+    );
+
+    ctx.fillText(
+        "Induced current",
+        870,
+        280
+    );
+
+}
+
+
+animateInduction();
+
+
+/* =====================================================
+   INITIAL CALCULATIONS
+===================================================== */
+
+calculateMagnetic();
+
+calculateEMF();
+
+</script>
+
+</body>
+</html>

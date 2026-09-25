@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wind Energy Conversion System – Block Diagram Animation</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#071018;
+    color:#e8f1f7;
+}
+
+header{
+    background:linear-gradient(90deg,#0c1d29,#102d3d,#0c1d29);
+    padding:18px;
+    text-align:center;
+    border-bottom:2px solid #23485d;
+}
+
+header h1{
+    margin:0;
+    font-size:27px;
+    color:#f5fbff;
+}
+
+header p{
+    margin:7px 0 0;
+    color:#9fc1d3;
+}
+
+.toolbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:12px;
+    justify-content:center;
+    background:#09151e;
+    border-bottom:1px solid #1e3b4c;
+}
+
+button{
+    background:#102a39;
+    color:#dcecf5;
+    border:1px solid #326078;
+    border-radius:7px;
+    padding:9px 14px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#174157;
+}
+
+button.active{
+    background:#245d76;
+}
+
+.main{
+    display:grid;
+    grid-template-columns:minmax(650px,2.2fr) minmax(320px,1fr);
+    gap:14px;
+    padding:14px;
+}
+
+.card{
+    background:#0b1923;
+    border:1px solid #244353;
+    border-radius:12px;
+    box-shadow:0 0 20px rgba(0,0,0,.25);
+}
+
+.diagram-card{
+    padding:10px;
+    min-height:690px;
+}
+
+.info-card{
+    padding:18px;
+    min-height:690px;
+}
+
+svg{
+    width:100%;
+    height:650px;
+    background:#061018;
+    border-radius:10px;
+}
+
+.block{
+    fill:#102c3b;
+    stroke:#4f8ba5;
+    stroke-width:2;
+    rx:10;
+}
+
+.block.activeBlock{
+    fill:#24576d;
+    stroke:#8dd8f4;
+    filter:url(#glow);
+}
+
+.block.loss{
+    fill:#382b18;
+    stroke:#c89b4c;
+}
+
+.block.control{
+    fill:#273347;
+    stroke:#879bc5;
+}
+
+.blockText{
+    fill:#eef8fc;
+    font-size:14px;
+    font-weight:bold;
+    text-anchor:middle;
+}
+
+.smallText{
+    fill:#9ebdca;
+    font-size:11px;
+    text-anchor:middle;
+}
+
+.flow{
+    stroke:#6dd6ff;
+    stroke-width:5;
+    fill:none;
+    stroke-linecap:round;
+    stroke-dasharray:12 10;
+    animation:flowMove 1s linear infinite;
+}
+
+.flow.hidden{
+    opacity:.15;
+}
+
+@keyframes flowMove{
+    to{
+        stroke-dashoffset:-44;
+    }
+}
+
+.windLine{
+    stroke:#a9d9ed;
+    stroke-width:3;
+    stroke-linecap:round;
+    animation:windMove 1.3s linear infinite;
+}
+
+@keyframes windMove{
+    from{transform:translateX(0);opacity:.2;}
+    50%{opacity:1;}
+    to{transform:translateX(35px);opacity:.2;}
+}
+
+.rotor{
+    transform-origin:330px 300px;
+    animation:rotorSpin 2.8s linear infinite;
+}
+
+.rotor.fast{
+    animation-duration:1.1s;
+}
+
+.rotor.slow{
+    animation-duration:4s;
+}
+
+@keyframes rotorSpin{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+
+.turbineTower{
+    fill:#a7b6bd;
+    stroke:#d8e4e8;
+    stroke-width:2;
+}
+
+.turbineBlade{
+    fill:#d7e2e6;
+    stroke:#80939b;
+    stroke-width:2;
+}
+
+.generatorCoil{
+    fill:none;
+    stroke:#e2a64a;
+    stroke-width:5;
+}
+
+.powerDot{
+    fill:#ffe56b;
+    filter:url(#glow);
+}
+
+.metric{
+    background:#08141c;
+    border:1px solid #254655;
+    border-radius:9px;
+    padding:10px;
+    margin:9px 0;
+}
+
+.metric span{
+    float:right;
+    color:#8de1ff;
+    font-weight:bold;
+}
+
+h2{
+    margin-top:0;
+    color:#9fe5ff;
+}
+
+h3{
+    color:#b8e9fa;
+    margin-bottom:7px;
+}
+
+.formula{
+    background:#07131b;
+    border-left:4px solid #56c8ef;
+    padding:10px;
+    margin:9px 0;
+    font-family:"Courier New",monospace;
+    color:#dff6ff;
+    overflow-x:auto;
+}
+
+.infoText{
+    color:#b6cbd5;
+    line-height:1.5;
+}
+
+.progressOuter{
+    height:12px;
+    background:#152832;
+    border-radius:8px;
+    overflow:hidden;
+    margin-top:8px;
+}
+
+.progressInner{
+    height:100%;
+    width:0%;
+    background:#56c8ef;
+    transition:width .3s;
+}
+
+.controlGrid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+input[type=range]{
+    width:100%;
+}
+
+select,input[type=number]{
+    width:100%;
+    padding:7px;
+    background:#07131b;
+    color:white;
+    border:1px solid #355466;
+    border-radius:5px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+td,th{
+    border:1px solid #284553;
+    padding:7px;
+    text-align:left;
+}
+
+th{
+    background:#102a39;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:12px;
+    background:#17394b;
+    color:#9de5ff;
+    font-size:12px;
+    margin:3px;
+}
+
+@media(max-width:1000px){
+    .main{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Wind Energy Conversion System (WECS)</h1>
+    <p>Block Diagram Approach • Energy Conversion • Generator • Power Electronics • Grid</p>
+</header>
+
+<div class="toolbar">
+    <button onclick="constructionMode()" id="btnConstruction">Construction</button>
+    <button onclick="workingMode()" id="btnWorking">Working</button>
+    <button onclick="fixedSpeedMode()" id="btnFixed">Fixed Speed</button>
+    <button onclick="variableSpeedMode()" id="btnVariable">Variable Speed</button>
+    <button onclick="generatorMode()" id="btnGenerator">Generator</button>
+    <button onclick="gridMode()" id="btnGrid">Grid Connected</button>
+    <button onclick="standaloneMode()" id="btnStandalone">Standalone</button>
+    <button onclick="lossMode()" id="btnLoss">Losses</button>
+    <button onclick="resetAll()">Reset</button>
+</div>
+
+<div class="main">
+
+<div class="card diagram-card">
+
+<svg viewBox="0 0 1100 650">
+
+<defs>
+    <filter id="glow">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+
+    <marker id="arrow" markerWidth="10" markerHeight="10"
+            refX="8" refY="3" orient="auto">
+        <path d="M0,0 L9,3 L0,6 Z" fill="#6dd6ff"/>
+    </marker>
+
+    <marker id="arrowYellow" markerWidth="10" markerHeight="10"
+            refX="8" refY="3" orient="auto">
+        <path d="M0,0 L9,3 L0,6 Z" fill="#ffe56b"/>
+    </marker>
+</defs>
+
+<!-- TITLE -->
+<text x="550" y="32"
+      fill="#dff7ff"
+      font-size="22"
+      text-anchor="middle"
+      font-weight="bold">
+    Block Diagram of Wind Energy Conversion System
+</text>
+
+<!-- WIND -->
+<g id="wind">
+    <text x="70" y="92" fill="#9fe5ff"
+          font-size="17" font-weight="bold">
+        WIND
+    </text>
+
+    <line class="windLine" x1="30" y1="125" x2="120" y2="125"/>
+    <line class="windLine" x1="20" y1="155" x2="120" y2="155"/>
+    <line class="windLine" x1="35" y1="185" x2="120" y2="185"/>
+    <line class="windLine" x1="20" y1="215" x2="120" y2="215"/>
+
+    <text x="72" y="250" class="smallText">
+        Kinetic energy
+    </text>
+</g>
+
+<!-- TURBINE -->
+<g id="turbine">
+    <polygon class="turbineTower"
+        points="275,420 365,420 350,300 290,300"/>
+
+    <circle cx="320" cy="300" r="34"
+            fill="#aebec4" stroke="#e2edf0" stroke-width="3"/>
+
+    <g class="rotor">
+        <path class="turbineBlade"
+              d="M320 300 C275 255 230 220 195 210
+                 C225 250 260 285 320 300 Z"/>
+
+        <path class="turbineBlade"
+              d="M320 300 C365 255 410 220 445 210
+                 C415 250 380 285 320 300 Z"/>
+
+        <path class="turbineBlade"
+              d="M320 300 C330 355 350 405 370 440
+                 C350 405 325 355 320 300 Z"/>
+    </g>
+
+    <text x="320" y="485"
+          class="blockText">
+        Wind Turbine
+    </text>
+
+    <text x="320" y="505"
+          class="smallText">
+        Rotor + Hub + Shaft
+    </text>
+</g>
+
+<!-- MECHANICAL DRIVE -->
+<rect id="mechanicalBlock"
+      class="block"
+      x="430" y="260" width="150" height="80"/>
+
+<text x="505" y="290" class="blockText">
+    Mechanical
+</text>
+<text x="505" y="310" class="blockText">
+    Drive Train
+</text>
+<text x="505" y="330" class="smallText">
+    Gearbox / Direct Drive
+</text>
+
+<!-- GENERATOR -->
+<rect id="generatorBlock"
+      class="block"
+      x="625" y="260" width="150" height="80"/>
+
+<text x="700" y="292" class="blockText">
+    Electrical
+</text>
+<text x="700" y="312" class="blockText">
+    Generator
+</text>
+<text x="700" y="330" class="smallText">
+    PMSG / SCIG / DFIG
+</text>
+
+<!-- POWER CONVERTER -->
+<rect id="converterBlock"
+      class="block"
+      x="820" y="260" width="150" height="80"/>
+
+<text x="895" y="292" class="blockText">
+    Power
+</text>
+<text x="895" y="312" class="blockText">
+    Converter
+</text>
+<text x="895" y="330" class="smallText">
+    AC-DC-AC
+</text>
+
+<!-- GRID -->
+<rect id="gridBlock"
+      class="block"
+      x="820" y="415" width="150" height="80"/>
+
+<text x="895" y="447" class="blockText">
+    Grid
+</text>
+<text x="895" y="467" class="smallText">
+    3-Phase AC Supply
+</text>
+
+<!-- LOAD -->
+<rect id="loadBlock"
+      class="block"
+      x="625" y="415" width="150" height="80"/>
+
+<text x="700" y="447" class="blockText">
+    Electrical
+</text>
+<text x="700" y="467" class="blockText">
+    Load
+</text>
+
+<!-- CONTROL -->
+<rect id="controlBlock"
+      class="block control"
+      x="820" y="110" width="150" height="80"/>
+
+<text x="895" y="142" class="blockText">
+    Control &
+</text>
+<text x="895" y="162" class="blockText">
+    Protection
+</text>
+<text x="895" y="182" class="smallText">
+    MPPT / Pitch / Brake
+</text>
+
+<!-- PITCH -->
+<rect id="pitchBlock"
+      class="block control"
+      x="105" y="350" width="150" height="70"/>
+
+<text x="180" y="380" class="blockText">
+    Pitch Control
+</text>
+<text x="180" y="400" class="smallText">
+    Blade Angle β
+</text>
+
+<!-- BLOCK CONNECTIONS -->
+
+<path class="flow" d="M120 170 C170 170 200 250 275 285"
+      marker-end="url(#arrow)"/>
+
+<path class="flow" d="M355 300 L430 300"
+      marker-end="url(#arrow)"/>
+
+<path class="flow" d="M580 300 L625 300"
+      marker-end="url(#arrow)"/>
+
+<path class="flow" d="M775 300 L820 300"
+      marker-end="url(#arrow)"/>
+
+<path class="flow" d="M895 340 L895 415"
+      marker-end="url(#arrow)"/>
+
+<path class="flow" d="M820 455 L775 455"
+      marker-end="url(#arrow)"/>
+
+<path class="flow"
+      d="M895 190 C895 215 770 235 700 260"
+      marker-end="url(#arrow)"/>
+
+<path class="flow"
+      d="M820 150 C700 190 500 200 320 270"
+      marker-end="url(#arrow)"/>
+
+<path class="flow"
+      d="M180 350 C230 330 270 320 290 310"
+      marker-end="url(#arrow)"/>
+
+<!-- POWER FLOW LABELS -->
+
+<text x="395" y="240" class="smallText">
+    Mechanical Power
+</text>
+
+<text x="600" y="240" class="smallText">
+    Shaft Power
+</text>
+
+<text x="800" y="240" class="smallText">
+    Electrical Power
+</text>
+
+<text x="900" y="390" class="smallText">
+    Conditioned AC
+</text>
+
+<!-- POWER DOTS -->
+<circle id="dot1" class="powerDot" cx="390" cy="300" r="6"/>
+<circle id="dot2" class="powerDot" cx="600" cy="300" r="6"/>
+<circle id="dot3" class="powerDot" cx="795" cy="300" r="6"/>
+<circle id="dot4" class="powerDot" cx="895" cy="385" r="6"/>
+
+<!-- LOSS BLOCK -->
+<rect id="lossBlock"
+      class="block loss"
+      x="430" y="545" width="540" height="55"
+      opacity="0"/>
+
+<text id="lossText"
+      x="700" y="579"
+      fill="#ffd88a"
+      font-size="14"
+      text-anchor="middle"
+      font-weight="bold"
+      opacity="0">
+    Losses: aerodynamic + mechanical + generator copper/core + converter losses
+</text>
+
+<!-- LABEL -->
+<text x="550" y="625"
+      fill="#7194a3"
+      font-size="12"
+      text-anchor="middle">
+    Wind → Mechanical Energy → Electrical Energy → Power Conditioning → Grid / Load
+</text>
+
+</svg>
+
+</div>
+
+<!-- INFO PANEL -->
+
+<div class="card info-card">
+
+<h2 id="modeTitle">Construction</h2>
+
+<div id="modeDescription" class="infoText">
+    A wind energy conversion system converts the kinetic energy of moving air
+    into electrical energy.
+</div>
+
+<div class="metric">
+    Wind Speed
+    <span id="windSpeedValue">12 m/s</span>
+</div>
+
+<div class="metric">
+    Rotor Speed
+    <span id="rpmValue">18 rpm</span>
+</div>
+
+<div class="metric">
+    Mechanical Power
+    <span id="mechanicalPower">0 kW</span>
+</div>
+
+<div class="metric">
+    Generator Output
+    <span id="generatorPower">0 kW</span>
+</div>
+
+<div class="metric">
+    Efficiency
+    <span id="efficiencyValue">0 %</span>
+</div>
+
+<h3>Wind Speed Control</h3>
+
+<input id="windSlider"
+       type="range"
+       min="4"
+       max="25"
+       value="12"
+       oninput="updateWind()">
+
+<div class="progressOuter">
+    <div id="progressBar" class="progressInner"></div>
+</div>
+
+<h3>Energy Conversion Chain</h3>
+
+<div>
+    <span class="badge">Wind Kinetic Energy</span>
+    →
+    <span class="badge">Rotor</span>
+    →
+    <span class="badge">Shaft</span>
+    →
+    <span class="badge">Generator</span>
+    →
+    <span class="badge">Converter</span>
+    →
+    <span class="badge">Grid</span>
+</div>
+
+<h3>Important Formulae</h3>
+
+<div class="formula">
+P<sub>wind</sub> = ½ ρ A V³
+</div>
+
+<div class="formula">
+P<sub>t</sub> = ½ ρ A V³ C<sub>p</sub>
+</div>
+
+<div class="formula">
+A = πR²
+</div>
+
+<div class="formula">
+C<sub>p</sub> = P<sub>t</sub> / (½ρAV³)
+</div>
+
+<div class="formula">
+λ = ωR / V
+</div>
+
+<div class="formula">
+ω = 2πN / 60
+</div>
+
+<div class="formula">
+T = P / ω
+</div>
+
+<h3>Basic Parameters</h3>
+
+<table>
+<tr>
+<th>Parameter</th>
+<th>Typical Value</th>
+</tr>
+
+<tr>
+<td>Air density ρ</td>
+<td>1.225 kg/m³</td>
+</tr>
+
+<tr>
+<td>Rotor radius R</td>
+<td>20 m</td>
+</tr>
+
+<tr>
+<td>Power coefficient C<sub>p</sub></td>
+<td>0.40 – 0.50</td>
+</tr>
+
+<tr>
+<td>Generator</td>
+<td>PMSG / DFIG / SCIG</td>
+</tr>
+</table>
+
+</div>
+</div>
+
+<script>
+
+let mode = "construction";
+
+const windSlider =
+    document.getElementById("windSlider");
+
+function setActive(id){
+
+    document.querySelectorAll("button")
+        .forEach(b => b.classList.remove("active"));
+
+    if(id){
+        document.getElementById(id)
+            .classList.add("active");
+    }
+}
+
+function setBlock(id,active=true){
+
+    const el=document.getElementById(id);
+
+    if(!el) return;
+
+    if(active)
+        el.classList.add("activeBlock");
+    else
+        el.classList.remove("activeBlock");
+}
+
+function clearBlocks(){
+
+    [
+        "mechanicalBlock",
+        "generatorBlock",
+        "converterBlock",
+        "gridBlock",
+        "loadBlock",
+        "controlBlock",
+        "pitchBlock"
+    ].forEach(id=>setBlock(id,false));
+}
+
+function updateWind(){
+
+    const V =
+        Number(windSlider.value);
+
+    document.getElementById("windSpeedValue")
+        .textContent=V.toFixed(1)+" m/s";
+
+    /*
+       Simplified educational calculation.
+       Pwind = 0.5*rho*A*V^3
+    */
+
+    const rho=1.225;
+    const R=20;
+    const A=Math.PI*R*R;
+
+    let Cp=0.45;
+
+    if(mode==="fixed")
+        Cp=0.35;
+
+    if(mode==="variable")
+        Cp=0.45;
+
+    let Pwind=
+        0.5*rho*A*Math.pow(V,3);
+
+    let Pmech=
+        Pwind*Cp;
+
+    let efficiency=0.92;
+
+    if(mode==="loss")
+        efficiency=0.82;
+
+    let Pgen=
+        Pmech*efficiency;
+
+    let rpm=
+        V*1.5;
+
+    document.getElementById("rpmValue")
+        .textContent=rpm.toFixed(1)+" rpm";
+
+    document.getElementById("mechanicalPower")
+        .textContent=(Pmech/1000).toFixed(2)+" kW";
+
+    document.getElementById("generatorPower")
+        .textContent=(Pgen/1000).toFixed(2)+" kW";
+
+    document.getElementById("efficiencyValue")
+        .textContent=(efficiency*100).toFixed(1)+" %";
+
+    document.getElementById("progressBar")
+        .style.width=
+        Math.min(100,(V/25)*100)+"%";
+
+    const rotor =
+        document.querySelector(".rotor");
+
+    rotor.classList.remove("fast","slow");
+
+    if(V>17)
+        rotor.classList.add("fast");
+
+    else if(V<8)
+        rotor.classList.add("slow");
+}
+
+function constructionMode(){
+
+    mode="construction";
+
+    setActive("btnConstruction");
+
+    clearBlocks();
+
+    document.getElementById("modeTitle")
+        .textContent="Construction of WECS";
+
+    document.getElementById("modeDescription")
+        .innerHTML=
+        "The wind turbine captures the kinetic energy of wind. " +
+        "The rotor transfers mechanical power through the drive train " +
+        "to the electrical generator.";
+
+    document.getElementById("lossBlock")
+        .setAttribute("opacity","0");
+
+    document.getElementById("lossText")
+        .setAttribute("opacity","0");
+
+    updateWind();
+}
+
+function workingMode(){
+
+    mode="working";
+
+    setActive("btnWorking");
+
+    clearBlocks();
+
+    [
+        "mechanicalBlock",
+        "generatorBlock",
+        "converterBlock",
+        "gridBlock"
+    ].forEach(id=>setBlock(id,true));
+
+    document.getElementById("modeTitle")
+        .textContent="WECS Working Principle";
+
+    document.getElementById("modeDescription")
+        .innerHTML=
+        "<b>Step 1:</b> Wind strikes the blades.<br>" +
+        "<b>Step 2:</b> Rotor converts wind energy into mechanical rotation.<br>" +
+        "<b>Step 3:</b> Shaft/gearbox transfers torque.<br>" +
+        "<b>Step 4:</b> Generator converts mechanical energy into electrical energy.<br>" +
+        "<b>Step 5:</b> Power converter conditions the generated electrical power.<br>" +
+        "<b>Step 6:</b> Power is supplied to the grid or load.";
+
+    updateWind();
+}
+
+function fixedSpeedMode(){
+
+    mode="fixed";
+
+    setActive("btnFixed");
+
+    clearBlocks();
+
+    setBlock("mechanicalBlock",true);
+    setBlock("generatorBlock",true);
+    setBlock("gridBlock",true);
+
+    document.getElementById("modeTitle")
+        .textContent="Fixed-Speed Wind Energy Conversion System";
+
+    document.getElementById("modeDescription")
+        .innerHTML=
+        "In a fixed-speed WECS, the generator operates approximately " +
+        "at constant speed determined by grid frequency and machine characteristics. " +
+        "A commonly studied arrangement uses a squirrel-cage induction generator (SCIG).<br><br>" +
+
+        "<b>Typical path:</b><br>" +
+        "Wind → Turbine → Gearbox → Induction Generator → Transformer → Grid";
+
+    updateWind();
+}
+
+function variableSpeedMode(){
+
+    mode="variable";
+
+    setActive("btnVariable");
+
+    clearBlocks();
+
+    [
+        "mechanicalBlock",
+        "generatorBlock",
+        "converterBlock",
+        "controlBlock",
+        "gridBlock"
+    ].forEach(id=>setBlock(id,true));
+
+    document.getElementById("modeTitle")
+        .textContent="Variable-Speed Wind Energy Conversion System";
+
+    document.getElementById("modeDescription")
+        .innerHTML=
+        "Variable-speed WECS allows rotor speed to change with wind speed. " +
+        "Power electronic converters decouple generator frequency from grid frequency. " +
+        "This allows better aerodynamic energy capture over a wider wind-speed range.<br><br>" +
+
+        "<b>Typical path:</b><br>" +
+        "Wind → Turbine → Generator → AC/DC/AC Converter → Grid";
+
+    updateWind();
+}
+
+function generatorMode(){
+
+    mode="generator";
+
+    setActive("btnGenerator");
+
+    clearBlocks();
+
+    setBlock("mechanicalBlock",true);
+    setBlock("generatorBlock",true);
+    setBlock("converterBlock",true);
+
+    document.getElementById("modeTitle")
+        .textContent="Electrical Generator in WECS";
+
+    document.getElementById("modeDescription")
+        .innerHTML=
+        "The wind turbine provides mechanical torque to the generator shaft. " +
+        "The generator converts mechanical power into electrical power by electromagnetic induction.<br><br>" +
+
+        "<b>Energy conversion:</b><br>" +
+        "Mechanical Power → Electromagnetic Conversion → Electrical Power";
+
+    updateWind();
+}
+
+function gridMode(){
+
+    mode="grid";
+
+    setActive("btnGrid");
+
+    clearBlocks();
+
+    [
+        "generatorBlock",
+        "converterBlock",
+        "gridBlock",
+        "controlBlock"
+    ].forEach(id=>setBlock(id,true));
+
+    document.getElementById("modeTitle")
+        .textContent="Grid-Connected WECS";
+
+    document.getElementById("modeDescription")
+        .innerHTML=
+        "The generated electrical power is processed by power electronic " +
+        "converters and synchronized with the utility grid.<br><br>" +
+
+        "<b>Main functions of converter:</b><br>" +
+        "• Voltage regulation<br>" +
+        "• Frequency control<br>" +
+        "• Reactive power control<br>" +
+        "• Grid synchronization<br>" +
+        "• Maximum power point tracking (MPPT)";
+
+    updateWind();
+}
+
+function standaloneMode(){
+
+    mode="standalone";
+
+    setActive("btnStandalone");
+
+    clearBlocks();
+
+    [
+        "generatorBlock",
+        "converterBlock",
+        "loadBlock",
+        "controlBlock"
+    ].forEach(id=>setBlock(id,true));
+
+    document.getElementById("modeTitle")
+        .textContent="Standalone Wind Energy Conversion System";
+
+    document.getElementById("modeDescription")
+        .innerHTML=
+        "In a standalone WECS, generated power is supplied to local loads " +
+        "and/or stored in a battery. A converter controls voltage and frequency " +
+        "according to load requirements.<br><br>" +
+
+        "<b>Typical path:</b><br>" +
+        "Wind → Turbine → Generator → Rectifier → DC Link → Inverter → Load/Battery";
+
+    updateWind();
+}
+
+function lossMode(){
+
+    mode="loss";
+
+    setActive("btnLoss");
+
+    clearBlocks();
+
+    [
+        "mechanicalBlock",
+        "generatorBlock",
+        "converterBlock"
+    ].forEach(id=>setBlock(id,true));
+
+    document.getElementById("modeTitle")
+        .textContent="Losses in Wind Energy Conversion System";
+
+    document.getElementById("modeDescription")
+        .innerHTML=
+        "<b>1. Aerodynamic losses:</b> blade drag, wake and tip losses.<br>" +
+        "<b>2. Mechanical losses:</b> bearing and gearbox losses.<br>" +
+        "<b>3. Generator losses:</b> copper, core and mechanical losses.<br>" +
+        "<b>4. Converter losses:</b> semiconductor conduction and switching losses.<br>" +
+        "<b>5. Transformer losses:</b> copper and core losses.";
+
+    document.getElementById("lossBlock")
+        .setAttribute("opacity","1");
+
+    document.getElementById("lossText")
+        .setAttribute("opacity","1");
+
+    updateWind();
+}
+
+function resetAll(){
+
+    mode="construction";
+
+    setActive(null);
+
+    clearBlocks();
+
+    windSlider.value=12;
+
+    document.getElementById("lossBlock")
+        .setAttribute("opacity","0");
+
+    document.getElementById("lossText")
+        .setAttribute("opacity","0");
+
+    document.getElementById("modeTitle")
+        .textContent="Construction";
+
+    document.getElementById("modeDescription")
+        .textContent=
+        "A wind energy conversion system converts the kinetic energy of moving air into electrical energy.";
+
+    updateWind();
+}
+
+/* POWER DOT MOTION */
+
+let dotPosition=0;
+
+function animateDots(){
+
+    dotPosition++;
+
+    const dots=[
+        document.getElementById("dot1"),
+        document.getElementById("dot2"),
+        document.getElementById("dot3"),
+        document.getElementById("dot4")
+    ];
+
+    const positions=[
+        [390,300],
+        [600,300],
+        [795,300],
+        [895,385]
+    ];
+
+    dots.forEach((dot,i)=>{
+
+        if(!dot)return;
+
+        const p=positions[i];
+
+        let offset=
+            ((dotPosition+i*35)%50)/50;
+
+        if(i===0)
+            dot.setAttribute("cx",355+offset*75);
+
+        if(i===1)
+            dot.setAttribute("cx",580+offset*45);
+
+        if(i===2)
+            dot.setAttribute("cx",775+offset*45);
+
+        if(i===3)
+            dot.setAttribute("cy",340+offset*75);
+    });
+
+    requestAnimationFrame(animateDots);
+}
+
+animateDots();
+
+updateWind();
+
+</script>
+
+</body>
+</html>

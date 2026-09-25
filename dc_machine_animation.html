@@ -1,0 +1,1333 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DC Machine – Construction & Working Animation</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#08111c;
+    color:#eaf4ff;
+}
+
+header{
+    background:linear-gradient(135deg,#0d2438,#102f47);
+    padding:20px;
+    text-align:center;
+    border-bottom:2px solid #245878;
+}
+
+header h1{
+    margin:0;
+    font-size:30px;
+}
+
+header p{
+    margin:8px 0 0;
+    color:#a9c8df;
+}
+
+.container{
+    max-width:1450px;
+    margin:auto;
+    padding:18px;
+}
+
+.toolbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+button{
+    background:#173b55;
+    color:white;
+    border:1px solid #347ca5;
+    padding:10px 16px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#235d80;
+}
+
+button.active{
+    background:#087eb4;
+}
+
+.main{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:15px;
+}
+
+.machine-panel{
+    background:#0b1724;
+    border:1px solid #24445c;
+    border-radius:12px;
+    padding:15px;
+    min-height:680px;
+}
+
+.info-panel{
+    background:#0b1724;
+    border:1px solid #24445c;
+    border-radius:12px;
+    padding:20px;
+}
+
+#stage{
+    position:relative;
+    height:620px;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at center,#122b40 0%,#08121d 65%);
+    border-radius:10px;
+    border:1px solid #23445c;
+}
+
+/* ===================== MACHINE PARTS ===================== */
+
+.part{
+    position:absolute;
+    opacity:0;
+    transition:
+        left 1s ease,
+        top 1s ease,
+        transform 1s ease,
+        opacity .7s ease;
+}
+
+.part.visible{
+    opacity:1;
+}
+
+/* YOKE */
+
+#yoke{
+    width:500px;
+    height:450px;
+    left:100px;
+    top:75px;
+    border:28px solid #6e7882;
+    border-radius:50%;
+    background:#101c27;
+    box-shadow:
+        inset 0 0 0 5px #9ba5ad,
+        0 0 25px rgba(0,0,0,.6);
+}
+
+/* poles */
+
+.pole{
+    width:100px;
+    height:130px;
+    background:#7f8992;
+    border:5px solid #b2bbc2;
+    border-radius:10px;
+}
+
+#poleN{
+    left:300px;
+    top:95px;
+}
+
+#poleS{
+    left:300px;
+    top:395px;
+}
+
+.pole-shoe{
+    position:absolute;
+    width:145px;
+    height:55px;
+    background:#909aa2;
+    border:5px solid #c2c9ce;
+    border-radius:30px;
+}
+
+#shoeN{
+    left:277px;
+    top:195px;
+}
+
+#shoeS{
+    left:277px;
+    top:370px;
+}
+
+/* field winding */
+
+.field{
+    width:115px;
+    height:75px;
+    border:9px solid #d98b24;
+    border-radius:50%;
+    box-shadow:
+        0 0 0 5px #a75f0d,
+        inset 0 0 15px #ffb53d;
+}
+
+#fieldN{
+    left:292px;
+    top:170px;
+}
+
+#fieldS{
+    left:292px;
+    top:350px;
+}
+
+/* armature */
+
+#armature{
+    width:260px;
+    height:260px;
+    left:220px;
+    top:180px;
+    border-radius:50%;
+    background:
+        repeating-conic-gradient(
+            #a5aeb5 0deg 8deg,
+            #66717a 8deg 15deg
+        );
+    border:13px solid #c4cbd0;
+    box-shadow:
+        inset 0 0 20px #18222b,
+        0 0 15px #000;
+    transform-origin:center;
+}
+
+#armature::before{
+    content:"";
+    position:absolute;
+    width:130px;
+    height:130px;
+    left:52px;
+    top:52px;
+    border-radius:50%;
+    background:#101923;
+    border:9px solid #8f999f;
+}
+
+/* armature winding */
+
+.winding{
+    width:205px;
+    height:205px;
+    left:247px;
+    top:207px;
+    border:10px dashed #d43d32;
+    border-radius:50%;
+    pointer-events:none;
+}
+
+/* shaft */
+
+#shaft{
+    width:360px;
+    height:18px;
+    left:170px;
+    top:300px;
+    background:#bfc7cd;
+    border:3px solid #707b83;
+    border-radius:10px;
+    z-index:1;
+}
+
+/* commutator */
+
+#commutator{
+    width:90px;
+    height:75px;
+    left:305px;
+    top:273px;
+    border-radius:12px;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #c47728 0px,
+            #c47728 10px,
+            #572f12 10px,
+            #572f12 13px
+        );
+    border:5px solid #e0a054;
+    z-index:5;
+}
+
+/* brushes */
+
+.brush{
+    width:35px;
+    height:70px;
+    background:#343a40;
+    border:4px solid #9ca5aa;
+    border-radius:5px;
+    z-index:8;
+}
+
+#brushLeft{
+    left:287px;
+    top:252px;
+}
+
+#brushRight{
+    left:378px;
+    top:252px;
+}
+
+/* terminals */
+
+.terminal{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:#bfc5ca;
+    border:4px solid #68727a;
+    z-index:10;
+}
+
+#terminalN{
+    left:340px;
+    top:35px;
+}
+
+#terminalS{
+    left:340px;
+    top:557px;
+}
+
+/* labels */
+
+.label{
+    position:absolute;
+    padding:5px 9px;
+    background:rgba(0,0,0,.75);
+    border:1px solid #5592b7;
+    border-radius:5px;
+    color:#fff;
+    font-size:13px;
+    opacity:0;
+    transition:opacity .5s;
+    z-index:30;
+    white-space:nowrap;
+}
+
+.label.show{
+    opacity:1;
+}
+
+/* arrows */
+
+.arrow{
+    position:absolute;
+    width:120px;
+    height:3px;
+    background:#55c7ff;
+    opacity:0;
+    z-index:25;
+    transform-origin:left center;
+}
+
+.arrow::after{
+    content:"";
+    position:absolute;
+    right:-2px;
+    top:-6px;
+    border-left:13px solid #55c7ff;
+    border-top:7px solid transparent;
+    border-bottom:7px solid transparent;
+}
+
+.arrow.show{
+    opacity:1;
+}
+
+/* magnetic field */
+
+.fieldline{
+    position:absolute;
+    width:250px;
+    height:100px;
+    border-top:3px dashed #45a7ff;
+    border-radius:50%;
+    opacity:0;
+    z-index:3;
+}
+
+.fieldline.show{
+    opacity:.8;
+    animation:fieldMove 2s linear infinite;
+}
+
+@keyframes fieldMove{
+    from{transform:translateX(-10px);}
+    to{transform:translateX(10px);}
+}
+
+/* current */
+
+.current{
+    position:absolute;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#ff4c42;
+    opacity:0;
+    z-index:20;
+}
+
+.current.show{
+    opacity:1;
+    animation:currentMove 2s linear infinite;
+}
+
+@keyframes currentMove{
+    0%{transform:translate(0,0);}
+    50%{transform:translate(120px,0);}
+    100%{transform:translate(240px,0);}
+}
+
+/* rotation */
+
+.rotate{
+    animation:rotateArm 2s linear infinite;
+}
+
+@keyframes rotateArm{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+
+/* progress */
+
+.progress-wrap{
+    height:10px;
+    background:#162532;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+#progress{
+    width:0%;
+    height:100%;
+    background:#23a9dc;
+    border-radius:10px;
+    transition:width .4s;
+}
+
+/* info */
+
+#partTitle{
+    color:#4bc4ff;
+    margin-top:0;
+}
+
+#partImage{
+    height:130px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:60px;
+    background:#101e2b;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.info-section{
+    background:#101e2b;
+    padding:12px;
+    border-radius:8px;
+    margin-top:12px;
+}
+
+.info-section h3{
+    margin-top:0;
+    color:#71d2ff;
+}
+
+ul{
+    line-height:1.7;
+}
+
+.formula{
+    background:#071019;
+    padding:12px;
+    border-left:4px solid #28a9dd;
+    font-family:monospace;
+    font-size:16px;
+}
+
+/* bottom */
+
+.bottom{
+    margin-top:15px;
+    background:#0b1724;
+    border:1px solid #24445c;
+    padding:15px;
+    border-radius:10px;
+}
+
+.legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.legend span{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.dot{
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    display:inline-block;
+}
+
+.blue{background:#45a7ff;}
+.orange{background:#d98b24;}
+.red{background:#d43d32;}
+.grey{background:#8f999f;}
+
+@media(max-width:900px){
+    .main{
+        grid-template-columns:1fr;
+    }
+
+    #stage{
+        transform-origin:top left;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>DC MACHINE – CONSTRUCTION & WORKING</h1>
+    <p>Interactive animated learning module – DC Motor & DC Generator</p>
+</header>
+
+<div class="container">
+
+    <div class="toolbar">
+        <button id="constructionBtn" class="active"
+                onclick="setMode('construction')">
+            🏗 Construction
+        </button>
+
+        <button onclick="setMode('assembly')">
+            🔧 Assemble Machine
+        </button>
+
+        <button onclick="setMode('motor')">
+            ⚙ DC Motor
+        </button>
+
+        <button onclick="setMode('generator')">
+            ⚡ DC Generator
+        </button>
+
+        <button onclick="showAll()">
+            👁 Show All Parts
+        </button>
+
+        <button onclick="resetAnimation()">
+            ↺ Reset
+        </button>
+    </div>
+
+    <div class="main">
+
+        <!-- MACHINE -->
+
+        <div class="machine-panel">
+
+            <div id="stage">
+
+                <!-- YOKE -->
+                <div id="yoke" class="part"></div>
+
+                <!-- POLES -->
+                <div id="poleN" class="part pole"></div>
+                <div id="poleS" class="part pole"></div>
+
+                <!-- POLE SHOES -->
+                <div id="shoeN" class="part pole-shoe"></div>
+                <div id="shoeS" class="part pole-shoe"></div>
+
+                <!-- FIELD WINDINGS -->
+                <div id="fieldN" class="part field"></div>
+                <div id="fieldS" class="part field"></div>
+
+                <!-- ARMATURE -->
+                <div id="armature" class="part"></div>
+
+                <!-- ARMATURE WINDING -->
+                <div id="armatureWinding" class="part winding"></div>
+
+                <!-- SHAFT -->
+                <div id="shaft" class="part"></div>
+
+                <!-- COMMUTATOR -->
+                <div id="commutator" class="part"></div>
+
+                <!-- BRUSHES -->
+                <div id="brushLeft" class="part brush"></div>
+                <div id="brushRight" class="part brush"></div>
+
+                <!-- TERMINALS -->
+                <div id="terminalN" class="part terminal"></div>
+                <div id="terminalS" class="part terminal"></div>
+
+                <!-- MAGNETIC FIELD -->
+                <div class="fieldline" id="f1"
+                     style="left:180px;top:235px;transform:rotate(8deg);"></div>
+
+                <div class="fieldline" id="f2"
+                     style="left:180px;top:315px;transform:rotate(-8deg);"></div>
+
+                <div class="fieldline" id="f3"
+                     style="left:220px;top:275px;transform:rotate(90deg);"></div>
+
+                <!-- CURRENT DOTS -->
+                <div class="current" id="c1"
+                     style="left:330px;top:160px;"></div>
+
+                <div class="current" id="c2"
+                     style="left:450px;top:300px;"></div>
+
+                <!-- LABELS -->
+
+                <div id="labelYoke" class="label"
+                     style="left:70px;top:110px;">
+                    Yoke / Frame
+                </div>
+
+                <div id="labelPole" class="label"
+                     style="left:425px;top:110px;">
+                    Pole Core
+                </div>
+
+                <div id="labelShoe" class="label"
+                     style="left:445px;top:185px;">
+                    Pole Shoe
+                </div>
+
+                <div id="labelField" class="label"
+                     style="left:450px;top:230px;">
+                    Field Winding
+                </div>
+
+                <div id="labelArmature" class="label"
+                     style="left:15px;top:285px;">
+                    Armature Core
+                </div>
+
+                <div id="labelWinding" class="label"
+                     style="left:15px;top:350px;">
+                    Armature Winding
+                </div>
+
+                <div id="labelShaft" class="label"
+                     style="left:510px;top:300px;">
+                    Shaft
+                </div>
+
+                <div id="labelCommutator" class="label"
+                     style="left:505px;top:380px;">
+                    Commutator
+                </div>
+
+                <div id="labelBrush" class="label"
+                     style="left:490px;top:450px;">
+                    Brushes
+                </div>
+
+            </div>
+
+            <div class="progress-wrap">
+                <div id="progress"></div>
+            </div>
+
+        </div>
+
+        <!-- INFORMATION -->
+
+        <div class="info-panel">
+
+            <div id="partImage">⚙️</div>
+
+            <h2 id="partTitle">DC Machine</h2>
+
+            <p id="partDescription">
+                Select <b>Construction</b> and use
+                <b>Next Part</b> to learn the construction
+                step by step.
+            </p>
+
+            <div class="info-section">
+                <h3>Function</h3>
+                <p id="partFunction">
+                    A DC machine converts mechanical energy
+                    into electrical energy or electrical energy
+                    into mechanical energy.
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h3>Construction</h3>
+                <p id="partConstruction">
+                    The machine consists of a stationary part
+                    called the stator and a rotating part called
+                    the armature or rotor.
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h3>Important Formula</h3>
+
+                <div class="formula" id="formula">
+                    Eg = (P Φ Z N) / (60 A)
+                </div>
+            </div>
+
+            <div style="margin-top:15px;display:flex;gap:8px;">
+                <button onclick="previousPart()">◀ Previous</button>
+                <button onclick="nextPart()">Next Part ▶</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="bottom">
+
+        <h3>Machine Components</h3>
+
+        <div class="legend">
+            <span><i class="dot grey"></i> Magnetic structure</span>
+            <span><i class="dot orange"></i> Field winding</span>
+            <span><i class="dot red"></i> Armature winding</span>
+            <span><i class="dot blue"></i> Magnetic flux</span>
+        </div>
+
+        <p>
+            <b>Learning sequence:</b>
+            Yoke → Pole Core → Pole Shoe → Field Winding →
+            Armature Core → Armature Winding → Shaft →
+            Commutator → Brushes → Complete Machine → Working.
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+/* ============================================================
+   DC MACHINE EDUCATIONAL ANIMATION
+   ============================================================ */
+
+const parts = [
+
+{
+    id:"yoke",
+    label:"labelYoke",
+    title:"1. Yoke / Outer Frame",
+    icon:"⭕",
+    description:
+    "The yoke is the outer frame of the DC machine. It provides mechanical support to the poles and protects the internal components.",
+    function:
+    "It provides mechanical strength and provides a low-reluctance path for the magnetic flux.",
+    construction:
+    "The yoke is generally made of cast iron or steel for smaller machines and fabricated or rolled steel for larger machines.",
+    formula:"Magnetic flux path: N-pole → Armature → S-pole → Yoke"
+},
+
+{
+    id:"poleN",
+    label:"labelPole",
+    title:"2. Pole Core",
+    icon:"🧲",
+    description:
+    "The pole core is attached to the inner surface of the yoke.",
+    function:
+    "It carries the field winding and establishes the magnetic field required for operation.",
+    construction:
+    "The pole core is usually made of magnetic steel. It is mechanically fixed to the yoke.",
+    formula:"Flux: Φ = B × A"
+},
+
+{
+    id:"shoeN",
+    label:"labelShoe",
+    title:"3. Pole Shoe",
+    icon:"🧲",
+    description:
+    "The pole shoe is the enlarged portion at the end of the pole core facing the armature.",
+    function:
+    "It spreads the magnetic flux over a larger area and reduces magnetic reluctance.",
+    construction:
+    "The pole shoe is shaped to cover a portion of the armature surface. It also supports the field coil.",
+    formula:"Reluctance: ℜ = l / (μA)"
+},
+
+{
+    id:"fieldN",
+    label:"labelField",
+    title:"4. Field Winding",
+    icon:"🌀",
+    description:
+    "The field winding is a coil wound around the pole core.",
+    function:
+    "When DC current flows through the winding, it produces the stationary magnetic field.",
+    construction:
+    "Insulated copper wire is wound around the pole core. The winding may be connected in shunt, series or compound configuration.",
+    formula:"MMF = Nf If"
+},
+
+{
+    id:"armature",
+    label:"labelArmature",
+    title:"5. Armature Core",
+    icon:"⚙️",
+    description:
+    "The armature core is the rotating magnetic structure located between the poles.",
+    function:
+    "It provides a path for magnetic flux and houses the armature conductors.",
+    construction:
+    "It is constructed from laminated silicon-steel sheets to reduce eddy-current losses.",
+    formula:"P_Eddy ∝ B² f² t²"
+},
+
+{
+    id:"armatureWinding",
+    label:"labelWinding",
+    title:"6. Armature Winding",
+    icon:"🔴",
+    description:
+    "Conductors are placed in slots on the armature core.",
+    function:
+    "In a generator, the winding is where EMF is induced. In a motor, current flows through the winding and produces electromagnetic torque.",
+    construction:
+    "The winding consists of insulated copper conductors arranged in slots and connected to the commutator segments.",
+    formula:"E = B l v"
+},
+
+{
+    id:"shaft",
+    label:"labelShaft",
+    title:"7. Shaft",
+    icon:"➖",
+    description:
+    "The shaft is the mechanical member passing through the armature.",
+    function:
+    "It transfers mechanical power between the armature and the external mechanical system.",
+    construction:
+    "The shaft is generally made of steel and is supported by bearings at the two ends.",
+    formula:"Mechanical power: P = Tω"
+},
+
+{
+    id:"commutator",
+    label:"labelCommutator",
+    title:"8. Commutator",
+    icon:"🟠",
+    description:
+    "The commutator is a cylindrical arrangement of copper segments insulated from each other.",
+    function:
+    "In a generator it converts the internally generated alternating EMF into unidirectional output. In a motor it reverses current in the armature conductors at the correct instant.",
+    construction:
+    "Copper segments are mounted on an insulating material such as mica. Each segment is connected to the armature winding.",
+    formula:"Generated output → DC through mechanical commutation"
+},
+
+{
+    id:"brushLeft",
+    label:"labelBrush",
+    title:"9. Brushes",
+    icon:"⬛",
+    description:
+    "Brushes are stationary carbon or graphite contacts that press against the commutator.",
+    function:
+    "They transfer electrical current between the rotating armature and the external circuit.",
+    construction:
+    "Brushes are held in brush holders and maintained against the commutator with suitable spring pressure.",
+    formula:"Electrical output/input passes through brushes"
+},
+
+{
+    id:"terminalN",
+    label:null,
+    title:"10. Terminals",
+    icon:"🔌",
+    description:
+    "The terminals provide electrical connection between the DC machine and the external circuit.",
+    function:
+    "They provide input or output electrical connections.",
+    construction:
+    "Terminal leads are brought out from the field and armature circuits according to the machine configuration.",
+    formula:"V = IR"
+}
+
+];
+
+let currentPart = -1;
+let currentMode = "construction";
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+
+function $(id){
+    return document.getElementById(id);
+}
+
+function showElement(id){
+    if($(id)){
+        $(id).classList.add("visible");
+    }
+}
+
+function hideElement(id){
+    if($(id)){
+        $(id).classList.remove("visible");
+    }
+}
+
+function showLabel(id){
+    if($(id)){
+        $(id).classList.add("show");
+    }
+}
+
+function hideAllLabels(){
+    document.querySelectorAll(".label")
+        .forEach(x=>x.classList.remove("show"));
+}
+
+function hideAllParts(){
+    document.querySelectorAll(".part")
+        .forEach(x=>x.classList.remove("visible"));
+
+    document.querySelectorAll(".fieldline")
+        .forEach(x=>x.classList.remove("show"));
+
+    document.querySelectorAll(".current")
+        .forEach(x=>x.classList.remove("show"));
+
+    $("armature").classList.remove("rotate");
+}
+
+/* ============================================================
+   CONSTRUCTION
+   ============================================================ */
+
+function resetAnimation(){
+
+    currentPart = -1;
+    currentMode = "construction";
+
+    hideAllParts();
+    hideAllLabels();
+
+    $("partTitle").innerText="DC Machine";
+    $("partImage").innerText="⚙️";
+
+    $("partDescription").innerHTML=
+        "Select <b>Construction</b> and use <b>Next Part</b> to learn the construction step by step.";
+
+    $("partFunction").innerText=
+        "A DC machine converts mechanical energy into electrical energy or electrical energy into mechanical energy.";
+
+    $("partConstruction").innerText=
+        "The machine consists of a stationary part called the stator and a rotating part called the armature or rotor.";
+
+    $("formula").innerText="Eg = (P Φ Z N) / (60 A)";
+
+    $("progress").style.width="0%";
+
+    $("constructionBtn").classList.add("active");
+}
+
+function nextPart(){
+
+    if(currentMode !== "construction"){
+        setMode("construction");
+    }
+
+    if(currentPart < parts.length-1){
+        currentPart++;
+        displayPart(currentPart);
+    }
+}
+
+function previousPart(){
+
+    if(currentPart > 0){
+        currentPart--;
+
+        hideAllParts();
+        hideAllLabels();
+
+        for(let i=0;i<=currentPart;i++){
+            activateConstructionPart(parts[i]);
+        }
+
+        updateInfo(parts[currentPart]);
+    }
+}
+
+function displayPart(index){
+
+    const p=parts[index];
+
+    activateConstructionPart(p);
+    updateInfo(p);
+
+    const percent=((index+1)/parts.length)*100;
+    $("progress").style.width=percent+"%";
+}
+
+function activateConstructionPart(p){
+
+    showElement(p.id);
+
+    /*
+       Field windings have two identical components.
+       Armature winding is separate from the core.
+    */
+
+    if(p.id==="poleN"){
+        showElement("poleS");
+    }
+
+    if(p.id==="shoeN"){
+        showElement("shoeS");
+    }
+
+    if(p.id==="fieldN"){
+        showElement("fieldS");
+    }
+
+    if(p.id==="armatureWinding"){
+        showElement("armature");
+        showElement("armatureWinding");
+    }
+
+    if(p.id==="brushLeft"){
+        showElement("brushRight");
+    }
+
+    if(p.id==="terminalN"){
+        showElement("terminalS");
+    }
+
+    if(p.label){
+        showLabel(p.label);
+    }
+}
+
+function updateInfo(p){
+
+    $("partTitle").innerText=p.title;
+    $("partImage").innerText=p.icon;
+    $("partDescription").innerText=p.description;
+    $("partFunction").innerText=p.function;
+    $("partConstruction").innerText=p.construction;
+    $("formula").innerText=p.formula;
+}
+
+/* ============================================================
+   SHOW ALL
+   ============================================================ */
+
+function showAll(){
+
+    currentMode="assembly";
+    hideAllParts();
+    hideAllLabels();
+
+    [
+        "yoke",
+        "poleN",
+        "poleS",
+        "shoeN",
+        "shoeS",
+        "fieldN",
+        "fieldS",
+        "armature",
+        "armatureWinding",
+        "shaft",
+        "commutator",
+        "brushLeft",
+        "brushRight",
+        "terminalN",
+        "terminalS"
+    ].forEach(showElement);
+
+    [
+        "labelYoke",
+        "labelPole",
+        "labelShoe",
+        "labelField",
+        "labelArmature",
+        "labelWinding",
+        "labelShaft",
+        "labelCommutator",
+        "labelBrush"
+    ].forEach(showLabel);
+
+    $("partTitle").innerText="Complete DC Machine";
+    $("partImage").innerText="⚙️";
+
+    $("partDescription").innerText=
+        "All major constructional parts of the DC machine are now visible.";
+
+    $("partFunction").innerText=
+        "The field system produces magnetic flux, while the armature system interacts with the flux to perform energy conversion.";
+
+    $("partConstruction").innerText=
+        "The machine consists of yoke, poles, field winding, armature core, armature winding, shaft, commutator, brushes and bearings/end covers.";
+
+    $("formula").innerText=
+        "Generator: Eg = (P Φ Z N)/(60 A)    |    Motor: T ∝ Φ Ia";
+
+    $("progress").style.width="100%";
+}
+
+/* ============================================================
+   MODE CONTROL
+   ============================================================ */
+
+function setMode(mode){
+
+    currentMode=mode;
+
+    document.querySelectorAll("button")
+        .forEach(b=>b.classList.remove("active"));
+
+    if(mode==="construction"){
+        $("constructionBtn").classList.add("active");
+        resetConstructionMode();
+    }
+
+    if(mode==="assembly"){
+        assemblyAnimation();
+    }
+
+    if(mode==="motor"){
+        motorAnimation();
+    }
+
+    if(mode==="generator"){
+        generatorAnimation();
+    }
+}
+
+/* ============================================================
+   ASSEMBLY
+   ============================================================ */
+
+function assemblyAnimation(){
+
+    hideAllParts();
+    hideAllLabels();
+
+    $("partTitle").innerText="Animated Assembly";
+    $("partImage").innerText="🔧";
+
+    $("partDescription").innerText=
+        "The DC machine is assembled sequentially. First the stationary magnetic structure is formed, followed by the rotating armature and electrical connection system.";
+
+    $("partFunction").innerText=
+        "Each component has a specific mechanical, magnetic or electrical function.";
+
+    $("partConstruction").innerText=
+        "Observe how the individual components occupy their actual positions in the machine.";
+
+    $("formula").innerText=
+        "Complete machine: Field system + Armature system + Commutation system";
+
+    const sequence=[
+        ["yoke",0],
+        ["poleN",600],
+        ["poleS",600],
+        ["shoeN",1200],
+        ["shoeS",1200],
+        ["fieldN",1800],
+        ["fieldS",1800],
+        ["armature",2500],
+        ["armatureWinding",2500],
+        ["shaft",3200],
+        ["commutator",3800],
+        ["brushLeft",4400],
+        ["brushRight",4400],
+        ["terminalN",5000],
+        ["terminalS",5000]
+    ];
+
+    sequence.forEach(item=>{
+        setTimeout(()=>{
+            showElement(item[0]);
+        },item[1]);
+    });
+
+    setTimeout(()=>{
+        [
+            "labelYoke",
+            "labelPole",
+            "labelShoe",
+            "labelField",
+            "labelArmature",
+            "labelWinding",
+            "labelShaft",
+            "labelCommutator",
+            "labelBrush"
+        ].forEach(showLabel);
+
+        $("progress").style.width="100%";
+    },5600);
+}
+
+/* ============================================================
+   MOTOR
+   ============================================================ */
+
+function motorAnimation(){
+
+    hideAllParts();
+    hideAllLabels();
+
+    showAll();
+
+    $("partTitle").innerText="DC Motor – Working Animation";
+    $("partImage").innerText="⚙️";
+
+    $("partDescription").innerText=
+        "Electrical energy is supplied to the armature through the brushes and commutator. The interaction between armature current and magnetic flux produces torque.";
+
+    $("partFunction").innerText=
+        "A DC motor converts electrical energy into mechanical energy.";
+
+    $("partConstruction").innerText=
+        "The field winding establishes the magnetic field. Armature current interacts with this field and produces electromagnetic torque.";
+
+    $("formula").innerText=
+        "Back EMF: Eb = V − IaRa     |     Torque: T ∝ ΦIa";
+
+    $("armature").classList.add("rotate");
+
+    document.querySelectorAll(".fieldline")
+        .forEach(x=>x.classList.add("show"));
+
+    document.querySelectorAll(".current")
+        .forEach(x=>x.classList.add("show"));
+
+    showMotorLabels();
+}
+
+function showMotorLabels(){
+
+    showLabel("labelYoke");
+    showLabel("labelPole");
+    showLabel("labelField");
+    showLabel("labelArmature");
+    showLabel("labelWinding");
+    showLabel("labelCommutator");
+    showLabel("labelBrush");
+
+}
+
+/* ============================================================
+   GENERATOR
+   ============================================================ */
+
+function generatorAnimation(){
+
+    hideAllParts();
+    hideAllLabels();
+
+    showAll();
+
+    $("partTitle").innerText="DC Generator – Working Animation";
+    $("partImage").innerText="⚡";
+
+    $("partDescription").innerText=
+        "When the armature is mechanically rotated in the magnetic field, conductors cut magnetic flux and EMF is induced.";
+
+    $("partFunction").innerText=
+        "A DC generator converts mechanical energy into electrical energy.";
+
+    $("partConstruction").innerText=
+        "Mechanical input rotates the armature. The induced EMF in the armature conductors is collected through the commutator and brushes as DC output.";
+
+    $("formula").innerText=
+        "Generated EMF: Eg = (P Φ Z N)/(60 A)";
+
+    $("armature").classList.add("rotate");
+
+    document.querySelectorAll(".fieldline")
+        .forEach(x=>x.classList.add("show"));
+
+    document.querySelectorAll(".current")
+        .forEach(x=>x.classList.add("show"));
+
+    showMotorLabels();
+}
+
+/* ============================================================
+   CONSTRUCTION RESET
+   ============================================================ */
+
+function resetConstructionMode(){
+
+    hideAllParts();
+    hideAllLabels();
+
+    currentPart=-1;
+
+    $("partTitle").innerText="DC Machine Construction";
+    $("partImage").innerText="🏗";
+
+    $("partDescription").innerText=
+        "Click Next Part to introduce each component individually.";
+
+    $("partFunction").innerText=
+        "Study the construction of the DC machine from the outside frame toward the rotating and electrical components.";
+
+    $("partConstruction").innerText=
+        "The animation intentionally separates each part so that students can identify its location, construction and function.";
+
+    $("formula").innerText=
+        "Eg = (P Φ Z N)/(60 A)";
+
+    $("progress").style.width="0%";
+}
+
+/* ============================================================
+   INITIALIZATION
+   ============================================================ */
+
+resetAnimation();
+
+</script>
+
+</body>
+</html>
+

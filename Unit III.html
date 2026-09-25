@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unit III – Energy Conversion Systems</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#06101a;
+    color:#eaf7ff;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    background:linear-gradient(135deg,#071827,#0d3045);
+    border-bottom:2px solid #27b9ee;
+    padding:25px;
+    text-align:center;
+}
+
+.header h1{
+    margin:0;
+    color:#65dcff;
+    font-size:32px;
+}
+
+.header p{
+    margin:8px 0 0;
+    color:#a9c8d8;
+    font-size:16px;
+}
+
+/* ================= UNIT INFO ================= */
+
+.unit-info{
+    max-width:1500px;
+    margin:auto;
+    padding:20px;
+}
+
+.unit-card{
+    background:#0b1b2a;
+    border:1px solid #20516b;
+    border-radius:14px;
+    padding:22px;
+    box-shadow:0 8px 25px rgba(0,0,0,.3);
+}
+
+.unit-card h2{
+    color:#72ddff;
+    margin-top:0;
+}
+
+.unit-card p{
+    line-height:1.7;
+    color:#c7dce6;
+}
+
+/* ================= TOP NAVIGATION ================= */
+
+.lesson-nav{
+    max-width:1500px;
+    margin:auto;
+    padding:0 20px 20px;
+
+    display:grid;
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:12px;
+}
+
+.lesson-btn{
+
+    border:1px solid #25546b;
+
+    background:#0c2030;
+
+    color:#dff6ff;
+
+    border-radius:12px;
+
+    padding:18px 12px;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    transition:.25s;
+
+    min-height:110px;
+}
+
+.lesson-btn:hover{
+
+    background:#12415a;
+
+    border-color:#50d5ff;
+
+    transform:translateY(-2px);
+}
+
+.lesson-btn.active{
+
+    background:#12516e;
+
+    border-color:#6ce0ff;
+
+    box-shadow:
+    0 0 15px rgba(56,202,255,.25);
+}
+
+.lesson-number{
+
+    display:block;
+
+    font-size:14px;
+
+    color:#69dfff;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+}
+
+.lesson-title{
+
+    display:block;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    margin-bottom:7px;
+}
+
+.lesson-description{
+
+    display:block;
+
+    font-size:12px;
+
+    color:#a9c6d3;
+
+    line-height:1.4;
+}
+
+/* ================= CONTENT AREA ================= */
+
+.viewer{
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:
+    0 20px 30px;
+}
+
+.viewer-card{
+
+    background:#07131f;
+
+    border:1px solid #21485e;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 10px 35px rgba(0,0,0,.35);
+}
+
+/* ================= TOOLBAR ================= */
+
+.toolbar{
+
+    background:#0d2434;
+
+    border-bottom:1px solid #24546a;
+
+    padding:12px 16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.lesson-name{
+
+    color:#72ddff;
+
+    font-weight:bold;
+
+    font-size:16px;
+}
+
+.toolbar-buttons{
+
+    display:flex;
+
+    gap:8px;
+}
+
+.toolbar button{
+
+    border:1px solid #32647b;
+
+    background:#102e40;
+
+    color:#e7f8ff;
+
+    padding:8px 14px;
+
+    border-radius:7px;
+
+    cursor:pointer;
+}
+
+.toolbar button:hover{
+
+    background:#17516b;
+
+    border-color:#65d9ff;
+}
+
+/* ================= IFRAME ================= */
+
+iframe{
+
+    width:100%;
+
+    height:850px;
+
+    border:0;
+
+    display:block;
+
+    background:#06101a;
+}
+
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav{
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:
+    0 20px 30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.bottom-nav button{
+
+    background:#103247;
+
+    border:1px solid #35718b;
+
+    color:#e8faff;
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+.bottom-nav button:hover{
+
+    background:#17617d;
+
+}
+
+/* ================= TOPICS ================= */
+
+.topic-section{
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:
+    0 20px 25px;
+}
+
+.topic-card{
+
+    background:#0a1926;
+
+    border:
+    1px solid #20475c;
+
+    border-radius:12px;
+
+    padding:20px;
+}
+
+.topic-card h3{
+
+    color:#69dfff;
+
+    margin-top:0;
+}
+
+.topic-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:12px;
+}
+
+.topic{
+
+    padding:14px;
+
+    border-radius:8px;
+
+    background:#0e2636;
+
+    border:1px solid #244d61;
+
+    color:#cce5ef;
+
+    line-height:1.5;
+}
+
+.topic b{
+
+    color:#6ddfff;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+
+    text-align:center;
+
+    padding:25px;
+
+    color:#708b99;
+
+    border-top:
+    1px solid #193747;
+
+    margin-top:10px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .lesson-nav{
+
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+    iframe{
+
+        height:700px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .lesson-nav{
+
+        grid-template-columns:1fr;
+    }
+
+    .header h1{
+
+        font-size:25px;
+    }
+
+    iframe{
+
+        height:650px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+<h1>UNIT – III</h1>
+
+<p>
+Energy Conversion Systems
+</p>
+
+</header>
+
+
+<!-- =====================================================
+     UNIT INTRODUCTION
+===================================================== -->
+
+<section class="unit-info">
+
+<div class="unit-card">
+
+<h2>⚡ Energy Conversion Systems</h2>
+
+<p>
+
+This unit introduces the fundamental principles and applications
+of electrical energy conversion systems. The learning material
+combines theory, animated concepts, block diagrams, formulas,
+numerical problems and interactive simulations.
+
+</p>
+
+<p>
+
+<strong>Learning sequence:</strong>
+
+Magnetic Principles →
+DC Machines →
+Transformer →
+Wind Energy →
+Solar PV →
+Inverter →
+UPS
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     LESSON NAVIGATION
+===================================================== -->
+
+<section class="lesson-nav">
+<button
+class="lesson-btn active"
+onclick="loadLesson(0)"
+>
+
+<span class="lesson-number">
+LESSON 01
+</span>
+
+<span class="lesson-title">
+Magnetic principles and Electromagnetic induction
+</span>
+
+<span class="lesson-description">
+Review of magnetic principles and electromagnetic induction
+</span>
+
+</button>
+
+
+<button
+class="lesson-btn active"
+onclick="loadLesson(1)"
+>
+
+<span class="lesson-number">
+LESSON 02
+</span>
+
+<span class="lesson-title">
+DC Generator & DC Motor
+</span>
+
+<span class="lesson-description">
+Construction, working principle,
+EMF, torque and applications
+</span>
+
+</button>
+
+
+<button
+class="lesson-btn"
+onclick="loadLesson(2)"
+>
+
+<span class="lesson-number">
+LESSON 03
+</span>
+
+<span class="lesson-title">
+Single Phase Transformer
+</span>
+
+<span class="lesson-description">
+Construction, working, EMF equation,
+losses and efficiency
+</span>
+
+</button>
+
+
+<button
+class="lesson-btn"
+onclick="loadLesson(3)"
+>
+
+<span class="lesson-number">
+LESSON 04
+</span>
+
+<span class="lesson-title">
+Wind Energy Conversion
+</span>
+
+<span class="lesson-description">
+Wind turbine, generator,
+converter and grid/load
+</span>
+
+</button>
+
+
+<button
+class="lesson-btn"
+onclick="loadLesson(4)"
+>
+
+<span class="lesson-number">
+LESSON 05
+</span>
+
+<span class="lesson-title">
+Solar PV 
+</span>
+
+<span class="lesson-description">
+PV systems 
+</span>
+
+</button>
+
+<button
+class="lesson-btn active"
+onclick="loadLesson(5)"
+>
+
+<span class="lesson-number">
+LESSON 06
+</span>
+
+<span class="lesson-title">
+Inverter & UPS
+</span>
+
+<span class="lesson-description">
+inverter operation,UPS and backup power
+</span>
+
+</button>
+
+
+
+</section>
+
+
+<!-- =====================================================
+     LESSON VIEWER
+===================================================== -->
+
+<section class="viewer">
+
+<div class="viewer-card">
+
+
+<div class="toolbar">
+
+<div
+class="lesson-name"
+id="lessonName"
+>
+Lesson 01 – DC Generator & DC Motor
+</div>
+
+
+<div class="toolbar-buttons">
+
+<button onclick="reloadLesson()">
+↻ Reload
+</button>
+
+<button onclick="openLessonNewTab()">
+↗ Open Full Page
+</button>
+
+</div>
+
+</div>
+
+
+<iframe
+id="lessonFrame"
+src="DC_Generator_Motor.html"
+title="Unit III Lesson"
+allowfullscreen>
+</iframe>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     BOTTOM NAVIGATION
+===================================================== -->
+
+<section class="bottom-nav">
+
+<button onclick="previousLesson()">
+← Previous Lesson
+</button>
+
+<button onclick="nextLesson()">
+Next Lesson →
+</button>
+
+</section>
+
+
+<!-- =====================================================
+     UNIT TOPICS
+===================================================== -->
+
+<section class="topic-section">
+
+<div class="topic-card">
+
+<h3>Unit III – Topics Covered</h3>
+
+<div class="topic-grid">
+
+<div class="topic">
+<b>01. Magnetic Principles</b><br>
+Magnetic circuits, electromagnetic
+induction and Faraday's law
+</div>
+
+<div class="topic">
+<b>02. DC Generator</b><br>
+Construction, working principle,
+EMF generation and applications
+</div>
+
+<div class="topic">
+<b>03. DC Motor</b><br>
+Back EMF, torque production,
+speed control and applications
+</div>
+
+<div class="topic">
+<b>04. Transformer</b><br>
+Construction, working, EMF equation,
+losses and efficiency
+</div>
+
+<div class="topic">
+<b>05. Wind Energy</b><br>
+Wind turbine, generator,
+converter and grid connection
+</div>
+
+<div class="topic">
+<b>06. Solar PV</b><br>
+Grid-connected and standalone
+photovoltaic systems
+</div>
+
+<div class="topic">
+<b>07. Inverter</b><br>
+DC-to-AC conversion, switching,
+PWM and filtering
+</div>
+
+<div class="topic">
+<b>08. UPS</b><br>
+Offline, line-interactive and
+online UPS systems
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+Unit III – Energy Conversion Systems<br>
+Interactive Digital Learning Module
+
+</footer>
+
+
+<script>
+
+
+/* =====================================================
+   LESSON DATA
+
+   CHANGE ONLY THE FILE NAMES HERE
+===================================================== */
+
+const lessons = [
+
+{
+        file:"review of EMF.html",
+
+        title:
+        "Lesson 01 – Review of magnetic principles and electromagnetic induction"
+    },
+
+    {
+        file:"dc_machine_animation.html",
+
+        title:
+        "Lesson 02 – DC Generator & DC Motor"
+    },
+
+    {
+        file:"Single_Phase_Transformer_Animation.html",
+
+        title:
+        "Lesson 03 – Single Phase Transformer"
+    },
+
+    {
+        file:"Wind_Energy_Conversion_System.html",
+
+        title:
+        "Lesson 04 – Wind Energy Conversion System"
+    },
+
+    {
+        file:"Solar_PV_Grid_Standalone_Animation.html",
+
+        title:
+        "Lesson 05 – Solar PV system On Grid & Off Grid"
+    },
+{
+        file:"Inverter_UPS_Systems.html",
+
+        title:
+        "Lesson 06 – Inverter & UPS"
+    }
+
+];
+
+
+let currentLesson = 0;
+
+
+/* =====================================================
+   LOAD LESSON
+===================================================== */
+
+function loadLesson(index){
+
+    if(index < 0){
+
+        index =
+        lessons.length - 1;
+    }
+
+    if(index >= lessons.length){
+
+        index = 0;
+    }
+
+    currentLesson = index;
+
+    const frame =
+    document.getElementById("lessonFrame");
+
+    const title =
+    document.getElementById("lessonName");
+
+    frame.src =
+    lessons[index].file;
+
+    title.textContent =
+    lessons[index].title;
+
+
+    /* Update buttons */
+
+    document
+    .querySelectorAll(".lesson-btn")
+    .forEach((button,i)=>{
+
+        button.classList.remove("active");
+
+        if(i === index){
+
+            button.classList.add("active");
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   PREVIOUS
+===================================================== */
+
+function previousLesson(){
+
+    currentLesson--;
+
+    if(currentLesson < 0){
+
+        currentLesson =
+        lessons.length - 1;
+    }
+
+    loadLesson(currentLesson);
+
+}
+
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+function nextLesson(){
+
+    currentLesson++;
+
+    if(currentLesson >= lessons.length){
+
+        currentLesson = 0;
+    }
+
+    loadLesson(currentLesson);
+
+}
+
+
+/* =====================================================
+   RELOAD
+===================================================== */
+
+function reloadLesson(){
+
+    const frame =
+    document.getElementById("lessonFrame");
+
+    frame.src =
+    frame.src;
+}
+
+
+/* =====================================================
+   OPEN FULL PAGE
+===================================================== */
+
+function openLessonNewTab(){
+
+    window.open(
+        lessons[currentLesson].file,
+        "_blank"
+    );
+
+}
+
+
+</script>
+
+</body>
+</html>
