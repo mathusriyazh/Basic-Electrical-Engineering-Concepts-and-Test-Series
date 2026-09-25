@@ -1,0 +1,2439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+Unit III – Energy Conversion Systems Question Bank
+</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#06111c;
+    color:#eaf7ff;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+
+    background:
+    linear-gradient(135deg,#071b2b,#0d354c);
+
+    padding:25px;
+
+    text-align:center;
+
+    border-bottom:
+    2px solid #28c3f3;
+
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+header h1{
+
+    margin:0;
+
+    color:#63ddff;
+
+    font-size:30px;
+}
+
+header h2{
+
+    margin:8px 0;
+
+    color:#d9f5ff;
+
+    font-size:20px;
+}
+
+header p{
+
+    margin:5px;
+
+    color:#a9c6d5;
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.container{
+
+    max-width:1450px;
+
+    margin:auto;
+
+    padding:20px;
+}
+
+
+/* =====================================================
+   CONTROL PANEL
+===================================================== */
+
+.control-panel{
+
+    background:#0b1d2c;
+
+    border:
+    1px solid #24536b;
+
+    border-radius:12px;
+
+    padding:18px;
+
+    margin-bottom:20px;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    align-items:center;
+}
+
+.control-panel label{
+
+    color:#8ddfff;
+
+    font-weight:bold;
+}
+
+select{
+
+    background:#102d3f;
+
+    color:#ffffff;
+
+    border:
+    1px solid #39728c;
+
+    padding:10px;
+
+    border-radius:7px;
+
+    font-size:15px;
+}
+
+button{
+
+    background:#123d54;
+
+    color:#ffffff;
+
+    border:
+    1px solid #43c9f5;
+
+    padding:10px 18px;
+
+    border-radius:7px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.2s;
+}
+
+button:hover{
+
+    background:#17617e;
+
+    transform:translateY(-1px);
+}
+
+
+/* =====================================================
+   INSTRUCTIONS
+===================================================== */
+
+.instructions{
+
+    background:#091a28;
+
+    border-left:
+    4px solid #55d8ff;
+
+    padding:15px;
+
+    border-radius:7px;
+
+    margin-bottom:20px;
+
+    line-height:1.7;
+}
+
+
+/* =====================================================
+   SET TITLE
+===================================================== */
+
+.set-title{
+
+    background:
+    linear-gradient(90deg,#0e3449,#09202f);
+
+    border:
+    1px solid #28627b;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    margin-bottom:20px;
+}
+
+.set-title h2{
+
+    margin:0;
+
+    color:#68ddff;
+}
+
+.set-title p{
+
+    margin-bottom:0;
+
+    color:#b8d2de;
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.section{
+
+    margin-bottom:25px;
+}
+
+.section-title{
+
+    background:#10364a;
+
+    padding:14px 18px;
+
+    border-left:
+    5px solid #58d9ff;
+
+    border-radius:7px;
+
+    margin-bottom:15px;
+
+    color:#e9faff;
+}
+
+.section-title span{
+
+    color:#70ddff;
+
+    float:right;
+}
+
+
+/* =====================================================
+   QUESTION CARD
+===================================================== */
+
+.question{
+
+    background:#0a1926;
+
+    border:
+    1px solid #20465b;
+
+    border-radius:10px;
+
+    padding:18px;
+
+    margin-bottom:15px;
+
+    box-shadow:
+    0 5px 18px rgba(0,0,0,.22);
+}
+
+.question:hover{
+
+    border-color:#367d99;
+}
+
+.qhead{
+
+    display:flex;
+
+    gap:10px;
+
+    align-items:flex-start;
+}
+
+.qno{
+
+    background:#124c66;
+
+    color:#75e4ff;
+
+    min-width:38px;
+
+    height:30px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:6px;
+
+    font-weight:bold;
+}
+
+.qtext{
+
+    flex:1;
+
+    line-height:1.6;
+
+    font-size:16px;
+}
+
+.marks{
+
+    color:#ffd166;
+
+    font-size:13px;
+
+    white-space:nowrap;
+}
+
+textarea{
+
+    width:100%;
+
+    min-height:90px;
+
+    resize:vertical;
+
+    margin-top:14px;
+
+    background:#06111b;
+
+    color:#e9f8ff;
+
+    border:
+    1px solid #28546a;
+
+    border-radius:7px;
+
+    padding:12px;
+
+    font-family:Arial;
+
+    font-size:15px;
+
+    line-height:1.5;
+}
+
+textarea:focus{
+
+    outline:none;
+
+    border-color:#51d7ff;
+
+    box-shadow:
+    0 0 8px rgba(60,200,255,.2);
+}
+
+
+/* =====================================================
+   RESULT
+===================================================== */
+
+.result{
+
+    display:none;
+
+    background:#092516;
+
+    border:
+    1px solid #3f8053;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    margin:20px 0;
+}
+
+.result h2{
+
+    color:#7ef28f;
+
+    margin-top:0;
+}
+
+.score-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(160px,1fr));
+
+    gap:12px;
+}
+
+.score-box{
+
+    background:#0c3020;
+
+    border:
+    1px solid #397c4d;
+
+    padding:15px;
+
+    border-radius:8px;
+
+    text-align:center;
+}
+
+.score-box span{
+
+    display:block;
+
+    color:#9fd5aa;
+
+    font-size:13px;
+}
+
+.score-box b{
+
+    display:block;
+
+    font-size:24px;
+
+    color:#80f18f;
+
+    margin-top:5px;
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+.feedback{
+
+    margin-top:12px;
+
+    padding:10px;
+
+    border-radius:6px;
+
+    font-size:14px;
+
+    display:none;
+}
+
+.correct{
+
+    background:#123720;
+
+    border:
+    1px solid #4c9d5c;
+
+    color:#b9ffc3;
+}
+
+.partial{
+
+    background:#382f12;
+
+    border:
+    1px solid #967d2d;
+
+    color:#ffe7a6;
+}
+
+.incorrect{
+
+    background:#381719;
+
+    border:
+    1px solid #94414b;
+
+    color:#ffc1c6;
+}
+
+
+/* =====================================================
+   ANSWER KEY
+===================================================== */
+
+.answer-key{
+
+    display:none;
+
+    background:#081a27;
+
+    border:
+    1px solid #35657b;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    margin-top:25px;
+}
+
+.answer-key h2{
+
+    color:#72dcff;
+}
+
+.key-item{
+
+    background:#0c2231;
+
+    border:
+    1px solid #214b61;
+
+    border-radius:8px;
+
+    padding:14px;
+
+    margin:10px 0;
+
+    line-height:1.6;
+}
+
+.key-item strong{
+
+    color:#73ddff;
+}
+
+.key-answer{
+
+    color:#d1e7ef;
+
+    margin-top:7px;
+}
+
+.key-score{
+
+    color:#ffd166;
+
+    margin-top:8px;
+
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   BOTTOM BUTTONS
+===================================================== */
+
+.bottom-controls{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    padding:25px 0;
+}
+
+.evaluate{
+
+    background:#17623c;
+
+    border-color:#65df8b;
+
+    font-size:17px;
+
+    padding:13px 28px;
+}
+
+.reset{
+
+    background:#54302e;
+
+    border-color:#df7770;
+
+    font-size:17px;
+
+    padding:13px 28px;
+}
+
+.print{
+
+    background:#34455a;
+
+    border-color:#81b8df;
+
+    font-size:17px;
+
+    padding:13px 28px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    text-align:center;
+
+    padding:25px;
+
+    border-top:
+    1px solid #1b3b4c;
+
+    color:#708b99;
+
+    margin-top:20px;
+}
+
+
+/* =====================================================
+   PRINT
+===================================================== */
+
+@media print{
+
+    header{
+
+        position:static;
+
+        color:#000;
+    }
+
+    body{
+
+        background:white;
+
+        color:black;
+    }
+
+    .control-panel,
+    .bottom-controls{
+
+        display:none;
+    }
+
+    .question{
+
+        color:black;
+
+        border:1px solid #999;
+
+        box-shadow:none;
+    }
+
+    textarea{
+
+        color:black;
+
+        border:1px solid #777;
+    }
+
+    .answer-key{
+
+        display:block !important;
+
+        color:black;
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:700px){
+
+    header h1{
+
+        font-size:23px;
+    }
+
+    header h2{
+
+        font-size:17px;
+    }
+
+    .section-title span{
+
+        float:none;
+
+        display:block;
+
+        margin-top:5px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>UNIT – III</h1>
+
+<h2>Energy Conversion Systems</h2>
+
+<p>
+Question Bank • Set 1 to Set 5 • 50 Marks per Set
+</p>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     CONTROL
+===================================================== -->
+
+<div class="control-panel">
+
+<label>
+Select Question Set:
+</label>
+
+<select id="setSelect"
+        onchange="loadSet()">
+
+<option value="0">SET 1</option>
+<option value="1">SET 2</option>
+<option value="2">SET 3</option>
+<option value="3">SET 4</option>
+<option value="4">SET 5</option>
+<option value="5">SET 6</option>
+<option value="6">SET 7</option>
+<option value="7">SET 8</option>
+
+
+</select>
+
+
+<button onclick="loadSet()">
+Load Set
+</button>
+
+
+<button onclick="resetTest()">
+Reset
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     INSTRUCTIONS
+===================================================== -->
+
+<div class="instructions">
+
+<strong>Instructions:</strong>
+
+<br>
+
+1. Each set contains <b>10 × 2 marks</b> and
+<b>3 × 10 marks</b> questions.
+
+<br>
+
+2. Total marks = <b>50</b>.
+
+<br>
+
+3. Type your answer in the box provided below each question.
+
+<br>
+
+4. Click <b>Evaluate</b> after answering all questions.
+
+<br>
+
+5. The system evaluates the answers using important
+technical keywords and concepts.
+
+<br>
+
+6. The <b>Answer Key</b> will be displayed only after evaluation.
+
+<br>
+
+7. For 10-mark questions, marks are awarded based on
+multiple important concepts included in the answer.
+
+</div>
+
+
+<!-- =====================================================
+     SET TITLE
+===================================================== -->
+
+<div class="set-title">
+
+<h2 id="setTitle">
+SET 1 – Energy Conversion Systems
+</h2>
+
+<p id="setDescription">
+10 × 2 Marks + 3 × 10 Marks = 50 Marks
+</p>
+
+</div>
+
+
+<!-- =====================================================
+     QUESTION PAPER
+===================================================== -->
+
+<div id="questionPaper">
+
+</div>
+
+
+<!-- =====================================================
+     RESULT
+===================================================== -->
+
+<div id="result"
+     class="result">
+
+<h2>Evaluation Result</h2>
+
+<div class="score-grid">
+
+<div class="score-box">
+<span>2-Mark Score</span>
+<b id="score2">0</b>
+</div>
+
+<div class="score-box">
+<span>10-Mark Score</span>
+<b id="score10">0</b>
+</div>
+
+<div class="score-box">
+<span>Total Score</span>
+<b id="totalScore">0 / 50</b>
+</div>
+
+<div class="score-box">
+<span>Percentage</span>
+<b id="percentage">0%</b>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     BUTTONS
+===================================================== -->
+
+<div class="bottom-controls">
+
+<button class="evaluate"
+        onclick="evaluateTest()">
+
+✓ Evaluate Answer
+
+</button>
+
+
+<button class="reset"
+        onclick="resetTest()">
+
+↻ Reset Answers
+
+</button>
+
+
+<button class="print"
+        onclick="window.print()">
+
+🖨 Print / Save PDF
+
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     ANSWER KEY
+===================================================== -->
+
+<div id="answerKey"
+     class="answer-key">
+
+<h2>
+📘 Answer Key and Evaluation
+</h2>
+
+<div id="answerKeyContent">
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<footer>
+
+Unit III – Energy Conversion Systems
+<br>
+Interactive Question Bank – Sets 1 to 5
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   QUESTION DATABASE
+=========================================================
+
+Each 2-mark question:
+keywords = important concepts
+
+Each 10-mark question:
+keywords = major points
+Each keyword contributes approximately 2 marks.
+
+========================================================= */
+
+
+const questionSets = [
+
+
+/* =========================================================
+   SET 1
+========================================================= */
+
+{
+
+title:"SET 1 – Energy Conversion Systems",
+
+questions:[
+
+{
+type:"2",
+q:"State the two fundamental principles governing magnetic circuits.",
+answer:"Magnetic flux is established by magnetomotive force (MMF), and the magnetic circuit obeys a relationship similar to Ohm's law: Φ = MMF / reluctance.",
+keywords:["magnetic flux","mmf","reluctance","ohm"]
+},
+
+{
+type:"2",
+q:"State Faraday's law of electromagnetic induction.",
+answer:"Faraday's law states that the induced EMF is proportional to the rate of change of magnetic flux linkage. e = -N dΦ/dt.",
+keywords:["faraday","induced emf","rate of change","flux","dphi"]
+},
+
+{
+type:"2",
+q:"What is the function of the yoke in a DC machine?",
+answer:"The yoke provides mechanical support to the poles and provides a low-reluctance path for the magnetic flux.",
+keywords:["mechanical support","magnetic flux","path","poles"]
+},
+
+{
+type:"2",
+q:"Define the generated EMF of a DC generator.",
+answer:"Generated EMF is the electrical voltage induced in the armature conductors when they rotate and cut the magnetic flux.",
+keywords:["generated emf","armature","rotate","flux"]
+},
+
+{
+type:"2",
+q:"What is back EMF in a DC motor?",
+answer:"Back EMF is the voltage induced in the armature of a motor that opposes the applied supply voltage.",
+keywords:["back emf","opposes","applied voltage","armature"]
+},
+
+{
+type:"2",
+q:"Why is a starter required for a DC motor?",
+answer:"At starting, the back EMF is zero, causing a very high armature current. A starter limits the starting current.",
+keywords:["back emf","zero","high current","starter","limit"]
+},
+
+{
+type:"2",
+q:"State the EMF equation of a single-phase transformer.",
+answer:"The RMS induced EMF is E = 4.44 f N Φm.",
+keywords:["4.44","frequency","turns","flux","emf"]
+},
+
+{
+type:"2",
+q:"What is the purpose of the MPPT controller in a solar PV system?",
+answer:"MPPT continuously operates the PV array near its maximum power point to extract maximum available power.",
+keywords:["mppt","maximum power","pv","maximum power point"]
+},
+
+{
+type:"2",
+q:"State the basic power relationship used for a wind turbine.",
+answer:"The available wind power is P = 1/2 ρ A V³.",
+keywords:["half","rho","area","velocity","cube"]
+},
+
+{
+type:"2",
+q:"What is the main function of an inverter in a UPS?",
+answer:"The inverter converts the DC power from the battery or DC link into AC power for the load.",
+keywords:["inverter","dc","ac","battery","load"]
+},
+
+
+{
+type:"10",
+q:"Explain the construction and working principle of a DC generator with a suitable block or sectional description.",
+answer:"A DC generator consists of yoke, poles, field winding, armature core, armature winding, commutator, brushes and shaft. The field system produces magnetic flux. The prime mover rotates the armature. Armature conductors cut the magnetic flux and an EMF is induced according to Faraday's law. The commutator mechanically rectifies the internally generated alternating EMF into unidirectional DC at the brushes. The generated EMF is given by Eg = PΦZN/(60A).",
+keywords:["yoke","poles","field winding","armature","commutator","brushes","faraday","generated emf","prime mover","eg"]
+},
+
+{
+type:"10",
+q:"Describe the construction and operating principle of a single-phase transformer. Include the important EMF relationship.",
+answer:"A transformer consists of a laminated magnetic core, primary winding and secondary winding. The primary is connected to AC supply and produces alternating magnetic flux in the core. The flux links the secondary and induces EMF according to electromagnetic induction. It transfers AC power by mutual induction without electrical connection between windings. The EMF equation is E = 4.44 f N Φm. The voltage ratio is approximately V1/V2 = N1/N2.",
+keywords:["laminated core","primary","secondary","alternating flux","mutual induction","emf","4.44","turns ratio","voltage ratio"]
+},
+
+{
+type:"10",
+q:"Explain the block diagram and operation of a grid-connected solar PV system.",
+answer:"A grid-connected PV system consists of PV array, DC-DC converter or MPPT, DC link, inverter, filter, protection and utility grid. Solar irradiation produces DC power in the PV array. MPPT extracts maximum power. The inverter converts DC to synchronized AC. The filter reduces switching harmonics and the power is supplied to local loads and/or the utility grid. Grid synchronization and protection are essential.",
+keywords:["pv array","mppt","dc-dc","dc link","inverter","filter","grid","synchronization","protection","load"]
+}
+
+]
+
+},
+
+
+/* =========================================================
+   SET 2
+========================================================= */
+
+{
+
+title:"SET 2 – Energy Conversion Systems",
+
+questions:[
+
+{
+type:"2",
+q:"Define reluctance of a magnetic circuit.",
+answer:"Reluctance is the opposition offered by a magnetic circuit to the establishment of magnetic flux.",
+keywords:["reluctance","opposition","magnetic flux","magnetic circuit"]
+},
+
+{
+type:"2",
+q:"What is Lenz's law?",
+answer:"Lenz's law states that the direction of induced EMF and current opposes the change producing it.",
+keywords:["lenz","opposes","change","induced"]
+},
+
+{
+type:"2",
+q:"What is the purpose of the commutator in a DC generator?",
+answer:"The commutator converts the alternating EMF generated in the armature into unidirectional output at the brushes.",
+keywords:["commutator","alternating","unidirectional","output","brushes"]
+},
+
+{
+type:"2",
+q:"Write the torque equation of a DC motor in proportional form.",
+answer:"Motor torque is proportional to ΦIa.",
+keywords:["torque","flux","armature current","phi","ia"]
+},
+
+{
+type:"2",
+q:"Why are transformer cores laminated?",
+answer:"Laminations increase the electrical resistance of eddy-current paths and thereby reduce eddy-current losses.",
+keywords:["laminated","eddy current","loss","resistance"]
+},
+
+{
+type:"2",
+q:"What is transformer voltage regulation?",
+answer:"Voltage regulation is the change in secondary terminal voltage from no-load to full-load, expressed relative to full-load voltage.",
+keywords:["voltage regulation","no load","full load","secondary"]
+},
+
+{
+type:"2",
+q:"What is the role of a wind turbine generator?",
+answer:"It converts the mechanical power obtained from the rotating wind turbine into electrical power.",
+keywords:["wind turbine","generator","mechanical","electrical"]
+},
+
+{
+type:"2",
+q:"Differentiate grid-connected and standalone PV systems.",
+answer:"A grid-connected system operates with the utility grid, while a standalone system operates independently and generally uses batteries for energy storage.",
+keywords:["grid connected","standalone","utility","battery","storage"]
+},
+
+{
+type:"2",
+q:"What is the purpose of an LC filter at an inverter output?",
+answer:"An LC filter attenuates high-frequency switching harmonics and produces a smoother AC waveform.",
+keywords:["lc filter","harmonics","switching","smooth","ac"]
+},
+
+{
+type:"2",
+q:"What happens to a UPS during a utility power failure?",
+answer:"The battery supplies DC power and the inverter converts it into AC power for the critical load.",
+keywords:["power failure","battery","dc","inverter","ac","load"]
+},
+
+
+{
+type:"10",
+q:"Explain the working principle of a DC motor and derive the relationship between back EMF and armature current.",
+answer:"A DC motor operates on the principle that a current-carrying conductor placed in a magnetic field experiences force. The field system produces flux and the armature current interacts with this flux to produce torque. As the armature rotates, back EMF is induced opposite to the applied voltage. The voltage equation is V = Eb + IaRa, so Ia = (V-Eb)/Ra. The torque is proportional to ΦIa.",
+keywords:["current carrying conductor","magnetic field","force","torque","back emf","voltage equation","v=eb","armature current","phi"]
+},
+
+{
+type:"10",
+q:"Discuss the construction, working and important losses of a single-phase transformer.",
+answer:"The transformer has a laminated core, primary winding and secondary winding. AC in the primary establishes alternating core flux, which links both windings and induces EMF. Major losses are hysteresis loss, eddy-current loss, copper loss and stray/load losses. Laminations reduce eddy-current loss and suitable core material reduces hysteresis loss. Efficiency is output power/input power.",
+keywords:["core","primary","secondary","flux","induced emf","hysteresis","eddy current","copper loss","lamination","efficiency"]
+},
+
+{
+type:"10",
+q:"Explain a standalone solar PV system using a block diagram approach.",
+answer:"A standalone PV system consists of PV array, MPPT/DC-DC converter, charge controller, battery bank, inverter and AC/DC loads. PV power is generated as DC. The charge controller manages battery charging and prevents overcharging. The battery stores energy for periods of low or zero sunlight. The inverter converts battery DC into AC for AC loads. The system operates independently of the utility grid.",
+keywords:["pv array","mppt","dc-dc","charge controller","battery","inverter","ac load","dc load","standalone"]
+}
+
+]
+
+},
+
+
+/* =========================================================
+   SET 3
+========================================================= */
+
+{
+
+title:"SET 3 – Energy Conversion Systems",
+
+questions:[
+
+{
+type:"2",
+q:"What is magnetomotive force (MMF)?",
+answer:"MMF is the force that establishes magnetic flux in a magnetic circuit and is given by NI ampere-turns.",
+keywords:["mmf","magnetomotive force","ni","ampere turns","flux"]
+},
+
+{
+type:"2",
+q:"State the significance of the negative sign in Faraday's law.",
+answer:"The negative sign represents Lenz's law, indicating that the induced EMF opposes the change in flux.",
+keywords:["negative sign","lenz","opposes","change","flux"]
+},
+
+{
+type:"2",
+q:"What is armature reaction in a DC machine?",
+answer:"Armature reaction is the effect of armature MMF on the main field flux distribution of a DC machine.",
+keywords:["armature reaction","armature mmf","main field","flux"]
+},
+
+{
+type:"2",
+q:"Write the basic generated EMF equation of a DC generator.",
+answer:"Eg = PΦZN/(60A).",
+keywords:["eg","p","phi","z","n","60","a"]
+},
+
+{
+type:"2",
+q:"What is the significance of back EMF in a DC motor?",
+answer:"Back EMF limits armature current during normal operation and represents the electrical energy converted into mechanical form.",
+keywords:["back emf","limits","armature current","mechanical"]
+},
+
+{
+type:"2",
+q:"What is the turns ratio of a transformer?",
+answer:"The turns ratio is N1/N2 and, for an ideal transformer, V1/V2 = N1/N2.",
+keywords:["turns ratio","n1","n2","v1","v2"]
+},
+
+{
+type:"2",
+q:"Define coefficient of performance of a wind turbine using Cp.",
+answer:"Power coefficient Cp is the ratio of power extracted by the turbine to the power available in the wind.",
+keywords:["cp","power coefficient","turbine","wind power","ratio"]
+},
+
+{
+type:"2",
+q:"What is meant by islanding in a grid-connected PV system?",
+answer:"Islanding is the condition in which a PV system continues energizing a section of the grid after the utility supply has been disconnected.",
+keywords:["islanding","pv","grid","utility","disconnected"]
+},
+
+{
+type:"2",
+q:"Why is PWM used in an inverter?",
+answer:"PWM controls the magnitude and frequency-related characteristics of the inverter output and reduces unwanted harmonics.",
+keywords:["pwm","magnitude","frequency","harmonics","output"]
+},
+
+{
+type:"2",
+q:"Define UPS transfer time.",
+answer:"Transfer time is the time taken by a standby or line-interactive UPS to transfer the load from utility supply to inverter/battery supply.",
+keywords:["transfer time","utility","inverter","battery","load"]
+},
+
+
+{
+type:"10",
+q:"Explain electromagnetic induction and show how it is used in electrical energy conversion systems.",
+answer:"Electromagnetic induction is the production of EMF when magnetic flux linking a conductor or coil changes. Faraday's law gives e = -N dΦ/dt and Lenz's law determines the direction. A rotating generator uses mechanical motion to produce electrical energy. A transformer uses changing flux to transfer electrical energy between windings. Induction is therefore fundamental to generators and transformers.",
+keywords:["electromagnetic induction","faraday","lenz","emf","changing flux","generator","mechanical","transformer","mutual induction"]
+},
+
+{
+type:"10",
+q:"With a suitable block representation, explain the major stages of a wind energy conversion system.",
+answer:"The major blocks are wind, rotor/turbine, mechanical drive train, generator, power electronic converter, filter/transformer and grid or load. Wind kinetic energy is converted to mechanical rotation by the turbine. The generator converts mechanical energy to electrical energy. The converter controls voltage, frequency and power flow. The electrical output is conditioned and supplied to the grid or load. Pitch/yaw and protection systems provide control.",
+keywords:["wind","turbine","rotor","drive train","generator","converter","filter","transformer","grid","load","pitch","protection"]
+},
+
+{
+type:"10",
+q:"Explain the operation of a grid-connected PV system from solar irradiation to AC grid power.",
+answer:"Solar radiation is converted into DC electricity by the PV array. An MPPT controller determines the maximum power operating point. The DC-DC stage may regulate the PV voltage. The DC link supplies the inverter. The inverter produces synchronized AC and controls active/reactive power as required. A filter removes switching harmonics and protection prevents unsafe grid operation. Power is supplied to local loads and the grid.",
+keywords:["solar irradiation","pv array","dc","mppt","dc-dc","dc link","inverter","synchronized ac","filter","grid","protection"]
+}
+
+]
+
+},
+
+
+/* =========================================================
+   SET 4
+========================================================= */
+
+{
+
+title:"SET 4 – Energy Conversion Systems",
+
+questions:[
+
+{
+type:"2",
+q:"State the relation between flux, MMF and reluctance.",
+answer:"Magnetic flux Φ = MMF / reluctance.",
+keywords:["flux","mmf","reluctance","mmf/reluctance"]
+},
+
+{
+type:"2",
+q:"Differentiate dynamically induced EMF and statically induced EMF.",
+answer:"Dynamically induced EMF occurs due to relative motion between conductor and magnetic field, while statically induced EMF occurs due to changing flux linking a stationary coil.",
+keywords:["dynamically","statically","motion","changing flux","stationary"]
+},
+
+{
+type:"2",
+q:"Why is the armature core of a DC machine laminated?",
+answer:"The armature core is laminated to reduce eddy-current losses.",
+keywords:["armature core","laminated","eddy current","loss"]
+},
+
+{
+type:"2",
+q:"What is the function of brushes in a DC machine?",
+answer:"Brushes provide electrical contact between the rotating commutator and the external stationary circuit.",
+keywords:["brushes","electrical contact","commutator","external circuit"]
+},
+
+{
+type:"2",
+q:"State the condition for maximum efficiency of a transformer.",
+answer:"Transformer efficiency is maximum when variable copper loss equals constant core loss.",
+keywords:["maximum efficiency","copper loss","core loss","equal"]
+},
+
+{
+type:"2",
+q:"What is transformer all-day efficiency?",
+answer:"All-day efficiency is the ratio of total energy output to total energy input over a complete 24-hour period.",
+keywords:["all day","efficiency","energy output","energy input","24"]
+},
+
+{
+type:"2",
+q:"What is the function of a pitch-control system in a wind turbine?",
+answer:"Pitch control changes the blade angle to regulate turbine power and protect the turbine at high wind speeds.",
+keywords:["pitch","blade angle","power","high wind","control"]
+},
+
+{
+type:"2",
+q:"What is the function of a battery in a standalone PV system?",
+answer:"The battery stores excess solar energy and supplies energy to loads when PV generation is insufficient.",
+keywords:["battery","store","solar energy","load","insufficient"]
+},
+
+{
+type:"2",
+q:"What is SPWM?",
+answer:"Sinusoidal pulse-width modulation generates inverter switching pulses by comparing a sinusoidal reference with a high-frequency carrier.",
+keywords:["spwm","sinusoidal","reference","carrier","switching pulses"]
+},
+
+{
+type:"2",
+q:"Why is a UPS used for critical loads?",
+answer:"A UPS maintains a continuous or rapidly restored supply to critical loads during interruptions and disturbances in utility power.",
+keywords:["ups","critical load","continuous","interruption","utility"]
+},
+
+
+{
+type:"10",
+q:"Explain the construction and operation of a DC motor and discuss the production of electromagnetic torque.",
+answer:"A DC motor consists of yoke, poles, field winding, armature core, armature winding, commutator, brushes and shaft. DC supply establishes field flux and armature current. A current-carrying armature conductor in the magnetic field experiences force. The combined conductor forces produce electromagnetic torque and rotate the armature. Back EMF develops as the motor rotates and limits armature current. Torque is proportional to ΦIa.",
+keywords:["yoke","poles","field winding","armature","commutator","brushes","force","torque","back emf","phi ia"]
+},
+
+{
+type:"10",
+q:"Explain the working principle, voltage transformation and losses of a single-phase transformer.",
+answer:"AC supply to the primary creates alternating magnetic flux in the laminated core. The flux links the secondary and induces voltage by mutual induction. Voltage transformation depends on the turns ratio V1/V2 = N1/N2. Losses include hysteresis, eddy-current, copper and stray losses. Core losses are approximately constant while copper losses vary with load current.",
+keywords:["primary","alternating flux","laminated core","secondary","mutual induction","turns ratio","hysteresis","eddy current","copper","stray"]
+},
+
+{
+type:"10",
+q:"Explain the block diagram and energy flow of a standalone PV system and compare it with a grid-connected system.",
+answer:"A standalone system consists of PV array, MPPT/DC-DC stage, charge controller, battery, inverter and loads. The battery provides stored energy when solar power is unavailable. A grid-connected system uses PV array, MPPT/DC link, inverter, filter and grid, with synchronization and anti-islanding protection. The standalone system is independent of the utility, while the grid-connected system operates in coordination with the utility grid.",
+keywords:["standalone","pv array","mppt","charge controller","battery","inverter","load","grid connected","synchronization","anti islanding"]
+}
+
+]
+
+},
+
+
+/* =========================================================
+   SET 5
+========================================================= */
+
+{
+
+title:"SET 5 – Energy Conversion Systems",
+
+questions:[
+
+{
+type:"2",
+q:"Define magnetic flux density.",
+answer:"Magnetic flux density is the magnetic flux per unit area normal to the flux direction, B = Φ/A.",
+keywords:["flux density","flux","area","b=phi/a"]
+},
+
+{
+type:"2",
+q:"Write the mathematical expression for induced EMF according to Faraday's law.",
+answer:"e = -N dΦ/dt.",
+keywords:["e","negative","n","dphi","dt"]
+},
+
+{
+type:"2",
+q:"What is the function of field winding in a DC machine?",
+answer:"The field winding produces the main magnetic flux required for generator EMF generation or motor torque production.",
+keywords:["field winding","magnetic flux","generator","motor","torque"]
+},
+
+{
+type:"2",
+q:"What is the purpose of the commutator in a DC motor?",
+answer:"The commutator reverses the armature current in the appropriate conductors so that the developed torque remains unidirectional.",
+keywords:["commutator","armature current","reverse","torque","unidirectional"]
+},
+
+{
+type:"2",
+q:"Why is a transformer rated in kVA rather than kW?",
+answer:"Transformer losses depend mainly on voltage and current rather than load power factor, so its rating is expressed in apparent power kVA.",
+keywords:["kva","kw","losses","voltage","current","power factor"]
+},
+
+{
+type:"2",
+q:"Mention any two applications of single-phase transformers.",
+answer:"Applications include domestic power supplies, electronic equipment, control circuits, isolation and distribution systems.",
+keywords:["domestic","electronic","control","isolation","distribution"]
+},
+
+{
+type:"2",
+q:"Write the expression for power available in wind.",
+answer:"Pwind = 1/2 ρ A V³.",
+keywords:["pwind","rho","area","v3","half"]
+},
+
+{
+type:"2",
+q:"What is the purpose of a charge controller in a standalone PV system?",
+answer:"It regulates battery charging and protects the battery from overcharging and excessive discharge.",
+keywords:["charge controller","battery","charging","overcharging","discharge"]
+},
+
+{
+type:"2",
+q:"What is meant by inverter efficiency?",
+answer:"Inverter efficiency is the ratio of AC output power to DC input power expressed as a percentage.",
+keywords:["inverter efficiency","ac output","dc input","percentage"]
+},
+
+{
+type:"2",
+q:"What is the function of a static bypass switch in an online UPS?",
+answer:"It transfers the critical load directly to the bypass AC supply when the inverter is unavailable or during maintenance/fault conditions.",
+keywords:["static bypass","critical load","bypass","inverter","maintenance","fault"]
+},
+
+
+{
+type:"10",
+q:"Discuss the fundamental magnetic principles and electromagnetic induction laws that form the basis of electrical machines.",
+answer:"Magnetic flux is established by MMF and the magnetic circuit follows Φ = MMF/reluctance. Flux density is B = Φ/A. Faraday's law states that a changing flux linkage induces EMF, e = -N dΦ/dt. Lenz's law gives the direction of induced EMF. These principles form the basis of DC generators, motors, transformers and other electromagnetic energy conversion devices.",
+keywords:["magnetic flux","mmf","reluctance","flux density","faraday","lenz","induced emf","generator","motor","transformer"]
+},
+
+{
+type:"10",
+q:"Describe the complete energy conversion process in a wind energy conversion system.",
+answer:"The wind possesses kinetic energy. The turbine rotor captures a portion of this energy and converts it into mechanical rotational energy. The drive train transfers the mechanical power to the generator. The generator produces electrical power. Power electronic converters condition the voltage and frequency. A transformer/filter may be used before connection to the grid or load. Control systems regulate speed, pitch and power, while protection systems ensure safe operation.",
+keywords:["wind kinetic energy","rotor","mechanical","drive train","generator","electrical power","converter","transformer","filter","grid","load","control","protection"]
+},
+
+{
+type:"10",
+q:"Explain the operation of an online UPS with a suitable block diagram and describe its operation during normal supply and power failure.",
+answer:"An online UPS consists of AC input, rectifier, DC link, battery, inverter, static bypass and critical load. During normal operation, utility AC is converted to DC by the rectifier and then converted back to controlled AC by the inverter. The battery remains charged through the DC system. During power failure, the battery supplies the DC link and the inverter continues supplying the load. The static bypass provides an alternate path during inverter fault or maintenance.",
+keywords:["online ups","rectifier","dc link","battery","inverter","static bypass","critical load","normal operation","power failure","ac dc ac"]
+}
+
+]
+
+},
+
+/* =========================================================
+   SET 6
+   MAGNETIC PRINCIPLES & ELECTROMAGNETIC INDUCTION
+========================================================= */
+
+{
+
+title:"SET 6 – Magnetic Principles and Electromagnetic Induction",
+
+questions:[
+
+/* =========================
+   2 MARK QUESTIONS
+========================= */
+
+{
+type:"2",
+q:"A magnetic circuit has an MMF of 500 AT and a reluctance of 250 AT/Wb. Calculate the magnetic flux.",
+answer:"Using Φ = MMF/Reluctance, Φ = 500/250 = 2 Wb.",
+keywords:["500","250","2","wb","mmf","reluctance","flux"]
+},
+
+{
+type:"2",
+q:"A coil has 500 turns and carries a flux of 0.02 Wb. Calculate the flux linkage.",
+answer:"Flux linkage = NΦ = 500 × 0.02 = 10 Wb-turn.",
+keywords:["500","0.02","10","flux linkage","wb"]
+},
+
+{
+type:"2",
+q:"A magnetic circuit has a flux of 0.01 Wb and cross-sectional area of 0.005 m². Calculate the flux density.",
+answer:"B = Φ/A = 0.01/0.005 = 2 T.",
+keywords:["0.01","0.005","2","tesla","flux density","b","phi"]
+},
+
+{
+type:"2",
+q:"A coil of 200 turns experiences a change in flux from 0.04 Wb to 0.01 Wb in 0.1 s. Calculate the average induced EMF.",
+answer:"e = N ΔΦ/Δt = 200 × (0.04 − 0.01)/0.1 = 60 V.",
+keywords:["200","0.04","0.01","0.1","60","v","induced emf","faraday"]
+},
+
+{
+type:"2",
+q:"A coil of 100 turns has a flux changing at 0.05 Wb/s. Calculate the induced EMF.",
+answer:"e = N dΦ/dt = 100 × 0.05 = 5 V.",
+keywords:["100","0.05","5","v","induced emf","faraday"]
+},
+
+{
+type:"2",
+q:"Define magnetic permeability.",
+answer:"Magnetic permeability is the ability of a material to support the establishment of magnetic flux. It is given by μ = B/H.",
+keywords:["permeability","magnetic flux","b","h","mu"]
+},
+
+{
+type:"2",
+q:"State Ampere's circuital law for a magnetic circuit.",
+answer:"The MMF around a closed magnetic path is equal to the product of current and number of turns, MMF = NI.",
+keywords:["ampere","mmf","ni","current","turns"]
+},
+
+{
+type:"2",
+q:"What is flux linkage?",
+answer:"Flux linkage is the total magnetic flux linking a coil and is given by λ = NΦ.",
+keywords:["flux linkage","nphi","turns","flux"]
+},
+
+{
+type:"2",
+q:"State Faraday's first law of electromagnetic induction.",
+answer:"Whenever the magnetic flux linking a circuit changes, an EMF is induced in the circuit.",
+keywords:["faraday","flux","changes","emf","induced"]
+},
+
+{
+type:"2",
+q:"State Lenz's law.",
+answer:"The direction of induced EMF and current is such that it opposes the change producing it.",
+keywords:["lenz","direction","induced","opposes","change"]
+},
+
+
+/* =========================
+   10 MARK QUESTIONS
+========================= */
+
+{
+type:"10",
+q:"A magnetic circuit has a coil of 800 turns carrying 2 A. The reluctance of the magnetic path is 1600 AT/Wb. Calculate the MMF, magnetic flux and flux density if the cross-sectional area is 0.004 m².",
+answer:"MMF = NI = 800 × 2 = 1600 AT. Magnetic flux Φ = MMF/Reluctance = 1600/1600 = 1 Wb. Flux density B = Φ/A = 1/0.004 = 250 T.",
+keywords:["800","2","1600","mmf","1","wb","0.004","250","tesla","reluctance","flux density"]
+},
+
+{
+type:"10",
+q:"Explain the magnetic circuit concept and establish the analogy between an electric circuit and a magnetic circuit.",
+answer:"A magnetic circuit provides a closed path for magnetic flux. MMF NI produces flux. Reluctance opposes flux. The basic relation is Φ = MMF/Reluctance. The electrical analogy is EMF, current and resistance corresponding to MMF, flux and reluctance. Flux density is B = Φ/A and field intensity is H = NI/l.",
+keywords:["magnetic circuit","mmf","flux","reluctance","phi","emf","current","resistance","flux density","field intensity"]
+},
+
+{
+type:"10",
+q:"Explain Faraday's law and Lenz's law of electromagnetic induction with suitable examples from generators and transformers.",
+answer:"Faraday's law states that an EMF is induced whenever flux linkage changes. The magnitude is e = -N dΦ/dt. Lenz's law is represented by the negative sign and states that induced EMF opposes the change producing it. Generators use relative motion between conductors and magnetic fields, while transformers use changing mutual flux between stationary windings.",
+keywords:["faraday","lenz","induced emf","negative sign","flux linkage","generator","transformer","changing flux","relative motion","mutual flux"]
+}
+
+]
+
+},
+
+
+/* =========================================================
+   SET 7
+   MAGNETIC PRINCIPLES & ELECTROMAGNETIC INDUCTION
+========================================================= */
+
+{
+
+title:"SET 7 – Magnetic Principles and Electromagnetic Induction",
+
+questions:[
+
+/* =========================
+   2 MARK QUESTIONS
+========================= */
+
+{
+type:"2",
+q:"A coil of 400 turns carries a current of 1.5 A. Calculate the MMF.",
+answer:"MMF = NI = 400 × 1.5 = 600 AT.",
+keywords:["400","1.5","600","at","mmf","ni"]
+},
+
+{
+type:"2",
+q:"A magnetic circuit has an MMF of 1000 AT and flux of 0.5 Wb. Calculate its reluctance.",
+answer:"Reluctance = MMF/Φ = 1000/0.5 = 2000 AT/Wb.",
+keywords:["1000","0.5","2000","at","wb","reluctance"]
+},
+
+{
+type:"2",
+q:"A flux of 0.008 Wb passes through an area of 0.002 m². Calculate the flux density.",
+answer:"B = Φ/A = 0.008/0.002 = 4 T.",
+keywords:["0.008","0.002","4","tesla","flux density"]
+},
+
+{
+type:"2",
+q:"A 250-turn coil experiences a flux change of 0.02 Wb in 0.05 s. Calculate the average induced EMF.",
+answer:"e = NΔΦ/Δt = 250 × 0.02/0.05 = 100 V.",
+keywords:["250","0.02","0.05","100","v","induced emf"]
+},
+
+{
+type:"2",
+q:"A 600-turn coil has an induced EMF of 120 V. If the flux changes at 0.2 Wb/s, calculate the number of turns required.",
+answer:"N = e/(dΦ/dt) = 120/0.2 = 600 turns.",
+keywords:["120","0.2","600","turns","induced emf","faraday"]
+},
+
+{
+type:"2",
+q:"Define magnetic field intensity H.",
+answer:"Magnetic field intensity is the MMF per unit length of the magnetic path and is given by H = NI/l.",
+keywords:["magnetic field intensity","mmf","length","ni","h"]
+},
+
+{
+type:"2",
+q:"What is reluctance?",
+answer:"Reluctance is the opposition offered by a magnetic circuit to the establishment of magnetic flux.",
+keywords:["reluctance","opposition","magnetic flux","magnetic circuit"]
+},
+
+{
+type:"2",
+q:"What is the difference between magnetic flux and flux density?",
+answer:"Magnetic flux is the total magnetic field passing through a surface, whereas flux density is flux per unit area, B = Φ/A.",
+keywords:["flux","flux density","area","phi","b"]
+},
+
+{
+type:"2",
+q:"State the dynamically induced EMF equation.",
+answer:"For a conductor moving in a magnetic field, the induced EMF is e = Blv for perpendicular motion.",
+keywords:["dynamically","emf","blv","magnetic field","conductor"]
+},
+
+{
+type:"2",
+q:"What is mutually induced EMF?",
+answer:"Mutually induced EMF is the EMF induced in one coil due to a change in current or flux produced by another magnetically coupled coil.",
+keywords:["mutual","induced emf","coil","change","current","flux","coupled"]
+},
+
+
+/* =========================
+   10 MARK QUESTIONS
+========================= */
+
+{
+type:"10",
+q:"A coil of 1000 turns links a magnetic flux that changes uniformly from 0.08 Wb to 0.02 Wb in 0.04 s. Calculate the average induced EMF and explain the direction of the induced EMF using Lenz's law.",
+answer:"Change in flux = 0.08 − 0.02 = 0.06 Wb. Average induced EMF e = NΔΦ/Δt = 1000 × 0.06/0.04 = 1500 V. The direction is determined by Lenz's law and opposes the change in flux.",
+keywords:["1000","0.08","0.02","0.04","0.06","1500","v","faraday","lenz","opposes"]
+},
+
+{
+type:"10",
+q:"Explain the different magnetic quantities used in electrical engineering: MMF, reluctance, flux, flux density, field intensity and permeability. Include their mathematical relationships.",
+answer:"MMF is NI ampere-turns. Reluctance is the opposition to magnetic flux. Flux is Φ = MMF/Reluctance. Flux density is B = Φ/A. Field intensity is H = NI/l. Permeability is μ = B/H. These quantities are used to analyse magnetic circuits and electromagnetic devices.",
+keywords:["mmf","ni","reluctance","flux","phi","flux density","b","area","field intensity","h","permeability","mu"]
+},
+
+{
+type:"10",
+q:"Explain electromagnetic induction in electrical machines and distinguish dynamically induced EMF, statically induced EMF and mutually induced EMF.",
+answer:"Electromagnetic induction occurs when flux linkage changes. Dynamically induced EMF occurs because of relative motion between conductor and magnetic field, e = Blv. Statically induced EMF occurs in a stationary coil due to changing flux, e = -N dΦ/dt. Mutual induction occurs when changing current in one coil induces EMF in another magnetically coupled coil. These principles are used in generators and transformers.",
+keywords:["electromagnetic induction","dynamically induced","blv","statically induced","changing flux","faraday","mutual induction","generator","transformer","emf"]
+}
+
+]
+
+},
+
+
+/* =========================================================
+   SET 8
+   MAGNETIC PRINCIPLES & ELECTROMAGNETIC INDUCTION
+========================================================= */
+
+{
+
+title:"SET 8 – Magnetic Principles and Electromagnetic Induction",
+
+questions:[
+
+/* =========================
+   2 MARK QUESTIONS
+========================= */
+
+{
+type:"2",
+q:"A magnetic circuit has 1200 turns and carries 0.8 A. Calculate the MMF.",
+answer:"MMF = NI = 1200 × 0.8 = 960 AT.",
+keywords:["1200","0.8","960","at","mmf"]
+},
+
+{
+type:"2",
+q:"A magnetic circuit has a reluctance of 800 AT/Wb and MMF of 400 AT. Calculate the flux.",
+answer:"Φ = MMF/Reluctance = 400/800 = 0.5 Wb.",
+keywords:["400","800","0.5","wb","flux","reluctance"]
+},
+
+{
+type:"2",
+q:"A magnetic core has a flux of 0.015 Wb and cross-sectional area of 0.003 m². Calculate the flux density.",
+answer:"B = Φ/A = 0.015/0.003 = 5 T.",
+keywords:["0.015","0.003","5","tesla","flux density"]
+},
+
+{
+type:"2",
+q:"A conductor of length 0.25 m moves at 8 m/s perpendicular to a magnetic field of 0.6 T. Calculate the dynamically induced EMF.",
+answer:"e = Blv = 0.6 × 0.25 × 8 = 1.2 V.",
+keywords:["0.6","0.25","8","1.2","v","blv","dynamically induced"]
+},
+
+{
+type:"2",
+q:"A 300-turn coil has its flux changed from 0.01 Wb to 0.04 Wb in 0.15 s. Calculate the average induced EMF.",
+answer:"e = NΔΦ/Δt = 300 × (0.04 − 0.01)/0.15 = 60 V.",
+keywords:["300","0.01","0.04","0.15","60","v","induced emf"]
+},
+
+{
+type:"2",
+q:"Define magnetic flux.",
+answer:"Magnetic flux is the total magnetic field passing through a given surface and is measured in weber.",
+keywords:["magnetic flux","weber","wb","magnetic field"]
+},
+
+{
+type:"2",
+q:"State the relationship between B, H and permeability.",
+answer:"The relationship is B = μH, where B is flux density, μ is permeability and H is magnetic field intensity.",
+keywords:["b","mu","h","permeability","flux density"]
+},
+
+{
+type:"2",
+q:"What is leakage flux?",
+answer:"Leakage flux is the portion of magnetic flux that does not follow the intended magnetic path or does not link all the required windings.",
+keywords:["leakage flux","magnetic flux","path","windings"]
+},
+
+{
+type:"2",
+q:"What is self-induced EMF?",
+answer:"Self-induced EMF is the EMF induced in a coil due to a change in its own current and is given by e = -L di/dt.",
+keywords:["self induced","emf","own current","l","di","dt"]
+},
+
+{
+type:"2",
+q:"What is coefficient of coupling between two coils?",
+answer:"The coefficient of coupling indicates the fraction of flux produced by one coil that links the other coil and is represented by k.",
+keywords:["coefficient","coupling","flux","coil","k"]
+},
+
+
+/* =========================
+   10 MARK QUESTIONS
+========================= */
+
+{
+type:"10",
+q:"A conductor of length 0.5 m moves at 12 m/s perpendicular to a magnetic field of 0.8 T. Calculate the induced EMF. If 20 such conductors are connected in series, calculate the total generated EMF.",
+answer:"For one conductor, e = Blv = 0.8 × 0.5 × 12 = 4.8 V. For 20 conductors in series, total EMF = 20 × 4.8 = 96 V. The result follows from dynamically induced electromagnetic induction.",
+keywords:["0.8","0.5","12","4.8","20","96","v","blv","dynamically induced","emf"]
+},
+
+{
+type:"10",
+q:"Explain the magnetic circuit parameters and derive the magnetic circuit equation Φ = NI/Reluctance. Discuss the effect of air gap on reluctance.",
+answer:"The MMF of a coil is NI. Magnetic flux is established in the magnetic circuit. Reluctance is the opposition to flux and is given by l/(μA). Therefore Φ = MMF/Reluctance = NI/ℜ. Flux density is B = Φ/A. An air gap has much lower permeability than the core and therefore contributes significant reluctance, requiring higher MMF for the same flux.",
+keywords:["mmf","ni","flux","reluctance","l","mu","area","phi","air gap","permeability","flux density"]
+},
+
+{
+type:"10",
+q:"Explain Faraday's laws of electromagnetic induction and derive the expression e = -N dΦ/dt. Explain the significance of the negative sign and give applications.",
+answer:"Faraday's law states that an EMF is induced when flux linkage changes. For a coil of N turns, flux linkage is NΦ and induced EMF is e = -d(NΦ)/dt = -N dΦ/dt when N is constant. The negative sign represents Lenz's law, indicating that the induced EMF opposes the change producing it. Applications include generators, transformers, inductors and electromagnetic sensors.",
+keywords:["faraday","flux linkage","nphi","e","dphi","dt","negative sign","lenz","opposes","generator","transformer","inductor"]
+}
+
+]
+
+}
+
+];
+
+
+/* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
+
+let currentSet = 0;
+
+
+/* =========================================================
+   LOAD SELECTED SET
+========================================================= */
+
+function loadSet(){
+
+    currentSet =
+    parseInt(
+        document.getElementById("setSelect").value
+    );
+
+    const set =
+    questionSets[currentSet];
+
+    document.getElementById("setTitle")
+        .textContent =
+        set.title;
+
+    document.getElementById("setDescription")
+        .textContent =
+        "10 × 2 Marks + 3 × 10 Marks = 50 Marks";
+
+    renderQuestions(set.questions);
+
+    document.getElementById("result")
+        .style.display="none";
+
+    document.getElementById("answerKey")
+        .style.display="none";
+}
+
+
+/* =========================================================
+   RENDER QUESTIONS
+========================================================= */
+
+function renderQuestions(questions){
+
+    const container =
+    document.getElementById("questionPaper");
+
+    container.innerHTML="";
+
+    let twoMarkCount=0;
+
+    let tenMarkCount=0;
+
+
+    /* =========================
+       2 MARK SECTION
+    ========================= */
+
+    const section2 =
+    document.createElement("div");
+
+    section2.className="section";
+
+    const heading2 =
+    document.createElement("div");
+
+    heading2.className="section-title";
+
+    heading2.innerHTML =
+    "PART A – SHORT ANSWER QUESTIONS <span>10 × 2 = 20 Marks</span>";
+
+    section2.appendChild(heading2);
+
+
+    questions.forEach((q,index)=>{
+
+        if(q.type!=="2") return;
+
+        twoMarkCount++;
+
+        const card =
+        createQuestionCard(
+            q,
+            index,
+            twoMarkCount,
+            "2"
+        );
+
+        section2.appendChild(card);
+
+    });
+
+
+    container.appendChild(section2);
+
+
+    /* =========================
+       10 MARK SECTION
+    ========================= */
+
+    const section10 =
+    document.createElement("div");
+
+    section10.className="section";
+
+    const heading10 =
+    document.createElement("div");
+
+    heading10.className="section-title";
+
+    heading10.innerHTML =
+    "PART B – DESCRIPTIVE QUESTIONS <span>3 × 10 = 30 Marks</span>";
+
+    section10.appendChild(heading10);
+
+
+    questions.forEach((q,index)=>{
+
+        if(q.type!=="10") return;
+
+        tenMarkCount++;
+
+        const card =
+        createQuestionCard(
+            q,
+            index,
+            tenMarkCount,
+            "10"
+        );
+
+        section10.appendChild(card);
+
+    });
+
+
+    container.appendChild(section10);
+}
+
+
+/* =========================================================
+   CREATE QUESTION CARD
+========================================================= */
+
+function createQuestionCard(
+    q,
+    originalIndex,
+    number,
+    type
+){
+
+    const card =
+    document.createElement("div");
+
+    card.className="question";
+
+    card.dataset.index =
+    originalIndex;
+
+    card.dataset.type =
+    type;
+
+
+    const qhead =
+    document.createElement("div");
+
+    qhead.className="qhead";
+
+
+    const qno =
+    document.createElement("div");
+
+    qno.className="qno";
+
+    qno.textContent =
+    number;
+
+
+    const qtext =
+    document.createElement("div");
+
+    qtext.className="qtext";
+
+    qtext.textContent =
+    q.q;
+
+
+    const marks =
+    document.createElement("div");
+
+    marks.className="marks";
+
+    marks.textContent =
+    type==="2" ? "2 Marks" : "10 Marks";
+
+
+    qhead.appendChild(qno);
+
+    qhead.appendChild(qtext);
+
+    qhead.appendChild(marks);
+
+
+    const textarea =
+    document.createElement("textarea");
+
+    textarea.id =
+    "answer_"+originalIndex;
+
+    textarea.placeholder =
+    type==="2"
+    ?
+    "Type your answer here..."
+    :
+    "Write the detailed answer here. Include principle, construction, working, block diagram, equations, applications or important points as applicable.";
+
+
+    const feedback =
+    document.createElement("div");
+
+    feedback.id =
+    "feedback_"+originalIndex;
+
+    feedback.className =
+    "feedback";
+
+
+    card.appendChild(qhead);
+
+    card.appendChild(textarea);
+
+    card.appendChild(feedback);
+
+
+    return card;
+}
+
+
+/* =========================================================
+   TEXT NORMALIZATION
+========================================================= */
+
+function normalizeText(text){
+
+    return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g," ")
+    .replace(/\s+/g," ")
+    .trim();
+
+}
+
+
+/* =========================================================
+   KEYWORD MATCHING
+========================================================= */
+
+function keywordFound(
+    answer,
+    keyword
+){
+
+    const cleanAnswer =
+    normalizeText(answer);
+
+    const cleanKeyword =
+    normalizeText(keyword);
+
+    return cleanAnswer
+        .includes(cleanKeyword);
+}
+
+
+/* =========================================================
+   EVALUATE
+========================================================= */
+
+function evaluateTest(){
+
+    const questions =
+    questionSets[currentSet].questions;
+
+    let score2=0;
+
+    let score10=0;
+
+    let keyHTML="";
+
+
+    questions.forEach((q,index)=>{
+
+        const textarea =
+        document.getElementById(
+            "answer_"+index
+        );
+
+        const feedback =
+        document.getElementById(
+            "feedback_"+index
+        );
+
+        if(!textarea || !feedback){
+
+            return;
+        }
+
+
+        const studentAnswer =
+        textarea.value.trim();
+
+
+        let matched=0;
+
+        q.keywords.forEach(keyword=>{
+
+            if(
+                keywordFound(
+                    studentAnswer,
+                    keyword
+                )
+            ){
+
+                matched++;
+            }
+
+        });
+
+
+        let obtained=0;
+
+        let feedbackText="";
+
+
+        if(q.type==="2"){
+
+            /*
+            2 marks:
+            1 or 2 important concepts.
+            */
+
+            if(matched >= 2){
+
+                obtained=2;
+
+                feedback.className =
+                "feedback correct";
+
+                feedbackText =
+                "✓ Good answer – important concepts identified.";
+
+            }
+
+            else if(matched === 1){
+
+                obtained=1;
+
+                feedback.className =
+                "feedback partial";
+
+                feedbackText =
+                "△ Partially correct – include one more important concept.";
+
+            }
+
+            else{
+
+                obtained=0;
+
+                feedback.className =
+                "feedback incorrect";
+
+                feedbackText =
+                "✗ Important expected concepts were not identified.";
+
+            }
+
+            score2 += obtained;
+
+        }
+
+
+        if(q.type==="10"){
+
+            /*
+            10 marks:
+            5 or more major concepts = full marks.
+
+            Each matched keyword group is approximately
+            2 marks.
+            */
+
+            obtained =
+            Math.min(
+                10,
+                Math.round(
+                    (matched /
+                    q.keywords.length) * 10
+                )
+            );
+
+
+            if(obtained>=8){
+
+                feedback.className =
+                "feedback correct";
+
+                feedbackText =
+                "✓ Very good coverage of the expected concepts.";
+
+            }
+
+            else if(obtained>=5){
+
+                feedback.className =
+                "feedback partial";
+
+                feedbackText =
+                "△ Partially complete – several important concepts are missing.";
+
+            }
+
+            else{
+
+                feedback.className =
+                "feedback incorrect";
+
+                feedbackText =
+                "✗ Major concepts required for the answer are missing.";
+
+            }
+
+            score10 += obtained;
+
+        }
+
+
+        feedback.textContent =
+        feedbackText +
+        " Score: " +
+        obtained +
+        "/" +
+        q.type;
+
+        feedback.style.display =
+        "block";
+
+
+        /* =========================
+           ANSWER KEY
+        ========================= */
+
+        keyHTML += `
+
+        <div class="key-item">
+
+            <strong>
+            ${q.type==="2"
+                ? "Part A – Question "+(
+                    questions
+                    .slice(0,index+1)
+                    .filter(x=>x.type==="2")
+                    .length
+                  )
+                : "Part B – Question "+(
+                    questions
+                    .slice(0,index+1)
+                    .filter(x=>x.type==="10")
+                    .length
+                  )
+            }
+            </strong>
+
+            <div style="margin-top:8px;">
+            ${q.q}
+            </div>
+
+            <div class="key-answer">
+
+            <b>Answer Key:</b><br>
+
+            ${q.answer}
+
+            </div>
+
+            <div class="key-score">
+
+            Evaluated Score:
+            ${obtained}/${q.type}
+
+            <br>
+
+            Matched concepts:
+            ${matched}/${q.keywords.length}
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+
+    const total =
+    score2 + score10;
+
+    const percentage =
+    (total / 50) * 100;
+
+
+    document.getElementById("score2")
+        .textContent =
+        score2 + " / 20";
+
+    document.getElementById("score10")
+        .textContent =
+        score10 + " / 30";
+
+    document.getElementById("totalScore")
+        .textContent =
+        total + " / 50";
+
+    document.getElementById("percentage")
+        .textContent =
+        percentage.toFixed(1) + "%";
+
+
+    document.getElementById("result")
+        .style.display =
+        "block";
+
+
+    document.getElementById("answerKeyContent")
+        .innerHTML =
+        keyHTML;
+
+
+    document.getElementById("answerKey")
+        .style.display =
+        "block";
+
+
+    /*
+    Scroll to result
+    */
+
+    document.getElementById("result")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetTest(){
+
+    document
+    .querySelectorAll("textarea")
+    .forEach(textarea=>{
+
+        textarea.value="";
+
+    });
+
+
+    document
+    .querySelectorAll(".feedback")
+    .forEach(feedback=>{
+
+        feedback.style.display =
+        "none";
+
+        feedback.textContent="";
+
+    });
+
+
+    document.getElementById("result")
+        .style.display="none";
+
+
+    document.getElementById("answerKey")
+        .style.display="none";
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+loadSet();
+
+</script>
+
+</body>
+</html>
